@@ -2,12 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-namespace System.Collections.Generic
+namespace Misnomer
 {
     // Implements a variable-size List that uses an array of objects to store the
     // elements. A List has a capacity, which is the allocated length
