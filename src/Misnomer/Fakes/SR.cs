@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     // ReSharper disable once InconsistentNaming
-    internal partial class SR
+    internal static partial class SR
     {
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format.
         // by default it returns false.
