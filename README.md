@@ -1,2 +1,3 @@
-# misnomer
-`Rist&lt;T>` — recyclable `List&lt;T>`.
+# Misnomer
+
+`Rist<T>` — recyclable `List<T>`.
