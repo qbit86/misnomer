@@ -6,7 +6,8 @@ using System;
 using System.Resources;
 using System.Runtime.CompilerServices;
 
-namespace Misnomer
+// ReSharper disable once CheckNamespace
+namespace System
 {
     internal partial class SR
     {
