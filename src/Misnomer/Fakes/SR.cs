@@ -2,40 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Resources;
 using System.Runtime.CompilerServices;
 
 // ReSharper disable once CheckNamespace
 namespace System
 {
+    // ReSharper disable once InconsistentNaming
     internal partial class SR
     {
-        private static ResourceManager s_resourceManager;
-
-        private static ResourceManager ResourceManager
-            => s_resourceManager ?? (s_resourceManager = new ResourceManager(ResourceType));
-
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format.
         // by default it returns false.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static bool UsingResourceKeys()
         {
             return false;
-        }
-
-        internal static string GetResourceString(string resourceKey, string defaultString)
-        {
-            string resourceString = null;
-            try { resourceString = ResourceManager.GetString(resourceKey); }
-            catch (MissingManifestResourceException) { }
-
-            if (defaultString != null && resourceKey.Equals(resourceString, StringComparison.Ordinal))
-            {
-                return defaultString;
-            }
-
-            return resourceString;
         }
 
         internal static string Format(string resourceFormat, params object[] args)
