@@ -22,7 +22,7 @@ namespace Misnomer
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
     [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class List<T> : IList<T>, IList, IReadOnlyList<T>
+    public partial class Rist<T> : IList<T>, IList, IReadOnlyList<T>
     {
         private const int DefaultCapacity = 4;
 
@@ -38,7 +38,7 @@ namespace Misnomer
         // of zero. Upon adding the first element to the list the capacity is
         // increased to DefaultCapacity, and then increased in multiples of two
         // as required.
-        public List()
+        public Rist()
         {
             _items = s_emptyArray;
         }
@@ -47,7 +47,7 @@ namespace Misnomer
         // initially empty, but will have room for the given number of elements
         // before any reallocations are required.
         // 
-        public List(int capacity)
+        public Rist(int capacity)
         {
             if (capacity < 0)
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
@@ -62,7 +62,7 @@ namespace Misnomer
         // size and capacity of the new list will both be equal to the size of the
         // given collection.
         // 
-        public List(IEnumerable<T> collection)
+        public Rist(IEnumerable<T> collection)
         {
             if (collection == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
@@ -344,14 +344,14 @@ namespace Misnomer
             return false;
         }
 
-        public List<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
+        public Rist<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
         {
             if (converter == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.converter);
             }
 
-            List<TOutput> list = new List<TOutput>(_size);
+            Rist<TOutput> list = new Rist<TOutput>(_size);
             for (int i = 0; i < _size; i++)
             {
                 list._items[i] = converter(_items[i]);
@@ -444,14 +444,14 @@ namespace Misnomer
             return default;
         }
 
-        public List<T> FindAll(Predicate<T> match)
+        public Rist<T> FindAll(Predicate<T> match)
         {
             if (match == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
-            List<T> list = new List<T>();
+            Rist<T> list = new Rist<T>();
             for (int i = 0; i < _size; i++)
             {
                 if (match(_items[i]))
@@ -593,7 +593,7 @@ namespace Misnomer
         IEnumerator IEnumerable.GetEnumerator()
             => new Enumerator(this);
 
-        public List<T> GetRange(int index, int count)
+        public Rist<T> GetRange(int index, int count)
         {
             if (index < 0)
             {
@@ -610,7 +610,7 @@ namespace Misnomer
                 ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidOffLen);
             }
 
-            List<T> list = new List<T>(count);
+            Rist<T> list = new Rist<T>(count);
             Array.Copy(_items, index, list._items, 0, count);
             list._size = count;
             return list;
@@ -1120,12 +1120,12 @@ namespace Misnomer
 
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
-            private List<T> _list;
+            private Rist<T> _list;
             private int _index;
             private int _version;
             private T _current;
 
-            internal Enumerator(List<T> list)
+            internal Enumerator(Rist<T> list)
             {
                 _list = list;
                 _index = 0;
@@ -1139,7 +1139,7 @@ namespace Misnomer
 
             public bool MoveNext()
             {
-                List<T> localList = _list;
+                Rist<T> localList = _list;
 
                 if (_version == localList._version && ((uint)_index < (uint)localList._size))
                 {
