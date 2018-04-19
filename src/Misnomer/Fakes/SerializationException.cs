@@ -30,11 +30,6 @@ namespace Misnomer
         {
             HResult = HResults.COR_E_SERIALIZATION;
         }
-
-        protected SerializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }
 
