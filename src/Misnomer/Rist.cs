@@ -54,7 +54,7 @@ namespace Misnomer
             if (capacity == 0)
                 _items = s_emptyArray;
             else
-                _items = new T[capacity];
+                _items = Pool.Rent(capacity);
         }
 
         // Constructs a List, copying the contents of the given collection. The
@@ -75,7 +75,7 @@ namespace Misnomer
                 }
                 else
                 {
-                    _items = new T[count];
+                    _items = Pool.Rent(count);
                     c.CopyTo(_items, 0);
                     _size = count;
                 }
@@ -109,12 +109,15 @@ namespace Misnomer
                 {
                     if (value > 0)
                     {
-                        T[] newItems = new T[value];
+                        T[] newItems = Pool.Rent(value);
                         if (_size > 0)
                         {
                             Array.Copy(_items, 0, newItems, 0, _size);
                         }
+
+                        T[] oldItems = _items;
                         _items = newItems;
+                        Pool.Return(oldItems, RuntimeHelpers.IsReferenceOrContainsReferences<T>());
                     }
                     else
                     {
