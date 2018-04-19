@@ -7,7 +7,7 @@ namespace Misnomer
     {
         private const int MaxArrayLength = 0X7FEFFFFF;
 
-        private System.Buffers.ArrayPool<T> Pool { get; } = System.Buffers.ArrayPool<T>.Shared;
+        private static System.Buffers.ArrayPool<T> Pool { get; } = System.Buffers.ArrayPool<T>.Shared;
 
         public void Dispose()
         {
