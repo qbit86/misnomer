@@ -11,6 +11,7 @@ namespace System
         internal const string Arg_KeyNotFoundWithKey = "The given key '{0}' was not present in the dictionary.";
         internal const string Arg_NonZeroLowerBound = "The lower bound of target array must be zero.";
         internal const string Arg_RankMultiDimNotSupported = "Only single dimensional arrays are supported for the requested action.";
+        internal const string Arg_SystemException = "System error.";
         internal const string Arg_WrongType = "The value '{0}' is not of type '{1}' and cannot be used in this generic collection.";
         internal const string Argument_AddingDuplicate = "An item with the same key has already been added. Key: {0}";
         internal const string Argument_DestinationTooShort = "Destination is too short.";
@@ -40,6 +41,7 @@ namespace System
         internal const string NotSupported_ValueCollectionSet = "Mutating a value collection derived from a dictionary is not allowed.";
         internal const string Serialization_MissingKeys = "The keys for this dictionary are missing.";
         internal const string Serialization_NullKey = "One of the serialized keys is null.";
+        internal const string SerializationException = "Serialization error.";
         internal const string TaskCompletionSourceT_TrySetException_NoExceptions = "The exceptions collection was empty.";
         internal const string TaskCompletionSourceT_TrySetException_NullException = "The exceptions collection included at least one null element.";
         internal const string TaskT_TransitionToFinal_AlreadyCompleted = "An attempt was made to transition a task to a final state when it had already completed.";
