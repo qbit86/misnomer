@@ -13,7 +13,7 @@ namespace Misnomer
         {
             T[] oldItems = _items;
             _items = s_emptyArray;
-            Pool.Return(oldItems);
+            Pool.Return(oldItems, RuntimeHelpers.IsReferenceOrContainsReferences<T>());
         }
     }
 }
