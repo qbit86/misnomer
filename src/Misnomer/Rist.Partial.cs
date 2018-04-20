@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 
 namespace Misnomer
 {
@@ -7,7 +8,7 @@ namespace Misnomer
     {
         private const int MaxArrayLength = 0X7FEFFFFF;
 
-        private static System.Buffers.ArrayPool<T> Pool { get; } = System.Buffers.ArrayPool<T>.Shared;
+        private static ArrayPool<T> Pool { get; } = ArrayPool<T>.Shared;
 
         public void Dispose()
         {
