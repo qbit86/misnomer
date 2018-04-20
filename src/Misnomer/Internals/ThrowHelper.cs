@@ -38,7 +38,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using SerializationException = Misnomer.SerializationException;
 
 namespace System

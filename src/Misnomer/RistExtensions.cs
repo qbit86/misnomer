@@ -1,8 +1,7 @@
-﻿// ReSharper disable once CheckNamespace
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace Misnomer.Extensions
 {
     public static class RistExtensions

@@ -32,7 +32,3 @@ namespace Misnomer
         }
     }
 }
-
-namespace System.Runtime.Serialization
-{
-}
