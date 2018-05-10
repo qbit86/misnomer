@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Threading;
 
-namespace System.Collections.Generic
+namespace Misnomer
 {
     /// <summary>
     /// Used internally to control behavior of insertion into a <see cref="Dictionary{TKey, TValue}"/>.
