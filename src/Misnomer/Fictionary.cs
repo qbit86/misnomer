@@ -36,7 +36,7 @@ namespace Misnomer
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>, ISerializable, IDeserializationCallback
+    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
     {
         private struct Entry
         {
@@ -134,14 +134,6 @@ namespace Misnomer
             {
                 Add(pair.Key, pair.Value);
             }
-        }
-
-        protected Dictionary(SerializationInfo info, StreamingContext context)
-        {
-            // We can't do anything with the keys and values until the entire graph has been deserialized
-            // and we have a resonable estimate that GetHashCode is not going to fail.  For the time being,
-            // we'll just cache this.  The graph is not valid until OnDeserialization has been called.
-            HashHelpers.SerializationInfoTable.Add(this, info);
         }
 
         public IEqualityComparer<TKey> Comparer
@@ -343,25 +335,6 @@ namespace Misnomer
 
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
             => new Enumerator(this, Enumerator.KeyValuePair);
-
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.info);
-            }
-
-            info.AddValue(VersionName, _version);
-            info.AddValue(ComparerName, _comparer ?? EqualityComparer<TKey>.Default, typeof(IEqualityComparer<TKey>));
-            info.AddValue(HashSizeName, _buckets == null ? 0 : _buckets.Length); // This is the length of the bucket array
-
-            if (_buckets != null)
-            {
-                var array = new KeyValuePair<TKey, TValue>[Count];
-                CopyTo(array, 0);
-                info.AddValue(KeyValuePairsName, array, typeof(KeyValuePair<TKey, TValue>[]));
-            }
-        }
 
         private int FindEntry(TKey key)
         {
@@ -660,51 +633,6 @@ namespace Misnomer
             }
 
             return true;
-        }
-
-        public virtual void OnDeserialization(object sender)
-        {
-            HashHelpers.SerializationInfoTable.TryGetValue(this, out SerializationInfo siInfo);
-
-            if (siInfo == null)
-            {
-                // We can return immediately if this function is called twice. 
-                // Note we remove the serialization info from the table at the end of this method.
-                return;
-            }
-
-            int realVersion = siInfo.GetInt32(VersionName);
-            int hashsize = siInfo.GetInt32(HashSizeName);
-            _comparer = (IEqualityComparer<TKey>)siInfo.GetValue(ComparerName, typeof(IEqualityComparer<TKey>));
-
-            if (hashsize != 0)
-            {
-                Initialize(hashsize);
-
-                KeyValuePair<TKey, TValue>[] array = (KeyValuePair<TKey, TValue>[])
-                    siInfo.GetValue(KeyValuePairsName, typeof(KeyValuePair<TKey, TValue>[]));
-
-                if (array == null)
-                {
-                    ThrowHelper.ThrowSerializationException(ExceptionResource.Serialization_MissingKeys);
-                }
-
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (array[i].Key == null)
-                    {
-                        ThrowHelper.ThrowSerializationException(ExceptionResource.Serialization_NullKey);
-                    }
-                    Add(array[i].Key, array[i].Value);
-                }
-            }
-            else
-            {
-                _buckets = null;
-            }
-
-            _version = realVersion;
-            HashHelpers.SerializationInfoTable.Remove(this);
         }
 
         private void Resize()
