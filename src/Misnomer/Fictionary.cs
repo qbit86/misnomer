@@ -36,7 +36,7 @@ namespace Misnomer
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
+    public partial class Fictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
     {
         private struct Entry
         {
@@ -63,13 +63,13 @@ namespace Misnomer
         private const string KeyValuePairsName = "KeyValuePairs"; // Do not rename (binary serialization)
         private const string ComparerName = "Comparer"; // Do not rename (binary serialization)
 
-        public Dictionary() : this(0, null) { }
+        public Fictionary() : this(0, null) { }
 
-        public Dictionary(int capacity) : this(capacity, null) { }
+        public Fictionary(int capacity) : this(capacity, null) { }
 
-        public Dictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
+        public Fictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
 
-        public Dictionary(int capacity, IEqualityComparer<TKey> comparer)
+        public Fictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
@@ -85,9 +85,9 @@ namespace Misnomer
             }
         }
 
-        public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
+        public Fictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
 
-        public Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) :
+        public Fictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) :
             this(dictionary != null ? dictionary.Count : 0, comparer)
         {
             if (dictionary == null)
@@ -99,9 +99,9 @@ namespace Misnomer
             // avoid the enumerator allocation and overhead by looping through the entries array directly.
             // We only do this when dictionary is Dictionary<TKey,TValue> and not a subclass, to maintain
             // back-compat with subclasses that may have overridden the enumerator behavior.
-            if (dictionary.GetType() == typeof(Dictionary<TKey, TValue>))
+            if (dictionary.GetType() == typeof(Fictionary<TKey, TValue>))
             {
-                Dictionary<TKey, TValue> d = (Dictionary<TKey, TValue>)dictionary;
+                Fictionary<TKey, TValue> d = (Fictionary<TKey, TValue>)dictionary;
                 int count = d._count;
                 Entry[] entries = d._entries;
                 for (int i = 0; i < count; i++)
@@ -120,9 +120,9 @@ namespace Misnomer
             }
         }
 
-        public Dictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : this(collection, null) { }
+        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : this(collection, null) { }
 
-        public Dictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) :
+        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) :
             this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             if (collection == null)
@@ -1067,7 +1067,7 @@ namespace Misnomer
         public struct Enumerator : IEnumerator<KeyValuePair<TKey, TValue>>,
             IDictionaryEnumerator
         {
-            private Dictionary<TKey, TValue> _dictionary;
+            private Fictionary<TKey, TValue> _dictionary;
             private int _version;
             private int _index;
             private KeyValuePair<TKey, TValue> _current;
@@ -1076,7 +1076,7 @@ namespace Misnomer
             internal const int DictEntry = 1;
             internal const int KeyValuePair = 2;
 
-            internal Enumerator(Dictionary<TKey, TValue> dictionary, int getEnumeratorRetType)
+            internal Enumerator(Fictionary<TKey, TValue> dictionary, int getEnumeratorRetType)
             {
                 _dictionary = dictionary;
                 _version = dictionary._version;
@@ -1191,9 +1191,9 @@ namespace Misnomer
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
         {
-            private Dictionary<TKey, TValue> _dictionary;
+            private Fictionary<TKey, TValue> _dictionary;
 
-            public KeyCollection(Dictionary<TKey, TValue> dictionary)
+            public KeyCollection(Fictionary<TKey, TValue> dictionary)
             {
                 if (dictionary == null)
                 {
@@ -1302,12 +1302,12 @@ namespace Misnomer
 
             public struct Enumerator : IEnumerator<TKey>, IEnumerator
             {
-                private Dictionary<TKey, TValue> _dictionary;
+                private Fictionary<TKey, TValue> _dictionary;
                 private int _index;
                 private int _version;
                 private TKey _currentKey;
 
-                internal Enumerator(Dictionary<TKey, TValue> dictionary)
+                internal Enumerator(Fictionary<TKey, TValue> dictionary)
                 {
                     _dictionary = dictionary;
                     _version = dictionary._version;
@@ -1374,9 +1374,9 @@ namespace Misnomer
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
         {
-            private Dictionary<TKey, TValue> _dictionary;
+            private Fictionary<TKey, TValue> _dictionary;
 
-            public ValueCollection(Dictionary<TKey, TValue> dictionary)
+            public ValueCollection(Fictionary<TKey, TValue> dictionary)
             {
                 if (dictionary == null)
                 {
@@ -1485,12 +1485,12 @@ namespace Misnomer
 
             public struct Enumerator : IEnumerator<TValue>, IEnumerator
             {
-                private Dictionary<TKey, TValue> _dictionary;
+                private Fictionary<TKey, TValue> _dictionary;
                 private int _index;
                 private int _version;
                 private TValue _currentValue;
 
-                internal Enumerator(Dictionary<TKey, TValue> dictionary)
+                internal Enumerator(Fictionary<TKey, TValue> dictionary)
                 {
                     _dictionary = dictionary;
                     _version = dictionary._version;
