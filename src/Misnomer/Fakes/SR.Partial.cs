@@ -8,6 +8,7 @@ namespace System
     {
         internal const string Arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";
         internal const string Arg_BogusIComparer = "Unable to sort because the IComparer.Compare() method returns inconsistent results. Either a value does not compare equal to itself, or one value repeatedly compared to another value yields different results. IComparer: '{0}'.";
+        internal const string Arg_HTCapacityOverflow = "Hashtable's capacity overflowed and went negative. Check load factor, capacity and the current size of the table.";
         internal const string Arg_KeyNotFoundWithKey = "The given key '{0}' was not present in the dictionary.";
         internal const string Arg_NonZeroLowerBound = "The lower bound of target array must be zero.";
         internal const string Arg_RankMultiDimNotSupported = "Only single dimensional arrays are supported for the requested action.";
