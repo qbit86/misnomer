@@ -1,8 +1,7 @@
 ﻿namespace Misnomer
 {
-    public partial class Fictionary<TKey, TValue>
+    public partial class Fictionary<TKey, TValue, TKeyComparer>
     {
-
     }
 }
 
