@@ -53,7 +53,7 @@ namespace Misnomer
         private int _freeList;
         private int _freeCount;
         private int _version;
-        private IEqualityComparer<TKey> _comparer;
+        private TKeyComparer _comparer;
         private KeyCollection _keys;
         private ValueCollection _values;
         private object _syncRoot;
@@ -64,32 +64,24 @@ namespace Misnomer
         private const string KeyValuePairsName = "KeyValuePairs"; // Do not rename (binary serialization)
         private const string ComparerName = "Comparer"; // Do not rename (binary serialization)
 
-        public Fictionary() : this(0, null) { }
+        public Fictionary() : this(0, default) { }
 
-        public Fictionary(int capacity) : this(capacity, null) { }
+        public Fictionary(int capacity) : this(capacity, default) { }
 
-        public Fictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
+        public Fictionary(TKeyComparer comparer) : this(0, comparer) { }
 
-        public Fictionary(int capacity, IEqualityComparer<TKey> comparer)
+        public Fictionary(int capacity, TKeyComparer comparer)
         {
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
-            if (comparer != EqualityComparer<TKey>.Default)
-            {
-                _comparer = comparer;
-            }
 
-            if (typeof(TKey) == typeof(string) && _comparer == null)
-            {
-                // To start, move off default comparer for string which is randomised
-                _comparer = (IEqualityComparer<TKey>)NonRandomizedStringEqualityComparer.Default;
-            }
+            _comparer = comparer;
         }
 
-        public Fictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
+        public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary) : this(dictionary, default) { }
 
-        public Fictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) :
-            this(dictionary != null ? dictionary.Count : 0, comparer)
+        public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary, TKeyComparer comparer) :
+            this(dictionary?.Count ?? 0, comparer)
         {
             if (dictionary == null)
             {
@@ -121,9 +113,9 @@ namespace Misnomer
             }
         }
 
-        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : this(collection, null) { }
+        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : this(collection, default) { }
 
-        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) :
+        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer) :
             this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             if (collection == null)
@@ -141,7 +133,7 @@ namespace Misnomer
         {
             get
             {
-                return (_comparer == null || _comparer is NonRandomizedStringEqualityComparer) ? EqualityComparer<TKey>.Default : _comparer;
+                return _comparer == null ? (IEqualityComparer<TKey>) EqualityComparer<TKey>.Default : _comparer;
             }
         }
 
@@ -350,7 +342,7 @@ namespace Misnomer
             int collisionCount = 0;
             if (buckets != null)
             {
-                IEqualityComparer<TKey> comparer = _comparer;
+                TKeyComparer comparer = _comparer;
                 if (comparer == null)
                 {
                     int hashCode = key.GetHashCode() & 0x7FFFFFFF;
@@ -459,7 +451,7 @@ namespace Misnomer
             }
 
             Entry[] entries = _entries;
-            IEqualityComparer<TKey> comparer = _comparer;
+            TKeyComparer comparer = _comparer;
 
             int hashCode = ((comparer == null) ? key.GetHashCode() : comparer.GetHashCode(key)) & 0x7FFFFFFF;
 
@@ -624,15 +616,6 @@ namespace Misnomer
             // Value in _buckets is 1-based
             bucket = index + 1;
 
-            // Value types never rehash
-            if (default(TKey) == null && collisionCount > HashHelpers.HashCollisionThreshold && comparer is NonRandomizedStringEqualityComparer)
-            {
-                // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
-                // i.e. EqualityComparer<string>.Default.
-                _comparer = null;
-                Resize(entries.Length, true);
-            }
-
             return true;
         }
 
@@ -657,7 +640,6 @@ namespace Misnomer
                 {
                     if (entries[i].hashCode >= 0)
                     {
-                        Debug.Assert(_comparer == null);
                         entries[i].hashCode = (entries[i].key.GetHashCode() & 0x7FFFFFFF);
                     }
                 }
