@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Threading;
 
 namespace Misnomer
@@ -36,7 +35,7 @@ namespace Misnomer
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    public partial class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
+    public class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
         where TKeyComparer : IEqualityComparer<TKey>
     {
         private struct Entry
