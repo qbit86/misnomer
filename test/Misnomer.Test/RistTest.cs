@@ -9,10 +9,24 @@ namespace Misnomer
     public sealed class RistTest
     {
         [Fact]
+        public void Capacity_ShouldBeEnough()
+        {
+            // Arrange
+            var rist = new Rist<int> {21, 2, 8, 5, 3, 13, 1};
+
+            // Act
+            rist.Capacity = 9;
+
+            // Assert
+            Assert.InRange(rist.Capacity, rist.Count, int.MaxValue);
+        }
+
+        [Fact]
         public void Capacity_ShouldThrow_WhenLessThenSize()
         {
             // Arrange
             var rist = new Rist<int> {21, 2, 8, 5, 3, 13, 1};
+
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => rist.Capacity = 3);
         }
