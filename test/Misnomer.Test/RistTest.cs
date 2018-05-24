@@ -22,6 +22,20 @@ namespace Misnomer
         }
 
         [Fact]
+        public void Capacity_ShouldNotChangeContents()
+        {
+            // Arrange
+            var expected = new[] {8, 2, 21, 5, 3, 34, 13};
+            var actual = new Rist<int>(expected);
+
+            // Act
+            actual.Capacity = 23;
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void Capacity_ShouldThrow_WhenLessThenSize()
         {
             // Arrange
