@@ -9,6 +9,29 @@ namespace Misnomer
 {
     public sealed class RistTest
     {
+        private static double Sqrt5 { get; } = Math.Sqrt(5);
+        private static double Phi { get; } = 0.5 * (1.0 + Sqrt5);
+
+        [Fact]
+        public void Add_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var list = new List<int>();
+            var rist = new Rist<int>();
+            const int count = 23;
+
+            // Act
+            for (int i = 0; i != count; ++i)
+            {
+                int item = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
+                list.Add(item);
+                rist.Add(item);
+            }
+
+            // Assert
+            Assert.Equal(list, rist);
+        }
+
         [Fact]
         public void Capacity_ShouldBeEnough()
         {
@@ -83,11 +106,11 @@ namespace Misnomer
             const int count = 23;
             var list = new List<int>(Enumerable.Repeat(int.MinValue, count));
             var rist = new Rist<int>(Enumerable.Repeat(-1, count));
-            double sqrt5 = Math.Sqrt(5);
-            double phi = 0.5 * (1 + sqrt5);
+
+            // Act
             for (int i = 0; i != count; ++i)
             {
-                int item = Convert.ToInt32(Math.Pow(phi, i) / sqrt5);
+                int item = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
                 list[i] = item;
                 rist[i] = item;
             }
