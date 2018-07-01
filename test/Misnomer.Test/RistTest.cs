@@ -158,5 +158,36 @@ namespace Misnomer
             // Assert
             Assert.Equal(list, rist);
         }
+
+        [Fact]
+        public void InsertRange_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var list = new List<int>();
+            var rist = new Rist<int>();
+            const int count = 8;
+            var prng = new Random(nameof(InsertRange_ShouldBehaveTheSameWay).GetHashCode());
+            var range = new List<int>(count);
+
+            // Act
+            for (int i = 0; i != count; ++i)
+            {
+                int index = prng.Next(0, i);
+                int item = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
+                if (index < range.Count)
+                {
+                    int temp = range[index];
+                    range[index] = item;
+                    item = temp;
+                }
+
+                range.Add(item);
+                list.InsertRange(index, range);
+                rist.InsertRange(index, range);
+            }
+
+            // Assert
+            Assert.Equal(list, rist);
+        }
     }
 }
