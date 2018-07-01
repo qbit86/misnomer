@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+// ReSharper disable CheckNamespace
+
 namespace Misnomer
 {
     internal static class EnumerableExtensions
