@@ -106,12 +106,10 @@ namespace Misnomer
         {
             // Arrange
             IEnumerable<int> collection = new[] {21, 2, 8, 5, 3, 13, 1}.AsNothingButIEnumerable();
-            // ReSharper disable PossibleMultipleEnumeration
             var expected = new List<int>(collection);
 
             // Act
             var actual = new Rist<int>(collection);
-            // ReSharper restore PossibleMultipleEnumeration
 
             // Assert
             Assert.Equal(expected, actual);
@@ -137,6 +135,28 @@ namespace Misnomer
             Assert.Equal(list.Count, rist.Count);
             for (int i = 0; i < rist.Count; ++i)
                 Assert.Equal(list[i], rist[i]);
+        }
+
+        [Fact]
+        public void Insert_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var list = new List<int>();
+            var rist = new Rist<int>();
+            const int count = 23;
+            var prng = new Random(nameof(Insert_ShouldBehaveTheSameWay).GetHashCode());
+
+            // Act
+            for (int i = 0; i != count; ++i)
+            {
+                int index = prng.Next(0, i);
+                int item = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
+                list.Insert(index, item);
+                rist.Insert(index, item);
+            }
+
+            // Assert
+            Assert.Equal(list, rist);
         }
     }
 }
