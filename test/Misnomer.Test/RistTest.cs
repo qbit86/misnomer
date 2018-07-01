@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-// https://github.com/aspnet/Home/wiki/Engineering-guidelines#unit-tests-and-functional-tests
+// ReSharper disable PossibleMultipleEnumeration
 // ReSharper disable once CheckNamespace
+
 namespace Misnomer
 {
+    // https://github.com/aspnet/Home/wiki/Engineering-guidelines#unit-tests-and-functional-tests
     public sealed class RistTest
     {
         private static double Sqrt5 { get; } = Math.Sqrt(5);
@@ -27,6 +29,22 @@ namespace Misnomer
                 list.Add(item);
                 rist.Add(item);
             }
+
+            // Assert
+            Assert.Equal(list, rist);
+        }
+
+        [Fact]
+        public void AddRange_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var list = new List<int>();
+            var rist = new Rist<int>();
+            IEnumerable<int> collection = new[] {8, 21, 2, 3, 13, 1, 5}.AsNothingButIEnumerable();
+
+            // Act
+            list.AddRange(collection);
+            rist.AddRange(collection);
 
             // Assert
             Assert.Equal(list, rist);
