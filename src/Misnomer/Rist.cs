@@ -946,7 +946,6 @@ namespace Misnomer
 
             if (count > 0)
             {
-                int i = _size;
                 _size -= count;
                 if (index < _size)
                 {
@@ -1122,9 +1121,9 @@ namespace Misnomer
 
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
-            private Rist<T> _list;
+            private readonly Rist<T> _list;
             private int _index;
-            private int _version;
+            private readonly int _version;
             private T _current;
 
             internal Enumerator(Rist<T> list)
