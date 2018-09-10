@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer", "src\Misnomer\Misnomer.csproj", "{009C881B-D2DA-48BF-9233-88E66ACB61CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Fictionary", "src\Misnomer\Misnomer.Fictionary.csproj", "{009C881B-D2DA-48BF-9233-88E66ACB61CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7A55A4A0-1654-4698-B5D7-52FF6EBE4462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.Test", "test\Misnomer.Test\Misnomer.Test.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Test", "test\Misnomer.Test\Misnomer.Test.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.Rist", "src\Misnomer.Rist\Misnomer.Rist.csproj", "{830B7512-9999-450A-870C-02FF7308C410}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Rist", "src\Misnomer.Rist\Misnomer.Rist.csproj", "{830B7512-9999-450A-870C-02FF7308C410}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Misnomer.Internal", "src\Misnomer.Internal\Misnomer.Internal.shproj", "{3892922D-D51A-4325-865C-CA9026641489}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{009C881B-D2DA-48BF-9233-88E66ACB61CF} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
-		{3F863B2C-83EF-46EE-B490-673E2154C9B6} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
-		{830B7512-9999-450A-870C-02FF7308C410} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
-		{3892922D-D51A-4325-865C-CA9026641489} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{009C881B-D2DA-48BF-9233-88E66ACB61CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +36,17 @@ Global
 		{830B7512-9999-450A-870C-02FF7308C410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830B7512-9999-450A-870C-02FF7308C410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830B7512-9999-450A-870C-02FF7308C410}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{009C881B-D2DA-48BF-9233-88E66ACB61CF} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
+		{3F863B2C-83EF-46EE-B490-673E2154C9B6} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
+		{830B7512-9999-450A-870C-02FF7308C410} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
+		{3892922D-D51A-4325-865C-CA9026641489} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}
 	EndGlobalSection
 EndGlobal
