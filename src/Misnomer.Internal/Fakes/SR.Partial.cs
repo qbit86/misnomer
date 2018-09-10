@@ -46,5 +46,6 @@ namespace System
         internal const string TaskCompletionSourceT_TrySetException_NoExceptions = "The exceptions collection was empty.";
         internal const string TaskCompletionSourceT_TrySetException_NullException = "The exceptions collection included at least one null element.";
         internal const string TaskT_TransitionToFinal_AlreadyCompleted = "An attempt was made to transition a task to a final state when it had already completed.";
+        internal const string ConcurrentCollection_SyncRoot_NotSupported = "The SyncRoot property may not be used for the synchronization of concurrent collections.";
     }
 }
