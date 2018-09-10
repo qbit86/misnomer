@@ -16,5 +16,12 @@ namespace Misnomer
             _items = s_emptyArray;
             Pool.Return(oldItems, RuntimeHelpers.IsReferenceOrContainsReferences<T>());
         }
+
+        public T[] MoveToArray()
+        {
+            T[] result = _items;
+            _items = s_emptyArray;
+            return result;
+        }
     }
 }
