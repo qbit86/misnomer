@@ -13,14 +13,18 @@ namespace Misnomer
         public void Dispose()
         {
             T[] oldItems = _items;
+            _size = 0;
             _items = s_emptyArray;
+            _version++;
             Pool.Return(oldItems, RuntimeHelpers.IsReferenceOrContainsReferences<T>());
         }
 
         public T[] MoveToArray()
         {
             T[] result = _items;
+            _size = 0;
             _items = s_emptyArray;
+            _version++;
             return result;
         }
     }
