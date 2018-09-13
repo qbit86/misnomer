@@ -38,7 +38,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using SerializationException = Misnomer.SerializationException;
 
 namespace System
 {
@@ -206,11 +205,6 @@ namespace System
         internal static void ThrowInvalidOperationException_ConcurrentOperationsNotSupported()
         {
             throw new InvalidOperationException(SR.InvalidOperation_ConcurrentOperationsNotSupported);
-        }
-
-        internal static void ThrowSerializationException(ExceptionResource resource)
-        {
-            throw new SerializationException(GetResourceString(resource));
         }
 
         internal static void ThrowObjectDisposedException_MemoryDisposed()
