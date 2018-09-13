@@ -7,7 +7,7 @@ using System;
 namespace Misnomer
 {
     [Serializable]
-    public class SystemException : Exception
+    internal class SystemException : Exception
     {
         public SystemException()
             : base(SR.Arg_SystemException)

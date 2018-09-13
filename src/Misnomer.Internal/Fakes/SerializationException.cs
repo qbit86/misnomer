@@ -7,7 +7,7 @@ using System;
 namespace Misnomer
 {
     [Serializable]
-    public class SerializationException : SystemException
+    internal sealed class SerializationException : SystemException
     {
         private static String s_nullMessage = SR.SerializationException;
 
