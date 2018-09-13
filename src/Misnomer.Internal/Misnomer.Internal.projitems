@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Fakes\RuntimeHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Fakes\SerializableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fakes\SR.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fakes\SR.Partial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\StackTraceHiddenAttribute.cs" />
