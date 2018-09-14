@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Buffers;
 
-// ReSharper disable once CheckNamespace
 namespace Misnomer
 {
     // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/shared/System/Collections/Generic/List.cs

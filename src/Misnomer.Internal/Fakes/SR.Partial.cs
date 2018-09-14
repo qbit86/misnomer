@@ -1,5 +1,4 @@
 ﻿// ReSharper disable InconsistentNaming
-// ReSharper disable once CheckNamespace
 namespace System
 {
     // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/src/Resources/Strings.resx
