@@ -14,6 +14,7 @@ Provides ToRist() extension method which perfectly replaces conventional ToList(
     <PackageLicenseUrl>https://github.com/qbit86/misnomer/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <PackageTags>recyclable;collection;pool;memory;allocation;list;array;buffer</PackageTags>
+    <PackageIconUrl>https://github.com/qbit86/misnomer/raw/develop/kopimi.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.4.0" />
