@@ -15,6 +15,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Misnomer.Internal", "src\Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Fictionary", "src\Misnomer.Fictionary\Misnomer.Fictionary.csproj", "{8C6F8E5A-59CC-4389-A5E2-BED7043A140A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{BD248697-DD32-4223-B914-295F9001A68B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistDemo", "samples\Misnomer.RistDemo\Misnomer.RistDemo.csproj", "{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
@@ -36,6 +40,10 @@ Global
 		{8C6F8E5A-59CC-4389-A5E2-BED7043A140A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C6F8E5A-59CC-4389-A5E2-BED7043A140A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C6F8E5A-59CC-4389-A5E2-BED7043A140A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +53,7 @@ Global
 		{830B7512-9999-450A-870C-02FF7308C410} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
 		{3892922D-D51A-4325-865C-CA9026641489} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
 		{8C6F8E5A-59CC-4389-A5E2-BED7043A140A} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
+		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E} = {BD248697-DD32-4223-B914-295F9001A68B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}
