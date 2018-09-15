@@ -1,6 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using Misnomer.Extensions;
-using static System.Console;
 
 namespace Misnomer.RistDemo
 {
@@ -11,17 +12,17 @@ namespace Misnomer.RistDemo
             Rist<string> rist = Directory.EnumerateDirectories(".").ToRist();
             rist.AddRange(Directory.EnumerateFiles("."));
             foreach (string item in rist)
-                WriteLine(item);
+                Console.WriteLine(item);
 
             int count = rist.Count;
-            int capacity = rist.Capacity;
             string[] array = rist.MoveToArray();
             int length = array.Length;
-            WriteLine($"{nameof(count)}: {count}, {nameof(capacity)}: {capacity}, {nameof(length)}: {length}");
+            Debug.Assert(count <= length);
+            Console.WriteLine($"{nameof(count)}: {count}, {nameof(length)}: {length}");
 
-            int newCount = rist.Count;
-            int newCapacity = rist.Capacity;
-            WriteLine($"{nameof(newCount)}: {newCount}, {nameof(newCapacity)}: {newCapacity}");
+            int capacity = rist.Capacity;
+            Debug.Assert(capacity == 0);
+            Console.WriteLine($"{nameof(capacity)}: {capacity}");
 
             rist.Dispose();
         }
