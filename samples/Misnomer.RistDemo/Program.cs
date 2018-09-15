@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Misnomer.Extensions;
 
-namespace Misnomer.RistDemo
+namespace Misnomer
 {
     internal static class Program
     {
