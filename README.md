@@ -2,7 +2,7 @@
 
 ## Misnomer.Rist
 
-**Rist&lt;T&gt;** — recyclable indexed collection. Implementation is based on [**List&lt;Tglt;**](https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/shared/System/Collections/Generic/List.cs), but uses pooling for the internal array.
+**Rist&lt;T&gt;** — recyclable indexed collection. Implementation is based on [**List&lt;T&gt;**](https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/shared/System/Collections/Generic/List.cs), but uses pooling for the internal array.
 
 ### Examples
 
