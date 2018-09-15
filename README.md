@@ -26,7 +26,7 @@ rist.Dispose();
 ### Remarks
 
 Implementation deliberatly prefers [shared](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared) pool over [private](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.create) one for the sake of performance.
-The risk is that untrusted caller can hold a reference to an array after returning it to **ArrayPool&lt;T&gt;.Shared**, thus getting access to internal state of **Rist&lt;T&gt;**.
+The risk is that untrusted caller can hold a reference to an array after returning it to [**ArrayPool&lt;T&gt;.Shared**](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared), thus getting access to internal state of **Rist&lt;T&gt;** on subsequent use.
 
 ## Misnomer.Fictionary
 
