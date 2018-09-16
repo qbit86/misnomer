@@ -9,6 +9,6 @@
 
 ## 0.1.0 - 2014-09-15
 ### Added
-- Rist&lt;T&gt; genric class for recyclable list.
+- **Rist&lt;T&gt;** genric class for recyclable list.
 
 [Unreleased]: https://github.com/qbit86/misnomer/compare/rist-0.1.0...HEAD
