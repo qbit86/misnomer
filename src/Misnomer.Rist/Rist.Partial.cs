@@ -3,7 +3,7 @@ using System.Buffers;
 
 namespace Misnomer
 {
-    // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/shared/System/Collections/Generic/List.cs
+    // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs
     /// <summary>
     /// Represents a recyclable list of objects that can be accessed by index.
     /// Enables pooling instances of inner array of type <see cref="T:T[]"/>.
