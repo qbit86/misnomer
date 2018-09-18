@@ -129,7 +129,7 @@ namespace Misnomer
             });
 
             // Assert
-            Assert.IsType(typeof(InvalidOperationException), exception);
+            Assert.IsType<InvalidOperationException>(exception);
         }
 
         [Fact]
