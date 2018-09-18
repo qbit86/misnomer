@@ -116,6 +116,23 @@ namespace Misnomer
         }
 
         [Fact]
+        public void Enumeration_ShouldThrow_WhenDisposed()
+        {
+            // Arrange
+            var rist = new Rist<int> {1, 2, 3, 5, 8, 13, 21};
+
+            // Act
+            Exception exception = Record.Exception(() =>
+            {
+                foreach (int _ in rist)
+                    rist.Dispose();
+            });
+
+            // Assert
+            Assert.IsType(typeof(InvalidOperationException), exception);
+        }
+
+        [Fact]
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
