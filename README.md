@@ -9,6 +9,11 @@ Standard collections with reduced allocations.
 ### Examples
 
 ```csharp
+using Misnomer;
+using Misnomer.Extensions;
+```
+
+```csharp
 Rist<string> rist = Directory.EnumerateDirectories(".").ToRist();
 rist.AddRange(Directory.EnumerateFiles("."));
 foreach (string item in rist)
