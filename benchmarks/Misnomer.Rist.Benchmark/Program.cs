@@ -9,7 +9,7 @@ namespace Misnomer
     {
         private static void Main()
         {
-            // http://benchmarkdotnet.org/Configs/Configs.htm
+            // https://benchmarkdotnet.org/articles/configs/configs.html
             Job job = new Job(Job.Default)
                 .ApplyAndFreeze(RunMode.Short);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 
 namespace Misnomer
@@ -14,7 +15,7 @@ namespace Misnomer
         }
 
         [Benchmark(Baseline = true)]
-        public int List()
+        public long List()
         {
             var list = new List<int>();
 
@@ -22,15 +23,18 @@ namespace Misnomer
         }
 
         [Benchmark]
-        public int Rist()
+        public long Rist()
         {
             var rist = new Rist<int>();
 
             return MaxTrajectoryPoint(rist);
         }
 
-        private int MaxTrajectoryPoint(IList<int> list)
+        private long MaxTrajectoryPoint(IList<int> list)
         {
+            Debug.Assert(list != null);
+            list.Add(0);
+
             const int start = 255;
 
             int max = start;
@@ -61,7 +65,8 @@ namespace Misnomer
                     break;
             }
 
-            return max;
+            Debug.Assert(list.Count > 0);
+            return list[list.Count - 1] << 32 + max;
         }
     }
 
