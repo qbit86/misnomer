@@ -5,7 +5,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Misnomer
 {
-    [MemoryDiagnoser]
     public abstract class RistBenchmark
     {
         // https://en.wikipedia.org/wiki/Collatz_conjecture
@@ -30,7 +29,7 @@ namespace Misnomer
             return MaxTrajectoryPoint(rist);
         }
 
-        private long MaxTrajectoryPoint(IList<int> list)
+        private static long MaxTrajectoryPoint(IList<int> list)
         {
             Debug.Assert(list != null);
             list.Add(0);

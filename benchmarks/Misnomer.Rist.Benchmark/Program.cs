@@ -1,8 +1,10 @@
 ﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Misnomer
 {
@@ -24,6 +26,7 @@ namespace Misnomer
                 .ApplyAndFreeze(RunMode.Short);
 
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
+                .With(MemoryDiagnoser.Default)
                 .With(clrLegacyJitJob)
                 .With(coreRyuJitJob);
 
