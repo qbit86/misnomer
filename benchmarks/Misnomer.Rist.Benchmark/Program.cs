@@ -19,6 +19,12 @@ namespace Misnomer
                 .With(Jit.LegacyJit)
                 .ApplyAndFreeze(RunMode.Short);
 
+            Job clrRyuJitJob = new Job(Job.Default)
+                .With(Runtime.Clr)
+                .With(Platform.X64)
+                .With(Jit.RyuJit)
+                .ApplyAndFreeze(RunMode.Short);
+
             Job coreRyuJitJob = new Job(Job.Default)
                 .With(Runtime.Core)
                 .With(Platform.X64)
@@ -28,6 +34,7 @@ namespace Misnomer
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
                 .With(MemoryDiagnoser.Default)
                 .With(clrLegacyJitJob)
+                .With(clrRyuJitJob)
                 .With(coreRyuJitJob);
 
             Summary _ = BenchmarkRunner.Run<RistBenchmark>(config);
