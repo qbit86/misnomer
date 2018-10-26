@@ -3,9 +3,9 @@
     <TargetFrameworks>net461;netstandard1.1;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.1.0</FileVersion>
-    <Version>0.1.1</Version>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
+    <Version>0.2.0</Version>
     <Authors>Viktor T.</Authors>
     <Title>Recyclable list</Title>
     <Description>Indexed collection like usual List&lt;T&gt;, but with less allocations.
@@ -17,6 +17,9 @@ Provides ToRist() extension method which perfectly replaces conventional ToList(
     <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/master/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <IncludeSource>True</IncludeSource>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.0" />
