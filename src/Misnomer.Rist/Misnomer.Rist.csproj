@@ -22,6 +22,8 @@ Provides ToRist() extension method which perfectly replaces conventional ToList(
     <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
+    <!-- https://github.com/dotnet/sourcelink/tree/master/docs -->
+    <!--<EmbedAllSources>true</EmbedAllSources>-->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
