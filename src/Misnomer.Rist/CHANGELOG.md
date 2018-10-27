@@ -21,5 +21,5 @@
 - **Rist&lt;T&gt;** genric class for recyclable list.
 
 [Unreleased]: https://github.com/qbit86/misnomer/compare/rist-0.2.0...HEAD
-[0.1.1]: https://github.com/qbit86/misnomer/compare/rist-0.1.0...rist-0.1.1
 [0.2.0]: https://github.com/qbit86/misnomer/compare/rist-0.1.1...rist-0.2.0
+[0.1.1]: https://github.com/qbit86/misnomer/compare/rist-0.1.0...rist-0.1.1
