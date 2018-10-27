@@ -5,7 +5,7 @@
 - **RistBenchmark** class for measuring allocations.
 - `netstandard2.0` and `net461` targets.
 - Strong naming with open-source key.
-- Embedded portable PDBs in the main package.
+- Embedded [portable PDBs](https://github.com/dotnet/core/blob/master/Documentation/diagnostics/portable_pdb.md) in the main package.
 - Integrated [Source Link](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink).
 
 ## [0.1.1] - 2018-09-17
