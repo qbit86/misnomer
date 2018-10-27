@@ -116,6 +116,23 @@ namespace Misnomer
         }
 
         [Fact]
+        public void Enumeration_ShouldThrow_WhenDisposed()
+        {
+            // Arrange
+            var rist = new Rist<int> {1, 2, 3, 5, 8, 13, 21};
+
+            // Act
+            Exception exception = Record.Exception(() =>
+            {
+                foreach (int _ in rist)
+                    rist.Dispose();
+            });
+
+            // Assert
+            Assert.IsType<InvalidOperationException>(exception);
+        }
+
+        [Fact]
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
@@ -185,6 +202,26 @@ namespace Misnomer
                 list.InsertRange(index, range);
                 rist.InsertRange(index, range);
             }
+
+            // Assert
+            Assert.Equal(list, rist);
+        }
+
+        [Fact]
+        public void RemoveAll_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var list = new List<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
+            var rist = new Rist<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
+
+            bool Match(char c)
+            {
+                return Convert.ToInt32(c) % 2 == 0;
+            }
+
+            // Act
+            list.RemoveAll(Match);
+            rist.RemoveAll(Match);
 
             // Assert
             Assert.Equal(list, rist);
