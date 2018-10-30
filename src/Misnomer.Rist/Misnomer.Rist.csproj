@@ -10,7 +10,8 @@
     <Title>Recyclable list</Title>
     <Description>Indexed collection like usual List&lt;T&gt;, but with less allocations.
 Enables reusing instances of inner array via ArrayPool&lt;T&gt;.Shared.
-Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.</Description>
+Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.
+MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
     <PackageLicenseUrl>https://github.com/qbit86/misnomer/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
