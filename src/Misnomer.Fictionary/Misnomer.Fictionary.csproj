@@ -4,6 +4,7 @@
     <LangVersion>latest</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.0" />

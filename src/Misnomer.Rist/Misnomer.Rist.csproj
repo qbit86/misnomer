@@ -21,6 +21,7 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <!-- https://github.com/dotnet/sourcelink/tree/master/docs -->
