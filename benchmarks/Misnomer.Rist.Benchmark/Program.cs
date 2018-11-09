@@ -37,7 +37,7 @@ namespace Misnomer
                 .With(clrRyuJitJob)
                 .With(coreRyuJitJob);
 
-            Summary _ = BenchmarkRunner.Run<RistBenchmark>(config);
+            Summary _ = BenchmarkRunner.Run<StringJoinBenchmark>(config);
         }
     }
 }
