@@ -4,6 +4,7 @@ using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Toolchains.CsProj;
 using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Misnomer
@@ -26,6 +27,7 @@ namespace Misnomer
                 .ApplyAndFreeze(RunMode.Short);
 
             Job coreRyuJitJob = new Job(Job.Default)
+                .With(CsProjCoreToolchain.NetCoreApp21)
                 .With(Runtime.Core)
                 .With(Platform.X64)
                 .With(Jit.RyuJit)
