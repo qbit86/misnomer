@@ -20,24 +20,30 @@ namespace Misnomer
         }
 
         [Benchmark(Baseline = true)]
-        [ArgumentsSource(nameof(Data))]
-        public string Move(Rist<string> list)
+        public string Move()
         {
+            Rist<string> list = CreateAndPopulateList();
+
             string[] array = list.MoveToArray();
             return string.Join(", ", array, 1, 3);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public string Linq(Rist<string> list)
+        public string Copy()
         {
-            IEnumerable<string> enumerable = list.Skip(1).Take(3);
-            return string.Join(", ", enumerable);
+            Rist<string> list = CreateAndPopulateList();
+
+            string[] array = list.ToArray();
+            return string.Join(", ", array, 1, 3);
         }
 
-        public IEnumerable<Rist<string>> Data()
+        [Benchmark]
+        public string Linq()
         {
-            yield return CreateAndPopulateList();
+            Rist<string> list = CreateAndPopulateList();
+
+            IEnumerable<string> enumerable = list.Skip(1).Take(3);
+            return string.Join(", ", enumerable);
         }
     }
 }
