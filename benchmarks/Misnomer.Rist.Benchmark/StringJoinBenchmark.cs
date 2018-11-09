@@ -4,7 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Misnomer
 {
-    public abstract class StringJoinBenchmark
+    public class StringJoinBenchmark
     {
         private static Rist<string> CreateAndPopulateList()
         {
