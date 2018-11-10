@@ -27,7 +27,6 @@ namespace Misnomer
                 .ApplyAndFreeze(RunMode.Short);
 
             Job coreRyuJitJob = new Job(Job.Default)
-                .With(CsProjCoreToolchain.NetCoreApp21)
                 .With(Runtime.Core)
                 .With(Platform.X64)
                 .With(Jit.RyuJit)
