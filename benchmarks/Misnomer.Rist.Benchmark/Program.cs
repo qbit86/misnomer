@@ -4,7 +4,6 @@ using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Toolchains.CsProj;
 using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Misnomer
