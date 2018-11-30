@@ -9,10 +9,12 @@
     <Import_RootNamespace>Misnomer.Internal</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Fakes\RuntimeHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Fakes\SR.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Fakes\SR.Partial.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\StackTraceHiddenAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\ThrowHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\SR.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\SR.Partial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\StackTraceHiddenAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\ThrowHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Misnomer\RuntimeHelpers.cs" />
   </ItemGroup>
 </Project>
