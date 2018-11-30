@@ -23,6 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.Rist.Benchmark", "benchmarks\Misnomer.Rist.Benchmark\Misnomer.Rist.Benchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	.editorconfig = .editorconfig
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
