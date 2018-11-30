@@ -8,7 +8,12 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# C# files
+[*.{csproj,gv,shproj}]
+indent_size = 2
+
+[*.sln.DotSettings]
+indent_style = tab
+
 [*.cs]
 # New line preferences
 csharp_new_line_before_open_brace = all
@@ -60,7 +65,7 @@ dotnet_naming_symbols.static_fields.applicable_kinds   = field
 dotnet_naming_symbols.static_fields.required_modifiers = static
 
 dotnet_naming_style.static_prefix_style.required_prefix = s_
-dotnet_naming_style.static_prefix_style.capitalization = camel_case 
+dotnet_naming_style.static_prefix_style.capitalization = camel_case
 
 # internal and private fields should be _camelCase
 dotnet_naming_rule.camel_case_for_private_internal_fields.severity = suggestion
@@ -71,7 +76,7 @@ dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
 dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, internal
 
 dotnet_naming_style.camel_case_underscore_style.required_prefix = _
-dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case 
+dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
 
 # Code style defaults
 dotnet_sort_system_directives_first = true
@@ -125,30 +130,3 @@ csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
-
-# C++ Files
-[*.{cpp,h,in}]
-curly_bracket_next_line = true
-indent_brace_style = Allman
-
-# Xml project files
-[*.{csproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
-indent_size = 2
-
-# Xml build files
-[*.builds]
-indent_size = 2
-
-# Xml files
-[*.{xml,stylecop,resx,ruleset}]
-indent_size = 2
-
-# Xml config files
-[*.{props,targets,config,nuspec}]
-indent_size = 2
-
-# Shell scripts
-[*.sh]
-end_of_line = lf
-[*.{cmd, bat}]
-end_of_line = crlf
