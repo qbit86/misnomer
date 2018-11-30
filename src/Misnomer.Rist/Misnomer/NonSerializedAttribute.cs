@@ -6,7 +6,7 @@ using System;
 
 namespace Misnomer
 {
-    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Field)]
     public sealed class NonSerializedAttribute : Attribute
     {
     }
