@@ -40,7 +40,7 @@ namespace Misnomer
             // Arrange
             var list = new List<int>();
             var rist = new Rist<int>();
-            IEnumerable<int> collection = new[] {8, 21, 2, 3, 13, 1, 5}.AsNothingButIEnumerable();
+            IEnumerable<int> collection = new[] { 8, 21, 2, 3, 13, 1, 5 }.AsNothingButIEnumerable();
 
             // Act
             list.AddRange(collection);
@@ -54,7 +54,7 @@ namespace Misnomer
         public void Capacity_ShouldBeEnough()
         {
             // Arrange
-            var rist = new Rist<int> {21, 2, 8, 5, 3, 13, 1};
+            var rist = new Rist<int> { 21, 2, 8, 5, 3, 13, 1 };
 
             // Act
             rist.Capacity = 9;
@@ -67,7 +67,7 @@ namespace Misnomer
         public void Capacity_ShouldNotChangeContents()
         {
             // Arrange
-            var expected = new[] {8, 2, 21, 5, 3, 34, 13};
+            var expected = new[] { 8, 2, 21, 5, 3, 34, 13 };
             var actual = new Rist<int>(expected);
 
             // Act
@@ -81,7 +81,7 @@ namespace Misnomer
         public void Capacity_ShouldThrow_WhenLessThenSize()
         {
             // Arrange
-            var rist = new Rist<int> {21, 2, 8, 5, 3, 13, 1};
+            var rist = new Rist<int> { 21, 2, 8, 5, 3, 13, 1 };
 
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => rist.Capacity = 3);
@@ -91,7 +91,7 @@ namespace Misnomer
         public void Create_WithCollection()
         {
             // Arrange
-            IEnumerable<int> collection = new[] {21, 2, 8, 5, 3, 13, 1};
+            IEnumerable<int> collection = new[] { 21, 2, 8, 5, 3, 13, 1 };
             var expected = new List<int>(collection);
 
             // Act
@@ -105,7 +105,7 @@ namespace Misnomer
         public void Create_WithEnumerable()
         {
             // Arrange
-            IEnumerable<int> collection = new[] {21, 2, 8, 5, 3, 13, 1}.AsNothingButIEnumerable();
+            IEnumerable<int> collection = new[] { 21, 2, 8, 5, 3, 13, 1 }.AsNothingButIEnumerable();
             var expected = new List<int>(collection);
 
             // Act
@@ -119,7 +119,7 @@ namespace Misnomer
         public void Enumeration_ShouldThrow_WhenDisposed()
         {
             // Arrange
-            var rist = new Rist<int> {1, 2, 3, 5, 8, 13, 21};
+            var rist = new Rist<int> { 1, 2, 3, 5, 8, 13, 21 };
 
             // Act
             Exception exception = Record.Exception(() =>
