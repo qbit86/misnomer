@@ -14,6 +14,8 @@ namespace System
         internal const string Arg_SystemException = "System error.";
         internal const string Arg_WrongType = "The value '{0}' is not of type '{1}' and cannot be used in this generic collection.";
         internal const string Argument_AddingDuplicate = "An item with the same key has already been added. Key: {0}";
+        internal const string Argument_BadFormatSpecifier = "Format specifier was invalid.";
+        internal const string Argument_CannotExtractScalar = "Cannot extract a Unicode scalar value from the specified index in the input.";
         internal const string Argument_DestinationTooShort = "Destination is too short.";
         internal const string Argument_InvalidArrayType = "Target array type is not compatible with the type of items in the collection.";
         internal const string Argument_InvalidOffLen = "Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.";
@@ -25,6 +27,7 @@ namespace System
         internal const string ArgumentOutOfRange_ListInsert = "Index must be within the bounds of the List.";
         internal const string ArgumentOutOfRange_NeedNonNegNum = "Non-negative number required.";
         internal const string ArgumentOutOfRange_SmallCapacity = "capacity was less than the current size.";
+        internal const string ConcurrentCollection_SyncRoot_NotSupported = "The SyncRoot property may not be used for the synchronization of concurrent collections.";
         internal const string InvalidOperation_ConcurrentOperationsNotSupported = "Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.";
         internal const string InvalidOperation_EnumEnded = "Enumeration already finished.";
         internal const string InvalidOperation_EnumFailedVersion = "Collection was modified; enumeration operation may not execute.";
@@ -45,6 +48,5 @@ namespace System
         internal const string TaskCompletionSourceT_TrySetException_NoExceptions = "The exceptions collection was empty.";
         internal const string TaskCompletionSourceT_TrySetException_NullException = "The exceptions collection included at least one null element.";
         internal const string TaskT_TransitionToFinal_AlreadyCompleted = "An attempt was made to transition a task to a final state when it had already completed.";
-        internal const string ConcurrentCollection_SyncRoot_NotSupported = "The SyncRoot property may not be used for the synchronization of concurrent collections.";
     }
 }
