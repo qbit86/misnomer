@@ -2,7 +2,7 @@
 namespace System
 {
     // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/src/Resources/Strings.resx
-    // ReSharper disable once InconsistentNaming
+
     internal static partial class SR
     {
         internal const string Arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";

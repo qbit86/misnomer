@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace System.Collections.Generic
 {
+    // ReSharper disable once InconsistentNaming
     internal sealed class ICollectionDebugView<T>
     {
         private readonly ICollection<T> _collection;
