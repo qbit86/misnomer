@@ -35,6 +35,8 @@
 // multiple times for different instantiation. 
 // 
 
+// ReSharper disable All
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
