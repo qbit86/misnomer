@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-// ReSharper disable All
-
 using System;
 
 namespace Misnomer
@@ -11,8 +9,5 @@ namespace Misnomer
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     public sealed class NonSerializedAttribute : Attribute
     {
-        public NonSerializedAttribute()
-        {
-        }
     }
 }
