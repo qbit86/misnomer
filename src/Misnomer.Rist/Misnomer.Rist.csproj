@@ -20,7 +20,7 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(MisnomerRootDir)misnomer.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
