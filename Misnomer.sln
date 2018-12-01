@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7A55A4A0-1654-4698-B5D7-52FF6EBE4462}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7A55A4A0-1654-4698-B5D7-52FF6EBE4462}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Test", "test\Misnomer.Test\Misnomer.Test.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Test", "tests\Misnomer.Test\Misnomer.Test.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Rist", "src\Misnomer.Rist\Misnomer.Rist.csproj", "{830B7512-9999-450A-870C-02FF7308C410}"
 EndProject
@@ -22,6 +22,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{B3C87831-0B68-460D-B97C-A6CB647ED0DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.Rist.Benchmark", "benchmarks\Misnomer.Rist.Benchmark\Misnomer.Rist.Benchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	.editorconfig = .editorconfig
+	LICENSE.txt = LICENSE.txt
+	README.md = README.md
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

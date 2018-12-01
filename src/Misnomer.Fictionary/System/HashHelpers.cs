@@ -5,9 +5,10 @@
 
 using System.Diagnostics;
 
+// ReSharper disable InconsistentNaming
 namespace System.Collections
 {
-    internal static partial class HashHelpers
+    internal static class HashHelpers
     {
         public const int HashCollisionThreshold = 100;
 

@@ -29,6 +29,7 @@ namespace Misnomer
                 .With(Runtime.Core)
                 .With(Platform.X64)
                 .With(Jit.RyuJit)
+                .WithBaseline(true)
                 .ApplyAndFreeze(RunMode.Short);
 
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
@@ -37,7 +38,7 @@ namespace Misnomer
                 .With(clrRyuJitJob)
                 .With(coreRyuJitJob);
 
-            Summary _ = BenchmarkRunner.Run<RistBenchmark>(config);
+            Summary _ = BenchmarkRunner.Run<StringJoinBenchmark>(config);
         }
     }
 }

@@ -35,6 +35,8 @@
 // multiple times for different instantiation. 
 // 
 
+// ReSharper disable All
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -96,6 +98,12 @@ namespace System
         {
             throw new ArgumentException(SR.Argument_OverlapAlignmentMismatch);
         }
+
+        internal static void ThrowArgumentException_CannotExtractScalar(ExceptionArgument argument)
+        {
+            throw GetArgumentException(ExceptionResource.Argument_CannotExtractScalar, argument);
+        }
+
         internal static void ThrowArgumentOutOfRange_IndexException()
         {
             throw GetArgumentOutOfRangeException(ExceptionArgument.index,
@@ -104,6 +112,11 @@ namespace System
         internal static void ThrowIndexArgumentOutOfRange_NeedNonNegNumException()
         {
             throw GetArgumentOutOfRangeException(ExceptionArgument.index,
+                                                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+        }
+        internal static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
+        {
+            throw GetArgumentOutOfRangeException(ExceptionArgument.value,
                                                     ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
         }
 
@@ -239,6 +252,16 @@ namespace System
             throw GetArraySegmentCtorValidationFailedException(array, offset, count);
         }
 
+        internal static void ThrowFormatException_BadFormatSpecifier()
+        {
+            throw new FormatException(SR.Argument_BadFormatSpecifier);
+        }
+
+        internal static void ThrowArgumentOutOfRangeException_SymbolDoesNotFit()
+        {
+            throw new ArgumentOutOfRangeException("symbol", SR.Argument_BadFormatSpecifier);
+        }
+
         // Allow nulls for reference types and Nullable<U>, but not for value types.
         // Aggressively inline so the jit evaluates the if in place and either drops the call altogether
         // Or just leaves null test and call to the Non-returning ThrowHelper.ThrowArgumentNullException
@@ -274,6 +297,8 @@ namespace System
                     return "startIndex";
                 case ExceptionArgument.task:
                     return "task";
+                case ExceptionArgument.ch:
+                    return "ch";
                 case ExceptionArgument.s:
                     return "s";
                 case ExceptionArgument.input:
@@ -326,6 +351,10 @@ namespace System
                     return "comparisonType";
                 case ExceptionArgument.manager:
                     return "manager";
+                case ExceptionArgument.sourceBytesToCopy:
+                    return "sourceBytesToCopy";
+                case ExceptionArgument.callBack:
+                    return "callBack";
                 default:
                     Debug.WriteLine("The enum value is not defined, please check the ExceptionArgument Enum.");
                     return "";
@@ -356,6 +385,8 @@ namespace System
                     return SR.ArgumentOutOfRange_SmallCapacity;
                 case ExceptionResource.Argument_InvalidOffLen:
                     return SR.Argument_InvalidOffLen;
+                case ExceptionResource.Argument_CannotExtractScalar:
+                    return SR.Argument_CannotExtractScalar;
                 case ExceptionResource.ArgumentOutOfRange_BiggerThanCollection:
                     return SR.ArgumentOutOfRange_BiggerThanCollection;
                 case ExceptionResource.Serialization_MissingKeys:
@@ -401,6 +432,7 @@ namespace System
         value,
         startIndex,
         task,
+        ch,
         s,
         input,
         ownedMemory,
@@ -426,7 +458,9 @@ namespace System
         state,
         length,
         comparisonType,
-        manager
+        manager,
+        sourceBytesToCopy,
+        callBack
     }
 
     //
@@ -444,6 +478,7 @@ namespace System
         ArgumentOutOfRange_NeedNonNegNum,
         ArgumentOutOfRange_SmallCapacity,
         Argument_InvalidOffLen,
+        Argument_CannotExtractScalar,
         ArgumentOutOfRange_BiggerThanCollection,
         Serialization_MissingKeys,
         Serialization_NullKey,
