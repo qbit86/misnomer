@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2] - 2018-12-19
+### Added
+- `netcoreapp1.0` as separate target framework to remove dependency from `System.Buffers`.
+
+### Changed
+- Replaced license URL with [license expression](https://spdx.org/licenses/).
+
 ## [0.2.1] - 2018-12-01
 ### Changed
 - Merged [fix](https://github.com/dotnet/corefx/commit/0341782cb944cc89dadfcec144399bbda26656e6) for `List<T>`.
@@ -24,6 +31,7 @@
 ### Added
 - `Rist<T>` genric class for recyclable list.
 
+[0.2.2]: https://github.com/qbit86/misnomer/compare/rist-0.2.1...rist-0.2.2
 [0.2.1]: https://github.com/qbit86/misnomer/compare/rist-0.2.0...rist-0.2.1
 [0.2.0]: https://github.com/qbit86/misnomer/compare/rist-0.1.1...rist-0.2.0
 [0.1.1]: https://github.com/qbit86/misnomer/compare/rist-0.1.0...rist-0.1.1
