@@ -29,6 +29,7 @@ ProjectSection(SolutionItems) = preProject
 	.editorconfig = .editorconfig
 	LICENSE.txt = LICENSE.txt
 	README.md = README.md
+	Directory.Build.props = Directory.Build.props
 EndProjectSection
 EndProject
 Global

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard1.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp1.0;netstandard1.1;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyVersion>0.2</AssemblyVersion>
-    <VersionPrefix>0.2.1</VersionPrefix>
+    <VersionPrefix>0.2.2</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Authors>Viktor T.</Authors>
     <Title>Recyclable list</Title>
@@ -12,7 +12,7 @@
 Enables reusing instances of inner array via ArrayPool&lt;T&gt;.Shared.
 Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.
 MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
-    <PackageLicenseUrl>https://github.com/qbit86/misnomer/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -20,20 +20,18 @@ MoveToArray() method releases ownership of internal buffer, so can be used as �
     <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)misnomer.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(MisnomerRootDir)misnomer.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
-    <!-- https://github.com/dotnet/sourcelink/tree/master/docs -->
-    <!--<EmbedAllSources>true</EmbedAllSources>-->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Condition="'$(TargetFramework)' != 'netcoreapp1.0'" Include="System.Buffers" Version="4.5.0" />
   </ItemGroup>
   <Import Project="..\Misnomer.Internal\Misnomer.Internal.projitems" Label="Shared" />
 </Project>
