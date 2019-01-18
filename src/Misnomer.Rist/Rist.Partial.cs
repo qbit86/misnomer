@@ -9,7 +9,7 @@ namespace Misnomer
     /// Enables pooling instances of inner array of type <see cref="T:T[]"/>.
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
-    public partial class Rist<T> : IDisposable
+    public sealed partial class Rist<T> : IDisposable
     {
         private const int MaxArrayLength = 0X7FEFFFFF;
 
