@@ -130,7 +130,7 @@ namespace Misnomer
         {
             get
             {
-                return _comparer == null ? (IEqualityComparer<TKey>) EqualityComparer<TKey>.Default : _comparer;
+                return _comparer == null ? (IEqualityComparer<TKey>)EqualityComparer<TKey>.Default : _comparer;
             }
         }
 
@@ -1295,8 +1295,8 @@ namespace Misnomer
             public struct Enumerator : IEnumerator<TKey>, IEnumerator
             {
                 private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
-                private readonly int _version;
                 private int _index;
+                private readonly int _version;
                 private TKey _currentKey;
 
                 internal Enumerator(Fictionary<TKey, TValue, TKeyComparer> dictionary)
