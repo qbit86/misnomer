@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Misnomer
 {
-    public static class Fictionary<TKey, TValue>
+    public static class DefaultFictionary<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create()
@@ -15,6 +15,22 @@ namespace Misnomer
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
                 new GenericEqualityComparer<TKey>());
+        }
+
+        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection)
+        {
+            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(collection,
+                new GenericEqualityComparer<TKey>());
+        }
+    }
+
+    public static class Fictionary<TKey, TValue>
+    {
+        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(TKeyComparer comparer)
+            where TKeyComparer : IEqualityComparer<TKey>
+        {
+            return new Fictionary<TKey, TValue, TKeyComparer>(0, comparer);
         }
 
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(int capacity, TKeyComparer comparer)
