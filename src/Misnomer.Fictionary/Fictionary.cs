@@ -60,10 +60,6 @@ namespace Misnomer
         private const string KeyValuePairsName = "KeyValuePairs"; // Do not rename (binary serialization)
         private const string ComparerName = "Comparer"; // Do not rename (binary serialization)
 
-        public Fictionary() : this(0, default) { }
-
-        public Fictionary(int capacity) : this(capacity, default) { }
-
         public Fictionary(TKeyComparer comparer) : this(0, comparer) { }
 
         public Fictionary(int capacity, TKeyComparer comparer)
@@ -71,10 +67,11 @@ namespace Misnomer
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
 
+            if (comparer == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
+
             _comparer = comparer;
         }
-
-        public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary) : this(dictionary, default) { }
 
         public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary, TKeyComparer comparer) :
             this(dictionary?.Count ?? 0, comparer)
@@ -108,8 +105,6 @@ namespace Misnomer
                 Add(pair.Key, pair.Value);
             }
         }
-
-        public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection) : this(collection, default) { }
 
         public Fictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer) :
             this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
