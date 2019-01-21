@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0] - 2019-01-22
+### Changed
+- Made `Rist<T>` sealed. This is breaking change but can [improve performance](https://reubenbond.github.io/posts/dotnet-perf-tuning).
+
+### Removed 
+- Merged removing `_syncRoot` in order to [reduce size](https://github.com/dotnet/corefx/issues/34149) of collection.
+
 ## [0.2.2] - 2018-12-19
 ### Added
 - `netcoreapp1.0` as separate target framework to remove dependency from `System.Buffers`.
@@ -31,6 +38,7 @@
 ### Added
 - `Rist<T>` genric class for recyclable list.
 
+[0.3.0]: https://github.com/qbit86/misnomer/compare/rist-0.2.2...rist-0.3.0
 [0.2.2]: https://github.com/qbit86/misnomer/compare/rist-0.2.1...rist-0.2.2
 [0.2.1]: https://github.com/qbit86/misnomer/compare/rist-0.2.0...rist-0.2.1
 [0.2.0]: https://github.com/qbit86/misnomer/compare/rist-0.1.1...rist-0.2.0
