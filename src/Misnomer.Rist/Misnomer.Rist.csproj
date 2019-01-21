@@ -3,8 +3,8 @@
     <TargetFrameworks>net461;netcoreapp1.0;netstandard1.1;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>0.2</AssemblyVersion>
-    <VersionPrefix>0.2.2</VersionPrefix>
+    <AssemblyVersion>0.3</AssemblyVersion>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Authors>Viktor T.</Authors>
     <Title>Recyclable list</Title>
