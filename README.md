@@ -2,9 +2,7 @@
 
 Standard collections with reduced allocations.
 
-## Misnomer.Rist
-
-[![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg)](https://www.nuget.org/packages/Misnomer.Rist/)
+## Misnomer.Rist [![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg)](https://www.nuget.org/packages/Misnomer.Rist/)
 
 `Rist<T>` — recyclable indexed collection. Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs), but uses pooling for the internal array.
 
