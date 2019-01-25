@@ -38,6 +38,13 @@ namespace Misnomer
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
         }
+
+        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer)
+            where TKeyComparer : IEqualityComparer<TKey>
+        {
+            return new Fictionary<TKey, TValue, TKeyComparer>(collection, comparer);
+        }
     }
 
     // ReSharper disable UnusedTypeParameter
