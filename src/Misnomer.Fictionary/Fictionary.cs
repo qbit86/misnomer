@@ -73,7 +73,7 @@ namespace Misnomer
             _comparer = comparer;
         }
 
-        public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary, TKeyComparer comparer) :
+        public Fictionary(IDictionary<TKey, TValue> dictionary, TKeyComparer comparer) :
             this(dictionary?.Count ?? 0, comparer)
         {
             if (dictionary == null)
@@ -81,10 +81,6 @@ namespace Misnomer
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.dictionary);
             }
 
-            // It is likely that the passed-in dictionary is Dictionary<TKey,TValue>. When this is the case,
-            // avoid the enumerator allocation and overhead by looping through the entries array directly.
-            // We only do this when dictionary is Dictionary<TKey,TValue> and not a subclass, to maintain
-            // back-compat with subclasses that may have overridden the enumerator behavior.
             if (dictionary.GetType() == typeof(Fictionary<TKey, TValue, TKeyComparer>))
             {
                 Fictionary<TKey, TValue, TKeyComparer> d = (Fictionary<TKey, TValue, TKeyComparer>)dictionary;
