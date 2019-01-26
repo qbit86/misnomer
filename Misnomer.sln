@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDBE2BAB-E63
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7A55A4A0-1654-4698-B5D7-52FF6EBE4462}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Test", "tests\Misnomer.Test\Misnomer.Test.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.RistTest", "tests\Misnomer.RistTest\Misnomer.RistTest.csproj", "{3F863B2C-83EF-46EE-B490-673E2154C9B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Rist", "src\Misnomer.Rist\Misnomer.Rist.csproj", "{830B7512-9999-450A-870C-02FF7308C410}"
 EndProject
