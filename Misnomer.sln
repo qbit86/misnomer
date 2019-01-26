@@ -32,6 +32,8 @@ ProjectSection(SolutionItems) = preProject
 	Directory.Build.props = Directory.Build.props
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryTest", "tests\Misnomer.FictionaryTest\Misnomer.FictionaryTest.csproj", "{DAA87D39-B0D2-4771-AD36-5D499357A06E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
@@ -61,6 +63,10 @@ Global
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{8C6F8E5A-59CC-4389-A5E2-BED7043A140A} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
 		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E} = {BD248697-DD32-4223-B914-295F9001A68B}
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9} = {B3C87831-0B68-460D-B97C-A6CB647ED0DC}
+		{DAA87D39-B0D2-4771-AD36-5D499357A06E} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}
