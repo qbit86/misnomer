@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using Xunit;
 
 namespace Misnomer
@@ -15,15 +16,16 @@ namespace Misnomer
         public void TryAdd_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(EqualityComparer<int>.Default);
-            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(EqualityComparer<int>.Default);
             const int count = 23;
+            var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
+            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(count, EqualityComparer<int>.Default);
 
             // Act
             for (int i = 0; i != count; ++i)
             {
-                int key = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
-                string value = key.ToString();
+                double rawValue = Math.Pow(Phi, i) / Sqrt5;
+                int key = Convert.ToInt32(rawValue);
+                string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 bool addedToDictionary = dictionary.TryAdd(key, value);
                 bool addedToFictionary = fictionary.TryAdd(key, value);
                 Assert.Equal(addedToDictionary, addedToFictionary);
@@ -41,14 +43,14 @@ namespace Misnomer
         {
             // Arrange
             int[] keys = ArrayPool<int>.Shared.Rent(23);
-            var dictionary = new Dictionary<int, string>(keys.Length, EqualityComparer<int>.Default);
-            var fictionary =
-                new Fictionary<int, string, EqualityComparer<int>>(keys.Length, EqualityComparer<int>.Default);
+            var dictionary = new Dictionary<int, string>(EqualityComparer<int>.Default);
+            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(EqualityComparer<int>.Default);
             for (int i = 0; i != keys.Length; ++i)
             {
-                int key = Convert.ToInt32(Math.Pow(Phi, i + 2) / Sqrt5);
+                double rawValue = Math.Pow(Phi, i) / Sqrt5;
+                int key = Convert.ToInt32(rawValue);
                 keys[i] = key;
-                string value = key.ToString();
+                string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 dictionary[key] = value;
                 fictionary[key] = value;
             }
