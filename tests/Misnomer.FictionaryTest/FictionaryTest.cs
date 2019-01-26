@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using Xunit;
 
@@ -21,14 +22,45 @@ namespace Misnomer
             // Act
             for (int i = 0; i != count; ++i)
             {
-                int item = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
-                string value = item.ToString();
-                dictionary.TryAdd(item, value);
-                fictionary.TryAdd(item, value);
+                int key = Convert.ToInt32(Math.Pow(Phi, i) / Sqrt5);
+                string value = key.ToString();
+                bool addedToDictionary = dictionary.TryAdd(key, value);
+                bool addedToFictionary = fictionary.TryAdd(key, value);
+                Assert.Equal(addedToDictionary, addedToFictionary);
             }
 
             // Assert
+            Assert.Equal(dictionary.Count, fictionary.Count);
             Assert.Equal(dictionary, fictionary);
+            Assert.Equal(dictionary.Keys, fictionary.Keys);
+            Assert.Equal(dictionary.Values, fictionary.Values);
+        }
+
+        [Fact]
+        public void Indexer_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            int[] keys = ArrayPool<int>.Shared.Rent(23);
+            var dictionary = new Dictionary<int, string>(keys.Length, EqualityComparer<int>.Default);
+            var fictionary =
+                new Fictionary<int, string, EqualityComparer<int>>(keys.Length, EqualityComparer<int>.Default);
+            for (int i = 0; i != keys.Length; ++i)
+            {
+                int key = Convert.ToInt32(Math.Pow(Phi, i + 2) / Sqrt5);
+                keys[i] = key;
+                string value = key.ToString();
+                dictionary[key] = value;
+                fictionary[key] = value;
+            }
+
+            // Act
+            for (int i = 0; i != keys.Length; ++i)
+            {
+                int key = keys[i];
+                string dictionaryValue = dictionary[key];
+                string fictionaryValue = fictionary[key];
+                Assert.Equal(dictionaryValue, fictionaryValue);
+            }
         }
     }
 }
