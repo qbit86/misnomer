@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Misnomer
@@ -38,12 +39,14 @@ namespace Misnomer
             return typeof(GenericEqualityComparer<T>).GetHashCode();
         }
 
+        [SuppressMessage("Usage", "CA1801")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(GenericEqualityComparer<T> left, GenericEqualityComparer<T> right)
         {
             return true;
         }
 
+        [SuppressMessage("Usage", "CA1801")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(GenericEqualityComparer<T> left, GenericEqualityComparer<T> right)
         {
