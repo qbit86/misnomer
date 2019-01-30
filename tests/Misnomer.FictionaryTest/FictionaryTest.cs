@@ -8,20 +8,24 @@ namespace Misnomer
 {
     public sealed class FictionaryTest
     {
+        private const int Count = 32;
+
         private static double Sqrt5 { get; } = Math.Sqrt(5);
 
-        private static double Phi { get; } = 0.5 * (1.0 + Sqrt5);
+        private static double ScaleFactor { get; } = 1.0 / Sqrt5;
+
+        private static double CommonRatio { get; } = 0.5 * (1.0 + Sqrt5);
 
         [Fact]
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
-            int[] keys = ArrayPool<int>.Shared.Rent(23);
+            int[] keys = ArrayPool<int>.Shared.Rent(Count);
             var dictionary = new Dictionary<int, string>(EqualityComparer<int>.Default);
             var fictionary = new Fictionary<int, string, EqualityComparer<int>>(EqualityComparer<int>.Default);
             for (int i = 0; i != keys.Length; ++i)
             {
-                double rawValue = Math.Pow(Phi, i) / Sqrt5;
+                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
                 int key = Convert.ToInt32(rawValue);
                 keys[i] = key;
                 string value = rawValue.ToString(CultureInfo.InvariantCulture);
@@ -43,14 +47,14 @@ namespace Misnomer
         public void TryAdd_ShouldBehaveTheSameWay()
         {
             // Arrange
-            const int count = 23;
+            const int count = Count;
             var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
             var fictionary = new Fictionary<int, string, EqualityComparer<int>>(count, EqualityComparer<int>.Default);
 
             // Act
             for (int i = 0; i != count; ++i)
             {
-                double rawValue = Math.Pow(Phi, i) / Sqrt5;
+                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
                 int key = Convert.ToInt32(rawValue);
                 string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 bool addedToDictionary = dictionary.TryAdd(key, value);

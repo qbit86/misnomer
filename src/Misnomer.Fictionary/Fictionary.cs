@@ -110,13 +110,7 @@ namespace Misnomer
             }
         }
 
-        public IEqualityComparer<TKey> Comparer
-        {
-            get
-            {
-                return _comparer == null ? (IEqualityComparer<TKey>)EqualityComparer<TKey>.Default : _comparer;
-            }
-        }
+        public TKeyComparer Comparer => _comparer;
 
         public int Count
         {
