@@ -8,13 +8,11 @@ namespace Misnomer
 {
     public sealed class FictionaryTest
     {
-        private const int Count = 32;
+        private const int Count = 233;
 
-        private static double Sqrt5 { get; } = Math.Sqrt(5);
+        private static double ScaleFactor { get; } = 1.0;
 
-        private static double ScaleFactor { get; } = 1.0 / Sqrt5;
-
-        private static double CommonRatio { get; } = 0.5 * (1.0 + Sqrt5);
+        private static double CommonRatio { get; } = Math.Pow(2.0, 1.0 / 12.0);
 
         [Fact]
         public void Indexer_ShouldBehaveTheSameWay()
