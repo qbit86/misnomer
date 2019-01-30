@@ -110,7 +110,14 @@ namespace Misnomer
             }
         }
 
-        public TKeyComparer Comparer => _comparer;
+        public TKeyComparer Comparer
+        {
+            get
+            {
+                Debug.Assert(_comparer != null, "_comparer != null");
+                return _comparer;
+            }
+        }
 
         public int Count
         {
