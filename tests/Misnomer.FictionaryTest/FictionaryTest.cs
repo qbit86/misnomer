@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using Xunit;
 
@@ -13,6 +14,29 @@ namespace Misnomer
         private static double ScaleFactor { get; } = 1.0;
 
         private static double CommonRatio { get; } = Math.Pow(2.0, 1.0 / 12.0);
+
+        [Fact]
+        public void Create_WithDictionary()
+        {
+            // Arrange
+            ImmutableDictionary<int, string>.Builder builder =
+                ImmutableDictionary.CreateBuilder<int, string>(Int32EqualityComparer.Default);
+            for (int i = 0; i != Count; ++i)
+            {
+                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
+                int key = Convert.ToInt32(rawValue);
+                string value = rawValue.ToString(CultureInfo.InvariantCulture);
+                builder.TryAdd(key, value);
+            }
+
+            ImmutableDictionary<int, string> sourceDictionary = builder.ToImmutable();
+            var keyComparer = new GenericEqualityComparer<int>();
+
+            var dictionary = new Dictionary<int, string>(sourceDictionary, keyComparer);
+            var fictionary = new Fictionary<int, string, GenericEqualityComparer<int>>(sourceDictionary, keyComparer);
+
+            Assert.Equal(dictionary, fictionary);
+        }
 
         [Fact]
         public void Indexer_ShouldBehaveTheSameWay()
