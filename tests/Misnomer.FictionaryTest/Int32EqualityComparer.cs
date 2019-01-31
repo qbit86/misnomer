@@ -13,7 +13,7 @@ namespace Misnomer
 
         public int GetHashCode(int obj)
         {
-            return unchecked(obj * 397) ^ obj;
+            return unchecked(obj * 397) ^ obj.GetHashCode();
         }
     }
 }
