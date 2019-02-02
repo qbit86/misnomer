@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
+using System.Linq;
 using Xunit;
 
 namespace Misnomer
@@ -20,7 +21,7 @@ namespace Misnomer
         {
             // Arrange
             ImmutableDictionary<int, string>.Builder builder =
-                ImmutableDictionary.CreateBuilder<int, string>(Int32EqualityComparer.Default);
+                ImmutableDictionary.CreateBuilder<int, string>(EqualityComparer<int>.Default);
             for (int i = 0; i != Count; ++i)
             {
                 double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
@@ -32,10 +33,13 @@ namespace Misnomer
             ImmutableDictionary<int, string> sourceDictionary = builder.ToImmutable();
             var keyComparer = new GenericEqualityComparer<int>();
 
-            var dictionary = new Dictionary<int, string>(sourceDictionary, keyComparer);
+            // Act
+            var dictionary = new Dictionary<int, string>(sourceDictionary, Int32EqualityComparer.Default);
             var fictionary = new Fictionary<int, string, GenericEqualityComparer<int>>(sourceDictionary, keyComparer);
 
-            Assert.Equal(dictionary, fictionary);
+            // Assert
+            Assert.Empty(dictionary.Except(fictionary));
+            Assert.Empty(fictionary.Except(dictionary));
         }
 
         [Fact]
