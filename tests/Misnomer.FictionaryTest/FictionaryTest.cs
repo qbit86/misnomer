@@ -46,15 +46,15 @@ namespace Misnomer
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
-            int[] keys = ArrayPool<int>.Shared.Rent(Count);
-            var dictionary = new Dictionary<int, string>(EqualityComparer<int>.Default);
-            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(EqualityComparer<int>.Default);
+            string[] keys = ArrayPool<string>.Shared.Rent(Count);
+            var dictionary = new Dictionary<string, double>(StringComparer.Ordinal);
+            var fictionary = new Fictionary<string, double, StringComparer>(StringComparer.Ordinal);
             for (int i = 0; i != keys.Length; ++i)
             {
-                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
-                int key = Convert.ToInt32(rawValue);
+                double value = Math.Pow(CommonRatio, i) * ScaleFactor;
+                int rawKey = Convert.ToInt32(value);
+                string key = rawKey.ToString();
                 keys[i] = key;
-                string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 dictionary[key] = value;
                 fictionary[key] = value;
             }
@@ -62,9 +62,9 @@ namespace Misnomer
             // Act
             for (int i = 0; i != keys.Length; ++i)
             {
-                int key = keys[i];
-                string dictionaryValue = dictionary[key];
-                string fictionaryValue = fictionary[key];
+                string key = keys[i];
+                double dictionaryValue = dictionary[key];
+                double fictionaryValue = fictionary[key];
                 Assert.Equal(dictionaryValue, fictionaryValue);
             }
         }
