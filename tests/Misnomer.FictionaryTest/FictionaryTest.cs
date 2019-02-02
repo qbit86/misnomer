@@ -90,9 +90,15 @@ namespace Misnomer
 
             // Assert
             Assert.Equal(dictionary.Count, fictionary.Count);
-            Assert.Equal(dictionary, fictionary);
-            Assert.Equal(dictionary.Keys, fictionary.Keys);
-            Assert.Equal(dictionary.Values, fictionary.Values);
+
+            Assert.Empty(dictionary.Keys.Except(fictionary.Keys));
+            Assert.Empty(fictionary.Keys.Except(dictionary.Keys));
+
+            Assert.Empty(dictionary.Values.Except(fictionary.Values));
+            Assert.Empty(fictionary.Values.Except(dictionary.Values));
+
+            Assert.Empty(dictionary.Except(fictionary));
+            Assert.Empty(fictionary.Except(dictionary));
         }
     }
 }
