@@ -12,6 +12,8 @@ namespace Misnomer
             return n % 2 == 0 ? n / 2 : 3 * n + 1;
         }
 
+#pragma warning disable CA1822
+
         [Benchmark(Baseline = true)]
         public long List()
         {
@@ -23,6 +25,8 @@ namespace Misnomer
         {
             return MaxTrajectoryPoint(new Rist<int>(), new RistPolicy());
         }
+
+#pragma warning restore CA1822
 
         private static long MaxTrajectoryPoint<TList, TListPolicy>(TList list, TListPolicy p)
             where TList : IList<int>
