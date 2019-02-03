@@ -52,9 +52,7 @@ namespace Misnomer
                 ImmutableDictionary.CreateBuilder<int, string>(EqualityComparer<int>.Default);
 
             foreach (KeyValuePair<int, string> kv in SampleItems)
-            {
                 builder[kv.Key] = kv.Value;
-            }
 
             return builder.ToImmutable();
         }
