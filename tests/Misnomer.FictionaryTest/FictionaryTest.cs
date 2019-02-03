@@ -66,9 +66,7 @@ namespace Misnomer
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 DefaultFictionary.Create(SampleDictionary);
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
-            {
                 Assert.True(fictionary.ContainsKey(kv.Key));
-            }
 
             // Act
             fictionary.Clear();
@@ -76,9 +74,7 @@ namespace Misnomer
             // Assert
             Assert.Empty(fictionary);
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
-            {
                 Assert.False(fictionary.ContainsKey(kv.Key));
-            }
         }
 
         [Fact]
