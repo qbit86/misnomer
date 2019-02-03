@@ -11,7 +11,7 @@ namespace Misnomer
     {
         private const int Count = 233;
 
-        private static KeyValuePair<int, string>[] s_sampleItems;
+        private static ImmutableArray<KeyValuePair<int, string>> s_sampleItems;
 
         private static ImmutableDictionary<int, string> s_sampleDictionary;
 
@@ -19,8 +19,8 @@ namespace Misnomer
 
         private static double CommonRatio { get; } = Math.Pow(2.0, 1.0 / 12.0);
 
-        private static KeyValuePair<int, string>[] SampleItems =>
-            s_sampleItems ?? (s_sampleItems = CreateSampleItems());
+        private static ImmutableArray<KeyValuePair<int, string>> SampleItems =>
+            s_sampleItems.IsDefault ? s_sampleItems = CreateSampleItems() : s_sampleItems;
 
         private static ImmutableDictionary<int, string> SampleDictionary =>
             s_sampleDictionary ?? (s_sampleDictionary = CreateSampleDictionary());
@@ -30,19 +30,20 @@ namespace Misnomer
             return Math.Pow(CommonRatio, i) * ScaleFactor;
         }
 
-        private static KeyValuePair<int, string>[] CreateSampleItems()
+        private static ImmutableArray<KeyValuePair<int, string>> CreateSampleItems()
         {
-            var result = new KeyValuePair<int, string>[Count];
+            ImmutableArray<KeyValuePair<int, string>>.Builder builder =
+                ImmutableArray.CreateBuilder<KeyValuePair<int, string>>();
 
             for (int i = 0; i != Count; ++i)
             {
                 double rawValue = Geometric(i);
                 int key = Convert.ToInt32(rawValue);
                 string value = rawValue.ToString(CultureInfo.InvariantCulture);
-                result[i] = KeyValuePair.Create(key, value);
+                builder.Add(KeyValuePair.Create(key, value));
             }
 
-            return result;
+            return builder.ToImmutable();
         }
 
         private static ImmutableDictionary<int, string> CreateSampleDictionary()
