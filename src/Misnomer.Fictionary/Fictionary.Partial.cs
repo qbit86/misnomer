@@ -17,6 +17,7 @@ namespace Misnomer
     public static class DefaultFictionary<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
+#pragma warning disable CA1000 // Do not declare static members on generic types
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create()
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(0, new GenericEqualityComparer<TKey>());
@@ -27,6 +28,7 @@ namespace Misnomer
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
                 new GenericEqualityComparer<TKey>());
         }
+#pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
     public static class Fictionary
@@ -48,6 +50,7 @@ namespace Misnomer
 
     public static class Fictionary<TKey, TValue>
     {
+#pragma warning disable CA1000 // Do not declare static members on generic types
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(TKeyComparer comparer)
             where TKeyComparer : IEqualityComparer<TKey>
         {
@@ -59,6 +62,7 @@ namespace Misnomer
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
         }
+#pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
     // ReSharper disable UnusedTypeParameter
