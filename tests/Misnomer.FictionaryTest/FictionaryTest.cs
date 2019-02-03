@@ -105,6 +105,26 @@ namespace Misnomer
         }
 
         [Fact]
+        public void CopyTo_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>(SampleDictionary);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary);
+
+            var dictionaryArray = new KeyValuePair<int, string>[dictionary.Count];
+            var fictionaryArray = new KeyValuePair<int, string>[fictionary.Count];
+
+            // Act
+            ((ICollection<KeyValuePair<int, string>>)dictionary).CopyTo(dictionaryArray, 0);
+            ((ICollection<KeyValuePair<int, string>>)fictionary).CopyTo(fictionaryArray, 0);
+
+            // Assert
+            Assert.Empty(dictionaryArray.Except(fictionaryArray));
+            Assert.Empty(fictionaryArray.Except(dictionaryArray));
+        }
+
+        [Fact]
         public void Create_WithDictionary()
         {
             // Arrange
