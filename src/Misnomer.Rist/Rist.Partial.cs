@@ -3,6 +3,7 @@ using System.Buffers;
 
 namespace Misnomer
 {
+#pragma warning disable CA1200 // Avoid using cref tags with a prefix
     // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs
     /// <summary>
     /// Represents a recyclable list of objects that can be accessed by index.
@@ -44,4 +45,5 @@ namespace Misnomer
             return result;
         }
     }
+#pragma warning restore CA1200 // Avoid using cref tags with a prefix
 }
