@@ -1,5 +1,4 @@
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -76,23 +75,22 @@ namespace Misnomer
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
-            string[] keys = ArrayPool<string>.Shared.Rent(Count);
             var dictionary = new Dictionary<string, double>(StringComparer.Ordinal);
             var fictionary = new Fictionary<string, double, StringComparer>(StringComparer.Ordinal);
-            for (int i = 0; i != keys.Length; ++i)
+
+            int count = SampleItems.Length;
+            for (int i = 0; i != count; ++i)
             {
                 double value = Geometric(i);
-                int rawKey = Convert.ToInt32(value);
-                string key = rawKey.ToString();
-                keys[i] = key;
+                string key = SampleItems[i].Value;
                 dictionary[key] = value;
                 fictionary[key] = value;
             }
 
             // Act
-            for (int i = 0; i != keys.Length; ++i)
+            for (int i = 0; i != count; ++i)
             {
-                string key = keys[i];
+                string key = SampleItems[i].Value;
                 double dictionaryValue = dictionary[key];
                 double fictionaryValue = fictionary[key];
                 Assert.Equal(dictionaryValue, fictionaryValue);
@@ -105,9 +103,9 @@ namespace Misnomer
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
             var fictionary = new Fictionary<int, string, GenericEqualityComparer<int>>(SampleDictionary, default);
+            int count = SampleItems.Length;
 
             // Act
-            int count = SampleItems.Length;
             for (int i = 0; i != count; ++i)
             {
                 int key = SampleItems[i].Key * (i % 2 == 0 ? 1 : -1);
@@ -122,16 +120,16 @@ namespace Misnomer
         public void TryAdd_ShouldBehaveTheSameWay()
         {
             // Arrange
-            const int count = Count;
+            int count = SampleItems.Length;
             var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
             var fictionary = new Fictionary<int, string, EqualityComparer<int>>(count, EqualityComparer<int>.Default);
 
             // Act
             for (int i = 0; i != count; ++i)
             {
-                double rawValue = Geometric(i);
-                int key = Convert.ToInt32(rawValue);
-                string value = rawValue.ToString(CultureInfo.InvariantCulture);
+                KeyValuePair<int, string> kv = SampleItems[i];
+                int key = kv.Key;
+                string value = kv.Value;
                 bool addedToDictionary = dictionary.TryAdd(key, value);
                 bool addedToFictionary = fictionary.TryAdd(key, value);
                 Assert.Equal(addedToDictionary, addedToFictionary);
