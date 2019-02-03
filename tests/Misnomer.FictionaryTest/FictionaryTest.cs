@@ -110,10 +110,12 @@ namespace Misnomer
             for (int i = 0; i != count; ++i)
             {
                 int key = SampleItems[i].Key * (i % 2 == 0 ? 1 : -1);
-                bool d = dictionary.Remove(key);
-                bool f = fictionary.Remove(key);
+                bool removedFromDictionary = dictionary.Remove(key);
+                bool removedFromFictionary = fictionary.Remove(key);
 
-                Assert.Equal(d, f);
+                Assert.Equal(removedFromDictionary, removedFromFictionary);
+                Assert.False(fictionary.ContainsKey(key));
+                Assert.False(fictionary.TryGetValue(key, out _));
             }
         }
 
@@ -134,6 +136,7 @@ namespace Misnomer
                 bool addedToDictionary = dictionary.TryAdd(key, value);
                 bool addedToFictionary = fictionary.TryAdd(key, value);
                 Assert.Equal(addedToDictionary, addedToFictionary);
+                Assert.True(fictionary.ContainsKey(key));
             }
 
             // Assert
