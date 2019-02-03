@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+using Misnomer.Extensions;
 using Xunit;
 
 namespace Misnomer
@@ -57,8 +58,7 @@ namespace Misnomer
             return builder.ToImmutable();
         }
 
-#pragma warning disable CA1707
-
+#pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
         public void Clear()
         {
@@ -75,6 +75,33 @@ namespace Misnomer
             Assert.Empty(fictionary);
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
                 Assert.False(fictionary.ContainsKey(kv.Key));
+        }
+
+        [Fact]
+        public void ContainsValue_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            Dictionary<string, int> dictionary = SampleDictionary.ToDictionary(kv => kv.Value, kv => kv.Key);
+            Fictionary<string, int, GenericEqualityComparer<string>> fictionary =
+                SampleDictionary.ToFictionary(kv => kv.Value, kv => kv.Key);
+            const int bound = 100;
+            int hitCount = 0;
+            int missCount = 0;
+
+            // Assert
+            for (int i = 0; i != bound; ++i)
+            {
+                bool dictionaryContainsValue = dictionary.ContainsValue(i);
+                bool fictionaryContainsValue = fictionary.ContainsValue(i);
+
+                Assert.Equal(dictionaryContainsValue, fictionaryContainsValue);
+
+                hitCount += Convert.ToInt32(fictionaryContainsValue);
+                missCount += Convert.ToInt32(!fictionaryContainsValue);
+            }
+
+            Assert.True(hitCount > 0);
+            Assert.True(missCount > 0);
         }
 
         [Fact]
@@ -174,7 +201,6 @@ namespace Misnomer
             Assert.Empty(dictionary.Except(fictionary));
             Assert.Empty(fictionary.Except(dictionary));
         }
-
-#pragma warning restore CA1707
+#pragma warning restore CA1707 // Identifiers should not contain underscores
     }
 }
