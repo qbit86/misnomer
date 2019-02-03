@@ -6,6 +6,14 @@ namespace Misnomer.Extensions
 {
     public static class FictionaryExtensions
     {
+        public static Fictionary<TKey, TSource, GenericEqualityComparer<TKey>> ToFictionary<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector)
+            where TKey : IEquatable<TKey>
+        {
+            return source.ToFictionary(keySelector, new GenericEqualityComparer<TKey>());
+        }
+
         public static Fictionary<TKey, TSource, TKeyComparer> ToFictionary<TSource, TKey, TKeyComparer>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -37,6 +45,15 @@ namespace Misnomer.Extensions
                 d.Add(keySelector(element), element);
 
             return d;
+        }
+
+        public static Fictionary<TKey, TElement, GenericEqualityComparer<TKey>> ToFictionary<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector)
+            where TKey : IEquatable<TKey>
+        {
+            return source.ToFictionary(keySelector, elementSelector, new GenericEqualityComparer<TKey>());
         }
 
         public static Fictionary<TKey, TElement, TKeyComparer> ToFictionary<TSource, TKey, TElement, TKeyComparer>(
