@@ -3,6 +3,17 @@ using System.Collections.Generic;
 
 namespace Misnomer
 {
+    public static class DefaultFictionary
+    {
+        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create<TKey, TValue>(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection)
+            where TKey : IEquatable<TKey>
+        {
+            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(collection,
+                new GenericEqualityComparer<TKey>());
+        }
+    }
+
     public static class DefaultFictionary<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
@@ -16,12 +27,22 @@ namespace Misnomer
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
                 new GenericEqualityComparer<TKey>());
         }
+    }
 
-        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(
-            IEnumerable<KeyValuePair<TKey, TValue>> collection)
+    public static class Fictionary
+    {
+        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKey, TValue, TKeyComparer>(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer)
+            where TKeyComparer : IEqualityComparer<TKey>
         {
-            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(collection,
-                new GenericEqualityComparer<TKey>());
+            return new Fictionary<TKey, TValue, TKeyComparer>(collection, comparer);
+        }
+
+        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKey, TValue, TKeyComparer>(
+            IDictionary<TKey, TValue> dictionary, TKeyComparer comparer)
+            where TKeyComparer : IEqualityComparer<TKey>
+        {
+            return new Fictionary<TKey, TValue, TKeyComparer>(dictionary, comparer);
         }
     }
 
@@ -37,20 +58,6 @@ namespace Misnomer
             where TKeyComparer : IEqualityComparer<TKey>
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
-        }
-
-        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(
-            IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(collection, comparer);
-        }
-
-        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(
-            IDictionary<TKey, TValue> dictionary, TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(dictionary, comparer);
         }
     }
 

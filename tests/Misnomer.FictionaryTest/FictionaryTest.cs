@@ -58,6 +58,29 @@ namespace Misnomer
         }
 
         [Fact]
+        public void Clear()
+        {
+            // Arrange
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary);
+            foreach (KeyValuePair<int, string> kv in SampleDictionary)
+            {
+                Assert.True(fictionary.ContainsKey(kv.Key));
+            }
+
+            // Act
+            fictionary.Clear();
+
+            // Assert
+            Assert.Empty(fictionary);
+            Assert.Equal(0, fictionary.Count);
+            foreach (KeyValuePair<int, string> kv in SampleDictionary)
+            {
+                Assert.False(fictionary.ContainsKey(kv.Key));
+            }
+        }
+
+        [Fact]
         public void Create_WithDictionary()
         {
             // Arrange
@@ -65,7 +88,8 @@ namespace Misnomer
 
             // Act
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
-            var fictionary = new Fictionary<int, string, GenericEqualityComparer<int>>(SampleDictionary, keyComparer);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                Fictionary.Create(SampleDictionary, keyComparer);
 
             // Assert
             Assert.Empty(dictionary.Except(fictionary));
@@ -77,7 +101,8 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<string, double>(StringComparer.Ordinal);
-            var fictionary = new Fictionary<string, double, StringComparer>(StringComparer.Ordinal);
+            Fictionary<string, double, StringComparer> fictionary =
+                Fictionary<string, double>.Create(StringComparer.Ordinal);
 
             int count = SampleItems.Length;
             for (int i = 0; i != count; ++i)
@@ -103,7 +128,8 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
-            var fictionary = new Fictionary<int, string, GenericEqualityComparer<int>>(SampleDictionary, default);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary);
             int count = SampleItems.Length;
 
             // Act
