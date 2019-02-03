@@ -57,6 +57,8 @@ namespace Misnomer
             return builder.ToImmutable();
         }
 
+#pragma warning disable CA1707
+
         [Fact]
         public void Clear()
         {
@@ -73,7 +75,6 @@ namespace Misnomer
 
             // Assert
             Assert.Empty(fictionary);
-            Assert.Equal(0, fictionary.Count);
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
             {
                 Assert.False(fictionary.ContainsKey(kv.Key));
@@ -177,5 +178,7 @@ namespace Misnomer
             Assert.Empty(dictionary.Except(fictionary));
             Assert.Empty(fictionary.Except(dictionary));
         }
+
+#pragma warning restore CA1707
     }
 }
