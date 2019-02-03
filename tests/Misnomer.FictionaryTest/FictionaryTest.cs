@@ -12,9 +12,34 @@ namespace Misnomer
     {
         private const int Count = 233;
 
+        private static KeyValuePair<int, string>[] s_keyValuePairs;
+
         private static double ScaleFactor { get; } = 1.0;
 
         private static double CommonRatio { get; } = Math.Pow(2.0, 1.0 / 12.0);
+
+        private static KeyValuePair<int, string>[] KeyValuePairs =>
+            s_keyValuePairs ?? (s_keyValuePairs = CreateKeyValuePairs());
+
+        private static double Geometric(int i)
+        {
+            return Math.Pow(CommonRatio, i) * ScaleFactor;
+        }
+
+        private static KeyValuePair<int, string>[] CreateKeyValuePairs()
+        {
+            var result = new KeyValuePair<int, string>[Count];
+
+            for (int i = 0; i != Count; ++i)
+            {
+                double rawValue = Geometric(i);
+                int key = Convert.ToInt32(rawValue);
+                string value = rawValue.ToString(CultureInfo.InvariantCulture);
+                result[i] = KeyValuePair.Create(key, value);
+            }
+
+            return result;
+        }
 
         [Fact]
         public void Create_WithDictionary()
@@ -24,7 +49,7 @@ namespace Misnomer
                 ImmutableDictionary.CreateBuilder<int, string>(EqualityComparer<int>.Default);
             for (int i = 0; i != Count; ++i)
             {
-                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
+                double rawValue = Geometric(i);
                 int key = Convert.ToInt32(rawValue);
                 string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 builder.TryAdd(key, value);
@@ -51,7 +76,7 @@ namespace Misnomer
             var fictionary = new Fictionary<string, double, StringComparer>(StringComparer.Ordinal);
             for (int i = 0; i != keys.Length; ++i)
             {
-                double value = Math.Pow(CommonRatio, i) * ScaleFactor;
+                double value = Geometric(i);
                 int rawKey = Convert.ToInt32(value);
                 string key = rawKey.ToString();
                 keys[i] = key;
@@ -80,7 +105,7 @@ namespace Misnomer
             // Act
             for (int i = 0; i != count; ++i)
             {
-                double rawValue = Math.Pow(CommonRatio, i) * ScaleFactor;
+                double rawValue = Geometric(i);
                 int key = Convert.ToInt32(rawValue);
                 string value = rawValue.ToString(CultureInfo.InvariantCulture);
                 bool addedToDictionary = dictionary.TryAdd(key, value);
