@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 
 namespace Misnomer
@@ -69,6 +70,7 @@ namespace Misnomer
     public sealed partial class Fictionary<TKey, TValue, TKeyComparer>
         where TKeyComparer : IEqualityComparer<TKey>
     {
+        private static ArrayPool<Entry> Pool => ArrayPool<Entry>.Shared;
     }
     // ReSharper restore UnusedTypeParameter
 }

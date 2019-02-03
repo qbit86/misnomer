@@ -413,7 +413,7 @@ namespace Misnomer
 
             _freeList = -1;
             _buckets = new int[size];
-            _entries = new Entry[size];
+            _entries = Pool.Rent(size);
 
             return size;
         }
@@ -613,7 +613,7 @@ namespace Misnomer
             Debug.Assert(newSize >= _entries.Length);
 
             int[] buckets = new int[newSize];
-            Entry[] entries = new Entry[newSize];
+            Entry[] entries = Pool.Rent(newSize);
 
             int count = _count;
             Array.Copy(_entries, 0, entries, 0, count);
@@ -642,6 +642,7 @@ namespace Misnomer
             }
 
             _buckets = buckets;
+            Pool.Return(_entries, true);
             _entries = entries;
         }
 
