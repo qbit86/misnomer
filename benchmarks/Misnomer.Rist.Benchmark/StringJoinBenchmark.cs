@@ -18,7 +18,7 @@ namespace Misnomer
 
             return list;
         }
-        
+
 #pragma warning disable CA1822
         [Benchmark(Baseline = true)]
         public string Move()
