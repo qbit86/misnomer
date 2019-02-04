@@ -76,7 +76,15 @@ namespace Misnomer
         {
             int count = _count;
             if (count <= 0)
+            {
+                if (_entries != null)
+                {
+                    Pool.Return(_entries, true);
+                    _entries = null;
+                }
+
                 return;
+            }
 
             Array.Clear(_buckets, 0, _buckets.Length);
 
