@@ -67,10 +67,28 @@ namespace Misnomer
     }
 
     // ReSharper disable UnusedTypeParameter
-    public sealed partial class Fictionary<TKey, TValue, TKeyComparer>
+    public sealed partial class Fictionary<TKey, TValue, TKeyComparer> : IDisposable
         where TKeyComparer : IEqualityComparer<TKey>
     {
         private static ArrayPool<Entry> Pool => ArrayPool<Entry>.Shared;
+
+        public void Dispose()
+        {
+            int count = _count;
+            if (count <= 0)
+                return;
+
+            Array.Clear(_buckets, 0, _buckets.Length);
+
+            _count = 0;
+            _freeList = -1;
+            _freeCount = 0;
+            Pool.Return(_entries, true);
+            _entries = null;
+
+            _keys = null;
+            _values = null;
+        }
     }
     // ReSharper restore UnusedTypeParameter
 }
