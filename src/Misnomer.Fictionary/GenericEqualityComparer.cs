@@ -5,8 +5,10 @@ using System.Runtime.CompilerServices;
 namespace Misnomer
 {
     // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/EqualityComparer.cs
+#pragma warning disable CA1815, CA2231
     public readonly struct GenericEqualityComparer<T> : IEqualityComparer<T>, IEquatable<GenericEqualityComparer<T>>
         where T : IEquatable<T>
+#pragma warning restore CA2231, CA1815
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(T x, T y)
@@ -37,21 +39,5 @@ namespace Misnomer
         {
             return typeof(GenericEqualityComparer<T>).GetHashCode();
         }
-
-#pragma warning disable CA1801
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(GenericEqualityComparer<T> left, GenericEqualityComparer<T> right)
-        {
-            return true;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator !=(GenericEqualityComparer<T> left, GenericEqualityComparer<T> right)
-        {
-            return false;
-        }
-
-#pragma warning restore CA1801
     }
 }
