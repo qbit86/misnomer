@@ -58,6 +58,17 @@ namespace Misnomer
             return builder.ToImmutable();
         }
 
+        private static IEnumerable<T> Mix<T>(IReadOnlyList<T> list)
+        {
+            int count = list.Count;
+            for (int i = 0, j = count - 1; i <= j; ++i, --j)
+            {
+                yield return list[j];
+                if (i < j)
+                    yield return list[i];
+            }
+        }
+
 #pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
         public void Clear()
@@ -218,12 +229,11 @@ namespace Misnomer
             // Arrange
             int count = SampleItems.Length;
             var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
-            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(count, EqualityComparer<int>.Default);
+            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(0, EqualityComparer<int>.Default);
 
             // Act
-            for (int i = 0; i != count; ++i)
+            foreach (KeyValuePair<int, string> kv in Mix(SampleItems))
             {
-                KeyValuePair<int, string> kv = SampleItems[i];
                 int key = kv.Key;
                 string value = kv.Value;
                 bool addedToDictionary = dictionary.TryAdd(key, value);
