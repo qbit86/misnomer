@@ -58,17 +58,6 @@ namespace Misnomer
             return builder.ToImmutable();
         }
 
-        private static IEnumerable<T> Mix<T>(IReadOnlyList<T> list)
-        {
-            int count = list.Count;
-            for (int i = 0, j = count - 1; i <= j; ++i, --j)
-            {
-                yield return list[j];
-                if (i < j)
-                    yield return list[i];
-            }
-        }
-
 #pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
         public void Clear()
@@ -232,7 +221,7 @@ namespace Misnomer
             var fictionary = new Fictionary<int, string, EqualityComparer<int>>(0, EqualityComparer<int>.Default);
 
             // Act
-            foreach (KeyValuePair<int, string> kv in Mix(SampleItems))
+            foreach (KeyValuePair<int, string> kv in SampleItems.Mix())
             {
                 int key = kv.Key;
                 string value = kv.Value;
@@ -259,25 +248,41 @@ namespace Misnomer
         public void TryGetValue_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>();
-            Fictionary<int, string, Int32EqualityComparer> fictionary =
-                Fictionary<int, string>.Create(Int32EqualityComparer.Default);
-
-            foreach (KeyValuePair<int, string> kv in SampleItems.Reverse())
-                dictionary.TryAdd(kv.Key, kv.Value);
-
-            foreach (KeyValuePair<int, string> kv in Mix(SampleItems))
-                fictionary.TryAdd(kv.Key, kv.Value);
+            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
 
             // Act
-            foreach (KeyValuePair<int, string> kv in SampleItems)
+            foreach (KeyValuePair<int, string> kv in SampleDictionary)
             {
-                bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string dictionaryValue);
-                bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string fictionaryValue);
+                {
+                    bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string fictionaryValue);
 
-                Assert.Equal(foundInDictionary, foundInFictionary);
-                Assert.Equal(dictionaryValue, fictionaryValue);
+                    Assert.Equal(foundInDictionary, foundInFictionary);
+                    Assert.Equal(dictionaryValue, fictionaryValue);
+                }
+                {
+                    bool foundInDictionary = dictionary.TryGetValue(-kv.Key, out string dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(-kv.Key, out string fictionaryValue);
+
+                    Assert.Equal(foundInDictionary, foundInFictionary);
+                    Assert.Equal(dictionaryValue, fictionaryValue);
+                }
             }
+        }
+
+        [Fact]
+        public void Keys_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
+
+            // Act
+            Assert.Empty(dictionary.Keys.Except(fictionary.Keys));
+            Assert.Empty(fictionary.Keys.Except(dictionary.Keys));
         }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
     }
