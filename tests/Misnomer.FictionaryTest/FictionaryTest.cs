@@ -280,9 +280,22 @@ namespace Misnomer
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 DefaultFictionary.Create(SampleDictionary.ToList().Mix());
 
-            // Act
+            // Assert
             Assert.Empty(dictionary.Keys.Except(fictionary.Keys));
             Assert.Empty(fictionary.Keys.Except(dictionary.Keys));
+        }
+
+        [Fact]
+        public void Values_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
+
+            // Assert
+            Assert.Empty(dictionary.Values.Except(fictionary.Values));
+            Assert.Empty(fictionary.Values.Except(dictionary.Values));
         }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
     }
