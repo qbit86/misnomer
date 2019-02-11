@@ -254,6 +254,31 @@ namespace Misnomer
             Assert.Empty(dictionary.Except(fictionary));
             Assert.Empty(fictionary.Except(dictionary));
         }
+
+        [Fact]
+        public void TryGetValue_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>();
+            Fictionary<int, string, Int32EqualityComparer> fictionary =
+                Fictionary<int, string>.Create(Int32EqualityComparer.Default);
+
+            foreach (KeyValuePair<int, string> kv in SampleItems.Reverse())
+                dictionary.TryAdd(kv.Key, kv.Value);
+
+            foreach (KeyValuePair<int, string> kv in Mix(SampleItems))
+                fictionary.TryAdd(kv.Key, kv.Value);
+
+            // Act
+            foreach (KeyValuePair<int, string> kv in SampleItems)
+            {
+                bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string dictionaryValue);
+                bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string fictionaryValue);
+
+                Assert.Equal(foundInDictionary, foundInFictionary);
+                Assert.Equal(dictionaryValue, fictionaryValue);
+            }
+        }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
     }
 }
