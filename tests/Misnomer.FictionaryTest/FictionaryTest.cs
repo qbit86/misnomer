@@ -190,6 +190,29 @@ namespace Misnomer
         }
 
         [Fact]
+        public void RemoveOut_ShouldBehaveTheSameWay()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
+                DefaultFictionary.Create(SampleDictionary);
+            int count = SampleItems.Length;
+
+            // Act
+            for (int i = 0; i != count; ++i)
+            {
+                int key = SampleItems[i].Key * (i % 2 == 0 ? 1 : -1);
+                bool removedFromDictionary = dictionary.Remove(key, out string dictionaryValue);
+                bool removedFromFictionary = fictionary.Remove(key, out string fictionaryValue);
+
+                Assert.Equal(removedFromDictionary, removedFromFictionary);
+                Assert.Equal(dictionaryValue, fictionaryValue);
+                Assert.False(fictionary.ContainsKey(key));
+                Assert.False(fictionary.TryGetValue(key, out _));
+            }
+        }
+
+        [Fact]
         public void TryAdd_ShouldBehaveTheSameWay()
         {
             // Arrange
