@@ -297,6 +297,31 @@ namespace Misnomer
             Assert.Empty(dictionary.Values.Except(fictionary.Values));
             Assert.Empty(fictionary.Values.Except(dictionary.Values));
         }
+
+        [Fact]
+        public void Dispose_ShouldClear()
+        {
+            // Arrange
+            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary = DefaultFictionary<int, string>.Create();
+            foreach (KeyValuePair<int, string> item in SampleItems)
+            {
+                fictionary.TryAdd(item.Key, item.Value);
+                fictionary.TryAdd(-item.Key, item.Key.ToString(CultureInfo.InvariantCulture));
+            }
+
+            // Act
+            fictionary.Dispose();
+            Assert.Empty(fictionary);
+
+            foreach (KeyValuePair<int, string> kv in SampleDictionary.ToList().Mix())
+                fictionary.Add(kv.Key, kv.Value);
+
+            // Assert
+            Assert.Empty(dictionary.Except(fictionary));
+            Assert.Empty(fictionary.Except(dictionary));
+        }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
     }
 }
