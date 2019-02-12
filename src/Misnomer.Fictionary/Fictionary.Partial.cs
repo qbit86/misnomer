@@ -74,28 +74,19 @@ namespace Misnomer
 
         public void Dispose()
         {
-            int count = _count;
-            if (count <= 0)
-            {
-                if (_entries != null)
-                {
-                    Pool.Return(_entries, true);
-                    _entries = null;
-                }
-
-                return;
-            }
-
-            Array.Clear(_buckets, 0, _buckets.Length);
-
+            ++_version;
             _count = 0;
-            _freeList = -1;
+            _freeList = 0;
             _freeCount = 0;
-            Pool.Return(_entries, true);
-            _entries = null;
-
             _keys = null;
             _values = null;
+            _buckets = null;
+
+            if (_entries != null)
+            {
+                Pool.Return(_entries, true);
+                _entries = null;
+            }
         }
     }
     // ReSharper restore UnusedTypeParameter
