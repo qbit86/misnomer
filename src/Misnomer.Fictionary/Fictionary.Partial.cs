@@ -32,6 +32,9 @@ namespace Misnomer
 #pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
+    /// <summary>
+    /// Provides the Create factory method for <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.
+    /// </summary>
     public static class Fictionary
     {
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKey, TValue, TKeyComparer>(
@@ -49,6 +52,11 @@ namespace Misnomer
         }
     }
 
+    /// <summary>
+    /// Provides the Create factory method for <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     public static class Fictionary<TKey, TValue>
     {
 #pragma warning disable CA1000 // Do not declare static members on generic types
@@ -70,7 +78,7 @@ namespace Misnomer
 
     // ReSharper disable UnusedTypeParameter
     /// <summary>
-    /// Represents a generic collection of key/value pairs.
+    /// Represents a generic collection of key/value pairs with concretely typed key comparer.
     /// Enables pooling instances of inner array of dictionary entries.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
