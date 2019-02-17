@@ -6,10 +6,19 @@ namespace Misnomer
 {
     /// <summary>
     /// Provides initialization method for instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
-    /// with <see cref="GenericEqualityComparer{TKey}" /> used as key comparer.
+    /// with <see cref="GenericEqualityComparer{TKey}" /> used as the key comparer.
     /// </summary>
     public static class DefaultFictionary
     {
+        /// <summary>
+        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
+        /// and uses <see cref="GenericEqualityComparer{TKey}" />.
+        /// </summary>
+        /// <param name="collection">The collection whose elements are copied to the new dictionary.</param>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
+        /// and uses <see cref="GenericEqualityComparer{TKey}" />.</returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>> collection)
             where TKey : IEquatable<TKey>
@@ -21,7 +30,7 @@ namespace Misnomer
 
     /// <summary>
     /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
-    /// with <see cref="GenericEqualityComparer{TKey}" /> used as key comparer.
+    /// with <see cref="GenericEqualityComparer{TKey}" /> used as the key comparer.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
@@ -29,11 +38,22 @@ namespace Misnomer
         where TKey : IEquatable<TKey>
     {
 #pragma warning disable CA1000 // Do not declare static members on generic types
+        /// <summary>
+        /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses <see cref="GenericEqualityComparer{TKey}" />.
+        /// </summary>
+        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses <see cref="GenericEqualityComparer{TKey}" />.</returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create()
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(0, new GenericEqualityComparer<TKey>());
         }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class that is empty,
+        /// has the specified initial capacity, and uses the <see cref="GenericEqualityComparer{TKey}" />.
+        /// </summary>
+        /// <param name="capacity">The initial number of elements that the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> can contain.</param>
+        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that has the specified initial capacity,
+        /// and uses <see cref="GenericEqualityComparer{TKey}" />.</returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(int capacity)
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
@@ -89,7 +109,7 @@ namespace Misnomer
     // ReSharper disable UnusedTypeParameter
     /// <summary>
     /// Represents a generic collection of key/value pairs with concretely typed key comparer.
-    /// Avoids virtual calls to key comparer.
+    /// Avoids virtual calls to the key comparer.
     /// Enables pooling instances of inner array of dictionary entries.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
