@@ -131,7 +131,7 @@ namespace Misnomer
             // Act
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                Fictionary.Create(SampleDictionary, keyComparer);
+                SampleDictionary.ToFictionary(keyComparer);
 
             // Assert
             Assert.Empty(dictionary.Except(fictionary));

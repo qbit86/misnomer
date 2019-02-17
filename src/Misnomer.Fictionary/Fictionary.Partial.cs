@@ -41,44 +41,6 @@ namespace Misnomer
     /// <summary>
     /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
     /// </summary>
-    public static class Fictionary
-    {
-        /// <summary>
-        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified key comparer.
-        /// </summary>
-        /// <param name="collection">The collection whose elements are copied to the new <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use to compare keys for equality.</param>
-        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
-        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified comparer.</returns>
-        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKey, TValue, TKeyComparer>(
-            IEnumerable<KeyValuePair<TKey, TValue>> collection, TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(collection, comparer);
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified key comparer.
-        /// </summary>
-        /// <param name="dictionary">The <see cref="IDictionary{TKey, TValue}" /> whose elements are copied to the new <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use to compare keys for equality.</param>
-        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
-        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified comparer.</returns>
-        public static Fictionary<TKey, TValue, TKeyComparer> Create<TKey, TValue, TKeyComparer>(
-            IDictionary<TKey, TValue> dictionary, TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(dictionary, comparer);
-        }
-    }
-
-    /// <summary>
-    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
-    /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     public static class Fictionary<TKey, TValue>
