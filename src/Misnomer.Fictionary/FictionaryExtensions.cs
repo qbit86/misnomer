@@ -58,6 +58,14 @@ namespace Misnomer.Extensions
             return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
         }
 
+        /// <summary>
+        /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> of its contents by using the <see cref="GenericEqualityComparer{TKey}" />.
+        /// </summary>
+        /// <param name="source">The sequence to enumerate to generate the dictionary.</param>
+        /// <param name="keySelector">The function that will produce the key for the dictionary from each sequence element.</param>
+        /// <typeparam name="TSource">The type of the elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">The type of the keys in the resulting dictionary.</typeparam>
+        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the items in the specified sequence.</returns>
         public static Fictionary<TKey, TSource, GenericEqualityComparer<TKey>> ToFictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
@@ -112,7 +120,7 @@ namespace Misnomer.Extensions
         }
 
         /// <summary>
-        /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> of its contents by using the specified key comparer.
+        /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> of its contents by using the <see cref="GenericEqualityComparer{TKey}" />.
         /// </summary>
         /// <param name="source">The sequence to enumerate to generate the dictionary.</param>
         /// <param name="keySelector">The function that will produce the key for the dictionary from each sequence element.</param>
@@ -130,6 +138,20 @@ namespace Misnomer.Extensions
             return source.ToFictionary(keySelector, elementSelector, new GenericEqualityComparer<TKey>());
         }
 
+        /// <summary>
+        /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> of its contents by using the specified key comparer.
+        /// </summary>
+        /// <param name="source">The sequence to enumerate to generate the dictionary.</param>
+        /// <param name="keySelector">The function that will produce the key for the dictionary from each sequence element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the dictionary from each sequence element.</param>
+        /// <param name="comparer">The key comparer to use for the dictionary.</param>
+        /// <typeparam name="TSource">The type of the elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">The type of the keys in the resulting dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the resulting dictionary.</typeparam>
+        /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
+        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the items in the specified sequence.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="keySelector"/> or <paramref name="elementSelector"/> is `null`;
+        /// or <paramref name="keySelector"/> produces a key that is null.</exception>
         public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TSource, TKey, TValue, TKeyComparer>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
