@@ -8,8 +8,8 @@ namespace Misnomer
     /// <summary>
     /// Represents a string comparison operation that uses ordinal case-sensitive comparison rules.
     /// </summary>
-    public readonly struct StringOrdinalComparer : IComparer<string>, IEqualityComparer<string>,
-        IEquatable<StringOrdinalComparer>
+    public readonly struct OrdinalStringComparer : IComparer<string>, IEqualityComparer<string>,
+        IEquatable<OrdinalStringComparer>
 #pragma warning restore CA2231, CA1815
     {
         /// <summary>
@@ -50,23 +50,23 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="StringOrdinalComparer" /> object is equal to another <see cref="StringOrdinalComparer" /> object.
+        /// Indicates whether the current <see cref="OrdinalStringComparer" /> object is equal to another <see cref="OrdinalStringComparer" /> object.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>`true`.</returns>
-        public bool Equals(StringOrdinalComparer other)
+        public bool Equals(OrdinalStringComparer other)
         {
             return true;
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="StringOrdinalComparer" /> object is equal to another comparer object of the same type.
+        /// Indicates whether the current <see cref="OrdinalStringComparer" /> object is equal to another comparer object of the same type.
         /// </summary>
         /// <param name="obj">An object to compare with this object.</param>
-        /// <returns>true` if <paramref name="obj"/> is of type <see cref="StringOrdinalComparer" />; otherwise, `false`.</returns>
+        /// <returns>true` if <paramref name="obj"/> is of type <see cref="OrdinalStringComparer" />; otherwise, `false`.</returns>
         public override bool Equals(object obj)
         {
-            return obj is StringOrdinalComparer;
+            return obj is OrdinalStringComparer;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Misnomer
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            return typeof(StringOrdinalComparer).GetHashCode();
+            return typeof(OrdinalStringComparer).GetHashCode();
         }
     }
 }
