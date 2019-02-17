@@ -5,30 +5,6 @@ using System.Collections.Generic;
 namespace Misnomer
 {
     /// <summary>
-    /// Provides initialization method for instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
-    /// with <see cref="GenericEqualityComparer{TKey}" /> used as the key comparer.
-    /// </summary>
-    public static class DefaultFictionary
-    {
-        /// <summary>
-        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
-        /// and uses the <see cref="GenericEqualityComparer{TKey}" />.
-        /// </summary>
-        /// <param name="collection">The collection whose elements are copied to the new <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.</param>
-        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
-        /// and uses the <see cref="GenericEqualityComparer{TKey}" />.</returns>
-        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create<TKey, TValue>(
-            IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            where TKey : IEquatable<TKey>
-        {
-            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(collection,
-                new GenericEqualityComparer<TKey>());
-        }
-    }
-
-    /// <summary>
     /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
     /// with <see cref="GenericEqualityComparer{TKey}" /> used as the key comparer.
     /// </summary>

@@ -63,8 +63,7 @@ namespace Misnomer
         public void Clear()
         {
             // Arrange
-            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
                 Assert.True(fictionary.ContainsKey(kv.Key));
 
@@ -109,8 +108,7 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary);
-            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
 
             var dictionaryArray = new KeyValuePair<int, string>[dictionary.Count];
             var fictionaryArray = new KeyValuePair<int, string>[fictionary.Count];
@@ -172,8 +170,7 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
-            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
             int count = SampleItems.Length;
 
             // Act
@@ -194,8 +191,7 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
-            Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary);
+            Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
             int count = SampleItems.Length;
 
             // Act
@@ -250,7 +246,7 @@ namespace Misnomer
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
+                SampleDictionary.ToList().Mix().ToFictionary();
 
             // Act
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
@@ -278,7 +274,7 @@ namespace Misnomer
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
+                SampleDictionary.ToList().Mix().ToFictionary();
 
             // Assert
             Assert.Empty(dictionary.Keys.Except(fictionary.Keys));
@@ -291,7 +287,7 @@ namespace Misnomer
             // Arrange
             var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
-                DefaultFictionary.Create(SampleDictionary.ToList().Mix());
+                SampleDictionary.ToList().Mix().ToFictionary();
 
             // Assert
             Assert.Empty(dictionary.Values.Except(fictionary.Values));
