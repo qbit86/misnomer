@@ -10,7 +10,8 @@ namespace Misnomer
     {
         private static void Main()
         {
-            Fictionary<string, FileSystemInfo, OrdinalStringComparer> fictionary = Directory.EnumerateDirectories(".")
+            Fictionary<string, FileSystemInfo, OrdinalStringComparer> fictionary =
+                Directory.EnumerateDirectories(".")
                 .Select(s => KeyValuePair.Create(s, (FileSystemInfo)new DirectoryInfo(s)))
                 .ToFictionary(new OrdinalStringComparer());
             foreach (string s in Directory.EnumerateFiles("."))

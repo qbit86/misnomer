@@ -1,10 +1,11 @@
 # Misnomer
 
-Standard collections with reduced allocations.
+Standard collections with some optimizations.
 
 ## Misnomer.Rist [![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg)](https://www.nuget.org/packages/Misnomer.Rist/)
 
-`Rist<T>` — recyclable indexed collection. Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs), but uses pooling for the internal array.
+`Rist<T>` — recyclable indexed collection.
+Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs), but uses pooling for the internal array.
 
 ### Examples
 
@@ -33,11 +34,36 @@ Failure to do so just leads to not returning the internal array to the pool, so 
 
 ### Remarks
 
-Implementation deliberatly prefers [shared](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared) pool over [private](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.create) one for the sake of performance.
+Implementation deliberately prefers [shared](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared) pool over [private](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.create) one for the sake of performance.
 The risk is that untrusted caller can hold a reference to an array after returning it to [ArrayPool&lt;T&gt;.Shared](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared), thus getting access to internal state of `Rist<T>` on subsequent use.
 
-## Misnomer.Fictionary
+## Misnomer.Fictionary [![Fictionary version](https://img.shields.io/nuget/v/Misnomer.Fictionary.svg)](https://www.nuget.org/packages/Misnomer.Fictionary/)
 
-`Fictionary<TKey, TValue, TKeyComparer>` — strongly typed associative collection.
-Implementation is based on [Dictionary&lt;TKey, TValue&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/Dictionary.cs), but uses generic parameter for comparer.
-Embedding it directly to the type of collection instead of indirect call to [IEqualityComparer&lt;TKey&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1) interface allows to avoid virtual call and prevents comparer from boxing in case of [value type](https://adamsitnik.com/Value-Types-vs-Reference-Types/).
+`Fictionary<TKey, TValue, TKeyComparer>` — fast associative collection.
+Implementation is based on [Dictionary&lt;TKey, TValue&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/Dictionary.cs), but uses generic parameter constraint for polymorphic key comparer.
+Specializing with concrete type instead of indirect call to [IEqualityComparer&lt;TKey&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1) interface allows to avoid virtual call and prevents from boxing in case of [value types](https://adamsitnik.com/Value-Types-vs-Reference-Types/).
+
+### Examples
+
+```csharp
+using Misnomer;
+using Misnomer.Extensions;
+```
+
+```csharp
+Fictionary<string, FileSystemInfo, OrdinalStringComparer> fictionary =
+    Directory.EnumerateDirectories(".")
+    .Select(s => KeyValuePair.Create(s, (FileSystemInfo)new DirectoryInfo(s)))
+    .ToFictionary(new OrdinalStringComparer());
+foreach (string s in Directory.EnumerateFiles("."))
+    fictionary.Add(s, new FileInfo(s));
+
+foreach (KeyValuePair<string, FileSystemInfo> kv in fictionary)
+    Console.WriteLine($"{kv.Value.LastWriteTimeUtc:s} {kv.Key}");
+
+Console.WriteLine();
+if (fictionary.TryGetValue(@".\Program.cs", out FileSystemInfo fsi) && fsi is FileInfo fi)
+    Console.WriteLine($"{fi.Name}: {fi.Length} bytes");
+
+fictionary.Dispose();
+```
