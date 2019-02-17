@@ -4,8 +4,45 @@ using System.Collections.Generic;
 // ReSharper disable once CheckNamespace
 namespace Misnomer.Extensions
 {
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
+    /// </summary>
     public static class FictionaryExtensions
     {
+        /// <summary>
+        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
+        /// and uses the <see cref="GenericEqualityComparer{TKey}" />.
+        /// </summary>
+        /// <param name="source">The collection whose elements are copied to the new <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.</param>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items
+        /// and uses the <see cref="GenericEqualityComparer{TKey}" />.</returns>
+        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> ToFictionary<TKey, TValue>(
+            this IEnumerable<KeyValuePair<TKey, TValue>> source)
+            where TKey : IEquatable<TKey>
+        {
+            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(source,
+                new GenericEqualityComparer<TKey>());
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified key comparer.
+        /// </summary>
+        /// <param name="source">The collection whose elements are copied to the new <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use to compare keys for equality.</param>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
+        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that contains the specified items and uses the specified comparer.</returns>
+        public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TKey, TValue, TKeyComparer>(
+            this IEnumerable<KeyValuePair<TKey, TValue>> source,
+            TKeyComparer comparer)
+            where TKeyComparer : IEqualityComparer<TKey>
+        {
+            return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
+        }
+
         public static Fictionary<TKey, TSource, GenericEqualityComparer<TKey>> ToFictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
