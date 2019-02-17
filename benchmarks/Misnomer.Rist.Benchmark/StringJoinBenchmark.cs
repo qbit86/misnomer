@@ -6,6 +6,20 @@ namespace Misnomer
 {
     public class StringJoinBenchmark
     {
+        private static Rist<string> CreateAndPopulateList()
+        {
+            var list = new Rist<string>();
+            // Populating, filtering, sorting, grouping...
+            list.Add("Camille");
+            list.Add("Annie");
+            list.Add("Sara");
+            list.Add("Katrin");
+            list.Add("Kari");
+
+            return list;
+        }
+
+#pragma warning disable CA1822
         [Benchmark(Baseline = true)]
         public string Move()
         {
@@ -32,18 +46,6 @@ namespace Misnomer
             IEnumerable<string> enumerable = list.Skip(1).Take(3);
             return string.Join(", ", enumerable);
         }
-
-        private static Rist<string> CreateAndPopulateList()
-        {
-            var list = new Rist<string>();
-            // Populating, filtering, sorting, grouping...
-            list.Add("Camille");
-            list.Add("Annie");
-            list.Add("Sara");
-            list.Add("Katrin");
-            list.Add("Kari");
-
-            return list;
-        }
+#pragma warning restore CA1822
     }
 }

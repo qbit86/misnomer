@@ -54,12 +54,6 @@ namespace Misnomer
         private KeyCollection _keys;
         private ValueCollection _values;
 
-        // constants for serialization
-        private const string VersionName = "Version"; // Do not rename (binary serialization)
-        private const string HashSizeName = "HashSize"; // Do not rename (binary serialization). Must save buckets.Length
-        private const string KeyValuePairsName = "KeyValuePairs"; // Do not rename (binary serialization)
-        private const string ComparerName = "Comparer"; // Do not rename (binary serialization)
-
         public Fictionary(TKeyComparer comparer) : this(0, comparer) { }
 
         public Fictionary(int capacity, TKeyComparer comparer)
@@ -73,7 +67,7 @@ namespace Misnomer
             _comparer = comparer;
         }
 
-        public Fictionary(Fictionary<TKey, TValue, TKeyComparer> dictionary, TKeyComparer comparer) :
+        public Fictionary(IDictionary<TKey, TValue> dictionary, TKeyComparer comparer) :
             this(dictionary?.Count ?? 0, comparer)
         {
             if (dictionary == null)
@@ -81,10 +75,6 @@ namespace Misnomer
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.dictionary);
             }
 
-            // It is likely that the passed-in dictionary is Dictionary<TKey,TValue>. When this is the case,
-            // avoid the enumerator allocation and overhead by looping through the entries array directly.
-            // We only do this when dictionary is Dictionary<TKey,TValue> and not a subclass, to maintain
-            // back-compat with subclasses that may have overridden the enumerator behavior.
             if (dictionary.GetType() == typeof(Fictionary<TKey, TValue, TKeyComparer>))
             {
                 Fictionary<TKey, TValue, TKeyComparer> d = (Fictionary<TKey, TValue, TKeyComparer>)dictionary;
@@ -120,11 +110,12 @@ namespace Misnomer
             }
         }
 
-        public IEqualityComparer<TKey> Comparer
+        public TKeyComparer Comparer
         {
             get
             {
-                return _comparer == null ? (IEqualityComparer<TKey>)EqualityComparer<TKey>.Default : _comparer;
+                Debug.Assert(_comparer != null, "_comparer != null");
+                return _comparer;
             }
         }
 
@@ -422,7 +413,7 @@ namespace Misnomer
 
             _freeList = -1;
             _buckets = new int[size];
-            _entries = new Entry[size];
+            _entries = Pool.Rent(size);
 
             return size;
         }
@@ -622,7 +613,7 @@ namespace Misnomer
             Debug.Assert(newSize >= _entries.Length);
 
             int[] buckets = new int[newSize];
-            Entry[] entries = new Entry[newSize];
+            Entry[] entries = Pool.Rent(newSize);
 
             int count = _count;
             Array.Copy(_entries, 0, entries, 0, count);
@@ -651,6 +642,7 @@ namespace Misnomer
             }
 
             _buckets = buckets;
+            Pool.Return(_entries, true);
             _entries = entries;
         }
 

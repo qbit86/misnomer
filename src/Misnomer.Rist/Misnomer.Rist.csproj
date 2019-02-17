@@ -16,7 +16,7 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageTags>recyclable;collection;pool;memory;allocation;list;array;buffer</PackageTags>
+    <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
@@ -27,11 +27,13 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.3" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Condition="'$(TargetFramework)' != 'netcoreapp1.0'" Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="Text.Analyzers" Version="2.6.3" />
   </ItemGroup>
   <Import Project="..\Misnomer.Internal\Misnomer.Internal.projitems" Label="Shared" />
 </Project>
