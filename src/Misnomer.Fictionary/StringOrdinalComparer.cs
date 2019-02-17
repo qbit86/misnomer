@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Misnomer
 {
@@ -17,6 +18,7 @@ namespace Misnomer
         /// <param name="x">A string to compare to <paramref name="y"/>.</param>
         /// <param name="y">A string to compare to <paramref name="x"/>.</param>
         /// <returns>A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int Compare(string x, string y)
         {
             return string.CompareOrdinal(x, y);
@@ -30,6 +32,7 @@ namespace Misnomer
         /// <returns>`true` if <paramref name="x"/> and <paramref name="y"/> refer to the same object,
         /// or <paramref name="x"/> and <paramref name="y"/> are equal,
         /// or <paramref name="x"/> and <paramref name="y"/> are `null`; otherwise, `false`.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(string x, string y)
         {
             return string.Equals(x, y, StringComparison.Ordinal);
@@ -40,6 +43,7 @@ namespace Misnomer
         /// </summary>
         /// <param name="obj">A string.</param>
         /// <returns>A 32-bit signed hash code calculated from the value of the <paramref name="obj"/> parameter.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetHashCode(string obj)
         {
             return obj?.GetHashCode() ?? 0;
@@ -59,7 +63,7 @@ namespace Misnomer
         /// Indicates whether the current <see cref="StringOrdinalComparer" /> object is equal to another comparer object of the same type.
         /// </summary>
         /// <param name="obj">An object to compare with this object.</param>
-        /// <returns>true` if <paramref name="obj"/> is of type <see cref="StringOrdinalComparer" />.</returns>
+        /// <returns>true` if <paramref name="obj"/> is of type <see cref="StringOrdinalComparer" />; otherwise, `false`.</returns>
         public override bool Equals(object obj)
         {
             return obj is StringOrdinalComparer;
