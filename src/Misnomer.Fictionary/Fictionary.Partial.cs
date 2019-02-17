@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Misnomer
 {
+    /// <summary>
+    /// Provides initialization method for instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
+    /// with <see cref="GenericEqualityComparer{TKey}" /> used as key comparer.
+    /// </summary>
     public static class DefaultFictionary
     {
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create<TKey, TValue>(
@@ -15,6 +19,12 @@ namespace Misnomer
         }
     }
 
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
+    /// with <see cref="GenericEqualityComparer{TKey}" /> used as key comparer.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     public static class DefaultFictionary<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
@@ -33,7 +43,7 @@ namespace Misnomer
     }
 
     /// <summary>
-    /// Provides the Create factory method for <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
     /// </summary>
     public static class Fictionary
     {
@@ -53,7 +63,7 @@ namespace Misnomer
     }
 
     /// <summary>
-    /// Provides the Create factory method for <see cref="Fictionary{TKey, TValue, TKeyComparer}" />.
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
@@ -79,6 +89,7 @@ namespace Misnomer
     // ReSharper disable UnusedTypeParameter
     /// <summary>
     /// Represents a generic collection of key/value pairs with concretely typed key comparer.
+    /// Avoids virtual calls to key comparer.
     /// Enables pooling instances of inner array of dictionary entries.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
