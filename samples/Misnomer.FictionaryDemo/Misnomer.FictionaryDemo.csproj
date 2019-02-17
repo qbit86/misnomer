@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.6.3">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Misnomer.Rist" Version="0.3.*" />
+    <PackageReference Include="Misnomer.Fictionary" Version="0.1.*" />
     <PackageReference Include="Text.Analyzers" Version="2.6.3">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
