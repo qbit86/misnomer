@@ -3,15 +3,15 @@
     <TargetFrameworks>net461;netcoreapp1.0;netstandard1.2;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>0.1</AssemblyVersion>
-    <VersionPrefix>0.1.1</VersionPrefix>
+    <AssemblyVersion>0.2</AssemblyVersion>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Authors>Viktor T.</Authors>
     <Title>Fast dictionary</Title>
     <Description>Associative collection like usual Dictionary&lt;K, V&gt;, but with comparer type preserved instead of hiding behind the interface.
 Enables devirtualization of calls to the key comparer.
 Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
-Provides ToFictionary() extension methods which perfectly replaces conventional ToDictionary() for materializing LINQ queries.</Description>
+Provides ToFictionary() extension methods which perfectly replace conventional ToDictionary() for materializing LINQ queries.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>

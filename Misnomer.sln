@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistDemo", "sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{B3C87831-0B68-460D-B97C-A6CB647ED0DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.Rist.Benchmark", "benchmarks\Misnomer.Rist.Benchmark\Misnomer.Rist.Benchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistBenchmark", "benchmarks\Misnomer.RistBenchmark\Misnomer.RistBenchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
 ProjectSection(SolutionItems) = preProject
@@ -33,6 +33,8 @@ ProjectSection(SolutionItems) = preProject
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryTest", "tests\Misnomer.FictionaryTest\Misnomer.FictionaryTest.csproj", "{DAA87D39-B0D2-4771-AD36-5D499357A06E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryDemo", "samples\Misnomer.FictionaryDemo\Misnomer.FictionaryDemo.csproj", "{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -67,6 +69,10 @@ Global
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E} = {BD248697-DD32-4223-B914-295F9001A68B}
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9} = {B3C87831-0B68-460D-B97C-A6CB647ED0DC}
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
+		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D} = {BD248697-DD32-4223-B914-295F9001A68B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}
