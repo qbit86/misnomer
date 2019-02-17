@@ -36,7 +36,7 @@
 
 ## 0.1.0 - 2018-09-15
 ### Added
-- `Rist<T>` genric class for recyclable list.
+- `Rist<T>` generic class for recyclable list.
 
 [0.3.0]: https://github.com/qbit86/misnomer/compare/rist-0.2.2...rist-0.3.0
 [0.2.2]: https://github.com/qbit86/misnomer/compare/rist-0.2.1...rist-0.2.2

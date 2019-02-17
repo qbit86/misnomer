@@ -16,7 +16,7 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageTags>recyclable;collection;pool;memory;allocation;list;array;buffer</PackageTags>
+    <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
