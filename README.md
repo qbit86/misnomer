@@ -67,3 +67,37 @@ if (fictionary.TryGetValue(@".\Program.cs", out FileSystemInfo fsi) && fsi is Fi
 
 fictionary.Dispose();
 ```
+
+There are several ways to create instance of `Fictionary<TKey, TValue, TKeyComparer>`.
+
+Constructor overloads are similar to those of `Dictionary<TKey, TValue>`, but explicitly require passing comparer and specifying all types, so can be verbose. 
+
+To utilize type inference for comparer, you can use factory methods defined in `Fictionary<TKey, TValue>` static class:
+
+```csharp
+var f = Fictionary<string, int>.Create(comparer: new OrdinalStringComparer());
+```
+
+Inferred type for `f` here is `Fictionary<string, int, OrdinalStringComparer>`.
+There are less generic parameters to specify comparing to invoking constructor:
+
+```csharp
+var f = new Fictionary<string, int, OrdinalStringComparer>(comparer: new OrdinalStringComparer());
+```
+
+In case if `TKey` implements `IEquatable<TKey>`, and you're fine with this default comparison, you can use factory methods defined in `DefaultFictionary<TKey, TValue>` static class:
+
+```csharp
+var f = DefaultFictionary<int, string>.Create(capacity: 23);
+```
+
+Inferred type for `f` here is `Fictionary<int, string, GenericEqualityComparer<int>>`.
+
+`GenericEqualityComparer<T>` is like [EqualityComparer&lt;T&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.equalitycomparer-1), but requires type of comparands to implement `IEquatable<TKey>`. Unlike `EqualityComparer<T>` it will never fall back to `Object.Equals(Object)`, so no unexpected boxing may happen.
+
+In case if you want to initialize dictionary from collection, you can use `ToFictionary()` extension methods; just import `Misnomer.Extensions` namespace:
+
+```csharp
+var f = Directory.EnumerateDirectories(".")
+    .ToFictionary(s => s, s => new DirectoryInfo(s), new OrdinalStringComparer());
+```
