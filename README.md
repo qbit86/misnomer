@@ -51,19 +51,22 @@ using Misnomer.Extensions;
 ```
 
 ```csharp
-Fictionary<string, FileSystemInfo, OrdinalStringComparer> fictionary =
-    Directory.EnumerateDirectories(".")
-    .Select(s => KeyValuePair.Create(s, (FileSystemInfo)new DirectoryInfo(s)))
-    .ToFictionary(new OrdinalStringComparer());
-foreach (string s in Directory.EnumerateFiles("."))
-    fictionary.Add(s, new FileInfo(s));
+IEnumerable<FileInfo> currentDirFiles =
+    new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles();
+Fictionary<string, FileInfo, OrdinalStringComparer> fictionary = currentDirFiles
+    .ToFictionary(fi => fi.Name, new OrdinalStringComparer());
 
-foreach (KeyValuePair<string, FileSystemInfo> kv in fictionary)
-    Console.WriteLine($"{kv.Value.LastWriteTimeUtc:s} {kv.Key}");
+IEnumerable<FileInfo> userDirFiles =
+    new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)).EnumerateFiles();
+foreach (FileInfo fi in userDirFiles)
+    fictionary.TryAdd(fi.Name, fi);
+
+foreach (KeyValuePair<string, FileInfo> kv in fictionary)
+    Console.WriteLine($"{kv.Key}\t{kv.Value.Directory.FullName}");
 
 Console.WriteLine();
-if (fictionary.TryGetValue(@".\Program.cs", out FileSystemInfo fsi) && fsi is FileInfo fi)
-    Console.WriteLine($"{fi.Name}: {fi.Length} bytes");
+if (fictionary.TryGetValue(".gitconfig", out FileInfo value))
+    Console.WriteLine($"{value.Name}: {value.Length} bytes");
 
 fictionary.Dispose();
 ```
