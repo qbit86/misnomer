@@ -25,42 +25,42 @@ namespace Misnomer
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int DictionaryRefStringComparer()
         {
             return _dictionaryRefStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int FictionaryRefStringComparer()
         {
             throw new NotImplementedException();
         }
 
         [Benchmark]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int DictionaryValueStringComparer()
         {
             throw new NotImplementedException();
         }
 
         [Benchmark]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int FictionaryValueStringComparer()
         {
             throw new NotImplementedException();
         }
 
         [Benchmark]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int DictionaryDefaultStringComparer()
         {
             throw new NotImplementedException();
         }
 
         [Benchmark]
-        [BenchmarkCategory("String")]
+        [BenchmarkCategory(nameof(String))]
         public int FictionaryGenericStringComparer()
         {
             throw new NotImplementedException();
