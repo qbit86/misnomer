@@ -8,10 +8,10 @@
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Authors>Viktor T.</Authors>
     <Title>Fast dictionary</Title>
-    <Description>Associative collection like usual Dictionary&lt;K, V&gt;, but with comparer type preserved instead of hiding behind the interface.
+    <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.
 Enables devirtualization of calls to the key comparer.
 Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
-Provides ToFictionary() extension methods which perfectly replace conventional ToDictionary() for materializing LINQ queries.</Description>
+Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
