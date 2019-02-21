@@ -16,6 +16,7 @@ namespace Misnomer
         private Dictionary<string, int> _dictionaryRefStringComparer;
         private Fictionary<string, int, StringComparer> _fictionaryRefStringComparer;
         private Dictionary<string, int> _dictionaryValueStringComparer;
+        private Fictionary<string, int, OrdinalStringComparer> _fictionaryValueStringComparer;
 
         private static string Trial { get; } = (~Seed).ToString();
 
@@ -38,6 +39,14 @@ namespace Misnomer
         {
             var dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
             _dictionaryValueStringComparer = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryValueStringComparer))]
+        public void GlobalSetupFictionaryValueStringComparer()
+        {
+            Fictionary<string, int, OrdinalStringComparer> fictionary = Fictionary<string, int>.Create(
+                new OrdinalStringComparer());
+            _fictionaryValueStringComparer = PopulateStringDictionary(fictionary);
         }
 
 
@@ -66,7 +75,7 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public int FictionaryValueStringComparer()
         {
-            throw new NotImplementedException();
+            return _fictionaryValueStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
