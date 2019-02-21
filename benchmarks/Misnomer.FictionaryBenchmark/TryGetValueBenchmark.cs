@@ -13,25 +13,27 @@ namespace Misnomer
         private const int Count = 1729;
         private const int Seed = 0x1e4f6c2a;
 
+        private Dictionary<string, int> _dictionaryDefaultStringComparer;
         private Dictionary<string, int> _dictionaryRefStringComparer;
-        private Fictionary<string, int, StringComparer> _fictionaryRefStringComparer;
         private Dictionary<string, int> _dictionaryValueStringComparer;
+        private Fictionary<string, int, GenericEqualityComparer<string>> _fictionaryGenericStringComparer;
+        private Fictionary<string, int, StringComparer> _fictionaryRefStringComparer;
         private Fictionary<string, int, OrdinalStringComparer> _fictionaryValueStringComparer;
 
         private static string Trial { get; } = (~Seed).ToString();
+
+        [GlobalSetup(Target = nameof(DictionaryDefaultStringComparer))]
+        public void GlobalSetupDictionaryDefaultStringComparer()
+        {
+            var dictionary = new Dictionary<string, int>();
+            _dictionaryDefaultStringComparer = PopulateStringDictionary(dictionary);
+        }
 
         [GlobalSetup(Target = nameof(DictionaryRefStringComparer))]
         public void GlobalSetupDictionaryRefStringComparer()
         {
             var dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
             _dictionaryRefStringComparer = PopulateStringDictionary(dictionary);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryRefStringComparer))]
-        public void GlobalSetupFictionaryRefStringComparer()
-        {
-            Fictionary<string, int, StringComparer> fictionary = Fictionary<string, int>.Create(StringComparer.Ordinal);
-            _fictionaryRefStringComparer = PopulateStringDictionary(fictionary);
         }
 
         [GlobalSetup(Target = nameof(DictionaryValueStringComparer))]
@@ -41,11 +43,26 @@ namespace Misnomer
             _dictionaryValueStringComparer = PopulateStringDictionary(dictionary);
         }
 
+        [GlobalSetup(Target = nameof(FictionaryGenericStringComparer))]
+        public void GlobalSetupFictionaryGenericStringComparer()
+        {
+            Fictionary<string, int, GenericEqualityComparer<string>> fictionary =
+                DefaultFictionary<string, int>.Create();
+            _fictionaryGenericStringComparer = PopulateStringDictionary(fictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryRefStringComparer))]
+        public void GlobalSetupFictionaryRefStringComparer()
+        {
+            Fictionary<string, int, StringComparer> fictionary = Fictionary<string, int>.Create(StringComparer.Ordinal);
+            _fictionaryRefStringComparer = PopulateStringDictionary(fictionary);
+        }
+
         [GlobalSetup(Target = nameof(FictionaryValueStringComparer))]
         public void GlobalSetupFictionaryValueStringComparer()
         {
-            Fictionary<string, int, OrdinalStringComparer> fictionary = Fictionary<string, int>.Create(
-                new OrdinalStringComparer());
+            Fictionary<string, int, OrdinalStringComparer> fictionary =
+                Fictionary<string, int>.Create(new OrdinalStringComparer());
             _fictionaryValueStringComparer = PopulateStringDictionary(fictionary);
         }
 
@@ -82,14 +99,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public int DictionaryDefaultStringComparer()
         {
-            throw new NotImplementedException();
+            return _dictionaryDefaultStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public int FictionaryGenericStringComparer()
         {
-            throw new NotImplementedException();
+            return _fictionaryGenericStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         private TDictionary PopulateStringDictionary<TDictionary>(TDictionary dictionary)
