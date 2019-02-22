@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics.Hashing;
 using System.Runtime.CompilerServices;
 
 namespace Misnomer
@@ -20,8 +21,8 @@ namespace Misnomer
                 return 0;
 
             int hash = 5381;
-            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Offset);
-            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Count);
+            hash = HashHelpers.Combine(hash, obj.Offset);
+            hash = HashHelpers.Combine(hash, obj.Count);
 
             hash ^= obj.Array.GetHashCode();
             return hash;
@@ -53,8 +54,8 @@ namespace Misnomer
                 return 0;
 
             int hash = 5381;
-            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Offset);
-            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Count);
+            hash = HashHelpers.Combine(hash, obj.Offset);
+            hash = HashHelpers.Combine(hash, obj.Count);
 
             hash ^= obj.Array.GetHashCode();
             return hash;
