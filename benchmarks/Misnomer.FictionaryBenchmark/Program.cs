@@ -2,7 +2,6 @@
 using System.Linq;
 using BenchmarkDotNet.Analysers;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
@@ -24,7 +23,6 @@ namespace Misnomer
 
             IEnumerable<Job> jobs = GetJobs();
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
-                .With(MemoryDiagnoser.Default)
                 .With(EnvironmentAnalyser.Default)
                 .With(jobs.ToArray());
 

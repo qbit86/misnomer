@@ -68,42 +68,42 @@ namespace Misnomer
 
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory(nameof(String))]
+        [BenchmarkCategory("RefString")]
         public int DictionaryRefStringComparer()
         {
             return _dictionaryRefStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
-        [BenchmarkCategory(nameof(String))]
+        [BenchmarkCategory("RefString")]
         public int FictionaryRefStringComparer()
         {
             return _fictionaryRefStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
-        [Benchmark]
-        [BenchmarkCategory(nameof(String))]
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("ValueString")]
         public int DictionaryValueStringComparer()
         {
             return _dictionaryValueStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
-        [BenchmarkCategory(nameof(String))]
+        [BenchmarkCategory("ValueString")]
         public int FictionaryValueStringComparer()
         {
             return _fictionaryValueStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
-        [Benchmark]
-        [BenchmarkCategory(nameof(String))]
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("DefaultString")]
         public int DictionaryDefaultStringComparer()
         {
             return _dictionaryDefaultStringComparer.TryGetValue(Trial, out int result) ? result : default;
         }
 
         [Benchmark]
-        [BenchmarkCategory(nameof(String))]
+        [BenchmarkCategory("DefaultString")]
         public int FictionaryGenericStringComparer()
         {
             return _fictionaryGenericStringComparer.TryGetValue(Trial, out int result) ? result : default;
