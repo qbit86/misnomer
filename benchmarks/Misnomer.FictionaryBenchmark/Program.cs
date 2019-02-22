@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BenchmarkDotNet.Analysers;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Environments;
@@ -24,6 +25,7 @@ namespace Misnomer
             IEnumerable<Job> jobs = GetJobs();
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
                 .With(MemoryDiagnoser.Default)
+                .With(EnvironmentAnalyser.Default)
                 .With(jobs.ToArray());
 
             Summary _ = BenchmarkRunner.Run<TryGetValueBenchmark>(config);

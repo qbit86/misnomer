@@ -14,6 +14,9 @@ indent_size = 2
 [*.sln.DotSettings]
 indent_style = tab
 
+[*.md]
+trim_trailing_whitespace = false
+
 [*.cs]
 
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
