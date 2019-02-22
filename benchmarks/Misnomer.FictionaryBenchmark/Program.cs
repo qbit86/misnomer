@@ -35,16 +35,21 @@ namespace Misnomer
         {
             foreach (Jit jit in s_jits)
             foreach (Platform platform in s_platforms)
-            foreach (Runtime runtime in s_runtimes)
             {
-                if (jit == Jit.LegacyJit && runtime.Equals(Runtime.Core))
+                if (jit == Jit.RyuJit && platform == Platform.X86)
                     continue;
 
-                yield return new Job(Job.Default)
-                    .With(jit)
-                    .With(platform)
-                    .With(runtime)
-                    .ApplyAndFreeze(s_runMode);
+                foreach (Runtime runtime in s_runtimes)
+                {
+                    if (jit == Jit.LegacyJit && runtime.Equals(Runtime.Core))
+                        continue;
+
+                    yield return new Job(Job.Default)
+                        .With(jit)
+                        .With(platform)
+                        .With(runtime)
+                        .ApplyAndFreeze(s_runMode);
+                }
             }
         }
     }
