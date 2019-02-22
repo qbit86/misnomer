@@ -13,9 +13,9 @@ namespace Misnomer
     internal static class Program
     {
         private static readonly RunMode s_runMode = RunMode.Short;
-        private static readonly Runtime[] s_runtimes = { Runtime.Clr, Runtime.Core };
         private static readonly Jit[] s_jits = { Jit.LegacyJit, Jit.RyuJit };
         private static readonly Platform[] s_platforms = { Platform.X86, Platform.X64 };
+        private static readonly Runtime[] s_runtimes = { Runtime.Clr, Runtime.Core };
 
         private static void Main()
         {
@@ -31,14 +31,19 @@ namespace Misnomer
 
         private static IEnumerable<Job> GetJobs()
         {
-            foreach (Runtime runtime in s_runtimes)
             foreach (Jit jit in s_jits)
             foreach (Platform platform in s_platforms)
+            foreach (Runtime runtime in s_runtimes)
+            {
+                if (jit == Jit.LegacyJit && runtime.Equals(Runtime.Core))
+                    continue;
+
                 yield return new Job(Job.Default)
-                    .With(runtime)
                     .With(jit)
                     .With(platform)
+                    .With(runtime)
                     .ApplyAndFreeze(s_runMode);
+            }
         }
     }
 }
