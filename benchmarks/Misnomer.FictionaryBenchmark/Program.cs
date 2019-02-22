@@ -6,7 +6,6 @@ using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Misnomer
 {

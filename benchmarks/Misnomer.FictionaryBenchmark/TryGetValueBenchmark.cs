@@ -118,7 +118,6 @@ namespace Misnomer
 
         #endregion
 
-
         #region Benchmarks
 
         [Benchmark(Baseline = true)]
