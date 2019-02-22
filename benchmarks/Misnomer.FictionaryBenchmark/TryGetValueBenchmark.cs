@@ -13,103 +13,15 @@ namespace Misnomer
         private const int Count = 1729;
         private const int Seed = 0x1e4f6c2a;
 
-        private Dictionary<string, int> _dictionaryDefaultStringComparer;
-        private Dictionary<string, int> _dictionaryRefStringComparer;
-        private Dictionary<string, int> _dictionaryValueStringComparer;
-        private Fictionary<string, int, GenericEqualityComparer<string>> _fictionaryGenericStringComparer;
-        private Fictionary<string, int, StringComparer> _fictionaryRefStringComparer;
-        private Fictionary<string, int, OrdinalStringComparer> _fictionaryValueStringComparer;
+        private Dictionary<string, int> _dictionary;
+        private Fictionary<string, int, OrdinalStringComparerObject> _fictionaryConcreteReference;
+        private Fictionary<string, int, OrdinalStringComparer> _fictionaryConcreteValue;
+        private Fictionary<string, int, StringComparer> _fictionaryStandardPolymorphic;
+        private Fictionary<string, int, IEqualityComparer<string>> _fictionaryVirtual;
 
         private static string Trial { get; } = (~Seed).ToString();
 
-        [GlobalSetup(Target = nameof(DictionaryDefaultStringComparer))]
-        public void GlobalSetupDictionaryDefaultStringComparer()
-        {
-            var dictionary = new Dictionary<string, int>();
-            _dictionaryDefaultStringComparer = PopulateStringDictionary(dictionary);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryRefStringComparer))]
-        public void GlobalSetupDictionaryRefStringComparer()
-        {
-            var dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
-            _dictionaryRefStringComparer = PopulateStringDictionary(dictionary);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryValueStringComparer))]
-        public void GlobalSetupDictionaryValueStringComparer()
-        {
-            var dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
-            _dictionaryValueStringComparer = PopulateStringDictionary(dictionary);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryGenericStringComparer))]
-        public void GlobalSetupFictionaryGenericStringComparer()
-        {
-            Fictionary<string, int, GenericEqualityComparer<string>> fictionary =
-                DefaultFictionary<string, int>.Create();
-            _fictionaryGenericStringComparer = PopulateStringDictionary(fictionary);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryRefStringComparer))]
-        public void GlobalSetupFictionaryRefStringComparer()
-        {
-            Fictionary<string, int, StringComparer> fictionary = Fictionary<string, int>.Create(StringComparer.Ordinal);
-            _fictionaryRefStringComparer = PopulateStringDictionary(fictionary);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryValueStringComparer))]
-        public void GlobalSetupFictionaryValueStringComparer()
-        {
-            Fictionary<string, int, OrdinalStringComparer> fictionary =
-                Fictionary<string, int>.Create(new OrdinalStringComparer());
-            _fictionaryValueStringComparer = PopulateStringDictionary(fictionary);
-        }
-
-
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("RefString")]
-        public int DictionaryRefStringComparer()
-        {
-            return _dictionaryRefStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        [Benchmark]
-        [BenchmarkCategory("RefString")]
-        public int FictionaryRefStringComparer()
-        {
-            return _fictionaryRefStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("ValueString")]
-        public int DictionaryValueStringComparer()
-        {
-            return _dictionaryValueStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        [Benchmark]
-        [BenchmarkCategory("ValueString")]
-        public int FictionaryValueStringComparer()
-        {
-            return _fictionaryValueStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("DefaultString")]
-        public int DictionaryDefaultStringComparer()
-        {
-            return _dictionaryDefaultStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        [Benchmark]
-        [BenchmarkCategory("DefaultString")]
-        public int FictionaryGenericStringComparer()
-        {
-            return _fictionaryGenericStringComparer.TryGetValue(Trial, out int result) ? result : default;
-        }
-
-        private TDictionary PopulateStringDictionary<TDictionary>(TDictionary dictionary)
+        private static TDictionary PopulateStringDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<string, int>
         {
             Debug.Assert(dictionary != null, "dictionary != null");
@@ -122,5 +34,167 @@ namespace Misnomer
 
             return dictionary;
         }
+
+        #region GlobalSetup
+
+        [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
+        public void GlobalSetupDictionaryConcreteValue()
+        {
+            var dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
+            _dictionary = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
+        public void GlobalSetupFictionaryConcreteValue()
+        {
+            var fictionary = new Fictionary<string, int, OrdinalStringComparer>(new OrdinalStringComparer());
+            _fictionaryConcreteValue = PopulateStringDictionary(fictionary);
+        }
+
+
+        [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
+        public void GlobalSetupDictionaryConcreteReference()
+        {
+            var dictionary = new Dictionary<string, int>(OrdinalStringComparerObject.Default);
+            _dictionary = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
+        public void GlobalSetupFictionaryConcreteReference()
+        {
+            var fictionary =
+                new Fictionary<string, int, OrdinalStringComparerObject>(OrdinalStringComparerObject.Default);
+            _fictionaryConcreteReference = PopulateStringDictionary(fictionary);
+        }
+
+
+        [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
+        public void GlobalSetupDictionaryVirtualValue()
+        {
+            IEqualityComparer<string> comparer = new OrdinalStringComparer();
+            var dictionary = new Dictionary<string, int>(comparer);
+            _dictionary = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
+        public void GlobalSetupFictionaryVirtualValue()
+        {
+            IEqualityComparer<string> comparer = new OrdinalStringComparer();
+            var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
+            _fictionaryVirtual = PopulateStringDictionary(fictionary);
+        }
+
+
+        [GlobalSetup(Target = nameof(DictionaryVirtualReference))]
+        public void GlobalSetupDictionaryVirtualReference()
+        {
+            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
+            var dictionary = new Dictionary<string, int>(comparer);
+            _dictionary = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
+        public void GlobalSetupFictionaryVirtualReference()
+        {
+            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
+            var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
+            _fictionaryVirtual = PopulateStringDictionary(fictionary);
+        }
+
+
+        [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
+        public void GlobalSetupDictionaryStandardPolymorphic()
+        {
+            var dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
+            _dictionary = PopulateStringDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
+        public void GlobalSetupFictionaryStandardPolymorphic()
+        {
+            var fictionary = new Fictionary<string, int, StringComparer>(StringComparer.Ordinal);
+            _fictionaryStandardPolymorphic = PopulateStringDictionary(fictionary);
+        }
+
+        #endregion
+
+
+        #region Benchmarks
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("ConcreteValue")]
+        public bool DictionaryConcreteValue()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("ConcreteValue")]
+        public bool FictionaryConcreteValue()
+        {
+            return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
+        }
+
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("ConcreteReference")]
+        public bool DictionaryConcreteReference()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("ConcreteReference")]
+        public bool FictionaryConcreteReference()
+        {
+            return _fictionaryConcreteReference.TryGetValue(Trial, out int _);
+        }
+
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("VirtualValue")]
+        public bool DictionaryVirtualValue()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("VirtualValue")]
+        public bool FictionaryVirtualValue()
+        {
+            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+        }
+
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("VirtualReference")]
+        public bool DictionaryVirtualReference()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("VirtualReference")]
+        public bool FictionaryVirtualReference()
+        {
+            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+        }
+
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("StandardPolymorphic")]
+        public bool DictionaryStandardPolymorphic()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("StandardPolymorphic")]
+        public bool FictionaryStandardPolymorphic()
+        {
+            return _fictionaryStandardPolymorphic.TryGetValue(Trial, out int _);
+        }
+
+        #endregion
     }
 }
