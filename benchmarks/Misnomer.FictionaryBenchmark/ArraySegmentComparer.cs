@@ -10,13 +10,21 @@ namespace Misnomer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(ArraySegment<T> x, ArraySegment<T> y)
         {
-            return x.Equals(y);
+            return x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetHashCode(ArraySegment<T> obj)
         {
-            return obj.GetHashCode();
+            if (obj.Array == null)
+                return 0;
+
+            int hash = 5381;
+            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Offset);
+            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Count);
+
+            hash ^= obj.Array.GetHashCode();
+            return hash;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -35,13 +43,21 @@ namespace Misnomer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(ArraySegment<T> x, ArraySegment<T> y)
         {
-            return x.Equals(y);
+            return x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetHashCode(ArraySegment<T> obj)
         {
-            return obj.GetHashCode();
+            if (obj.Array == null)
+                return 0;
+
+            int hash = 5381;
+            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Offset);
+            hash = System.Numerics.Hashing.HashHelpers.Combine(hash, obj.Count);
+
+            hash ^= obj.Array.GetHashCode();
+            return hash;
         }
     }
 }
