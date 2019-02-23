@@ -4,61 +4,57 @@ BenchmarkDotNet=v0.11.4, OS=Windows 10.0.17763.316 (1809/October2018Update/Redst
 Intel Core i5-4690K CPU 3.50GHz (Haswell), 1 CPU, 4 logical and 4 physical cores
 .NET Core SDK=2.1.504
   [Host]     : .NET Core 2.1.8 (CoreCLR 4.6.27317.03, CoreFX 4.6.27317.03), 64bit RyuJIT
-  Job-MXYUHW : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
-  Job-YRTXYQ : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 32bit LegacyJIT-v4.7.3324.0
-  Job-UGBUQJ : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
-  Job-KVAQHN : .NET Core 2.1.8 (CoreCLR 4.6.27317.03, CoreFX 4.6.27317.03), 64bit RyuJIT
+  Job-TNPFYQ : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
+  Job-LCPJXE : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 32bit LegacyJIT-v4.7.3324.0
+  Job-ZNEBQQ : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
+  Job-HYAXMW : .NET Core 2.1.8 (CoreCLR 4.6.27317.03, CoreFX 4.6.27317.03), 64bit RyuJIT
 
-IterationCount=3  LaunchCount=1  WarmupCount=3  
+IterationCount=15  LaunchCount=2  WarmupCount=10  
 Categories=String  
 
 ```
-|                        Method |       Jit | Platform | Runtime |     Mean |     Error |    StdDev | Ratio | RatioSD |
-|------------------------------ |---------- |--------- |-------- |---------:|----------:|----------:|------:|--------:|
-|       DictionaryConcreteValue | LegacyJit |      X64 |     Clr | 18.38 ns | 4.2953 ns | 0.2354 ns |  1.07 |    0.01 |
-|       FictionaryConcreteValue | LegacyJit |      X64 |     Clr | 16.64 ns | 2.1605 ns | 0.1184 ns |  0.97 |    0.01 |
-|   DictionaryConcreteReference | LegacyJit |      X64 |     Clr | 17.29 ns | 1.8147 ns | 0.0995 ns |  1.01 |    0.01 |
-|   FictionaryConcreteReference | LegacyJit |      X64 |     Clr | 20.74 ns | 0.5188 ns | 0.0284 ns |  1.21 |    0.01 |
-|        DictionaryVirtualValue | LegacyJit |      X64 |     Clr | 18.03 ns | 0.7100 ns | 0.0389 ns |  1.05 |    0.01 |
-|        FictionaryVirtualValue | LegacyJit |      X64 |     Clr | 19.71 ns | 0.7489 ns | 0.0410 ns |  1.15 |    0.00 |
-|    DictionaryVirtualReference | LegacyJit |      X64 |     Clr | 17.05 ns | 0.1217 ns | 0.0067 ns |  1.00 |    0.01 |
-|    FictionaryVirtualReference | LegacyJit |      X64 |     Clr | 19.60 ns | 0.7919 ns | 0.0434 ns |  1.14 |    0.01 |
-|  DictionaryDefaultPolymorphic | LegacyJit |      X64 |     Clr | 17.32 ns | 9.0069 ns | 0.4937 ns |  1.01 |    0.03 |
-| DictionaryStandardPolymorphic | LegacyJit |      X64 |     Clr | 17.13 ns | 1.7329 ns | 0.0950 ns |  1.00 |    0.00 |
-| FictionaryStandardPolymorphic | LegacyJit |      X64 |     Clr | 20.45 ns | 0.5336 ns | 0.0292 ns |  1.19 |    0.01 |
-|                               |           |          |         |          |           |           |       |         |
-|       DictionaryConcreteValue | LegacyJit |      X86 |     Clr | 16.24 ns | 0.2958 ns | 0.0162 ns |  1.07 |    0.00 |
-|       FictionaryConcreteValue | LegacyJit |      X86 |     Clr | 13.07 ns | 2.6219 ns | 0.1437 ns |  0.86 |    0.01 |
-|   DictionaryConcreteReference | LegacyJit |      X86 |     Clr | 15.90 ns | 3.6139 ns | 0.1981 ns |  1.05 |    0.01 |
-|   FictionaryConcreteReference | LegacyJit |      X86 |     Clr | 15.47 ns | 0.1988 ns | 0.0109 ns |  1.02 |    0.00 |
-|        DictionaryVirtualValue | LegacyJit |      X86 |     Clr | 16.23 ns | 0.9518 ns | 0.0522 ns |  1.07 |    0.00 |
-|        FictionaryVirtualValue | LegacyJit |      X86 |     Clr | 15.72 ns | 0.5715 ns | 0.0313 ns |  1.04 |    0.00 |
-|    DictionaryVirtualReference | LegacyJit |      X86 |     Clr | 15.95 ns | 0.4811 ns | 0.0264 ns |  1.05 |    0.00 |
-|    FictionaryVirtualReference | LegacyJit |      X86 |     Clr | 15.46 ns | 0.8404 ns | 0.0461 ns |  1.02 |    0.00 |
-|  DictionaryDefaultPolymorphic | LegacyJit |      X86 |     Clr | 15.16 ns | 0.8576 ns | 0.0470 ns |  1.00 |    0.00 |
-| DictionaryStandardPolymorphic | LegacyJit |      X86 |     Clr | 15.15 ns | 0.1390 ns | 0.0076 ns |  1.00 |    0.00 |
-| FictionaryStandardPolymorphic | LegacyJit |      X86 |     Clr | 16.22 ns | 7.1593 ns | 0.3924 ns |  1.07 |    0.03 |
-|                               |           |          |         |          |           |           |       |         |
-|       DictionaryConcreteValue |    RyuJit |      X64 |     Clr | 18.33 ns | 0.3927 ns | 0.0215 ns |  1.08 |    0.00 |
-|       FictionaryConcreteValue |    RyuJit |      X64 |     Clr | 16.47 ns | 0.4353 ns | 0.0239 ns |  0.97 |    0.00 |
-|   DictionaryConcreteReference |    RyuJit |      X64 |     Clr | 17.35 ns | 0.6401 ns | 0.0351 ns |  1.02 |    0.00 |
-|   FictionaryConcreteReference |    RyuJit |      X64 |     Clr | 19.88 ns | 0.6677 ns | 0.0366 ns |  1.17 |    0.00 |
-|        DictionaryVirtualValue |    RyuJit |      X64 |     Clr | 18.06 ns | 0.3791 ns | 0.0208 ns |  1.06 |    0.00 |
-|        FictionaryVirtualValue |    RyuJit |      X64 |     Clr | 20.20 ns | 0.5232 ns | 0.0287 ns |  1.19 |    0.00 |
-|    DictionaryVirtualReference |    RyuJit |      X64 |     Clr | 17.13 ns | 1.5985 ns | 0.0876 ns |  1.01 |    0.01 |
-|    FictionaryVirtualReference |    RyuJit |      X64 |     Clr | 19.60 ns | 0.5294 ns | 0.0290 ns |  1.15 |    0.00 |
-|  DictionaryDefaultPolymorphic |    RyuJit |      X64 |     Clr | 17.02 ns | 0.3825 ns | 0.0210 ns |  1.00 |    0.00 |
-| DictionaryStandardPolymorphic |    RyuJit |      X64 |     Clr | 17.04 ns | 0.9319 ns | 0.0511 ns |  1.00 |    0.00 |
-| FictionaryStandardPolymorphic |    RyuJit |      X64 |     Clr | 20.26 ns | 0.5920 ns | 0.0324 ns |  1.19 |    0.01 |
-|                               |           |          |         |          |           |           |       |         |
-|       DictionaryConcreteValue |    RyuJit |      X64 |    Core | 20.35 ns | 0.2532 ns | 0.0139 ns |  0.90 |    0.01 |
-|       FictionaryConcreteValue |    RyuJit |      X64 |    Core | 19.24 ns | 0.0573 ns | 0.0031 ns |  0.85 |    0.01 |
-|   DictionaryConcreteReference |    RyuJit |      X64 |    Core | 22.84 ns | 0.9990 ns | 0.0548 ns |  1.01 |    0.01 |
-|   FictionaryConcreteReference |    RyuJit |      X64 |    Core | 22.99 ns | 0.7054 ns | 0.0387 ns |  1.02 |    0.01 |
-|        DictionaryVirtualValue |    RyuJit |      X64 |    Core | 20.31 ns | 1.4618 ns | 0.0801 ns |  0.90 |    0.01 |
-|        FictionaryVirtualValue |    RyuJit |      X64 |    Core | 20.57 ns | 7.3025 ns | 0.4003 ns |  0.91 |    0.01 |
-|    DictionaryVirtualReference |    RyuJit |      X64 |    Core | 20.63 ns | 7.1456 ns | 0.3917 ns |  0.91 |    0.01 |
-|    FictionaryVirtualReference |    RyuJit |      X64 |    Core | 19.48 ns | 2.2060 ns | 0.1209 ns |  0.86 |    0.01 |
-|  DictionaryDefaultPolymorphic |    RyuJit |      X64 |    Core | 16.90 ns | 1.7670 ns | 0.0969 ns |  0.75 |    0.00 |
-| DictionaryStandardPolymorphic |    RyuJit |      X64 |    Core | 22.59 ns | 3.9474 ns | 0.2164 ns |  1.00 |    0.00 |
-| FictionaryStandardPolymorphic |    RyuJit |      X64 |    Core | 20.50 ns | 9.7873 ns | 0.5365 ns |  0.91 |    0.03 |
+|                        Method |       Jit | Platform | Runtime |     Mean |     Error |    StdDev |   Median | Ratio | RatioSD |
+|------------------------------ |---------- |--------- |-------- |---------:|----------:|----------:|---------:|------:|--------:|
+|       DictionaryConcreteValue | LegacyJit |      X64 |     Clr | 18.23 ns | 0.0281 ns | 0.0421 ns | 18.21 ns |  1.07 |    0.01 |
+|       FictionaryConcreteValue | LegacyJit |      X64 |     Clr | 15.48 ns | 0.0322 ns | 0.0462 ns | 15.47 ns |  0.91 |    0.01 |
+|   DictionaryConcreteReference | LegacyJit |      X64 |     Clr | 17.46 ns | 0.3525 ns | 0.5276 ns | 17.46 ns |  1.02 |    0.03 |
+|   FictionaryConcreteReference | LegacyJit |      X64 |     Clr | 20.46 ns | 0.0761 ns | 0.1115 ns | 20.45 ns |  1.20 |    0.01 |
+|        DictionaryVirtualValue | LegacyJit |      X64 |     Clr | 17.99 ns | 0.0243 ns | 0.0356 ns | 17.99 ns |  1.05 |    0.01 |
+|        FictionaryVirtualValue | LegacyJit |      X64 |     Clr | 20.88 ns | 0.0545 ns | 0.0815 ns | 20.88 ns |  1.22 |    0.01 |
+|    DictionaryVirtualReference | LegacyJit |      X64 |     Clr | 17.23 ns | 0.0396 ns | 0.0568 ns | 17.22 ns |  1.01 |    0.01 |
+|    FictionaryVirtualReference | LegacyJit |      X64 |     Clr | 21.39 ns | 0.8896 ns | 1.3316 ns | 21.41 ns |  1.25 |    0.07 |
+| DictionaryStandardPolymorphic | LegacyJit |      X64 |     Clr | 17.10 ns | 0.1065 ns | 0.1561 ns | 17.04 ns |  1.00 |    0.00 |
+| FictionaryStandardPolymorphic | LegacyJit |      X64 |     Clr | 20.13 ns | 0.1254 ns | 0.1838 ns | 20.10 ns |  1.18 |    0.02 |
+|                               |           |          |         |          |           |           |          |       |         |
+|       DictionaryConcreteValue | LegacyJit |      X86 |     Clr | 16.28 ns | 0.0333 ns | 0.0489 ns | 16.28 ns |  1.07 |    0.01 |
+|       FictionaryConcreteValue | LegacyJit |      X86 |     Clr | 13.02 ns | 0.0256 ns | 0.0383 ns | 13.01 ns |  0.86 |    0.00 |
+|   DictionaryConcreteReference | LegacyJit |      X86 |     Clr | 15.69 ns | 0.0258 ns | 0.0370 ns | 15.68 ns |  1.03 |    0.00 |
+|   FictionaryConcreteReference | LegacyJit |      X86 |     Clr | 15.55 ns | 0.0292 ns | 0.0438 ns | 15.55 ns |  1.03 |    0.00 |
+|        DictionaryVirtualValue | LegacyJit |      X86 |     Clr | 16.24 ns | 0.0303 ns | 0.0454 ns | 16.24 ns |  1.07 |    0.01 |
+|        FictionaryVirtualValue | LegacyJit |      X86 |     Clr | 15.70 ns | 0.0205 ns | 0.0293 ns | 15.69 ns |  1.04 |    0.00 |
+|    DictionaryVirtualReference | LegacyJit |      X86 |     Clr | 15.68 ns | 0.0271 ns | 0.0406 ns | 15.69 ns |  1.03 |    0.01 |
+|    FictionaryVirtualReference | LegacyJit |      X86 |     Clr | 15.57 ns | 0.1352 ns | 0.2024 ns | 15.50 ns |  1.03 |    0.01 |
+| DictionaryStandardPolymorphic | LegacyJit |      X86 |     Clr | 15.16 ns | 0.0315 ns | 0.0462 ns | 15.15 ns |  1.00 |    0.00 |
+| FictionaryStandardPolymorphic | LegacyJit |      X86 |     Clr | 15.99 ns | 0.0271 ns | 0.0406 ns | 15.98 ns |  1.05 |    0.00 |
+|                               |           |          |         |          |           |           |          |       |         |
+|       DictionaryConcreteValue |    RyuJit |      X64 |     Clr | 18.27 ns | 0.0202 ns | 0.0303 ns | 18.26 ns |  1.08 |    0.00 |
+|       FictionaryConcreteValue |    RyuJit |      X64 |     Clr | 15.83 ns | 0.2877 ns | 0.4217 ns | 15.55 ns |  0.93 |    0.03 |
+|   DictionaryConcreteReference |    RyuJit |      X64 |     Clr | 16.96 ns | 0.0215 ns | 0.0315 ns | 16.95 ns |  1.00 |    0.00 |
+|   FictionaryConcreteReference |    RyuJit |      X64 |     Clr | 20.35 ns | 0.0560 ns | 0.0837 ns | 20.32 ns |  1.20 |    0.01 |
+|        DictionaryVirtualValue |    RyuJit |      X64 |     Clr | 18.00 ns | 0.0192 ns | 0.0263 ns | 17.99 ns |  1.06 |    0.00 |
+|        FictionaryVirtualValue |    RyuJit |      X64 |     Clr | 20.91 ns | 0.0346 ns | 0.0517 ns | 20.92 ns |  1.23 |    0.00 |
+|    DictionaryVirtualReference |    RyuJit |      X64 |     Clr | 17.22 ns | 0.0222 ns | 0.0326 ns | 17.22 ns |  1.02 |    0.00 |
+|    FictionaryVirtualReference |    RyuJit |      X64 |     Clr | 20.07 ns | 0.0456 ns | 0.0682 ns | 20.07 ns |  1.18 |    0.00 |
+| DictionaryStandardPolymorphic |    RyuJit |      X64 |     Clr | 16.95 ns | 0.0190 ns | 0.0284 ns | 16.94 ns |  1.00 |    0.00 |
+| FictionaryStandardPolymorphic |    RyuJit |      X64 |     Clr | 20.38 ns | 0.2696 ns | 0.4035 ns | 20.39 ns |  1.20 |    0.02 |
+|                               |           |          |         |          |           |           |          |       |         |
+|       DictionaryConcreteValue |    RyuJit |      X64 |    Core | 23.52 ns | 2.2019 ns | 3.2275 ns | 20.51 ns |  1.01 |    0.09 |
+|       FictionaryConcreteValue |    RyuJit |      X64 |    Core | 18.16 ns | 0.7071 ns | 1.0583 ns | 18.13 ns |  0.77 |    0.09 |
+|   DictionaryConcreteReference |    RyuJit |      X64 |    Core | 24.20 ns | 1.0299 ns | 1.5096 ns | 22.78 ns |  1.03 |    0.04 |
+|   FictionaryConcreteReference |    RyuJit |      X64 |    Core | 21.93 ns | 0.0671 ns | 0.0984 ns | 21.89 ns |  0.94 |    0.06 |
+|        DictionaryVirtualValue |    RyuJit |      X64 |    Core | 20.24 ns | 0.0362 ns | 0.0530 ns | 20.23 ns |  0.86 |    0.06 |
+|        FictionaryVirtualValue |    RyuJit |      X64 |    Core | 21.23 ns | 0.7420 ns | 1.1107 ns | 21.18 ns |  0.91 |    0.04 |
+|    DictionaryVirtualReference |    RyuJit |      X64 |    Core | 21.71 ns | 0.8833 ns | 1.2947 ns | 20.53 ns |  0.93 |    0.11 |
+|    FictionaryVirtualReference |    RyuJit |      X64 |    Core | 19.00 ns | 0.0186 ns | 0.0279 ns | 19.00 ns |  0.81 |    0.05 |
+| DictionaryStandardPolymorphic |    RyuJit |      X64 |    Core | 23.53 ns | 1.1477 ns | 1.6089 ns | 22.20 ns |  1.00 |    0.00 |
+| FictionaryStandardPolymorphic |    RyuJit |      X64 |    Core | 19.49 ns | 0.0253 ns | 0.0379 ns | 19.48 ns |  0.83 |    0.06 |
