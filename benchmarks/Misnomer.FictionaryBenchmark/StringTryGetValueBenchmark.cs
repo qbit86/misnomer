@@ -102,13 +102,6 @@ namespace Misnomer
         }
 
 
-        [GlobalSetup(Target = nameof(DictionaryDefaultPolymorphic))]
-        public void GlobalSetupDictionaryDefaultPolymorphic()
-        {
-            var dictionary = new Dictionary<string, int>();
-            _dictionary = PopulateDictionary(dictionary);
-        }
-
         [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
         public void GlobalSetupDictionaryStandardPolymorphic()
         {
@@ -196,13 +189,6 @@ namespace Misnomer
             return _fictionaryVirtual.TryGetValue(Trial, out int _);
         }
 
-
-        [Benchmark]
-        [BenchmarkCategory(nameof(String))]
-        public bool DictionaryDefaultPolymorphic()
-        {
-            return _dictionary.TryGetValue(Trial, out int _);
-        }
 
         [Benchmark(Baseline = true)]
         [BenchmarkCategory(nameof(String))]
