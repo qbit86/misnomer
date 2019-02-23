@@ -21,7 +21,7 @@ namespace Misnomer
 
         private static string Trial { get; } = (~Seed).ToString();
 
-        private static TDictionary PopulateStringDictionary<TDictionary>(TDictionary dictionary)
+        private static TDictionary PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<string, int>
         {
             Debug.Assert(dictionary != null, "dictionary != null");
@@ -41,14 +41,14 @@ namespace Misnomer
         public void GlobalSetupDictionaryConcreteValue()
         {
             var dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
-            _dictionary = PopulateStringDictionary(dictionary);
+            _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
             var fictionary = new Fictionary<string, int, OrdinalStringComparer>(new OrdinalStringComparer());
-            _fictionaryConcreteValue = PopulateStringDictionary(fictionary);
+            _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
 
@@ -56,7 +56,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryConcreteReference()
         {
             var dictionary = new Dictionary<string, int>(OrdinalStringComparerObject.Default);
-            _dictionary = PopulateStringDictionary(dictionary);
+            _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
@@ -64,7 +64,7 @@ namespace Misnomer
         {
             var fictionary =
                 new Fictionary<string, int, OrdinalStringComparerObject>(OrdinalStringComparerObject.Default);
-            _fictionaryConcreteReference = PopulateStringDictionary(fictionary);
+            _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
 
 
@@ -73,7 +73,7 @@ namespace Misnomer
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
             var dictionary = new Dictionary<string, int>(comparer);
-            _dictionary = PopulateStringDictionary(dictionary);
+            _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
@@ -81,7 +81,7 @@ namespace Misnomer
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
             var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
-            _fictionaryVirtual = PopulateStringDictionary(fictionary);
+            _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
 
@@ -90,7 +90,7 @@ namespace Misnomer
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
             var dictionary = new Dictionary<string, int>(comparer);
-            _dictionary = PopulateStringDictionary(dictionary);
+            _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
@@ -98,7 +98,7 @@ namespace Misnomer
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
             var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
-            _fictionaryVirtual = PopulateStringDictionary(fictionary);
+            _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
 
@@ -106,14 +106,14 @@ namespace Misnomer
         public void GlobalSetupDictionaryStandardPolymorphic()
         {
             var dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
-            _dictionary = PopulateStringDictionary(dictionary);
+            _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
             var fictionary = new Fictionary<string, int, StringComparer>(StringComparer.Ordinal);
-            _fictionaryStandardPolymorphic = PopulateStringDictionary(fictionary);
+            _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 
         #endregion
