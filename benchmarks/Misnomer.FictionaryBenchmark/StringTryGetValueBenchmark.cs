@@ -120,75 +120,75 @@ namespace Misnomer
 
         #region Benchmarks
 
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("ConcreteValue")]
+        [Benchmark]
+        [BenchmarkCategory(nameof(String))]
         public bool DictionaryConcreteValue()
         {
             return _dictionary.TryGetValue(Trial, out int _);
         }
 
-        [Benchmark]
-        [BenchmarkCategory("ConcreteValue")]
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory(nameof(String))]
         public bool FictionaryConcreteValue()
         {
             return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
         }
 
 
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("ConcreteReference")]
+        [Benchmark]
+        [BenchmarkCategory(nameof(String))]
         public bool DictionaryConcreteReference()
         {
             return _dictionary.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
-        [BenchmarkCategory("ConcreteReference")]
+        [BenchmarkCategory(nameof(String))]
         public bool FictionaryConcreteReference()
         {
             return _fictionaryConcreteReference.TryGetValue(Trial, out int _);
         }
 
 
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("VirtualValue")]
+        [Benchmark]
+        [BenchmarkCategory(nameof(String))]
         public bool DictionaryVirtualValue()
         {
             return _dictionary.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
-        [BenchmarkCategory("VirtualValue")]
+        [BenchmarkCategory(nameof(String))]
         public bool FictionaryVirtualValue()
         {
             return _fictionaryVirtual.TryGetValue(Trial, out int _);
         }
 
 
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("VirtualReference")]
+        [Benchmark]
+        [BenchmarkCategory(nameof(String))]
         public bool DictionaryVirtualReference()
         {
             return _dictionary.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
-        [BenchmarkCategory("VirtualReference")]
+        [BenchmarkCategory(nameof(String))]
         public bool FictionaryVirtualReference()
         {
             return _fictionaryVirtual.TryGetValue(Trial, out int _);
         }
 
 
-        [Benchmark(Baseline = true)]
-        [BenchmarkCategory("StandardPolymorphic")]
+        [Benchmark]
+        [BenchmarkCategory(nameof(String))]
         public bool DictionaryStandardPolymorphic()
         {
             return _dictionary.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
-        [BenchmarkCategory("StandardPolymorphic")]
+        [BenchmarkCategory(nameof(String))]
         public bool FictionaryStandardPolymorphic()
         {
             return _fictionaryStandardPolymorphic.TryGetValue(Trial, out int _);
