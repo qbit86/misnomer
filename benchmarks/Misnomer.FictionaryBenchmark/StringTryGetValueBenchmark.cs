@@ -8,7 +8,7 @@ namespace Misnomer
 {
     [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     [CategoriesColumn]
-    public abstract class TryGetValueBenchmark
+    public abstract class StringTryGetValueBenchmark
     {
         private const int Count = 1729;
         private const int Seed = 0x1e4f6c2a;
