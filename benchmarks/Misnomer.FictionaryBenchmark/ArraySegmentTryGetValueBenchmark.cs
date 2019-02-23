@@ -15,10 +15,8 @@ namespace Misnomer
 
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
-
         private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
-        // private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
-        // private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
+        private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
 
         private static Key Trial { get; } = new Key(Array.Empty<int>());
 
@@ -39,13 +37,6 @@ namespace Misnomer
         }
 
         #region GlobalSetup
-
-        [GlobalSetup(Target = nameof(DictionaryDefault))]
-        public void GlobalSetupDictionaryDefault()
-        {
-            var dictionary = new Dictionary<Key, int>();
-            _dictionary = PopulateDictionary(dictionary);
-        }
 
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
@@ -76,11 +67,52 @@ namespace Misnomer
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
 
+        [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
+        public void GlobalSetupDictionaryVirtualValue()
+        {
+            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            var dictionary = new Dictionary<Key, int>(comparer);
+            _dictionary = PopulateDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
+        public void GlobalSetupFictionaryVirtualValue()
+        {
+            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            _fictionaryVirtual = PopulateDictionary(fictionary);
+        }
+
+        [GlobalSetup(Target = nameof(DictionaryVirtualReference))]
+        public void GlobalSetupDictionaryVirtualReference()
+        {
+            IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
+            var dictionary = new Dictionary<Key, int>(comparer);
+            _dictionary = PopulateDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
+        public void GlobalSetupFictionaryVirtualReference()
+        {
+            IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
+            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            _fictionaryVirtual = PopulateDictionary(fictionary);
+        }
+
+        [GlobalSetup(Target = nameof(DictionaryDefault))]
+        public void GlobalSetupDictionaryDefault()
+        {
+            var dictionary = new Dictionary<Key, int>();
+            _dictionary = PopulateDictionary(dictionary);
+        }
+
         [GlobalCleanup]
         public void GlobalCleanup()
         {
             _dictionary = null;
+            _fictionaryConcreteReference = null;
             _fictionaryConcreteValue = null;
+            _fictionaryVirtual = null;
         }
 
         #endregion
@@ -88,12 +120,6 @@ namespace Misnomer
         #region Benchmarks
 
         [Benchmark]
-        public bool DictionaryDefault()
-        {
-            return _dictionary.TryGetValue(Trial, out int _);
-        }
-
-        [Benchmark(Baseline = true)]
         public bool DictionaryConcreteValue()
         {
             return _dictionary.TryGetValue(Trial, out int _);
@@ -105,7 +131,7 @@ namespace Misnomer
             return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public bool DictionaryConcreteReference()
         {
             return _dictionary.TryGetValue(Trial, out int _);
@@ -115,6 +141,36 @@ namespace Misnomer
         public bool FictionaryConcreteReference()
         {
             return _fictionaryConcreteReference.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool DictionaryVirtualValue()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool FictionaryVirtualValue()
+        {
+            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool DictionaryVirtualReference()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool FictionaryVirtualReference()
+        {
+            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool DictionaryDefault()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
         }
 
         #endregion
