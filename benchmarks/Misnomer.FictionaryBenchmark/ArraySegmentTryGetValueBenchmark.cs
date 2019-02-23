@@ -56,6 +56,13 @@ namespace Misnomer
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
+        [GlobalSetup(Target = nameof(DictionaryDefault))]
+        public void GlobalSetupDictionaryDefault()
+        {
+            var dictionary = new Dictionary<ArraySegment<int>, int>();
+            _dictionary = PopulateDictionary(dictionary);
+        }
+
         #endregion
 
         #region Benchmarks
@@ -72,6 +79,13 @@ namespace Misnomer
         public bool FictionaryConcreteValue()
         {
             return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("ConcreteValue")]
+        public bool DictionaryDefault()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
         }
 
         #endregion
