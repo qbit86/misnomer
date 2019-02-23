@@ -104,3 +104,11 @@ In case if you want to initialize dictionary from collection, you can use `ToFic
 var f = Directory.EnumerateDirectories(".")
     .ToFictionary(s => s, s => new DirectoryInfo(s), new OrdinalStringComparer());
 ```
+
+### Remarks
+
+Please take a look at reports in benchmarks/ directory.
+Or even better, measure performance by yourself on your environment.
+
+For `string` keys `Fictionary<string, int, TComparer>` shows better performance than `Dictionary<string, int>` when `TCmparer` **is value type**.
+If comparer is of reference type then outcome may vary depending on JIT/platform/runtime combination. 
