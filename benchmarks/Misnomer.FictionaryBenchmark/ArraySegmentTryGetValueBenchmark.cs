@@ -16,6 +16,7 @@ namespace Misnomer
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
         private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
+        private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
         private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
 
         private static Key Trial { get; } = new Key(Array.Empty<int>());
@@ -99,6 +100,20 @@ namespace Misnomer
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
+        [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
+        public void GlobalSetupDictionaryStandardPolymorphic()
+        {
+            var dictionary = new Dictionary<Key, int>(EqualityComparer<Key>.Default);
+            _dictionary = PopulateDictionary(dictionary);
+        }
+
+        [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
+        public void GlobalSetupFictionaryStandardPolymorphic()
+        {
+            var fictionary = new Fictionary<Key, int, EqualityComparer<Key>>(EqualityComparer<Key>.Default);
+            _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
+        }
+
         [GlobalSetup(Target = nameof(DictionaryDefault))]
         public void GlobalSetupDictionaryDefault()
         {
@@ -165,6 +180,18 @@ namespace Misnomer
         public bool FictionaryVirtualReference()
         {
             return _fictionaryVirtual.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool DictionaryStandardPolymorphic()
+        {
+            return _dictionary.TryGetValue(Trial, out int _);
+        }
+
+        [Benchmark]
+        public bool FictionaryStandardPolymorphic()
+        {
+            return _fictionaryStandardPolymorphic.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
