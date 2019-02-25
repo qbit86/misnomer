@@ -2,8 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>net471;netcoreapp2.1</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <LangVersion>latest</LangVersion>
-    <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.11.4" />
