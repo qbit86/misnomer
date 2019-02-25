@@ -1,27 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp1.0;netstandard1.2;netstandard2.0</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyVersion>0.2</AssemblyVersion>
     <VersionPrefix>0.2.0</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
-    <Authors>Viktor T.</Authors>
     <Title>Fast dictionary</Title>
     <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.
 Enables devirtualization of calls to the key comparer.
 Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
 Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
-    <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Fictionary/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MisnomerRootDir)misnomer.snk</AssemblyOriginatorKeyFile>
-    <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
