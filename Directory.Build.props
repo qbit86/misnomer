@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <MisnomerRootDir>$(MSBuildThisFileDirectory)</MisnomerRootDir>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <NeutralLanguage>en-US</NeutralLanguage>
     <LangVersion>latest</LangVersion>
     <Authors>Viktor T.</Authors>

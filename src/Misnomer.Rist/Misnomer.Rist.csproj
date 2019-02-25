@@ -12,7 +12,7 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(MisnomerRootDir)misnomer.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(RepoRoot)misnomer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
