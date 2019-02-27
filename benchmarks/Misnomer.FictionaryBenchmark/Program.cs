@@ -25,7 +25,7 @@ namespace Misnomer
                 .With(EnvironmentAnalyser.Default)
                 .With(jobs.ToArray());
 
-            Summary _ = BenchmarkRunner.Run<EnumTryGetValueBenchmark>(config);
+            Summary _ = BenchmarkRunner.Run<StringPutBenchmark>(config);
         }
 
         private static IEnumerable<Job> GetJobs()
