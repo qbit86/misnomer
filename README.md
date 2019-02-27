@@ -112,3 +112,9 @@ Or even better, measure performance by yourself on your environment.
 
 For example for `string` keys `Fictionary<string, int, TComparer>` shows better performance than `Dictionary<string, int>` when `TCmparer` **is value type**.
 If comparer is of reference type then outcome may vary depending on JIT/platform/runtime combination. 
+
+## Source Link
+
+All libraries support [Source Link](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink) for source code debugging. To enable stepping into library methods implementation in Visual Studio 2017 Update 9, select **Enable Source Link support** in debugging options, and clear **Enable Just My Code**. Source code will be automatically downloaded from GitHub on demand.
+
+![Enable Source Link support](source-link-highlight.png?raw=true)
