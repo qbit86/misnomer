@@ -15,7 +15,7 @@ namespace Misnomer
 
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
-        private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
+        private Fictionary<Key, int, ArraySegmentEqualityComparer<int>> _fictionaryConcreteValue;
         private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
         private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
 
@@ -44,14 +44,14 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            _dictionary = new Dictionary<Key, int>(new ArraySegmentComparer<int>());
+            _dictionary = new Dictionary<Key, int>(new ArraySegmentEqualityComparer<int>());
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
             _fictionaryConcreteValue =
-                new Fictionary<Key, int, ArraySegmentComparer<int>>(new ArraySegmentComparer<int>());
+                new Fictionary<Key, int, ArraySegmentEqualityComparer<int>>(new ArraySegmentEqualityComparer<int>());
         }
 
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
@@ -70,14 +70,14 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
         public void GlobalSetupDictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
             _dictionary = new Dictionary<Key, int>(comparer);
         }
 
         [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
         public void GlobalSetupFictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
             _fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
         }
 

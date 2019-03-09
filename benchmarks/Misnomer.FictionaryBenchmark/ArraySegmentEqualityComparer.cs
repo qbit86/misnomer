@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace Misnomer
 {
-    internal readonly struct ArraySegmentComparer<T> : IEqualityComparer<ArraySegment<T>>,
-        IEquatable<ArraySegmentComparer<T>>
+    internal readonly struct ArraySegmentEqualityComparer<T> : IEqualityComparer<ArraySegment<T>>,
+        IEquatable<ArraySegmentEqualityComparer<T>>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(ArraySegment<T> x, ArraySegment<T> y)
@@ -29,7 +29,7 @@ namespace Misnomer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(ArraySegmentComparer<T> other)
+        public bool Equals(ArraySegmentEqualityComparer<T> other)
         {
             return true;
         }

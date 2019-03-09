@@ -14,13 +14,13 @@ namespace Misnomer
 
         private static readonly int[] s_array = new int[Count];
 
-        private int _trialSeed;
-
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
-        private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
+        private Fictionary<Key, int, ArraySegmentEqualityComparer<int>> _fictionaryConcreteValue;
         private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
         private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
+
+        private int _trialSeed;
 
         private Key Trial { get; set; } = new Key(Array.Empty<int>());
 
@@ -53,14 +53,15 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(new ArraySegmentComparer<int>());
+            var dictionary = new Dictionary<Key, int>(new ArraySegmentEqualityComparer<int>());
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            var fictionary = new Fictionary<Key, int, ArraySegmentComparer<int>>(new ArraySegmentComparer<int>());
+            var fictionary =
+                new Fictionary<Key, int, ArraySegmentEqualityComparer<int>>(new ArraySegmentEqualityComparer<int>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
@@ -82,7 +83,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
         public void GlobalSetupDictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
             var dictionary = new Dictionary<Key, int>(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
@@ -90,7 +91,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
         public void GlobalSetupFictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
+            IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
             var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
