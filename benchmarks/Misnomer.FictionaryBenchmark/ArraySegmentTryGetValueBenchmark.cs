@@ -6,6 +6,7 @@ using Key = System.ArraySegment<int>;
 
 namespace Misnomer
 {
+    [MemoryDiagnoser]
     public abstract class ArraySegmentTryGetValueBenchmark
     {
         // 270th prime.
@@ -13,13 +14,15 @@ namespace Misnomer
 
         private static readonly int[] s_array = new int[Count];
 
+        private int _trialSeed = 0;
+
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
         private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
         private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
         private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
 
-        private static Key Trial { get; } = new Key(Array.Empty<int>());
+        private Key Trial { get; set; } = new Key(Array.Empty<int>());
 
         private static TDictionary PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<Key, int>
@@ -29,7 +32,7 @@ namespace Misnomer
             for (int i = 0; i != Count; ++i)
             {
                 // 269th prime.
-                int value = 1723 * i % Count;
+                int value = (5 + 1723 * i) % Count;
                 var key = new Key(s_array, value, Count - value);
                 dictionary[key] = value;
             }
@@ -38,6 +41,14 @@ namespace Misnomer
         }
 
         #region GlobalSetup
+
+        [GlobalSetup]
+        public void GlobalSetup()
+        {
+            int value = (7 + 199 * _trialSeed) % Count;
+            ++_trialSeed;
+            Trial = new Key(s_array, value, Count - value);
+        }
 
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
