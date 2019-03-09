@@ -14,7 +14,7 @@ namespace Misnomer
 
         private static readonly int[] s_array = new int[Count];
 
-        private int _trialSeed = 0;
+        private int _trialSeed;
 
         private Dictionary<Key, int> _dictionary;
         private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
