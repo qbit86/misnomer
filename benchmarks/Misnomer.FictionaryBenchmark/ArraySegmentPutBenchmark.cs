@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
-using Key = System.DateTime;
+using Key = System.ArraySegment<int>;
 
 namespace Misnomer
 {
     [MemoryDiagnoser]
-    public abstract class DateTimePutBenchmark
+    public abstract class ArraySegmentPutBenchmark
     {
         // 270th prime.
         private const int Count = 1733;
 
+        private static readonly int[] s_array = new int[Count];
+
         private Dictionary<Key, int> _dictionary;
-        private Fictionary<Key, int, GenericEqualityComparerObject<Key>> _fictionaryConcreteReference;
-        private Fictionary<Key, int, GenericEqualityComparer<Key>> _fictionaryConcreteValue;
+        private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
+        private Fictionary<Key, int, ArraySegmentComparer<int>> _fictionaryConcreteValue;
         private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
         private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
 
@@ -25,12 +27,12 @@ namespace Misnomer
             for (int i = 0; i != Count; ++i)
             {
                 int firstValue = (7 + 1723 * i) % Count;
-                Key firstKey = Key.FromBinary(firstValue);
+                var firstKey = new Key(s_array, firstValue, Count - firstValue);
                 if (!dictionary.ContainsKey(firstKey))
                     dictionary.Add(firstKey, firstValue);
 
                 int secondValue = (13 + 853 * i) % Count;
-                Key secondKey = Key.FromBinary(secondValue);
+                var secondKey = new Key(s_array, secondValue, Count - secondValue);
                 dictionary[secondKey] = secondValue;
             }
 
@@ -42,54 +44,54 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            _dictionary = new Dictionary<Key, int>(new GenericEqualityComparer<Key>());
+            _dictionary = new Dictionary<Key, int>(new ArraySegmentComparer<int>());
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
             _fictionaryConcreteValue =
-                new Fictionary<Key, int, GenericEqualityComparer<Key>>(new GenericEqualityComparer<Key>());
+                new Fictionary<Key, int, ArraySegmentComparer<int>>(new ArraySegmentComparer<int>());
         }
 
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
         public void GlobalSetupDictionaryConcreteReference()
         {
-            _dictionary = new Dictionary<Key, int>(GenericEqualityComparerObject<Key>.Default);
+            _dictionary = new Dictionary<Key, int>(ArraySegmentComparerObject<int>.Default);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            _fictionaryConcreteReference = new Fictionary<Key, int, GenericEqualityComparerObject<Key>>(
-                GenericEqualityComparerObject<Key>.Default);
+            _fictionaryConcreteReference = new Fictionary<Key, int, ArraySegmentComparerObject<int>>(
+                ArraySegmentComparerObject<int>.Default);
         }
 
         [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
         public void GlobalSetupDictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
+            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
             _dictionary = new Dictionary<Key, int>(comparer);
         }
 
         [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
         public void GlobalSetupFictionaryVirtualValue()
         {
-            IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
+            IEqualityComparer<Key> comparer = new ArraySegmentComparer<int>();
             _fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
         }
 
         [GlobalSetup(Target = nameof(DictionaryVirtualReference))]
         public void GlobalSetupDictionaryVirtualReference()
         {
-            IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
+            IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
             _dictionary = new Dictionary<Key, int>(comparer);
         }
 
         [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
         public void GlobalSetupFictionaryVirtualReference()
         {
-            IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
+            IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
             _fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
         }
 
