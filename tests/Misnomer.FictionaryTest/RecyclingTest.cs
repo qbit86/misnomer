@@ -24,18 +24,18 @@ namespace Misnomer
 
             // Act
             for (int upper = 1; upper <= count; ++upper)
-                for (int i = 0; i < upper; ++i)
+            for (int i = 0; i < upper; ++i)
+            {
+                Dictionary<DateTimeOffset, long> d = dictionaries[i];
+                int newItemCount = Math.Max(1, d.Count);
+                Fictionary<DateTimeOffset, long, GenericEqualityComparer<DateTimeOffset>> f = fictionaries[i];
+                for (int k = 0; k != newItemCount; ++k)
                 {
-                    Dictionary<DateTimeOffset, long> d = dictionaries[i];
-                    int newItemCount = Math.Max(1, d.Count);
-                    Fictionary<DateTimeOffset, long, GenericEqualityComparer<DateTimeOffset>> f = fictionaries[i];
-                    for (int k = 0; k != newItemCount; ++k)
-                    {
-                        long value = (upper << 24) | (i << 16) | k;
-                        d.TryAdd(DateTimeOffset.FromFileTime(value), value);
-                        f.TryAdd(DateTimeOffset.FromFileTime(value), value);
-                    }
+                    long value = (upper << 24) | (i << 16) | k;
+                    d.TryAdd(DateTimeOffset.FromFileTime(value), value);
+                    f.TryAdd(DateTimeOffset.FromFileTime(value), value);
                 }
+            }
 
             // Assert
             for (int i = 0; i != count; ++i)

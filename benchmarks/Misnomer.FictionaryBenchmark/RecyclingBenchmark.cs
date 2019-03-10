@@ -37,49 +37,25 @@ namespace Misnomer
             return dictionaries.Length;
         }
 
-        #region Setup
+        #region Benchmarks
 
-        [IterationSetup(Target = nameof(Dictionary))]
-        public void IterationSetupDictionary()
+        [Benchmark(Baseline = true)]
+        public int Dictionary()
         {
             int count = _dictionaries.Length;
             for (int i = 0; i != count; ++i)
                 _dictionaries[i] = new Dictionary<DateTimeOffset, long>();
-        }
 
-        [IterationSetup(Target = nameof(Fictionary))]
-        public void IterationSetupFictionary()
-        {
-            int count = _fictionaries.Length;
-            for (int i = 0; i != count; ++i)
-                _fictionaries[i] = DefaultFictionary<DateTimeOffset, long>.Create();
-        }
-
-        [IterationCleanup(Target = nameof(Dictionary))]
-        public void IterationCleanupDictionary()
-        {
-            Array.Clear(_dictionaries, 0, _dictionaries.Length);
-        }
-
-        [IterationCleanup(Target = nameof(Fictionary))]
-        public void IterationCleanupFictionary()
-        {
-            Array.Clear(_fictionaries, 0, _fictionaries.Length);
-        }
-
-        #endregion
-
-        #region Benchmarks
-
-        [Benchmark]
-        public int Dictionary()
-        {
             return PopulateDictionaries(_dictionaries);
         }
 
         [Benchmark]
         public int Fictionary()
         {
+            int count = _fictionaries.Length;
+            for (int i = 0; i != count; ++i)
+                _fictionaries[i] = DefaultFictionary<DateTimeOffset, long>.Create();
+
             return PopulateDictionaries(_fictionaries);
         }
 
