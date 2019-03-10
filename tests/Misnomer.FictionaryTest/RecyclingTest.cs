@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Misnomer
 {
-    public sealed class RecyclingFictionaryTest
+    public sealed class RecyclingTest
     {
 #pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
