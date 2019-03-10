@@ -135,7 +135,7 @@ namespace Misnomer
         }
 
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
             return PopulateDictionary(_dictionary);

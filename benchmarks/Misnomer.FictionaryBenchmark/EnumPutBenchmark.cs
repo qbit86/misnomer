@@ -11,12 +11,6 @@ namespace Misnomer
         // 270th prime.
         private const int Count = 1733;
 
-        private Dictionary<Key, int> _dictionary;
-        private Fictionary<Key, int, EnumEqualityComparerObject> _fictionaryConcreteReference;
-        private Fictionary<Key, int, EnumEqualityComparer> _fictionaryConcreteValue;
-        private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
-        private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
-
         private static int PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<Key, int>
         {
@@ -37,158 +31,90 @@ namespace Misnomer
             return dictionary.Count;
         }
 
-        #region GlobalSetup
-
-        [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
-        public void GlobalSetupDictionaryConcreteValue()
-        {
-            _dictionary = new Dictionary<Key, int>(new EnumEqualityComparer());
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
-        public void GlobalSetupFictionaryConcreteValue()
-        {
-            _fictionaryConcreteValue = new Fictionary<Key, int, EnumEqualityComparer>(new EnumEqualityComparer());
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
-        public void GlobalSetupDictionaryConcreteReference()
-        {
-            _dictionary = new Dictionary<Key, int>(EnumEqualityComparerObject.Default);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
-        public void GlobalSetupFictionaryConcreteReference()
-        {
-            _fictionaryConcreteReference = new Fictionary<Key, int, EnumEqualityComparerObject>(
-                EnumEqualityComparerObject.Default);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
-        public void GlobalSetupDictionaryVirtualValue()
-        {
-            IEqualityComparer<Key> comparer = new EnumEqualityComparer();
-            _dictionary = new Dictionary<Key, int>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
-        public void GlobalSetupFictionaryVirtualValue()
-        {
-            IEqualityComparer<Key> comparer = new EnumEqualityComparer();
-            _fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryVirtualReference))]
-        public void GlobalSetupDictionaryVirtualReference()
-        {
-            IEqualityComparer<Key> comparer = EnumEqualityComparerObject.Default;
-            _dictionary = new Dictionary<Key, int>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
-        public void GlobalSetupFictionaryVirtualReference()
-        {
-            IEqualityComparer<Key> comparer = EnumEqualityComparerObject.Default;
-            _fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
-        public void GlobalSetupDictionaryStandardPolymorphic()
-        {
-            _dictionary = new Dictionary<Key, int>(EqualityComparer<Key>.Default);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
-        public void GlobalSetupFictionaryStandardPolymorphic()
-        {
-            _fictionaryStandardPolymorphic =
-                new Fictionary<Key, int, EqualityComparer<Key>>(EqualityComparer<Key>.Default);
-        }
-
-        [GlobalSetup(Target = nameof(DictionaryDefault))]
-        public void GlobalSetupDictionaryDefault()
-        {
-            _dictionary = new Dictionary<Key, int>();
-        }
-
-        [GlobalCleanup]
-        public void GlobalCleanup()
-        {
-            _dictionary = null;
-            _fictionaryConcreteReference = null;
-            _fictionaryConcreteValue = null;
-            _fictionaryStandardPolymorphic = null;
-            _fictionaryVirtual = null;
-        }
-
-        #endregion
-
         #region Benchmarks
 
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<Key, int>(Count, new EnumEqualityComparer());
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            return PopulateDictionary(_fictionaryConcreteValue);
+            var fictionaryConcreteValue = new Fictionary<Key, int, EnumEqualityComparer>(
+                Count, new EnumEqualityComparer());
+            return PopulateDictionary(fictionaryConcreteValue);
         }
 
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<Key, int>(Count, EnumEqualityComparerObject.Default);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            return PopulateDictionary(_fictionaryConcreteReference);
+            var fictionaryConcreteReference = new Fictionary<Key, int, EnumEqualityComparerObject>(
+                Count, EnumEqualityComparerObject.Default);
+            return PopulateDictionary(fictionaryConcreteReference);
         }
 
         [Benchmark]
         public int DictionaryVirtualValue()
         {
-            return PopulateDictionary(_dictionary);
+            IEqualityComparer<Key> comparer = new EnumEqualityComparer();
+            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryVirtualValue()
         {
-            return PopulateDictionary(_fictionaryVirtual);
+            IEqualityComparer<Key> comparer = new EnumEqualityComparer();
+            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
+            return PopulateDictionary(fictionaryVirtual);
         }
 
         [Benchmark]
         public int DictionaryVirtualReference()
         {
-            return PopulateDictionary(_dictionary);
+            IEqualityComparer<Key> comparer = EnumEqualityComparerObject.Default;
+            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryVirtualReference()
         {
-            return PopulateDictionary(_fictionaryVirtual);
+            IEqualityComparer<Key> comparer = EnumEqualityComparerObject.Default;
+            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
+            return PopulateDictionary(fictionaryVirtual);
         }
 
         [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<Key, int>(Count, EqualityComparer<Key>.Default);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            return PopulateDictionary(_fictionaryStandardPolymorphic);
+            var fictionaryStandardPolymorphic =
+                new Fictionary<Key, int, EqualityComparer<Key>>(Count, EqualityComparer<Key>.Default);
+            return PopulateDictionary(fictionaryStandardPolymorphic);
         }
 
         [Benchmark]
         public int DictionaryDefault()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<Key, int>(Count);
+            return PopulateDictionary(dictionary);
         }
 
         #endregion
