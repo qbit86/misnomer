@@ -11,12 +11,6 @@ namespace Misnomer
         // 270th prime.
         private const int Count = 1733;
 
-        private Dictionary<string, int> _dictionary;
-        private Fictionary<string, int, OrdinalStringComparerObject> _fictionaryConcreteReference;
-        private Fictionary<string, int, OrdinalStringComparer> _fictionaryConcreteValue;
-        private Fictionary<string, int, StringComparer> _fictionaryStandardPolymorphic;
-        private Fictionary<string, int, IEqualityComparer<string>> _fictionaryVirtual;
-
         private static int PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<string, int>
         {
@@ -37,153 +31,86 @@ namespace Misnomer
             return dictionary.Count;
         }
 
-        #region GlobalSetup
-
-        [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
-        public void GlobalSetupDictionaryConcreteValue()
-        {
-            _dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
-        public void GlobalSetupFictionaryConcreteValue()
-        {
-            _fictionaryConcreteValue = new Fictionary<string, int, OrdinalStringComparer>(new OrdinalStringComparer());
-        }
-
-
-        [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
-        public void GlobalSetupDictionaryConcreteReference()
-        {
-            _dictionary = new Dictionary<string, int>(OrdinalStringComparerObject.Default);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
-        public void GlobalSetupFictionaryConcreteReference()
-        {
-            _fictionaryConcreteReference =
-                new Fictionary<string, int, OrdinalStringComparerObject>(OrdinalStringComparerObject.Default);
-        }
-
-
-        [GlobalSetup(Target = nameof(DictionaryVirtualValue))]
-        public void GlobalSetupDictionaryVirtualValue()
-        {
-            IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            _dictionary = new Dictionary<string, int>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryVirtualValue))]
-        public void GlobalSetupFictionaryVirtualValue()
-        {
-            IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            _fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
-        }
-
-
-        [GlobalSetup(Target = nameof(DictionaryVirtualReference))]
-        public void GlobalSetupDictionaryVirtualReference()
-        {
-            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            _dictionary = new Dictionary<string, int>(comparer);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryVirtualReference))]
-        public void GlobalSetupFictionaryVirtualReference()
-        {
-            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            _fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
-        }
-
-
-        [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
-        public void GlobalSetupDictionaryStandardPolymorphic()
-        {
-            _dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
-        }
-
-        [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
-        public void GlobalSetupFictionaryStandardPolymorphic()
-        {
-            _fictionaryStandardPolymorphic = new Fictionary<string, int, StringComparer>(StringComparer.Ordinal);
-        }
-
-        [GlobalCleanup]
-        public void GlobalCleanup()
-        {
-            _dictionary = null;
-            _fictionaryConcreteReference = null;
-            _fictionaryConcreteValue = null;
-            _fictionaryStandardPolymorphic = null;
-            _fictionaryVirtual = null;
-        }
-
-        #endregion
-
         #region Benchmarks
 
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<string, int>(Count, new OrdinalStringComparer());
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            return PopulateDictionary(_fictionaryConcreteValue);
+            var fictionaryConcreteValue = new Fictionary<string, int, OrdinalStringComparer>(
+                Count, new OrdinalStringComparer());
+            return PopulateDictionary(fictionaryConcreteValue);
         }
 
 
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<string, int>(Count, OrdinalStringComparerObject.Default);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            return PopulateDictionary(_fictionaryConcreteReference);
+            var fictionaryConcreteReference = new Fictionary<string, int, OrdinalStringComparerObject>(
+                Count, OrdinalStringComparerObject.Default);
+            return PopulateDictionary(fictionaryConcreteReference);
         }
 
 
         [Benchmark]
         public int DictionaryVirtualValue()
         {
-            return PopulateDictionary(_dictionary);
+            IEqualityComparer<string> comparer = new OrdinalStringComparer();
+            var dictionary = new Dictionary<string, int>(Count, comparer);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryVirtualValue()
         {
-            return PopulateDictionary(_fictionaryVirtual);
+            IEqualityComparer<string> comparer = new OrdinalStringComparer();
+            var fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(Count, comparer);
+            return PopulateDictionary(fictionaryVirtual);
         }
 
 
         [Benchmark]
         public int DictionaryVirtualReference()
         {
-            return PopulateDictionary(_dictionary);
+            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
+            var dictionary = new Dictionary<string, int>(Count, comparer);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryVirtualReference()
         {
-            return PopulateDictionary(_fictionaryVirtual);
+            IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
+            var fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(Count, comparer);
+            return PopulateDictionary(fictionaryVirtual);
         }
 
-
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            return PopulateDictionary(_dictionary);
+            var dictionary = new Dictionary<string, int>(Count, StringComparer.Ordinal);
+            return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            return PopulateDictionary(_fictionaryStandardPolymorphic);
+            var fictionaryStandardPolymorphic = new Fictionary<string, int, StringComparer>(
+                Count, StringComparer.Ordinal);
+            return PopulateDictionary(fictionaryStandardPolymorphic);
         }
 
         #endregion
