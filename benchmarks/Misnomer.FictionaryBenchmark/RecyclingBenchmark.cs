@@ -11,9 +11,10 @@ namespace Misnomer
     {
         private const int Count = 13;
 
-        private readonly Dictionary<Key, long>[] _dictionaries = new Dictionary<DateTimeOffset, long>[Count];
+        private readonly Dictionary<Key, long>[] _dictionaries = new Dictionary<Key, long>[Count];
+
         private readonly Fictionary<Key, long, GenericEqualityComparer<Key>>[] _fictionaries =
-            new Fictionary<DateTimeOffset, long, GenericEqualityComparer<DateTimeOffset>>[Count];
+            new Fictionary<Key, long, GenericEqualityComparer<Key>>[Count];
 
         private static int PopulateDictionaries<TDictionary>(TDictionary[] dictionaries)
             where TDictionary : IDictionary<Key, long>
