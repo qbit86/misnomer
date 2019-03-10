@@ -38,22 +38,22 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(new ArraySegmentEqualityComparer<int>());
+            var dictionary = new Dictionary<Key, int>(Count, new ArraySegmentEqualityComparer<int>());
             return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            var fictionaryConcreteValue =
-                new Fictionary<Key, int, ArraySegmentEqualityComparer<int>>(new ArraySegmentEqualityComparer<int>());
+            var fictionaryConcreteValue = new Fictionary<Key, int, ArraySegmentEqualityComparer<int>>(
+                Count, new ArraySegmentEqualityComparer<int>());
             return PopulateDictionary(fictionaryConcreteValue);
         }
 
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(ArraySegmentComparerObject<int>.Default);
+            var dictionary = new Dictionary<Key, int>(Count, ArraySegmentComparerObject<int>.Default);
             return PopulateDictionary(dictionary);
         }
 
@@ -61,7 +61,7 @@ namespace Misnomer
         public int FictionaryConcreteReference()
         {
             var fictionaryConcreteReference = new Fictionary<Key, int, ArraySegmentComparerObject<int>>(
-                ArraySegmentComparerObject<int>.Default);
+                Count, ArraySegmentComparerObject<int>.Default);
             return PopulateDictionary(fictionaryConcreteReference);
         }
 
@@ -69,7 +69,7 @@ namespace Misnomer
         public int DictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            var dictionary = new Dictionary<Key, int>(comparer);
+            var dictionary = new Dictionary<Key, int>(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -77,7 +77,7 @@ namespace Misnomer
         public int FictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -85,7 +85,7 @@ namespace Misnomer
         public int DictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            var dictionary = new Dictionary<Key, int>(comparer);
+            var dictionary = new Dictionary<Key, int>(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -93,14 +93,14 @@ namespace Misnomer
         public int FictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
         [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<Key, int>(EqualityComparer<Key>.Default);
+            var dictionary = new Dictionary<Key, int>(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(dictionary);
         }
 
@@ -108,14 +108,14 @@ namespace Misnomer
         public int FictionaryStandardPolymorphic()
         {
             var fictionaryStandardPolymorphic =
-                new Fictionary<Key, int, EqualityComparer<Key>>(EqualityComparer<Key>.Default);
+                new Fictionary<Key, int, EqualityComparer<Key>>(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(fictionaryStandardPolymorphic);
         }
 
         [Benchmark]
         public int DictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>();
+            var dictionary = new Dictionary<Key, int>(Count);
             return PopulateDictionary(dictionary);
         }
 
