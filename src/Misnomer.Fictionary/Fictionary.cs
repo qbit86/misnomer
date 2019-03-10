@@ -50,7 +50,7 @@ namespace Misnomer
         private int _freeList;
         private int _freeCount;
         private int _version;
-        private TKeyComparer _comparer;
+        private readonly TKeyComparer _comparer;
         private KeyCollection _keys;
         private ValueCollection _values;
 
