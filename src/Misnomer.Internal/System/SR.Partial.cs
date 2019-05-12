@@ -1,3 +1,5 @@
+﻿// ReSharper disable InconsistentNaming
+
 ﻿namespace System
 {
     // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/src/Resources/Strings.resx
