@@ -29,9 +29,11 @@ namespace Misnomer
         /// </summary>
         /// <param name="x">A string to compare to <paramref name="y"/>.</param>
         /// <param name="y">A string to compare to <paramref name="x"/>.</param>
-        /// <returns>`true` if <paramref name="x"/> and <paramref name="y"/> refer to the same object,
+        /// <returns>
+        /// `true` if <paramref name="x"/> and <paramref name="y"/> refer to the same object,
         /// or <paramref name="x"/> and <paramref name="y"/> are equal,
-        /// or <paramref name="x"/> and <paramref name="y"/> are `null`; otherwise, `false`.</returns>
+        /// or <paramref name="x"/> and <paramref name="y"/> are `null`; otherwise, `false`.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(string x, string y)
         {
@@ -50,7 +52,7 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="OrdinalStringComparer" /> object is equal to another <see cref="OrdinalStringComparer" /> object.
+        /// Indicates whether the current <see cref="OrdinalStringComparer"/> object is equal to another <see cref="OrdinalStringComparer"/> object.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>`true`.</returns>
@@ -60,10 +62,10 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="OrdinalStringComparer" /> object is equal to another comparer object of the same type.
+        /// Indicates whether the current <see cref="OrdinalStringComparer"/> object is equal to another comparer object of the same type.
         /// </summary>
         /// <param name="obj">An object to compare with this object.</param>
-        /// <returns>true` if <paramref name="obj"/> is of type <see cref="OrdinalStringComparer" />; otherwise, `false`.</returns>
+        /// <returns>true` if <paramref name="obj"/> is of type <see cref="OrdinalStringComparer"/>; otherwise, `false`.</returns>
         public override bool Equals(object obj)
         {
             return obj is OrdinalStringComparer;

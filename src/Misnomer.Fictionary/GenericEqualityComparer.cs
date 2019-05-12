@@ -7,7 +7,7 @@ namespace Misnomer
     // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/EqualityComparer.cs
 #pragma warning disable CA1815, CA2231
     /// <summary>
-    /// Compares two objects for equivalence by invoking the implementation of the <see cref="IEquatable{T}.Equals(T)" />.
+    /// Compares two objects for equivalence by invoking the implementation of the <see cref="IEquatable{T}.Equals(T)"/>.
     /// </summary>
     /// <typeparam name="T">The type of objects to compare.</typeparam>
     public readonly struct GenericEqualityComparer<T> : IEqualityComparer<T>, IEquatable<GenericEqualityComparer<T>>
@@ -41,7 +41,7 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="GenericEqualityComparer{T}" /> object is equal to another <see cref="GenericEqualityComparer{T}" /> object.
+        /// Indicates whether the current <see cref="GenericEqualityComparer{T}"/> object is equal to another <see cref="GenericEqualityComparer{T}"/> object.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>`true`.</returns>
@@ -51,10 +51,10 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Indicates whether the current <see cref="GenericEqualityComparer{T}" /> object is equal to another comparer object of the same type.
+        /// Indicates whether the current <see cref="GenericEqualityComparer{T}"/> object is equal to another comparer object of the same type.
         /// </summary>
         /// <param name="obj">An object to compare with this object.</param>
-        /// <returns>true` if <paramref name="obj"/> is of type <see cref="GenericEqualityComparer{T}" />; otherwise, `false`.</returns>
+        /// <returns>true` if <paramref name="obj"/> is of type <see cref="GenericEqualityComparer{T}"/>; otherwise, `false`.</returns>
         public override bool Equals(object obj)
         {
             return obj is GenericEqualityComparer<T>;
