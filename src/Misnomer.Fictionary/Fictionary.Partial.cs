@@ -5,8 +5,8 @@ using System.Collections.Generic;
 namespace Misnomer
 {
     /// <summary>
-    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class
-    /// with <see cref="GenericEqualityComparer{TKey}" /> used as the key comparer.
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class
+    /// with <see cref="GenericEqualityComparer{TKey}"/> used as the key comparer.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
@@ -15,21 +15,23 @@ namespace Misnomer
     {
 #pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
-        /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses the <see cref="GenericEqualityComparer{TKey}" />.
+        /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the <see cref="GenericEqualityComparer{TKey}"/>.
         /// </summary>
-        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses the <see cref="GenericEqualityComparer{TKey}" />.</returns>
+        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the <see cref="GenericEqualityComparer{TKey}"/>.</returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create()
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(0, new GenericEqualityComparer<TKey>());
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class that is empty,
-        /// has the specified initial capacity, and uses the <see cref="GenericEqualityComparer{TKey}" />.
+        /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class that is empty,
+        /// has the specified initial capacity, and uses the <see cref="GenericEqualityComparer{TKey}"/>.
         /// </summary>
-        /// <param name="capacity">The initial number of elements that the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> can contain.</param>
-        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that has the specified initial capacity,
-        /// and uses the <see cref="GenericEqualityComparer{TKey}" />.</returns>
+        /// <param name="capacity">The initial number of elements that the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> can contain.</param>
+        /// <returns>
+        /// A new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that has the specified initial capacity,
+        /// and uses the <see cref="GenericEqualityComparer{TKey}"/>.
+        /// </returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(int capacity)
         {
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
@@ -39,7 +41,7 @@ namespace Misnomer
     }
 
     /// <summary>
-    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class.
+    /// Provides a set of initialization methods for instances of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
@@ -47,11 +49,11 @@ namespace Misnomer
     {
 #pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
-        /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses the specified comparer.
+        /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the specified comparer.
         /// </summary>
-        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use to compare keys for equality.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use to compare keys for equality.</param>
         /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
-        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that uses the specified comparer" />.</returns>
+        /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the specified comparer" />.</returns>
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(TKeyComparer comparer)
             where TKeyComparer : IEqualityComparer<TKey>
         {
@@ -59,14 +61,16 @@ namespace Misnomer
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> class that is empty,
+        /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class that is empty,
         /// has the specified initial capacity, and uses the specified comparer.
         /// </summary>
-        /// <param name="capacity">The initial number of elements that the <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> can contain.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use to compare keys for equality.</param>
+        /// <param name="capacity">The initial number of elements that the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> can contain.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use to compare keys for equality.</param>
         /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
-        /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}" /> that has the specified initial capacity,
-        /// and uses the specified comparer.</returns>
+        /// <returns>
+        /// A new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that has the specified initial capacity,
+        /// and uses the specified comparer.
+        /// </returns>
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(int capacity, TKeyComparer comparer)
             where TKeyComparer : IEqualityComparer<TKey>
         {
