@@ -3,6 +3,7 @@
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=fictionary/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=prng/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Rist/@EntryIndexedValue">True</s:Boolean>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/MAX_INITIALIZER_ELEMENTS_ON_LINE/@EntryValue">8</s:Int64>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=830B7512_002D9999_002D450A_002D870C_002D02FF7308C410_002Fd_003ASystem_002Ff_003AArraySortHelper_002Ecs/@EntryIndexedValue">830B7512-9999-450A-870C-02FF7308C410/d:System/f:ArraySortHelper.cs</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=830B7512_002D9999_002D450A_002D870C_002D02FF7308C410_002Fd_003ASystem_002Ff_003AICollectionDebugView_002Ecs/@EntryIndexedValue">830B7512-9999-450A-870C-02FF7308C410/d:System/f:ICollectionDebugView.cs</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=830B7512_002D9999_002D450A_002D870C_002D02FF7308C410_002Ff_003AGlobalSuppressions_002Ecs/@EntryIndexedValue">830B7512-9999-450A-870C-02FF7308C410/f:GlobalSuppressions.cs</s:String>
