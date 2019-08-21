@@ -27,9 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{C5FC45
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	.editorconfig = .editorconfig
-	LICENSE.txt = LICENSE.txt
-	README.md = README.md
 	Directory.Build.props = Directory.Build.props
+	LICENSE.txt = LICENSE.txt
+	Misnomer.sln.DotSettings = Misnomer.sln.DotSettings
+	README.md = README.md
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryTest", "tests\Misnomer.FictionaryTest\Misnomer.FictionaryTest.csproj", "{DAA87D39-B0D2-4771-AD36-5D499357A06E}"
