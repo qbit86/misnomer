@@ -77,8 +77,10 @@ namespace Misnomer
         {
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
+            {
                 if (_dictionary.TryGetValue(Trials[i], out int value))
                     result ^= value;
+            }
 
             return result;
         }
@@ -88,8 +90,10 @@ namespace Misnomer
         {
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
+            {
                 if (_fictionaryConcreteValue.TryGetValue(Trials[i], out int value))
                     result ^= value;
+            }
 
             return result;
         }
@@ -99,8 +103,10 @@ namespace Misnomer
         {
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
+            {
                 if (_dictionary.TryGetValue(Trials[i], out int value))
                     result ^= value;
+            }
 
             return result;
         }

@@ -1,27 +1,43 @@
 root = true
 
 [*]
+
+#### Core EditorConfig Options ####
+
 charset = utf-8
-end_of_line = crlf
+
+# Indentation and spacing
 indent_size = 4
 indent_style = space
+
+# New line preferences
+end_of_line = crlf
 insert_final_newline = true
 max_line_length = 120
 trim_trailing_whitespace = true
 
 [*.{csproj,gv,props,shproj}]
+
 indent_size = 2
 
 [*.{sln,sln.DotSettings}]
+
 indent_style = tab
 
 [*.md]
+
 trim_trailing_whitespace = false
 
 [*.cs]
 
 # ReSharper properties
+resharper_align_multiline_binary_expressions_chain = false
 resharper_autodetect_indent_settings = false
+resharper_braces_for_for = required_for_multiline
+resharper_braces_for_foreach = required_for_multiline
+resharper_braces_for_ifelse = required_for_multiline
+resharper_braces_for_while = required_for_multiline
+resharper_csharp_stick_comment = false
 resharper_empty_block_style = together_same_line
 resharper_max_initializer_elements_on_line = 8
 resharper_place_simple_embedded_statement_on_same_line = false
