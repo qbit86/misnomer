@@ -23,9 +23,8 @@ trim_trailing_whitespace = false
 # ReSharper properties
 resharper_autodetect_indent_settings = false
 resharper_empty_block_style = together_same_line
-resharper_for_built_in_types = use_var_when_evident
 resharper_max_initializer_elements_on_line = 8
-resharper_place_simple_embedded_statement_on_same_line = False
+resharper_place_simple_embedded_statement_on_same_line = false
 resharper_space_within_single_line_array_initializer_braces = true
 resharper_xmldoc_indent_child_elements = DoNotTouch
 resharper_xmldoc_indent_text = DoNotTouch
