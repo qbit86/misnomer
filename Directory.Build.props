@@ -8,8 +8,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
-    <AssemblyOriginatorKeyFile>$(RepoRoot)misnomer.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(RepoRoot)assets/misnomer.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
 </Project>
