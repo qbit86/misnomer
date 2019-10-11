@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
+#pragma warning disable CA1825 // Avoid zero-length array allocations
+
 namespace Misnomer
 {
     // Implements a variable-size List that uses an array of objects to store the
