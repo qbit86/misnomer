@@ -1,9 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <RepoRoot>$(MSBuildThisFileDirectory)../</RepoRoot>
-    <PackageIcon>kopimi.png</PackageIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="$(RepoRoot)/assets/kopimi.png" Pack="true" PackagePath=""/>
-  </ItemGroup>
-</Project>

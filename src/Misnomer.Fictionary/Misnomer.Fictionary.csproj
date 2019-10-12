@@ -12,7 +12,11 @@ Provides ToFictionary() extension methods which replace conventional ToDictionar
     <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Fictionary/CHANGELOG.md</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
+    <PackageIcon>kopimi.png</PackageIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(RepoRoot)/assets/kopimi.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
