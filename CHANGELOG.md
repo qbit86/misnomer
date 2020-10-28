@@ -1,8 +1,9 @@
 # Changelog
 
-## [Unreleased] - 2020-10-28
+## [Unreleased] - 2020-10-29
 ### Added
 - Support of `netcoreapp3.0` target platform.
+- Nullable annotation and warning contexts.
 
 ### Changed
 - Set `netstandard1.3` as minimum target platform.
