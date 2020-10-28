@@ -268,10 +268,34 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void IfNullAndNullsAreIllegalThenThrow<T>(object value, ExceptionArgument argName)
         {
-            // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
+            // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
             if (!(default(T) == null) && value == null)
                 ThrowHelper.ThrowArgumentNullException(argName);
         }
+
+        internal static void ThrowNotSupportedExceptionIfNonNumericType<T>()
+        {
+            if (typeof(T) != typeof(byte) && typeof(T) != typeof(sbyte) &&
+                typeof(T) != typeof(short) && typeof(T) != typeof(ushort) &&
+                typeof(T) != typeof(int) && typeof(T) != typeof(uint) &&
+                typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&
+                typeof(T) != typeof(float) && typeof(T) != typeof(double))
+            {
+                throw new NotSupportedException(SR.Arg_TypeNotSupported);
+            }
+        }
+
+#if false // Reflection-based implementation does not work for CoreRT/ProjectN
+        // This function will convert an ExceptionArgument enum value to the argument name string.
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static string GetArgumentName(ExceptionArgument argument)
+        {
+            Debug.Assert(Enum.IsDefined(typeof(ExceptionArgument), argument),
+                "The enum value is not defined, please check the ExceptionArgument Enum.");
+
+            return argument.ToString();
+        }
+#endif
 
         private static string GetArgumentName(ExceptionArgument argument)
         {
@@ -360,6 +384,18 @@ namespace System
                     return "";
             }
         }
+
+#if false // Reflection-based implementation does not work for CoreRT/ProjectN
+        // This function will convert an ExceptionResource enum value to the resource string.
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static string GetResourceString(ExceptionResource resource)
+        {
+            Debug.Assert(Enum.IsDefined(typeof(ExceptionResource), resource),
+                "The enum value is not defined, please check the ExceptionResource Enum.");
+
+            return SR.GetResourceString(resource.ToString());
+        }
+#endif
 
         private static string GetResourceString(ExceptionResource resource)
         {
