@@ -122,3 +122,10 @@ If comparer is of reference type then outcome may vary depending on JIT/platform
 All libraries support [Source Link](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink) for source code debugging. To enable stepping into library methods implementation in Visual Studio 2017 Update 9, select **Enable Source Link support** in debugging options, and clear **Enable Just My Code**. Source code will be automatically downloaded from GitHub on demand.
 
 ![Enable Source Link support](source-link-highlight.png?raw=true)
+
+## License
+
+[![License](https://img.shields.io/github/license/qbit86/misnomer)](LICENSE.txt)
+
+The icon is designed by [OpenMoji](https://openmoji.org) — the open-source emoji and icon project.
+License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
