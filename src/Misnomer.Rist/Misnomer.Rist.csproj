@@ -11,12 +11,7 @@ Provides ToRist() extension method which perfectly replaces conventional ToList(
 MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
     <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
-    <SignAssembly>true</SignAssembly>
-    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="$(RepoRoot)/assets/icon.png" Pack="true" PackagePath=""/>
-  </ItemGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
