@@ -1,14 +1,7 @@
 <Project>
   <PropertyGroup>
-    <Authors>Viktor T.</Authors>
-    <LangVersion>8</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
     <RootNamespace>Misnomer</RootNamespace>
-    <AssemblyOriginatorKeyFile>$(RepoRoot)assets/misnomer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 </Project>

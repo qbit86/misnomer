@@ -1,0 +1,25 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>$(RepoRoot)assets/misnomer.snk</AssemblyOriginatorKeyFile>
+    <ContinuousIntegrationBuild Condition="'$(Configuration)' == 'Release'">true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
+    <InformationalVersion>$(Version)</InformationalVersion>
+    <LangVersion>8</LangVersion>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Viktor T.</Authors>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PackageIcon>kopimi.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(RepoRoot)/assets/kopimi.png" Pack="true" PackagePath="" />
+    <SourceRoot Include="$(RepoRoot)" />
+  </ItemGroup>
+</Project>
