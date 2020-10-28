@@ -4,6 +4,9 @@
 ### Added
 - Support of `netcoreapp3.0` target platform.
 
+### Changed
+- Set `netstandard1.3` as minimum target platform.
+
 ### Removed
 - Support of `netcoreapp1.0` target platform.
 
