@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.
+Enables devirtualization of calls to the key comparer.
+Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
+Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Fictionary/CHANGELOG.md</PackageReleaseNotes>
+    <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
+    <Title>Fast dictionary</Title>
     <VersionPrefix>0.4.0</VersionPrefix>
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyVersion>0.4</AssemblyVersion>
-    <TargetFrameworks>net461;netcoreapp1.0;netstandard1.2;netstandard2.0;netstandard2.1</TargetFrameworks>
     <FileVersion>$(VersionPrefix)</FileVersion>
-    <Title>Fast dictionary</Title>
-    <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.
-Enables devirtualization of calls to the key comparer.
-Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
-Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
-    <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
-    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Fictionary/CHANGELOG.md</PackageReleaseNotes>
+    <TargetFrameworks>netcoreapp1.0;net461;netstandard1.2;netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>

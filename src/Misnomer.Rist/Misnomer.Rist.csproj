@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Description>Indexed collection like usual List&lt;T&gt;, but with less allocations.
+Enables reusing instances of inner array via ArrayPool&lt;T&gt;.Shared.
+Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.
+MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
+    <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
+    <Title>Recyclable list</Title>
     <VersionPrefix>0.4.0</VersionPrefix>
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyVersion>0.4</AssemblyVersion>
-    <TargetFrameworks>net461;netcoreapp1.0;netstandard1.1;netstandard2.0;netstandard2.1</TargetFrameworks>
     <FileVersion>$(VersionPrefix)</FileVersion>
-    <Title>Recyclable list</Title>
-    <Description>Indexed collection like usual List&lt;T&gt;, but with less allocations.
-Enables reusing instances of inner array via ArrayPool&lt;T&gt;.Shared.
-Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.
-MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
-    <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
-    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
+    <TargetFrameworks>netcoreapp1.0;net461;netstandard1.1;netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
