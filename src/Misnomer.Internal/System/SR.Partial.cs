@@ -20,7 +20,6 @@ namespace System
         internal const string Arg_RankIndices = "Indices length does not match the array rank.";
         internal const string Arg_RankMultiDimNotSupported = "Only single dimensional arrays are supported for the requested action.";
         internal const string Arg_RanksAndBounds = "Number of lengths and lowerBounds must match.";
-        internal const string Arg_SystemException = "System error.";
         internal const string Arg_TypeNotSupported = "Specified type is not supported";
         internal const string Arg_WrongType = "The value '{0}' is not of type '{1}' and cannot be used in this generic collection.";
         internal const string Argument_AddingDuplicate = "An item with the same key has already been added. Key: {0}";
@@ -69,7 +68,6 @@ namespace System
         internal const string InvalidOperation_NullArray = "The underlying array is null.";
         internal const string InvalidOperation_WrongAsyncResultOrEndCalledMultiple = "Either the IAsyncResult object did not come from the corresponding async method on this type, or the End method was called multiple times with the same IAsyncResult.";
         internal const string Memory_OutstandingReferences = "Release all references before disposing this instance.";
-        internal const string MemoryDisposed = "Memory<T> has been disposed.";
         internal const string NotSupported_FixedSizeCollection = "Collection was of a fixed size.";
         internal const string NotSupported_KeyCollectionSet = "Mutating a key collection derived from a dictionary is not allowed.";
         internal const string NotSupported_ReadOnlyCollection = "Collection is read-only.";
