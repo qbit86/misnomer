@@ -92,8 +92,9 @@ namespace System
 
         internal static void ThrowArgumentException_DestinationTooShort()
         {
-            throw new ArgumentException(SR.Argument_DestinationTooShort);
+            throw new ArgumentException(SR.Argument_DestinationTooShort, "destination");
         }
+
         internal static void ThrowArgumentException_OverlapAlignmentMismatch()
         {
             throw new ArgumentException(SR.Argument_OverlapAlignmentMismatch);
@@ -109,11 +110,13 @@ namespace System
             throw GetArgumentOutOfRangeException(ExceptionArgument.index,
                                                     ExceptionResource.ArgumentOutOfRange_Index);
         }
+
         internal static void ThrowIndexArgumentOutOfRange_NeedNonNegNumException()
         {
             throw GetArgumentOutOfRangeException(ExceptionArgument.index,
                                                     ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
         }
+
         internal static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
         {
             throw GetArgumentOutOfRangeException(ExceptionArgument.value,
@@ -321,8 +324,20 @@ namespace System
                     return "startIndex";
                 case ExceptionArgument.task:
                     return "task";
+                case ExceptionArgument.bytes:
+                    return "bytes";
+                case ExceptionArgument.byteIndex:
+                    return "byteIndex";
+                case ExceptionArgument.byteCount:
+                    return "byteCount";
                 case ExceptionArgument.ch:
                     return "ch";
+                case ExceptionArgument.chars:
+                    return "chars";
+                case ExceptionArgument.charIndex:
+                    return "charIndex";
+                case ExceptionArgument.charCount:
+                    return "charCount";
                 case ExceptionArgument.s:
                     return "s";
                 case ExceptionArgument.input:
@@ -379,6 +394,84 @@ namespace System
                     return "sourceBytesToCopy";
                 case ExceptionArgument.callBack:
                     return "callBack";
+                case ExceptionArgument.creationOptions:
+                    return "creationOptions";
+                case ExceptionArgument.function:
+                    return "function";
+                case ExceptionArgument.scheduler:
+                    return "scheduler";
+                case ExceptionArgument.continuationAction:
+                    return "continuationAction";
+                case ExceptionArgument.continuationFunction:
+                    return "continuationFunction";
+                case ExceptionArgument.tasks:
+                    return "tasks";
+                case ExceptionArgument.asyncResult:
+                    return "asyncResult";
+                case ExceptionArgument.beginMethod:
+                    return "beginMethod";
+                case ExceptionArgument.endMethod:
+                    return "endMethod";
+                case ExceptionArgument.endFunction:
+                    return "endFunction";
+                case ExceptionArgument.cancellationToken:
+                    return "cancellationToken";
+                case ExceptionArgument.continuationOptions:
+                    return "continuationOptions";
+                case ExceptionArgument.delay:
+                    return "delay";
+                case ExceptionArgument.millisecondsDelay:
+                    return "millisecondsDelay";
+                case ExceptionArgument.millisecondsTimeout:
+                    return "millisecondsTimeout";
+                case ExceptionArgument.stateMachine:
+                    return "stateMachine";
+                case ExceptionArgument.timeout:
+                    return "timeout";
+                case ExceptionArgument.type:
+                    return "type";
+                case ExceptionArgument.sourceIndex:
+                    return "sourceIndex";
+                case ExceptionArgument.sourceArray:
+                    return "sourceArray";
+                case ExceptionArgument.destinationIndex:
+                    return "destinationIndex";
+                case ExceptionArgument.destinationArray:
+                    return "destinationArray";
+                case ExceptionArgument.pHandle:
+                    return "pHandle";
+                case ExceptionArgument.other:
+                    return "other";
+                case ExceptionArgument.newSize:
+                    return "newSize";
+                case ExceptionArgument.lowerBounds:
+                    return "lowerBounds";
+                case ExceptionArgument.lengths:
+                    return "lengths";
+                case ExceptionArgument.len:
+                    return "len";
+                case ExceptionArgument.keys:
+                    return "keys";
+                case ExceptionArgument.indices:
+                    return "indices";
+                case ExceptionArgument.index1:
+                    return "index1";
+                case ExceptionArgument.index2:
+                    return "index2";
+                case ExceptionArgument.index3:
+                    return "index3";
+                case ExceptionArgument.length1:
+                    return "length1";
+                case ExceptionArgument.length2:
+                    return "length2";
+                case ExceptionArgument.length3:
+                    return "length3";
+                case ExceptionArgument.endIndex:
+                    return "endIndex";
+                case ExceptionArgument.elementType:
+                    return "elementType";
+                case ExceptionArgument.arrayIndex:
+                    return "arrayIndex";
                 default:
                     Debug.Fail("The enum value is not defined, please check the ExceptionArgument Enum.");
                     return "";
@@ -403,6 +496,10 @@ namespace System
             {
                 case ExceptionResource.ArgumentOutOfRange_Index:
                     return SR.ArgumentOutOfRange_Index;
+                case ExceptionResource.ArgumentOutOfRange_IndexCount:
+                    return SR.ArgumentOutOfRange_IndexCount;
+                case ExceptionResource.ArgumentOutOfRange_IndexCountBuffer:
+                    return SR.ArgumentOutOfRange_IndexCountBuffer;
                 case ExceptionResource.ArgumentOutOfRange_Count:
                     return SR.ArgumentOutOfRange_Count;
                 case ExceptionResource.Arg_ArrayPlusOffTooSmall:
@@ -493,9 +590,38 @@ namespace System
                     return SR.ArgumentOutOfRange_EndIndexStartIndex;
                 case ExceptionResource.ArgumentOutOfRange_Enum:
                     return SR.ArgumentOutOfRange_Enum;
+                case ExceptionResource.ArgumentOutOfRange_HugeArrayNotSupported:
+                    return SR.ArgumentOutOfRange_HugeArrayNotSupported;
+                case ExceptionResource.Argument_AddingDuplicate:
+                    return SR.Argument_AddingDuplicate;
+                case ExceptionResource.Argument_InvalidArgumentForComparison:
+                    return SR.Argument_InvalidArgumentForComparison;
+                case ExceptionResource.Arg_LowerBoundsMustMatch:
+                    return SR.Arg_LowerBoundsMustMatch;
+                case ExceptionResource.Arg_MustBeType:
+                    return SR.Arg_MustBeType;
+                case ExceptionResource.Arg_Need1DArray:
+                    return SR.Arg_Need1DArray;
+                case ExceptionResource.Arg_Need2DArray:
+                    return SR.Arg_Need2DArray;
+                case ExceptionResource.Arg_Need3DArray:
+                    return SR.Arg_Need3DArray;
+                case ExceptionResource.Arg_NeedAtLeast1Rank:
+                    return SR.Arg_NeedAtLeast1Rank;
+                case ExceptionResource.Arg_RankIndices:
+                    return SR.Arg_RankIndices;
+                case ExceptionResource.Arg_RanksAndBounds:
+                    return SR.Arg_RanksAndBounds;
+                case ExceptionResource.InvalidOperation_IComparerFailed:
+                    return SR.InvalidOperation_IComparerFailed;
+                case ExceptionResource.NotSupported_FixedSizeCollection:
+                    return SR.NotSupported_FixedSizeCollection;
+                case ExceptionResource.Rank_MultiDimNotSupported:
+                    return SR.Rank_MultiDimNotSupported;
+                case ExceptionResource.Arg_TypeNotSupported:
+                    return SR.Arg_TypeNotSupported;
                 default:
-                    Debug.Assert(false,
-                        "The enum value is not defined, please check the ExceptionResource Enum.");
+                    Debug.Fail("The enum value is not defined, please check the ExceptionResource Enum.");
                     return "";
             }
         }
@@ -516,7 +642,13 @@ namespace System
         value,
         startIndex,
         task,
+        bytes,
+        byteIndex,
+        byteCount,
         ch,
+        chars,
+        charIndex,
+        charCount,
         s,
         input,
         ownedMemory,
@@ -563,6 +695,27 @@ namespace System
         stateMachine,
         timeout,
         type,
+        sourceIndex,
+        sourceArray,
+        destinationIndex,
+        destinationArray,
+        pHandle,
+        other,
+        newSize,
+        lowerBounds,
+        lengths,
+        len,
+        keys,
+        indices,
+        index1,
+        index2,
+        index3,
+        length1,
+        length2,
+        length3,
+        endIndex,
+        elementType,
+        arrayIndex,
     }
 
     //
@@ -571,6 +724,8 @@ namespace System
     internal enum ExceptionResource
     {
         ArgumentOutOfRange_Index,
+        ArgumentOutOfRange_IndexCount,
+        ArgumentOutOfRange_IndexCountBuffer,
         ArgumentOutOfRange_Count,
         Arg_ArrayPlusOffTooSmall,
         NotSupported_ReadOnlyCollection,
@@ -616,5 +771,20 @@ namespace System
         ArgumentNull_SafeHandle,
         ArgumentOutOfRange_EndIndexStartIndex,
         ArgumentOutOfRange_Enum,
+        ArgumentOutOfRange_HugeArrayNotSupported,
+        Argument_AddingDuplicate,
+        Argument_InvalidArgumentForComparison,
+        Arg_LowerBoundsMustMatch,
+        Arg_MustBeType,
+        Arg_Need1DArray,
+        Arg_Need2DArray,
+        Arg_Need3DArray,
+        Arg_NeedAtLeast1Rank,
+        Arg_RankIndices,
+        Arg_RanksAndBounds,
+        InvalidOperation_IComparerFailed,
+        NotSupported_FixedSizeCollection,
+        Rank_MultiDimNotSupported,
+        Arg_TypeNotSupported,
     }
 }
