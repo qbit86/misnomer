@@ -409,6 +409,54 @@ namespace System
                     return SR.NotSupported_StringComparison;
                 case ExceptionResource.ConcurrentCollection_SyncRoot_NotSupported:
                     return SR.ConcurrentCollection_SyncRoot_NotSupported;
+                case ExceptionResource.Task_MultiTaskContinuation_NullTask:
+                    return SR.Task_MultiTaskContinuation_NullTask;
+                case ExceptionResource.InvalidOperation_WrongAsyncResultOrEndCalledMultiple:
+                    return SR.InvalidOperation_WrongAsyncResultOrEndCalledMultiple;
+                case ExceptionResource.Task_MultiTaskContinuation_EmptyTaskList:
+                    return SR.Task_MultiTaskContinuation_EmptyTaskList;
+                case ExceptionResource.Task_Start_TaskCompleted:
+                    return SR.Task_Start_TaskCompleted;
+                case ExceptionResource.Task_Start_Promise:
+                    return SR.Task_Start_Promise;
+                case ExceptionResource.Task_Start_ContinuationTask:
+                    return SR.Task_Start_ContinuationTask;
+                case ExceptionResource.Task_Start_AlreadyStarted:
+                    return SR.Task_Start_AlreadyStarted;
+                case ExceptionResource.Task_RunSynchronously_Continuation:
+                    return SR.Task_RunSynchronously_Continuation;
+                case ExceptionResource.Task_RunSynchronously_Promise:
+                    return SR.Task_RunSynchronously_Promise;
+                case ExceptionResource.Task_RunSynchronously_TaskCompleted:
+                    return SR.Task_RunSynchronously_TaskCompleted;
+                case ExceptionResource.Task_RunSynchronously_AlreadyStarted:
+                    return SR.Task_RunSynchronously_AlreadyStarted;
+                case ExceptionResource.AsyncMethodBuilder_InstanceNotInitialized:
+                    return SR.AsyncMethodBuilder_InstanceNotInitialized;
+                case ExceptionResource.Task_ContinueWith_ESandLR:
+                    return SR.Task_ContinueWith_ESandLR;
+                case ExceptionResource.Task_ContinueWith_NotOnAnything:
+                    return SR.Task_ContinueWith_NotOnAnything;
+                case ExceptionResource.Task_Delay_InvalidDelay:
+                    return SR.Task_Delay_InvalidDelay;
+                case ExceptionResource.Task_Delay_InvalidMillisecondsDelay:
+                    return SR.Task_Delay_InvalidMillisecondsDelay;
+                case ExceptionResource.Task_Dispose_NotCompleted:
+                    return SR.Task_Dispose_NotCompleted;
+                case ExceptionResource.Task_ThrowIfDisposed:
+                    return SR.Task_ThrowIfDisposed;
+                case ExceptionResource.Task_WaitMulti_NullTask:
+                    return SR.Task_WaitMulti_NullTask;
+                case ExceptionResource.ArgumentException_OtherNotArrayOfCorrectLength:
+                    return SR.ArgumentException_OtherNotArrayOfCorrectLength;
+                case ExceptionResource.ArgumentNull_Array:
+                    return SR.ArgumentNull_Array;
+                case ExceptionResource.ArgumentNull_SafeHandle:
+                    return SR.ArgumentNull_SafeHandle;
+                case ExceptionResource.ArgumentOutOfRange_EndIndexStartIndex:
+                    return SR.ArgumentOutOfRange_EndIndexStartIndex;
+                case ExceptionResource.ArgumentOutOfRange_Enum:
+                    return SR.ArgumentOutOfRange_Enum;
                 default:
                     Debug.Assert(false,
                         "The enum value is not defined, please check the ExceptionResource Enum.");
@@ -419,7 +467,7 @@ namespace System
 
     //
     // The convention for this enum is using the argument name as the enum name
-    // 
+    //
     internal enum ExceptionArgument
     {
         obj,
@@ -460,12 +508,30 @@ namespace System
         comparisonType,
         manager,
         sourceBytesToCopy,
-        callBack
+        callBack,
+        creationOptions,
+        function,
+        scheduler,
+        continuationAction,
+        continuationFunction,
+        tasks,
+        asyncResult,
+        beginMethod,
+        endMethod,
+        endFunction,
+        cancellationToken,
+        continuationOptions,
+        delay,
+        millisecondsDelay,
+        millisecondsTimeout,
+        stateMachine,
+        timeout,
+        type,
     }
 
     //
     // The convention for this enum is using the resource name as the enum name
-    // 
+    //
     internal enum ExceptionResource
     {
         ArgumentOutOfRange_Index,
@@ -490,5 +556,29 @@ namespace System
         TaskCompletionSourceT_TrySetException_NoExceptions,
         NotSupported_StringComparison,
         ConcurrentCollection_SyncRoot_NotSupported,
+        Task_MultiTaskContinuation_NullTask,
+        InvalidOperation_WrongAsyncResultOrEndCalledMultiple,
+        Task_MultiTaskContinuation_EmptyTaskList,
+        Task_Start_TaskCompleted,
+        Task_Start_Promise,
+        Task_Start_ContinuationTask,
+        Task_Start_AlreadyStarted,
+        Task_RunSynchronously_Continuation,
+        Task_RunSynchronously_Promise,
+        Task_RunSynchronously_TaskCompleted,
+        Task_RunSynchronously_AlreadyStarted,
+        AsyncMethodBuilder_InstanceNotInitialized,
+        Task_ContinueWith_ESandLR,
+        Task_ContinueWith_NotOnAnything,
+        Task_Delay_InvalidDelay,
+        Task_Delay_InvalidMillisecondsDelay,
+        Task_Dispose_NotCompleted,
+        Task_ThrowIfDisposed,
+        Task_WaitMulti_NullTask,
+        ArgumentException_OtherNotArrayOfCorrectLength,
+        ArgumentNull_Array,
+        ArgumentNull_SafeHandle,
+        ArgumentOutOfRange_EndIndexStartIndex,
+        ArgumentOutOfRange_Enum,
     }
 }
