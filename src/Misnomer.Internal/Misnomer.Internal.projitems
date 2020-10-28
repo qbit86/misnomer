@@ -9,6 +9,7 @@
     <Import_RootNamespace>Misnomer.Internal</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)System\NullableAttributes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\SR.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\SR.Partial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\StackTraceHiddenAttribute.cs" />
