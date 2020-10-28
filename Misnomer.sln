@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistBenchmark", "benchmarks\Misnomer.RistBenchmark\Misnomer.RistBenchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	.editorconfig = .editorconfig
