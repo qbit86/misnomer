@@ -356,7 +356,7 @@ namespace System
                 case ExceptionArgument.callBack:
                     return "callBack";
                 default:
-                    Debug.WriteLine("The enum value is not defined, please check the ExceptionArgument Enum.");
+                    Debug.Fail("The enum value is not defined, please check the ExceptionArgument Enum.");
                     return "";
             }
         }
