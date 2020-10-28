@@ -56,6 +56,7 @@ namespace System
         internal const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
         internal const string InvalidOperation_EnumOpCantHappen = "Enumeration has either not started or has already finished.";
         internal const string InvalidOperation_HandleIsNotInitialized = "Handle is not initialized.";
+        internal const string InvalidOperation_HandleIsNotPinned = "Handle is not pinned.";
         internal const string InvalidOperation_IComparerFailed = "Failed to compare two elements in the array.";
         internal const string InvalidOperation_NoValue = "Nullable object must have a value.";
         internal const string InvalidOperation_NullArray = "The underlying array is null.";
