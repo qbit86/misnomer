@@ -112,7 +112,7 @@ namespace Misnomer
                         T[] newItems = Pool.Rent(value);
                         if (_size > 0)
                         {
-                            Array.Copy(_items, 0, newItems, 0, _size);
+                            Array.Copy(_items, newItems, _size);
                         }
 
                         T[] oldItems = _items;
@@ -171,15 +171,12 @@ namespace Misnomer
         {
             // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
             // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
-            return ((value is T) || (value == null && default(T) == null));
+            return (value is T) || (value == null && default(T) == null);
         }
 
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get => this[index];
             set
             {
                 ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(value, ExceptionArgument.value);
@@ -1038,7 +1035,7 @@ namespace Misnomer
             }
 
             T[] array = new T[_size];
-            Array.Copy(_items, 0, array, 0, _size);
+            Array.Copy(_items, array, _size);
             return array;
         }
 
