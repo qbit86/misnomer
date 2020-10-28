@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <VersionPrefix>0.4.0</VersionPrefix>
+    <VersionSuffix>preview</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyVersion>0.4</AssemblyVersion>
     <TargetFrameworks>net461;netcoreapp1.0;netstandard1.2;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <AssemblyVersion>0.2</AssemblyVersion>
-    <VersionPrefix>0.2.0</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Title>Fast dictionary</Title>
     <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.

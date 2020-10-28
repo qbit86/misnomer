@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <VersionPrefix>0.4.0</VersionPrefix>
+    <VersionSuffix>preview</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyVersion>0.4</AssemblyVersion>
     <TargetFrameworks>net461;netcoreapp1.0;netstandard1.1;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <AssemblyVersion>0.3</AssemblyVersion>
-    <VersionPrefix>0.3.0</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Title>Recyclable list</Title>
     <Description>Indexed collection like usual List&lt;T&gt;, but with less allocations.
