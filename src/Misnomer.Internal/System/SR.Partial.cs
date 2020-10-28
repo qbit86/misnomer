@@ -1,6 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
-﻿namespace System
+namespace System
 {
     // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/src/Resources/Strings.resx
 
@@ -13,8 +13,10 @@
         internal const string Arg_NonZeroLowerBound = "The lower bound of target array must be zero.";
         internal const string Arg_RankMultiDimNotSupported = "Only single dimensional arrays are supported for the requested action.";
         internal const string Arg_SystemException = "System error.";
+        internal const string Arg_TypeNotSupported = "Specified type is not supported";
         internal const string Arg_WrongType = "The value '{0}' is not of type '{1}' and cannot be used in this generic collection.";
         internal const string Argument_AddingDuplicate = "An item with the same key has already been added. Key: {0}";
+        internal const string Argument_AddingDuplicateWithKey = "An item with the same key has already been added. Key: {0}";
         internal const string Argument_BadFormatSpecifier = "Format specifier was invalid.";
         internal const string Argument_CannotExtractScalar = "Cannot extract a Unicode scalar value from the specified index in the input.";
         internal const string Argument_DestinationTooShort = "Destination is too short.";
@@ -22,6 +24,7 @@
         internal const string Argument_InvalidOffLen = "Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.";
         internal const string Argument_InvalidTypeWithPointersNotSupported = "Cannot use type '{0}'. Only value types without pointers or references are supported.";
         internal const string Argument_OverlapAlignmentMismatch = "Overlapping spans have mismatching alignment.";
+        internal const string Argument_PrecisionTooLarge = "Precision cannot be larger than {0}.";
         internal const string ArgumentOutOfRange_BiggerThanCollection = "Must be less than or equal to the size of the collection.";
         internal const string ArgumentOutOfRange_Count = "Count must be positive and count must refer to a location within the string/array/collection.";
         internal const string ArgumentOutOfRange_Index = "Index was out of range. Must be non-negative and less than the size of the collection.";
@@ -34,6 +37,7 @@
         internal const string InvalidOperation_EnumFailedVersion = "Collection was modified; enumeration operation may not execute.";
         internal const string InvalidOperation_EnumNotStarted = "Enumeration has not started. Call MoveNext.";
         internal const string InvalidOperation_EnumOpCantHappen = "Enumeration has either not started or has already finished.";
+        internal const string InvalidOperation_HandleIsNotInitialized = "Handle is not initialized.";
         internal const string InvalidOperation_IComparerFailed = "Failed to compare two elements in the array.";
         internal const string InvalidOperation_NoValue = "Nullable object must have a value.";
         internal const string InvalidOperation_NullArray = "The underlying array is null.";
