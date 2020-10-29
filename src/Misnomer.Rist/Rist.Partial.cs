@@ -14,8 +14,6 @@ namespace Misnomer
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     public sealed partial class Rist<T> : IDisposable
     {
-        private const int MaxArrayLength = 0X7FEFFFFF;
-
         private static ArrayPool<T> Pool => ArrayPool<T>.Shared;
 
         /// <summary>
