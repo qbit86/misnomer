@@ -261,7 +261,7 @@ namespace Misnomer
             {
                 for (int i = 0; i < _count; i++)
                 {
-                    if (entries[i].hashCode >= 0 && entries[i].value == null) return true;
+                    if (entries[i].next >= -1 && entries[i].value == null) return true;
                 }
             }
             else
@@ -271,7 +271,7 @@ namespace Misnomer
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     for (int i = 0; i < _count; i++)
                     {
-                        if (entries[i].hashCode >= 0 && EqualityComparer<TValue>.Default.Equals(entries[i].value, value)) return true;
+                        if (entries[i].next >= -1 && EqualityComparer<TValue>.Default.Equals(entries[i].value, value)) return true;
                     }
                 }
                 else
@@ -282,7 +282,7 @@ namespace Misnomer
                     EqualityComparer<TValue> defaultComparer = EqualityComparer<TValue>.Default;
                     for (int i = 0; i < _count; i++)
                     {
-                        if (entries[i].hashCode >= 0 && defaultComparer.Equals(entries[i].value, value)) return true;
+                        if (entries[i].next >= -1 && defaultComparer.Equals(entries[i].value, value)) return true;
                     }
                 }
             }
