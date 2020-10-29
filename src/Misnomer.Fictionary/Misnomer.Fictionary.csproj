@@ -15,7 +15,6 @@ Provides ToFictionary() extension methods which replace conventional ToDictionar
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyVersion>0.4</AssemblyVersion>
     <FileVersion>$(VersionPrefix)</FileVersion>
-    <Nullable>enable</Nullable>
     <TargetFrameworks>netcoreapp2.0;netcoreapp3.0;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">

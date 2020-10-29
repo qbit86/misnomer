@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
