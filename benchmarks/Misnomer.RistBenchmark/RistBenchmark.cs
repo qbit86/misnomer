@@ -17,7 +17,7 @@ namespace Misnomer
             where TListPolicy : IListPolicy<TList>
         {
             Debug.Assert(list != null);
-            list.Add(0);
+            list!.Add(0);
 
             const int start = 255;
 
