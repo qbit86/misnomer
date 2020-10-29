@@ -14,7 +14,7 @@ namespace Misnomer
 
         private static ImmutableArray<KeyValuePair<int, string>> s_sampleItems;
 
-        private static ImmutableDictionary<int, string> s_sampleDictionary;
+        private static ImmutableDictionary<int, string>? s_sampleDictionary;
 
         private static double ScaleFactor { get; } = 1.0;
 
@@ -24,7 +24,7 @@ namespace Misnomer
             s_sampleItems.IsDefault ? s_sampleItems = CreateSampleItems() : s_sampleItems;
 
         private static ImmutableDictionary<int, string> SampleDictionary =>
-            s_sampleDictionary ?? (s_sampleDictionary = CreateSampleDictionary());
+            s_sampleDictionary ??= CreateSampleDictionary();
 
         private static double Geometric(int i)
         {
@@ -198,8 +198,8 @@ namespace Misnomer
             for (int i = 0; i != count; ++i)
             {
                 int key = SampleItems[i].Key * (i % 2 == 0 ? 1 : -1);
-                bool removedFromDictionary = dictionary.Remove(key, out string dictionaryValue);
-                bool removedFromFictionary = fictionary.Remove(key, out string fictionaryValue);
+                bool removedFromDictionary = dictionary.Remove(key, out string? dictionaryValue);
+                bool removedFromFictionary = fictionary.Remove(key, out string? fictionaryValue);
 
                 Assert.Equal(removedFromDictionary, removedFromFictionary);
                 Assert.Equal(dictionaryValue, fictionaryValue);
@@ -252,15 +252,15 @@ namespace Misnomer
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
             {
                 {
-                    bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string dictionaryValue);
-                    bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string fictionaryValue);
+                    bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string? dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string? fictionaryValue);
 
                     Assert.Equal(foundInDictionary, foundInFictionary);
                     Assert.Equal(dictionaryValue, fictionaryValue);
                 }
                 {
-                    bool foundInDictionary = dictionary.TryGetValue(-kv.Key, out string dictionaryValue);
-                    bool foundInFictionary = fictionary.TryGetValue(-kv.Key, out string fictionaryValue);
+                    bool foundInDictionary = dictionary.TryGetValue(-kv.Key, out string? dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(-kv.Key, out string? fictionaryValue);
 
                     Assert.Equal(foundInDictionary, foundInFictionary);
                     Assert.Equal(dictionaryValue, fictionaryValue);
