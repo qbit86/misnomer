@@ -11,15 +11,9 @@ namespace Misnomer
         internal static OrdinalStringComparerObject Default { get; } = new OrdinalStringComparerObject();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(string x, string y)
-        {
-            return string.Equals(x, y, StringComparison.Ordinal);
-        }
+        public bool Equals(string? x, string? y) => string.Equals(x, y, StringComparison.Ordinal);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(string obj)
-        {
-            return obj?.GetHashCode() ?? 0;
-        }
+        public int GetHashCode(string obj) => obj.GetHashCode();
     }
 }

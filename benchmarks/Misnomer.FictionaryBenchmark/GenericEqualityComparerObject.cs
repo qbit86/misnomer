@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Misnomer
@@ -12,18 +13,15 @@ namespace Misnomer
         internal static GenericEqualityComparerObject<T> Default { get; } = new GenericEqualityComparerObject<T>();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(T x, T y)
+        public bool Equals([AllowNull] T x, [AllowNull] T y)
         {
-            if (y == null)
-                return x == null;
+            if (x is null || y is null)
+                return x is null && y is null;
 
-            return y.Equals(x);
+            return x.Equals(y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(T obj)
-        {
-            return obj?.GetHashCode() ?? 0;
-        }
+        public int GetHashCode(T obj) => obj.GetHashCode();
     }
 }
