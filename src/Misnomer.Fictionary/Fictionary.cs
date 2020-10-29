@@ -301,7 +301,7 @@ namespace Misnomer
             }
 
             info.AddValue(VersionName, _version);
-            info.AddValue(ComparerName, _comparer, typeof(TKeyComparer));
+            info.AddValue(ComparerName, Comparer, typeof(TKeyComparer));
             info.AddValue(HashSizeName, _buckets == null ? 0 : _buckets.Length); // This is the length of the bucket array
 
             if (_buckets != null)
@@ -698,8 +698,7 @@ namespace Misnomer
                 {
                     if (entries[i].next >= -1)
                     {
-                        Debug.Assert(_comparer == null);
-                        entries[i].hashCode = (uint)entries[i].key.GetHashCode();
+                        entries[i].hashCode = (uint)_comparer.GetHashCode(entries[i].key);
                     }
                 }
             }
