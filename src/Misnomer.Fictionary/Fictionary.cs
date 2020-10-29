@@ -51,7 +51,7 @@ namespace Misnomer
 
         private int[]? _buckets;
         private Entry[]? _entries;
-#if BIT64
+#if TARGET_64BIT
         private ulong _fastModMultiplier;
 #endif
         private int _count;
@@ -83,14 +83,13 @@ namespace Misnomer
         {
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
-
-            if (comparer == null)
+            if (comparer != null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
+                _comparer = comparer;
             }
             else
             {
-                _comparer = comparer;
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
             }
         }
 
@@ -253,7 +252,7 @@ namespace Misnomer
             }
             else
             {
-                if (default(TValue)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                if (typeof(TValue).IsValueType)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     for (int i = 0; i < _count; i++)
@@ -264,7 +263,7 @@ namespace Misnomer
                 else
                 {
                     // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize
-                    // https://github.com/dotnet/coreclr/issues/17273
+                    // https://github.com/dotnet/runtime/issues/10050
                     // So cache in a local rather than get EqualityComparer per loop iteration
                     EqualityComparer<TValue> defaultComparer = EqualityComparer<TValue>.Default;
                     for (int i = 0; i < _count; i++)
@@ -347,7 +346,7 @@ namespace Misnomer
                     int i = GetBucket(hashCode);
                     Entry[]? entries = _entries;
                     uint collisionCount = 0;
-                    if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                    if (typeof(TKey).IsValueType)
                     {
                         // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
 
@@ -355,7 +354,7 @@ namespace Misnomer
                         i--;
                         do
                         {
-                            // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                            // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                             // Test in if to drop range check for following array access
                             if ((uint)i >= (uint)entries.Length)
                             {
@@ -379,7 +378,7 @@ namespace Misnomer
                     else
                     {
                         // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize
-                        // https://github.com/dotnet/coreclr/issues/17273
+                        // https://github.com/dotnet/runtime/issues/10050
                         // So cache in a local rather than get EqualityComparer per loop iteration
                         EqualityComparer<TKey> defaultComparer = EqualityComparer<TKey>.Default;
 
@@ -387,7 +386,7 @@ namespace Misnomer
                         i--;
                         do
                         {
-                            // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                            // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                             // Test in if to drop range check for following array access
                             if ((uint)i >= (uint)entries.Length)
                             {
@@ -419,7 +418,7 @@ namespace Misnomer
                     i--;
                     do
                     {
-                        // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                        // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                         // Test in if to drop range check for following array access
                         if ((uint)i >= (uint)entries.Length)
                         {
@@ -463,7 +462,7 @@ namespace Misnomer
 
             // Assign member variables after both arrays allocated to guard against corruption from OOM if second fails
             _freeList = -1;
-#if BIT64
+#if TARGET_64BIT
             _fastModMultiplier = HashHelpers.GetFastModMultiplier((uint)size);
 #endif
             _buckets = buckets;
@@ -498,12 +497,12 @@ namespace Misnomer
 
             if (comparer == null)
             {
-                if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                if (typeof(TKey).IsValueType)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     while (true)
                     {
-                        // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                        // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                         // Test uint in if rather than loop condition to drop range check for following array access
                         if ((uint)i >= (uint)entries.Length)
                         {
@@ -515,7 +514,6 @@ namespace Misnomer
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i].value = value;
-                                _version++;
                                 return true;
                             }
 
@@ -541,12 +539,12 @@ namespace Misnomer
                 else
                 {
                     // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize
-                    // https://github.com/dotnet/coreclr/issues/17273
+                    // https://github.com/dotnet/runtime/issues/10050
                     // So cache in a local rather than get EqualityComparer per loop iteration
                     EqualityComparer<TKey> defaultComparer = EqualityComparer<TKey>.Default;
                     while (true)
                     {
-                        // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                        // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                         // Test uint in if rather than loop condition to drop range check for following array access
                         if ((uint)i >= (uint)entries.Length)
                         {
@@ -558,7 +556,6 @@ namespace Misnomer
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
                                 entries[i].value = value;
-                                _version++;
                                 return true;
                             }
 
@@ -586,7 +583,7 @@ namespace Misnomer
             {
                 while (true)
                 {
-                    // Should be a while loop https://github.com/dotnet/coreclr/issues/15476
+                    // Should be a while loop https://github.com/dotnet/runtime/issues/9422
                     // Test uint in if rather than loop condition to drop range check for following array access
                     if ((uint)i >= (uint)entries.Length)
                     {
@@ -598,7 +595,6 @@ namespace Misnomer
                         if (behavior == InsertionBehavior.OverwriteExisting)
                         {
                             entries[i].value = value;
-                            _version++;
                             return true;
                         }
 
@@ -713,16 +709,16 @@ namespace Misnomer
         private void Resize(int newSize, bool forceNewHashCodes)
         {
             // Value types never rehash
-            Debug.Assert(!forceNewHashCodes || default(TKey)! == null); // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+            Debug.Assert(!forceNewHashCodes || !typeof(TKey).IsValueType);
             Debug.Assert(_entries != null, "_entries should be non-null");
             Debug.Assert(newSize >= _entries.Length);
 
             Entry[] entries = Pool.Rent(newSize);
 
             int count = _count;
-            Array.Copy(_entries, 0, entries, 0, count);
+            Array.Copy(_entries, entries, count);
 
-            if (default(TKey)! == null && forceNewHashCodes) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+            if (!typeof(TKey).IsValueType && forceNewHashCodes)
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -736,7 +732,7 @@ namespace Misnomer
 
             // Assign member variables after both arrays allocated to guard against corruption from OOM if second fails
             _buckets = new int[newSize];
-#if BIT64
+#if TARGET_64BIT
             _fastModMultiplier = HashHelpers.GetFastModMultiplier((uint)newSize);
 #endif
             for (int i = 0; i < count; i++)
@@ -1160,7 +1156,7 @@ namespace Misnomer
         private ref int GetBucket(uint hashCode)
         {
             int[] buckets = _buckets!;
-#if BIT64
+#if TARGET_64BIT
             return ref buckets[HashHelpers.FastMod(hashCode, (uint)buckets.Length, _fastModMultiplier)];
 #else
             return ref buckets[hashCode % (uint)buckets.Length];
@@ -1185,7 +1181,7 @@ namespace Misnomer
                 _version = dictionary._version;
                 _index = 0;
                 _getEnumeratorRetType = getEnumeratorRetType;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
             }
 
             public bool MoveNext()
@@ -1209,7 +1205,7 @@ namespace Misnomer
                 }
 
                 _index = _dictionary._count + 1;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
                 return false;
             }
 
@@ -1247,7 +1243,7 @@ namespace Misnomer
                 }
 
                 _index = 0;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
             }
 
             DictionaryEntry IDictionaryEnumerator.Entry
