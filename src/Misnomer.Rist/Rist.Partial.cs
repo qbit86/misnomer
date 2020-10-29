@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Misnomer
 {
-    // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs
+    // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs
 
     /// <summary>
     /// Represents a recyclable list of objects that can be accessed by index.
