@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace Misnomer
 {
@@ -33,7 +34,8 @@ namespace Misnomer
 
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    public partial class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
+    [Serializable]
+    public partial class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>, ISerializable, IDeserializationCallback
     {
         private struct Entry
         {
@@ -121,6 +123,14 @@ namespace Misnomer
             {
                 Add(pair.Key, pair.Value);
             }
+        }
+
+        protected Fictionary(SerializationInfo info, StreamingContext context)
+        {
+            // We can't do anything with the keys and values until the entire graph has been deserialized
+            // and we have a resonable estimate that GetHashCode is not going to fail.  For the time being,
+            // we'll just cache this.  The graph is not valid until OnDeserialization has been called.
+            HashHelpers.SerializationInfoTable.Add(this, info);
         }
 
         public TKeyComparer Comparer
@@ -322,6 +332,25 @@ namespace Misnomer
 
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
             => new Enumerator(this, Enumerator.KeyValuePair);
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.info);
+            }
+
+            info.AddValue(VersionName, _version);
+            info.AddValue(ComparerName, _comparer, typeof(TKeyComparer));
+            info.AddValue(HashSizeName, _buckets == null ? 0 : _buckets.Length); // This is the length of the bucket array
+
+            if (_buckets != null)
+            {
+                var array = new KeyValuePair<TKey, TValue>[Count];
+                CopyTo(array, 0);
+                info.AddValue(KeyValuePairsName, array, typeof(KeyValuePair<TKey, TValue>[]));
+            }
+        }
 
         private int FindEntry(TKey key)
         {
@@ -616,6 +645,11 @@ namespace Misnomer
             _version++;
 
             return true;
+        }
+
+        public void OnDeserialization(object sender)
+        {
+            throw new NotSupportedException();
         }
 
         private void Resize()
