@@ -11,7 +11,7 @@ namespace Misnomer
         {
             IEnumerable<FileInfo> currentDirFiles =
                 new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles();
-            Fictionary<string, FileInfo, OrdinalStringComparer> fictionary = currentDirFiles
+            using Fictionary<string, FileInfo, OrdinalStringComparer> fictionary = currentDirFiles
                 .ToFictionary(fi => fi.Name, new OrdinalStringComparer());
 
             IEnumerable<FileInfo> userDirFiles =
@@ -25,8 +25,6 @@ namespace Misnomer
             Console.WriteLine();
             if (fictionary.TryGetValue(".gitconfig", out FileInfo value))
                 Console.WriteLine($"{value.Name}: {value.Length} bytes");
-
-            fictionary.Dispose();
         }
     }
 }
