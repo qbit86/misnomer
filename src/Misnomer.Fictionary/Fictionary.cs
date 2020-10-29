@@ -73,9 +73,13 @@ namespace Misnomer
             if (capacity > 0) Initialize(capacity);
 
             if (comparer == null)
+            {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
-
-            _comparer = comparer;
+            }
+            else
+            {
+                _comparer = comparer;
+            }
         }
 
         public Fictionary(IDictionary<TKey, TValue> dictionary, TKeyComparer comparer) :
@@ -649,6 +653,15 @@ namespace Misnomer
 
         public void OnDeserialization(object sender)
         {
+            HashHelpers.SerializationInfoTable.TryGetValue(this, out SerializationInfo siInfo);
+
+            if (siInfo == null)
+            {
+                // We can return immediately if this function is called twice.
+                // Note we remove the serialization info from the table at the end of this method.
+                return;
+            }
+
             throw new NotSupportedException();
         }
 
