@@ -6,9 +6,7 @@
 - Nullable annotation and warning contexts.
 
 ### Changed
-- Set `netstandard1.3` as minimum target platform.
-
-### Removed
-- Support of `netcoreapp1.0` target platform.
+- Rist: Set `netstandard1.3` as minimum target platform.
+- Fictionary: Set `netstandard2.0` as minimum target platform.
 
 [Unreleased]: https://github.com/qbit86/misnomer/compare/fictionary-0.2.0...HEAD
