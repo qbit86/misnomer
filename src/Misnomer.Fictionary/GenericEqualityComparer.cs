@@ -4,7 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace Misnomer
 {
-    // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/EqualityComparer.cs
+    // https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/EqualityComparer.cs
+
 #pragma warning disable CA1815, CA2231
     /// <summary>
     /// Compares two objects for equivalence by invoking the implementation of the <see cref="IEquatable{T}.Equals(T)"/>.
