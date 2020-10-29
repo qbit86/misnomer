@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Runtime.CompilerServices;
 
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix
 
