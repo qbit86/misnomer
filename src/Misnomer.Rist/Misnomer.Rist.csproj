@@ -5,7 +5,7 @@ Enables reusing instances of inner array via ArrayPool&lt;T&gt;.Shared.
 Provides ToRist() extension method which perfectly replaces conventional ToList() for materializing LINQ queries.
 MoveToArray() method releases ownership of internal buffer, so can be used as “array builder”.</Description>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Rist/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <Title>Recyclable list</Title>
     <VersionPrefix>0.4.0</VersionPrefix>
