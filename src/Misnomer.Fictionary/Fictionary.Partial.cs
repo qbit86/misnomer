@@ -79,7 +79,7 @@ namespace Misnomer
 #pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
-    // https://github.com/dotnet/runtime/blob/e9b7afc2d67f42e1bfeabf6f67421290e614b97a/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs
+    // https://github.com/dotnet/runtime/blob/82f2e7b0e6d03c0f5848a046cc1beafd0b329186/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs
 
     // ReSharper disable UnusedTypeParameter
     /// <summary>
