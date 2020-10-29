@@ -9,8 +9,10 @@ namespace Misnomer
     {
         private static void Main()
         {
-            Rist<string> rist = Directory.EnumerateDirectories(".").ToRist();
+            using Rist<string> rist = Directory.EnumerateDirectories(".").ToRist();
             rist.AddRange(Directory.EnumerateFiles("."));
+            rist.Sort((left, right) => string.CompareOrdinal(right, left));
+
             foreach (string item in rist)
                 Console.WriteLine(item);
 
@@ -23,8 +25,6 @@ namespace Misnomer
             int capacity = rist.Capacity;
             Debug.Assert(capacity == 0);
             Console.WriteLine($"{nameof(capacity)}: {capacity}");
-
-            rist.Dispose();
         }
     }
 }
