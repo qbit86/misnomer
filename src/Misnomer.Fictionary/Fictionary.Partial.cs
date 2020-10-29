@@ -79,7 +79,7 @@ namespace Misnomer
 #pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
-    // https://github.com/dotnet/runtime/blob/7210b177874cc8d2958a6448978c321e9d756c3a/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs
+    // https://github.com/dotnet/runtime/blob/1fddb020356e982f13195da9dd6dfc34ac2b03f1/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs
 
     // ReSharper disable UnusedTypeParameter
     /// <summary>
@@ -91,7 +91,7 @@ namespace Misnomer
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
     public sealed partial class Fictionary<TKey, TValue, TKeyComparer> : IDisposable
-        where TKeyComparer : IEqualityComparer<TKey>
+        where TKeyComparer : IEqualityComparer<TKey> where TKey : notnull
     {
         private static ArrayPool<Entry> Pool => ArrayPool<Entry>.Shared;
 
