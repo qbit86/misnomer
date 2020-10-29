@@ -81,7 +81,7 @@ namespace Misnomer
             {
                 _size = 0;
                 _items = s_emptyArray;
-                using (IEnumerator<T> en = collection.GetEnumerator())
+                using (IEnumerator<T> en = collection!.GetEnumerator())
                 {
                     while (en.MoveNext())
                     {
@@ -167,14 +167,14 @@ namespace Misnomer
             }
         }
 
-        private static bool IsCompatibleObject(object value)
+        private static bool IsCompatibleObject(object? value)
         {
             // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
             // Note that default(T) is not equal to null for value types except when T is Nullable<U>.
             return (value is T) || (value == null && default(T) == null);
         }
 
-        object IList.this[int index]
+        object? IList.this[int index]
         {
             get => this[index];
             set
@@ -183,7 +183,7 @@ namespace Misnomer
 
                 try
                 {
-                    this[index] = (T)value;
+                    this[index] = (T)value!;
                 }
                 catch (InvalidCastException)
                 {
@@ -223,13 +223,13 @@ namespace Misnomer
             _items[size] = item;
         }
 
-        int IList.Add(object item)
+        int IList.Add(object? item)
         {
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(item, ExceptionArgument.item);
 
             try
             {
-                Add((T)item);
+                Add((T)item!);
             }
             catch (InvalidCastException)
             {
@@ -269,7 +269,7 @@ namespace Misnomer
         // The method uses the Array.BinarySearch method to perform the
         // search.
         //
-        public int BinarySearch(int index, int count, T item, IComparer<T> comparer)
+        public int BinarySearch(int index, int count, T item, IComparer<T>? comparer)
         {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
@@ -284,7 +284,7 @@ namespace Misnomer
         public int BinarySearch(T item)
             => BinarySearch(0, Count, item, null);
 
-        public int BinarySearch(T item, IComparer<T> comparer)
+        public int BinarySearch(T item, IComparer<T>? comparer)
             => BinarySearch(0, Count, item, comparer);
 
         // Clears the contents of List.
@@ -324,11 +324,11 @@ namespace Misnomer
             return _size != 0 && IndexOf(item) != -1;
         }
 
-        bool IList.Contains(object item)
+        bool IList.Contains(object? item)
         {
             if (IsCompatibleObject(item))
             {
-                return Contains((T)item);
+                return Contains((T)item!);
             }
             return false;
         }
@@ -366,7 +366,7 @@ namespace Misnomer
             try
             {
                 // Array.Copy will check for NULL.
-                Array.Copy(_items, 0, array, arrayIndex, _size);
+                Array.Copy(_items, 0, array!, arrayIndex, _size);
             }
             catch (ArrayTypeMismatchException)
             {
@@ -616,11 +616,11 @@ namespace Misnomer
         public int IndexOf(T item)
             => Array.IndexOf(_items, item, 0, _size);
 
-        int IList.IndexOf(object item)
+        int IList.IndexOf(object? item)
         {
             if (IsCompatibleObject(item))
             {
-                return IndexOf((T)item);
+                return IndexOf((T)item!);
             }
             return -1;
         }
@@ -682,13 +682,13 @@ namespace Misnomer
             _version++;
         }
 
-        void IList.Insert(int index, object item)
+        void IList.Insert(int index, object? item)
         {
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(item, ExceptionArgument.item);
 
             try
             {
-                Insert(index, (T)item);
+                Insert(index, (T)item!);
             }
             catch (InvalidCastException)
             {
@@ -841,11 +841,11 @@ namespace Misnomer
             return false;
         }
 
-        void IList.Remove(object item)
+        void IList.Remove(object? item)
         {
             if (IsCompatibleObject(item))
             {
-                Remove((T)item);
+                Remove((T)item!);
             }
         }
 
@@ -903,7 +903,7 @@ namespace Misnomer
             }
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
-                _items[_size] = default;
+                _items[_size] = default!;
             }
             _version++;
         }
@@ -978,7 +978,7 @@ namespace Misnomer
 
         // Sorts the elements in this list.  Uses Array.Sort with the
         // provided comparer.
-        public void Sort(IComparer<T> comparer)
+        public void Sort(IComparer<T>? comparer)
             => Sort(0, Count, comparer);
 
         // Sorts the elements in a section of this list. The sort compares the
@@ -989,7 +989,7 @@ namespace Misnomer
         //
         // This method uses the Array.Sort method to sort the elements.
         //
-        public void Sort(int index, int count, IComparer<T> comparer)
+        public void Sort(int index, int count, IComparer<T>? comparer)
         {
             if (index < 0)
             {
@@ -1118,9 +1118,9 @@ namespace Misnomer
                 return false;
             }
 
-            public T Current => _current;
+            public T Current => _current!;
 
-            object IEnumerator.Current
+            object? IEnumerator.Current
             {
                 get
                 {
