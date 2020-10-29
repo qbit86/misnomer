@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+
 // This file defines an internal class used to throw exceptions in BCL code.
 // The main purpose is to reduce code size.
 //
@@ -37,6 +38,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace System
 {
@@ -272,6 +274,12 @@ namespace System
         internal static void ThrowInvalidOperationException(ExceptionResource resource, Exception e)
         {
             throw new InvalidOperationException(GetResourceString(resource), e);
+        }
+
+        [DoesNotReturn]
+        internal static void ThrowSerializationException(ExceptionResource resource)
+        {
+            throw new SerializationException(GetResourceString(resource));
         }
 
         [DoesNotReturn]
