@@ -91,7 +91,7 @@ namespace Misnomer
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
     public sealed partial class Fictionary<TKey, TValue, TKeyComparer> : IDisposable
-        where TKeyComparer : IEqualityComparer<TKey>
+        where TKeyComparer : IEqualityComparer<TKey> where TKey : notnull
     {
         private static ArrayPool<Entry> Pool => ArrayPool<Entry>.Shared;
 

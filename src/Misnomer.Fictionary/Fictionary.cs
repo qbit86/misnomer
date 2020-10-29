@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
@@ -48,15 +49,15 @@ namespace Misnomer
             public TValue value;         // Value of entry
         }
 
-        private int[] _buckets;
-        private Entry[] _entries;
+        private int[]? _buckets;
+        private Entry[]? _entries;
         private int _count;
         private int _freeList;
         private int _freeCount;
         private int _version;
         private readonly TKeyComparer _comparer;
-        private KeyCollection _keys;
-        private ValueCollection _values;
+        private KeyCollection? _keys;
+        private ValueCollection? _values;
         private const int StartOfFreeList = -3;
 
         // constants for serialization
@@ -98,10 +99,10 @@ namespace Misnomer
             {
                 Fictionary<TKey, TValue, TKeyComparer> d = (Fictionary<TKey, TValue, TKeyComparer>)dictionary;
                 int count = d._count;
-                Entry[] entries = d._entries;
+                Entry[]? entries = d._entries;
                 for (int i = 0; i < count; i++)
                 {
-                    if (entries[i].next >= -1)
+                    if (entries![i].next >= -1)
                     {
                         Add(entries[i].key, entries[i].value);
                     }
@@ -146,10 +147,7 @@ namespace Misnomer
             }
         }
 
-        public int Count
-        {
-            get { return _count - _freeCount; }
-        }
+        public int Count => _count - _freeCount;
 
         public KeyCollection Keys
         {
@@ -210,7 +208,7 @@ namespace Misnomer
             get
             {
                 int i = FindEntry(key);
-                if (i >= 0) return _entries[i].value;
+                if (i >= 0) return _entries![i].value;
                 ThrowHelper.ThrowKeyNotFoundException(key);
                 return default;
             }
@@ -233,7 +231,7 @@ namespace Misnomer
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> keyValuePair)
         {
             int i = FindEntry(keyValuePair.Key);
-            if (i >= 0 && EqualityComparer<TValue>.Default.Equals(_entries[i].value, keyValuePair.Value))
+            if (i >= 0 && EqualityComparer<TValue>.Default.Equals(_entries![i].value, keyValuePair.Value))
             {
                 return true;
             }
@@ -243,7 +241,7 @@ namespace Misnomer
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> keyValuePair)
         {
             int i = FindEntry(keyValuePair.Key);
-            if (i >= 0 && EqualityComparer<TValue>.Default.Equals(_entries[i].value, keyValuePair.Value))
+            if (i >= 0 && EqualityComparer<TValue>.Default.Equals(_entries![i].value, keyValuePair.Value))
             {
                 Remove(keyValuePair.Key);
                 return true;
@@ -256,6 +254,9 @@ namespace Misnomer
             int count = _count;
             if (count > 0)
             {
+                Debug.Assert(_buckets != null, "_buckets should be non-null");
+                Debug.Assert(_entries != null, "_entries should be non-null");
+
                 Array.Clear(_buckets, 0, _buckets.Length);
 
                 _count = 0;
@@ -270,22 +271,22 @@ namespace Misnomer
 
         public bool ContainsValue(TValue value)
         {
-            Entry[] entries = _entries;
+            Entry[]? entries = _entries;
             if (value == null)
             {
                 for (int i = 0; i < _count; i++)
                 {
-                    if (entries[i].next >= -1 && entries[i].value == null) return true;
+                    if (entries![i].next >= -1 && entries[i].value == null) return true;
                 }
             }
             else
             {
-                if (default(TValue) != null)
+                if (default(TValue)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     for (int i = 0; i < _count; i++)
                     {
-                        if (entries[i].next >= -1 && EqualityComparer<TValue>.Default.Equals(entries[i].value, value)) return true;
+                        if (entries![i].next >= -1 && EqualityComparer<TValue>.Default.Equals(entries[i].value, value)) return true;
                     }
                 }
                 else
@@ -296,7 +297,7 @@ namespace Misnomer
                     EqualityComparer<TValue> defaultComparer = EqualityComparer<TValue>.Default;
                     for (int i = 0; i < _count; i++)
                     {
-                        if (entries[i].next >= -1 && defaultComparer.Equals(entries[i].value, value)) return true;
+                        if (entries![i].next >= -1 && defaultComparer.Equals(entries[i].value, value)) return true;
                     }
                 }
             }
@@ -321,10 +322,10 @@ namespace Misnomer
             }
 
             int count = _count;
-            Entry[] entries = _entries;
+            Entry[]? entries = _entries;
             for (int i = 0; i < count; i++)
             {
-                if (entries[i].next >= -1)
+                if (entries![i].next >= -1)
                 {
                     array[index++] = new KeyValuePair<TKey, TValue>(entries[i].key, entries[i].value);
                 }
@@ -364,18 +365,19 @@ namespace Misnomer
             }
 
             int i = -1;
-            int[] buckets = _buckets;
-            Entry[] entries = _entries;
+            int[]? buckets = _buckets;
+            Entry[]? entries = _entries;
             int collisionCount = 0;
             if (buckets != null)
             {
+                Debug.Assert(entries != null, "expected entries to be != null");
                 TKeyComparer comparer = _comparer;
                 if (comparer == null)
                 {
                     uint hashCode = (uint)key.GetHashCode();
                     // Value in _buckets is 1-based
                     i = buckets[hashCode % (uint)buckets.Length] - 1;
-                    if (default(TKey) != null)
+                    if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
                     {
                         // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                         do
@@ -475,10 +477,12 @@ namespace Misnomer
             {
                 Initialize(0);
             }
+            Debug.Assert(_buckets != null);
 
-            Entry[] entries = _entries;
+            Entry[]? entries = _entries;
+            Debug.Assert(entries != null, "expected entries to be non-null");
+
             TKeyComparer comparer = _comparer;
-
             uint hashCode = (uint)((comparer == null) ? key.GetHashCode() : comparer.GetHashCode(key));
 
             int collisionCount = 0;
@@ -488,7 +492,7 @@ namespace Misnomer
 
             if (comparer == null)
             {
-                if (default(TKey) != null)
+                if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     do
@@ -631,7 +635,7 @@ namespace Misnomer
                 entries = _entries;
             }
 
-            ref Entry entry = ref entries[index];
+            ref Entry entry = ref entries![index];
 
             if (updateFreeList)
             {
@@ -651,9 +655,9 @@ namespace Misnomer
             return true;
         }
 
-        public void OnDeserialization(object sender)
+        public void OnDeserialization(object? sender)
         {
-            HashHelpers.SerializationInfoTable.TryGetValue(this, out SerializationInfo siInfo);
+            HashHelpers.SerializationInfoTable.TryGetValue(this, out SerializationInfo? siInfo);
 
             if (siInfo == null)
             {
@@ -671,7 +675,8 @@ namespace Misnomer
         private void Resize(int newSize, bool forceNewHashCodes)
         {
             // Value types never rehash
-            Debug.Assert(!forceNewHashCodes || default(TKey) == null);
+            Debug.Assert(!forceNewHashCodes || default(TKey)! == null); // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+            Debug.Assert(_entries != null, "_entries should be non-null");
             Debug.Assert(newSize >= _entries.Length);
 
             int[] buckets = new int[newSize];
@@ -680,7 +685,7 @@ namespace Misnomer
             int count = _count;
             Array.Copy(_entries, 0, entries, 0, count);
 
-            if (default(TKey) == null && forceNewHashCodes)
+            if (default(TKey)! == null && forceNewHashCodes) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -719,11 +724,12 @@ namespace Misnomer
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            int[] buckets = _buckets;
-            Entry[] entries = _entries;
+            int[]? buckets = _buckets;
+            Entry[]? entries = _entries;
             int collisionCount = 0;
             if (buckets != null)
             {
+                Debug.Assert(entries != null, "entries should be non-null");
                 uint hashCode = (uint)(_comparer?.GetHashCode(key) ?? key.GetHashCode());
                 uint bucket = hashCode % (uint)buckets.Length;
                 int last = -1;
@@ -751,11 +757,11 @@ namespace Misnomer
 
                         if (RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
                         {
-                            entry.key = default;
+                            entry.key = default!;
                         }
                         if (RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
                         {
-                            entry.value = default;
+                            entry.value = default!;
                         }
                         _freeList = i;
                         _freeCount++;
@@ -779,18 +785,19 @@ namespace Misnomer
         // This overload is a copy of the overload Remove(TKey key) with one additional
         // statement to copy the value for entry being removed into the output parameter.
         // Code has been intentionally duplicated for performance reasons.
-        public bool Remove(TKey key, out TValue value)
+        public bool Remove(TKey key, [MaybeNullWhen(false)] out TValue value)
         {
             if (key == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            int[] buckets = _buckets;
-            Entry[] entries = _entries;
+            int[]? buckets = _buckets;
+            Entry[]? entries = _entries;
             int collisionCount = 0;
             if (buckets != null)
             {
+                Debug.Assert(entries != null, "entries should be non-null");
                 uint hashCode = (uint)(_comparer?.GetHashCode(key) ?? key.GetHashCode());
                 uint bucket = hashCode % (uint)buckets.Length;
                 int last = -1;
@@ -820,11 +827,11 @@ namespace Misnomer
 
                         if (RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
                         {
-                            entry.key = default;
+                            entry.key = default!;
                         }
                         if (RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
                         {
-                            entry.value = default;
+                            entry.value = default!;
                         }
                         _freeList = i;
                         _freeCount++;
@@ -842,19 +849,19 @@ namespace Misnomer
                     collisionCount++;
                 }
             }
-            value = default;
+            value = default!;
             return false;
         }
 
-        public bool TryGetValue(TKey key, out TValue value)
+        public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
         {
             int i = FindEntry(key);
             if (i >= 0)
             {
-                value = _entries[i].value;
+                value = _entries![i].value;
                 return true;
             }
-            value = default;
+            value = default!;
             return false;
         }
 
@@ -885,10 +892,10 @@ namespace Misnomer
             }
             else if (array is DictionaryEntry[] dictEntryArray)
             {
-                Entry[] entries = _entries;
+                Entry[]? entries = _entries;
                 for (int i = 0; i < _count; i++)
                 {
-                    if (entries[i].next >= -1)
+                    if (entries![i].next >= -1)
                     {
                         dictEntryArray[index++] = new DictionaryEntry(entries[i].key, entries[i].value);
                     }
@@ -896,7 +903,7 @@ namespace Misnomer
             }
             else
             {
-                object[] objects = array as object[];
+                object[]? objects = array as object[];
                 if (objects == null)
                 {
                     ThrowHelper.ThrowArgumentException_Argument_InvalidArrayType();
@@ -905,10 +912,10 @@ namespace Misnomer
                 try
                 {
                     int count = _count;
-                    Entry[] entries = _entries;
+                    Entry[]? entries = _entries;
                     for (int i = 0; i < count; i++)
                     {
-                        if (entries[i].next >= -1)
+                        if (entries![i].next >= -1)
                         {
                             objects[index++] = new KeyValuePair<TKey, TValue>(entries[i].key, entries[i].value);
                         }
@@ -968,7 +975,7 @@ namespace Misnomer
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             int newSize = HashHelpers.GetPrime(capacity);
 
-            Entry[] oldEntries = _entries;
+            Entry[]? oldEntries = _entries;
             int currentCapacity = oldEntries == null ? 0 : oldEntries.Length;
             if (newSize >= currentCapacity)
                 return;
@@ -976,19 +983,19 @@ namespace Misnomer
             int oldCount = _count;
             _version++;
             Initialize(newSize);
-            Entry[] entries = _entries;
-            int[] buckets = _buckets;
+            Entry[]? entries = _entries;
+            int[]? buckets = _buckets;
             int count = 0;
             for (int i = 0; i < oldCount; i++)
             {
-                uint hashCode = oldEntries[i].hashCode;
+                uint hashCode = oldEntries![i].hashCode; // At this point, we know we have entries.
                 if (oldEntries[i].next >= -1)
                 {
-                    ref Entry entry = ref entries[count];
+                    ref Entry entry = ref entries![count];
                     entry = oldEntries[i];
                     uint bucket = hashCode % (uint)newSize;
                     // Value in _buckets is 1-based
-                    entry.next = buckets[bucket] - 1;
+                    entry.next = buckets![bucket] - 1; // If we get here, we have entries, therefore buckets is not null.
                     // Value in _buckets is 1-based
                     buckets[bucket] = count + 1;
                     count++;
@@ -1010,7 +1017,7 @@ namespace Misnomer
 
         ICollection IDictionary.Values => (ICollection)Values;
 
-        object IDictionary.this[object key]
+        object? IDictionary.this[object key]
         {
             get
             {
@@ -1019,7 +1026,7 @@ namespace Misnomer
                     int i = FindEntry((TKey)key);
                     if (i >= 0)
                     {
-                        return _entries[i].value;
+                        return _entries![i].value;
                     }
                 }
                 return null;
@@ -1037,7 +1044,7 @@ namespace Misnomer
                     TKey tempKey = (TKey)key;
                     try
                     {
-                        this[tempKey] = (TValue)value;
+                        this[tempKey] = (TValue)value!;
                     }
                     catch (InvalidCastException)
                     {
@@ -1060,7 +1067,7 @@ namespace Misnomer
             return (key is TKey);
         }
 
-        void IDictionary.Add(object key, object value)
+        void IDictionary.Add(object key, object? value)
         {
             if (key == null)
             {
@@ -1074,7 +1081,7 @@ namespace Misnomer
 
                 try
                 {
-                    Add(tempKey, (TValue)value);
+                    Add(tempKey, (TValue)value!);
                 }
                 catch (InvalidCastException)
                 {
@@ -1140,7 +1147,7 @@ namespace Misnomer
                 // dictionary.count+1 could be negative if dictionary.count is int.MaxValue
                 while ((uint)_index < (uint)_dictionary._count)
                 {
-                    ref Entry entry = ref _dictionary._entries[_index++];
+                    ref Entry entry = ref _dictionary._entries![_index++];
 
                     if (entry.next >= -1)
                     {
@@ -1160,7 +1167,7 @@ namespace Misnomer
             {
             }
 
-            object IEnumerator.Current
+            object? IEnumerator.Current
             {
                 get
                 {
@@ -1217,7 +1224,7 @@ namespace Misnomer
                 }
             }
 
-            object IDictionaryEnumerator.Value
+            object? IDictionaryEnumerator.Value
             {
                 get
                 {
@@ -1235,7 +1242,7 @@ namespace Misnomer
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
         {
-            private Fictionary<TKey, TValue, TKeyComparer> _dictionary;
+            private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
 
             public KeyCollection(Fictionary<TKey, TValue, TKeyComparer> dictionary)
             {
@@ -1267,10 +1274,10 @@ namespace Misnomer
                 }
 
                 int count = _dictionary._count;
-                Entry[] entries = _dictionary._entries;
+                Entry[]? entries = _dictionary._entries;
                 for (int i = 0; i < count; i++)
                 {
-                    if (entries[i].next >= -1) array[index++] = entries[i].key;
+                    if (entries![i].next >= -1) array[index++] = entries[i].key;
                 }
             }
 
@@ -1318,19 +1325,19 @@ namespace Misnomer
                 }
                 else
                 {
-                    object[] objects = array as object[];
+                    object[]? objects = array as object[];
                     if (objects == null)
                     {
                         ThrowHelper.ThrowArgumentException_Argument_InvalidArrayType();
                     }
 
                     int count = _dictionary._count;
-                    Entry[] entries = _dictionary._entries;
+                    Entry[]? entries = _dictionary._entries;
                     try
                     {
                         for (int i = 0; i < count; i++)
                         {
-                            if (entries[i].next >= -1) objects[index++] = entries[i].key;
+                            if (entries![i].next >= -1) objects[index++] = entries[i].key;
                         }
                     }
                     catch (ArrayTypeMismatchException)
@@ -1349,7 +1356,7 @@ namespace Misnomer
                 private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
                 private int _index;
                 private readonly int _version;
-                private TKey _currentKey;
+                [AllowNull, MaybeNull] private TKey _currentKey;
 
                 internal Enumerator(Fictionary<TKey, TValue, TKeyComparer> dictionary)
                 {
@@ -1372,7 +1379,7 @@ namespace Misnomer
 
                     while ((uint)_index < (uint)_dictionary._count)
                     {
-                        ref Entry entry = ref _dictionary._entries[_index++];
+                        ref Entry entry = ref _dictionary._entries![_index++];
 
                         if (entry.next >= -1)
                         {
@@ -1386,9 +1393,9 @@ namespace Misnomer
                     return false;
                 }
 
-                public TKey Current => _currentKey;
+                public TKey Current => _currentKey!;
 
-                object IEnumerator.Current
+                object? IEnumerator.Current
                 {
                     get
                     {
@@ -1418,7 +1425,7 @@ namespace Misnomer
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
         {
-            private Fictionary<TKey, TValue, TKeyComparer> _dictionary;
+            private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
 
             public ValueCollection(Fictionary<TKey, TValue, TKeyComparer> dictionary)
             {
@@ -1439,7 +1446,7 @@ namespace Misnomer
                     ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
                 }
 
-                if (index < 0 || index > array.Length)
+                if ((uint)index > array.Length)
                 {
                     ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
                 }
@@ -1450,10 +1457,10 @@ namespace Misnomer
                 }
 
                 int count = _dictionary._count;
-                Entry[] entries = _dictionary._entries;
+                Entry[]? entries = _dictionary._entries;
                 for (int i = 0; i < count; i++)
                 {
-                    if (entries[i].next >= -1) array[index++] = entries[i].value;
+                    if (entries![i].next >= -1) array[index++] = entries[i].value;
                 }
             }
 
@@ -1501,19 +1508,19 @@ namespace Misnomer
                 }
                 else
                 {
-                    object[] objects = array as object[];
+                    object[]? objects = array as object[];
                     if (objects == null)
                     {
                         ThrowHelper.ThrowArgumentException_Argument_InvalidArrayType();
                     }
 
                     int count = _dictionary._count;
-                    Entry[] entries = _dictionary._entries;
+                    Entry[]? entries = _dictionary._entries;
                     try
                     {
                         for (int i = 0; i < count; i++)
                         {
-                            if (entries[i].next >= -1) objects[index++] = entries[i].value;
+                            if (entries![i].next >= -1) objects[index++] = entries[i].value!;
                         }
                     }
                     catch (ArrayTypeMismatchException)
@@ -1532,7 +1539,7 @@ namespace Misnomer
                 private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
                 private int _index;
                 private readonly int _version;
-                private TValue _currentValue;
+                [AllowNull, MaybeNull] private TValue _currentValue;
 
                 internal Enumerator(Fictionary<TKey, TValue, TKeyComparer> dictionary)
                 {
@@ -1555,7 +1562,7 @@ namespace Misnomer
 
                     while ((uint)_index < (uint)_dictionary._count)
                     {
-                        ref Entry entry = ref _dictionary._entries[_index++];
+                        ref Entry entry = ref _dictionary._entries![_index++];
 
                         if (entry.next >= -1)
                         {
@@ -1568,9 +1575,9 @@ namespace Misnomer
                     return false;
                 }
 
-                public TValue Current => _currentValue;
+                public TValue Current => _currentValue!;
 
-                object IEnumerator.Current
+                object? IEnumerator.Current
                 {
                     get
                     {
