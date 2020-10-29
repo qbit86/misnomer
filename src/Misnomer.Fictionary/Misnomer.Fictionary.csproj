@@ -12,6 +12,7 @@ Provides ToFictionary() extension methods which replace conventional ToDictionar
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyVersion>0.4</AssemblyVersion>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <Nullable>enable</Nullable>
