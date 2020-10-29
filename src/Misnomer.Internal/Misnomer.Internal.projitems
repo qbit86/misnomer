@@ -10,12 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)System\NullableAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\RuntimeHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\SR.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\SR.Partial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\StackTraceHiddenAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\ThrowHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Misnomer\RuntimeHelpers.cs" />
   </ItemGroup>
 </Project>
