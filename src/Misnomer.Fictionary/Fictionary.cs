@@ -84,13 +84,13 @@ namespace Misnomer
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity);
             if (capacity > 0) Initialize(capacity);
 
-            if (comparer == null)
+            if (comparer != null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
+                _comparer = comparer;
             }
             else
             {
-                _comparer = comparer;
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
             }
         }
 
@@ -253,7 +253,7 @@ namespace Misnomer
             }
             else
             {
-                if (default(TValue)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                if (default(TValue) != null)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     for (int i = 0; i < _count; i++)
@@ -347,7 +347,7 @@ namespace Misnomer
                     int i = GetBucket(hashCode);
                     Entry[]? entries = _entries;
                     uint collisionCount = 0;
-                    if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                    if (default(TKey) != null)
                     {
                         // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
 
@@ -498,7 +498,7 @@ namespace Misnomer
 
             if (comparer == null)
             {
-                if (default(TKey)! != null) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+                if (default(TKey) != null)
                 {
                     // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                     while (true)
@@ -713,16 +713,16 @@ namespace Misnomer
         private void Resize(int newSize, bool forceNewHashCodes)
         {
             // Value types never rehash
-            Debug.Assert(!forceNewHashCodes || default(TKey)! == null); // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+            Debug.Assert(!forceNewHashCodes || default(TKey) == null);
             Debug.Assert(_entries != null, "_entries should be non-null");
             Debug.Assert(newSize >= _entries.Length);
 
             Entry[] entries = Pool.Rent(newSize);
 
             int count = _count;
-            Array.Copy(_entries, 0, entries, 0, count);
+            Array.Copy(_entries, entries, count);
 
-            if (default(TKey)! == null && forceNewHashCodes) // TODO-NULLABLE: default(T) == null warning (https://github.com/dotnet/roslyn/issues/34757)
+            if (default(TKey) == null && forceNewHashCodes)
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -1185,7 +1185,7 @@ namespace Misnomer
                 _version = dictionary._version;
                 _index = 0;
                 _getEnumeratorRetType = getEnumeratorRetType;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
             }
 
             public bool MoveNext()
@@ -1209,7 +1209,7 @@ namespace Misnomer
                 }
 
                 _index = _dictionary._count + 1;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
                 return false;
             }
 
@@ -1247,7 +1247,7 @@ namespace Misnomer
                 }
 
                 _index = 0;
-                _current = new KeyValuePair<TKey, TValue>();
+                _current = default;
             }
 
             DictionaryEntry IDictionaryEnumerator.Entry
