@@ -14,11 +14,11 @@ namespace Misnomer
 
         private static readonly int[] s_array = new int[Count];
 
-        private Dictionary<Key, int> _dictionary;
-        private Fictionary<Key, int, ArraySegmentComparerObject<int>> _fictionaryConcreteReference;
-        private Fictionary<Key, int, ArraySegmentEqualityComparer<int>> _fictionaryConcreteValue;
-        private Fictionary<Key, int, EqualityComparer<Key>> _fictionaryStandardPolymorphic;
-        private Fictionary<Key, int, IEqualityComparer<Key>> _fictionaryVirtual;
+        private Dictionary<Key, int>? _dictionary;
+        private Fictionary<Key, int, ArraySegmentComparerObject<int>>? _fictionaryConcreteReference;
+        private Fictionary<Key, int, ArraySegmentEqualityComparer<int>>? _fictionaryConcreteValue;
+        private Fictionary<Key, int, EqualityComparer<Key>>? _fictionaryStandardPolymorphic;
+        private Fictionary<Key, int, IEqualityComparer<Key>>? _fictionaryVirtual;
 
         private int _trialSeed;
 
@@ -149,67 +149,67 @@ namespace Misnomer
         [Benchmark]
         public bool DictionaryConcreteValue()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool FictionaryConcreteValue()
         {
-            return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
+            return _fictionaryConcreteValue!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark(Baseline = true)]
         public bool DictionaryConcreteReference()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool FictionaryConcreteReference()
         {
-            return _fictionaryConcreteReference.TryGetValue(Trial, out int _);
+            return _fictionaryConcreteReference!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool DictionaryVirtualValue()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool FictionaryVirtualValue()
         {
-            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+            return _fictionaryVirtual!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool DictionaryVirtualReference()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool FictionaryVirtualReference()
         {
-            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+            return _fictionaryVirtual!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool DictionaryStandardPolymorphic()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool FictionaryStandardPolymorphic()
         {
-            return _fictionaryStandardPolymorphic.TryGetValue(Trial, out int _);
+            return _fictionaryStandardPolymorphic!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         public bool DictionaryDefault()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         #endregion

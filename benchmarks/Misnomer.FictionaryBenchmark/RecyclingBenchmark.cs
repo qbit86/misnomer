@@ -21,7 +21,7 @@ namespace Misnomer
         {
             Debug.Assert(dictionaries != null, "dictionaries != null");
 
-            int count = dictionaries.Length;
+            int count = dictionaries!.Length;
             for (int upper = 1; upper <= count; ++upper)
             for (int i = 0; i < upper; ++i)
             {

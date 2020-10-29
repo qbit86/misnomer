@@ -13,11 +13,11 @@ namespace Misnomer
         private const int Count = 1729;
         private const int Seed = 0x1e4f6c2a;
 
-        private Dictionary<string, int> _dictionary;
-        private Fictionary<string, int, OrdinalStringComparerObject> _fictionaryConcreteReference;
-        private Fictionary<string, int, OrdinalStringComparer> _fictionaryConcreteValue;
-        private Fictionary<string, int, StringComparer> _fictionaryStandardPolymorphic;
-        private Fictionary<string, int, IEqualityComparer<string>> _fictionaryVirtual;
+        private Dictionary<string, int>? _dictionary;
+        private Fictionary<string, int, OrdinalStringComparerObject>? _fictionaryConcreteReference;
+        private Fictionary<string, int, OrdinalStringComparer>? _fictionaryConcreteValue;
+        private Fictionary<string, int, StringComparer>? _fictionaryStandardPolymorphic;
+        private Fictionary<string, int, IEqualityComparer<string>>? _fictionaryVirtual;
 
         private static string Trial { get; } = (~Seed).ToString();
 
@@ -134,14 +134,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public bool DictionaryConcreteValue()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public bool FictionaryConcreteValue()
         {
-            return _fictionaryConcreteValue.TryGetValue(Trial, out int _);
+            return _fictionaryConcreteValue!.TryGetValue(Trial, out int _);
         }
 
 
@@ -149,14 +149,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public bool DictionaryConcreteReference()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public bool FictionaryConcreteReference()
         {
-            return _fictionaryConcreteReference.TryGetValue(Trial, out int _);
+            return _fictionaryConcreteReference!.TryGetValue(Trial, out int _);
         }
 
 
@@ -164,14 +164,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public bool DictionaryVirtualValue()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public bool FictionaryVirtualValue()
         {
-            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+            return _fictionaryVirtual!.TryGetValue(Trial, out int _);
         }
 
 
@@ -179,14 +179,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public bool DictionaryVirtualReference()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public bool FictionaryVirtualReference()
         {
-            return _fictionaryVirtual.TryGetValue(Trial, out int _);
+            return _fictionaryVirtual!.TryGetValue(Trial, out int _);
         }
 
 
@@ -194,14 +194,14 @@ namespace Misnomer
         [BenchmarkCategory(nameof(String))]
         public bool DictionaryStandardPolymorphic()
         {
-            return _dictionary.TryGetValue(Trial, out int _);
+            return _dictionary!.TryGetValue(Trial, out int _);
         }
 
         [Benchmark]
         [BenchmarkCategory(nameof(String))]
         public bool FictionaryStandardPolymorphic()
         {
-            return _fictionaryStandardPolymorphic.TryGetValue(Trial, out int _);
+            return _fictionaryStandardPolymorphic!.TryGetValue(Trial, out int _);
         }
 
         #endregion

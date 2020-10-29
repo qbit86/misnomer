@@ -10,8 +10,8 @@ namespace Misnomer
         // 270th prime.
         private const int Count = 1733;
 
-        private Dictionary<Key, int> _dictionary;
-        private Fictionary<Key, int, EnumEqualityComparer> _fictionaryConcreteValue;
+        private Dictionary<Key, int>? _dictionary;
+        private Fictionary<Key, int, EnumEqualityComparer>? _fictionaryConcreteValue;
 
         private static Key[] Trials { get; } = CreateTrials();
 
@@ -78,7 +78,7 @@ namespace Misnomer
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
             {
-                if (_dictionary.TryGetValue(Trials[i], out int value))
+                if (_dictionary!.TryGetValue(Trials[i], out int value))
                     result ^= value;
             }
 
@@ -91,7 +91,7 @@ namespace Misnomer
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
             {
-                if (_fictionaryConcreteValue.TryGetValue(Trials[i], out int value))
+                if (_fictionaryConcreteValue!.TryGetValue(Trials[i], out int value))
                     result ^= value;
             }
 
@@ -104,7 +104,7 @@ namespace Misnomer
             int result = 0;
             for (int i = 0; i != Trials.Length; ++i)
             {
-                if (_dictionary.TryGetValue(Trials[i], out int value))
+                if (_dictionary!.TryGetValue(Trials[i], out int value))
                     result ^= value;
             }
 
