@@ -7,7 +7,6 @@ namespace Misnomer
 {
     public sealed class RecyclingTest
     {
-#pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
         public void RecycledFictionaries_ShouldBehaveCorrectly()
         {
@@ -47,6 +46,5 @@ namespace Misnomer
                 Assert.Empty(f.Except(d));
             }
         }
-#pragma warning restore CA1707
     }
 }

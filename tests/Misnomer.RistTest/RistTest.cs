@@ -14,8 +14,6 @@ namespace Misnomer
         private static double Sqrt5 { get; } = Math.Sqrt(5);
         private static double Phi { get; } = 0.5 * (1.0 + Sqrt5);
 
-#pragma warning disable CA1707
-
         [Fact]
         public void Add_ShouldBehaveTheSameWay()
         {
@@ -225,7 +223,5 @@ namespace Misnomer
             // Assert
             Assert.Equal(list, rist);
         }
-
-#pragma warning restore CA1707
     }
 }

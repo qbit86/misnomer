@@ -1,4 +1,5 @@
 [*.cs]
+dotnet_diagnostic.CA1707.severity = silent # Identifiers should not contain underscores
 dotnet_diagnostic.IDE0007.severity = silent
 dotnet_diagnostic.IDE0008.severity = silent
 dotnet_diagnostic.IDE0017.severity = silent
