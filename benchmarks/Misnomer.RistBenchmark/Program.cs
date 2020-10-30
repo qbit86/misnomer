@@ -14,29 +14,29 @@ namespace Misnomer
         {
             // https://benchmarkdotnet.org/articles/configs/configs.html
             Job clrLegacyJitJob = new Job(Job.Default)
-                .With(Runtime.Clr)
-                .With(Platform.X86)
-                .With(Jit.LegacyJit)
+                .WithRuntime(ClrRuntime.Net48)
+                .WithPlatform(Platform.X86)
+                .WithJit(Jit.LegacyJit)
                 .ApplyAndFreeze(RunMode.Short);
 
             Job clrRyuJitJob = new Job(Job.Default)
-                .With(Runtime.Clr)
-                .With(Platform.X64)
-                .With(Jit.RyuJit)
+                .WithRuntime(ClrRuntime.Net48)
+                .WithPlatform(Platform.X64)
+                .WithJit(Jit.RyuJit)
                 .ApplyAndFreeze(RunMode.Short);
 
             Job coreRyuJitJob = new Job(Job.Default)
-                .With(Runtime.Core)
-                .With(Platform.X64)
-                .With(Jit.RyuJit)
+                .WithRuntime(CoreRuntime.Core31)
+                .WithPlatform(Platform.X64)
+                .WithJit(Jit.RyuJit)
                 .WithBaseline(true)
                 .ApplyAndFreeze(RunMode.Short);
 
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
-                .With(MemoryDiagnoser.Default)
-                .With(clrLegacyJitJob)
-                .With(clrRyuJitJob)
-                .With(coreRyuJitJob);
+                .AddDiagnoser(MemoryDiagnoser.Default)
+                .AddJob(clrLegacyJitJob)
+                .AddJob(clrRyuJitJob)
+                .AddJob(coreRyuJitJob);
 
             Summary _ = BenchmarkRunner.Run<StringJoinBenchmark>(config);
         }

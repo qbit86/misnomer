@@ -14,7 +14,7 @@ namespace Misnomer
         private static readonly RunMode s_runMode = RunMode.Short;
         private static readonly Jit[] s_jits = { Jit.LegacyJit, Jit.RyuJit };
         private static readonly Platform[] s_platforms = { Platform.X86, Platform.X64 };
-        private static readonly Runtime[] s_runtimes = { Runtime.Clr, Runtime.Core };
+        private static readonly Runtime[] s_runtimes = { ClrRuntime.Net48, CoreRuntime.Core31 };
 
         private static void Main()
         {
@@ -22,8 +22,8 @@ namespace Misnomer
 
             IEnumerable<Job> jobs = GetJobs();
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
-                .With(EnvironmentAnalyser.Default)
-                .With(jobs.ToArray());
+                .AddAnalyser(EnvironmentAnalyser.Default)
+                .AddJob(jobs.ToArray());
 
             Summary _ = BenchmarkRunner.Run<StringPutBenchmark>(config);
         }
@@ -38,13 +38,13 @@ namespace Misnomer
 
                 foreach (Runtime runtime in s_runtimes)
                 {
-                    if (jit == Jit.LegacyJit && runtime.Equals(Runtime.Core))
+                    if (jit == Jit.LegacyJit && runtime.Equals(CoreRuntime.Core31))
                         continue;
 
                     yield return new Job(Job.Default)
-                        .With(jit)
-                        .With(platform)
-                        .With(runtime)
+                        .WithJit(jit)
+                        .WithPlatform(platform)
+                        .WithRuntime(runtime)
                         .ApplyAndFreeze(s_runMode);
                 }
             }
