@@ -5,7 +5,6 @@ namespace Misnomer
 {
     // https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/Internal/Runtime/CompilerServices/Unsafe.cs
 
-    [CLSCompliant(false)]
     internal static unsafe class UnsafeHelpers
     {
         /// <summary>
