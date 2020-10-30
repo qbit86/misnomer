@@ -1,4 +1,4 @@
-#if NET48
+#if NETCOREAPP2_0 || NET461 || NET48
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property)]
