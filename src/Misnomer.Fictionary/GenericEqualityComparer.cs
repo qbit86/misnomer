@@ -36,10 +36,7 @@ namespace Misnomer
         /// <param name="obj">The object for which to get a hash code.</param>
         /// <returns>A hash code for the specified object.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(T obj)
-        {
-            return obj?.GetHashCode() ?? 0;
-        }
+        public int GetHashCode(T obj) => obj?.GetHashCode() ?? 0;
 
         /// <summary>
         /// Indicates whether the current <see cref="GenericEqualityComparer{T}"/> object is equal to another <see cref="GenericEqualityComparer{T}"/> object.
