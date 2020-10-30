@@ -20,7 +20,7 @@ namespace Misnomer
                 fictionary.TryAdd(fi.Name, fi);
 
             foreach (KeyValuePair<string, FileInfo> kv in fictionary)
-                Console.WriteLine($"{kv.Key}\t{kv.Value.Directory.FullName}");
+                Console.WriteLine($"{kv.Key}\t{kv.Value.Directory?.FullName}");
 
             Console.WriteLine();
             if (fictionary.TryGetValue(".gitconfig", out FileInfo value))
