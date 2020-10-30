@@ -7,10 +7,7 @@ namespace Misnomer
     public abstract class RistBenchmark
     {
         // https://en.wikipedia.org/wiki/Collatz_conjecture
-        private static int GetNext(int n)
-        {
-            return (n & 1) == 0 ? n / 2 : 3 * n + 1;
-        }
+        private static int GetNext(int n) => (n & 1) == 0 ? n / 2 : 3 * n + 1;
 
         private static long MaxTrajectoryPoint<TList, TListPolicy>(TList list, TListPolicy p)
             where TList : IList<int>
@@ -55,16 +52,10 @@ namespace Misnomer
 
 #pragma warning disable CA1822
         [Benchmark(Baseline = true)]
-        public long List()
-        {
-            return MaxTrajectoryPoint(new List<int>(), new ListPolicy());
-        }
+        public long List() => MaxTrajectoryPoint(new List<int>(), new ListPolicy());
 
         [Benchmark]
-        public long Rist()
-        {
-            return MaxTrajectoryPoint(new Rist<int>(), new RistPolicy());
-        }
+        public long Rist() => MaxTrajectoryPoint(new Rist<int>(), new RistPolicy());
 #pragma warning restore CA1822
     }
 
@@ -78,47 +69,23 @@ namespace Misnomer
 
     internal struct ListPolicy : IListPolicy<List<int>>
     {
-        public int GetCapacity(List<int> list)
-        {
-            return list.Capacity;
-        }
+        public int GetCapacity(List<int> list) => list.Capacity;
 
-        public void SetCapacity(List<int> list, int capacity)
-        {
-            list.Capacity = capacity;
-        }
+        public void SetCapacity(List<int> list, int capacity) => list.Capacity = capacity;
 
-        public void RemoveRange(List<int> list, int index, int count)
-        {
-            list.RemoveRange(index, count);
-        }
+        public void RemoveRange(List<int> list, int index, int count) => list.RemoveRange(index, count);
 
-        public void TrimExcess(List<int> list)
-        {
-            list.TrimExcess();
-        }
+        public void TrimExcess(List<int> list) => list.TrimExcess();
     }
 
     internal struct RistPolicy : IListPolicy<Rist<int>>
     {
-        public int GetCapacity(Rist<int> list)
-        {
-            return list.Capacity;
-        }
+        public int GetCapacity(Rist<int> list) => list.Capacity;
 
-        public void SetCapacity(Rist<int> list, int capacity)
-        {
-            list.Capacity = capacity;
-        }
+        public void SetCapacity(Rist<int> list, int capacity) => list.Capacity = capacity;
 
-        public void RemoveRange(Rist<int> list, int index, int count)
-        {
-            list.RemoveRange(index, count);
-        }
+        public void RemoveRange(Rist<int> list, int index, int count) => list.RemoveRange(index, count);
 
-        public void TrimExcess(Rist<int> list)
-        {
-            list.TrimExcess();
-        }
+        public void TrimExcess(Rist<int> list) => list.TrimExcess();
     }
 }

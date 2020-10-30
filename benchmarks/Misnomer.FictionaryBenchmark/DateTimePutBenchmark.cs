@@ -19,12 +19,12 @@ namespace Misnomer
             for (int i = 0; i != Count; ++i)
             {
                 int firstValue = (7 + 1723 * i) % Count;
-                Key firstKey = Key.FromBinary(firstValue);
+                var firstKey = Key.FromBinary(firstValue);
                 if (!dictionary.ContainsKey(firstKey))
                     dictionary.Add(firstKey, firstValue);
 
                 int secondValue = (13 + 853 * i) % Count;
-                Key secondKey = Key.FromBinary(secondValue);
+                var secondKey = Key.FromBinary(secondValue);
                 dictionary[secondKey] = secondValue;
             }
 

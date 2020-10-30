@@ -9,22 +9,13 @@ namespace Misnomer
         IEquatable<EnumEqualityComparer>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Key x, Key y)
-        {
-            return (int)y == (int)x;
-        }
+        public bool Equals(Key x, Key y) => (int)y == (int)x;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(Key obj)
-        {
-            return ((int)obj).GetHashCode();
-        }
+        public int GetHashCode(Key obj) => ((int)obj).GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(EnumEqualityComparer other)
-        {
-            return true;
-        }
+        public bool Equals(EnumEqualityComparer other) => true;
     }
 
     internal sealed class EnumEqualityComparerObject : IEqualityComparer<Key>
@@ -34,15 +25,9 @@ namespace Misnomer
         internal static EnumEqualityComparerObject Default { get; } = new EnumEqualityComparerObject();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Key x, Key y)
-        {
-            return (int)y == (int)x;
-        }
+        public bool Equals(Key x, Key y) => (int)y == (int)x;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(Key obj)
-        {
-            return ((int)obj).GetHashCode();
-        }
+        public int GetHashCode(Key obj) => ((int)obj).GetHashCode();
     }
 }
