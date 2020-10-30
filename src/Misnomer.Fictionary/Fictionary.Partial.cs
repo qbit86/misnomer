@@ -78,7 +78,6 @@ namespace Misnomer
 
     // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs
 
-    // ReSharper disable UnusedTypeParameter
     /// <summary>
     /// Represents a generic collection of key/value pairs with concretely typed key comparer.
     /// Avoids virtual calls to the key comparer.
@@ -113,5 +112,4 @@ namespace Misnomer
             }
         }
     }
-    // ReSharper restore UnusedTypeParameter
 }

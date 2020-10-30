@@ -13,3 +13,4 @@ generated_code = true
 dotnet_diagnostic.CA1000.severity = silent
 dotnet_diagnostic.CA1005.severity = none
 dotnet_diagnostic.CA1710.severity = silent
+resharper_unused_type_parameter_highlighting = hint
