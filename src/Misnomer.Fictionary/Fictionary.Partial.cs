@@ -13,7 +13,6 @@ namespace Misnomer
     public static class DefaultFictionary<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the <see cref="GenericEqualityComparer{TKey}"/>.
         /// </summary>
@@ -37,7 +36,6 @@ namespace Misnomer
             return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
                 new GenericEqualityComparer<TKey>());
         }
-#pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
     /// <summary>
@@ -48,7 +46,6 @@ namespace Misnomer
     public static class Fictionary<TKey, TValue>
         where TKey : notnull
     {
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the specified comparer.
         /// </summary>
@@ -77,7 +74,6 @@ namespace Misnomer
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
         }
-#pragma warning restore CA1000 // Do not declare static members on generic types
     }
 
     // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs

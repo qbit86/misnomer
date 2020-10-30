@@ -10,5 +10,6 @@ dotnet_diagnostic.CS8767.severity = silent
 generated_code = true
 
 [Fictionary.Partial.cs]
+dotnet_diagnostic.CA1000.severity = silent
 dotnet_diagnostic.CA1005.severity = none
 dotnet_diagnostic.CA1710.severity = silent
