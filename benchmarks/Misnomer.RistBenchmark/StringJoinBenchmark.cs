@@ -19,7 +19,6 @@ namespace Misnomer
             return list;
         }
 
-#pragma warning disable CA1822
         [Benchmark(Baseline = true)]
         public string Move()
         {
@@ -46,6 +45,5 @@ namespace Misnomer
             IEnumerable<string> enumerable = list.Skip(1).Take(3);
             return string.Join(", ", enumerable);
         }
-#pragma warning restore CA1822
     }
 }

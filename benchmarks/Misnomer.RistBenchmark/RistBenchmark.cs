@@ -50,13 +50,11 @@ namespace Misnomer
             return ((long)list[list.Count - 1] << 32) + max;
         }
 
-#pragma warning disable CA1822
         [Benchmark(Baseline = true)]
         public long List() => MaxTrajectoryPoint(new List<int>(), new ListPolicy());
 
         [Benchmark]
         public long Rist() => MaxTrajectoryPoint(new Rist<int>(), new RistPolicy());
-#pragma warning restore CA1822
     }
 
     internal interface IListPolicy<in TList>
