@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics.Hashing;
 using System.Runtime.CompilerServices;
 
 namespace Misnomer
@@ -9,30 +8,15 @@ namespace Misnomer
         IEquatable<ArraySegmentEqualityComparer<T>>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(ArraySegment<T> x, ArraySegment<T> y)
-        {
-            return x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
-        }
+        public bool Equals(ArraySegment<T> x, ArraySegment<T> y) =>
+            x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(ArraySegment<T> obj)
-        {
-            if (obj.Array == null)
-                return 0;
-
-            int hash = 5381;
-            hash = HashHelpers.Combine(hash, obj.Offset);
-            hash = HashHelpers.Combine(hash, obj.Count);
-
-            hash ^= obj.Array.GetHashCode();
-            return hash;
-        }
+        public int GetHashCode(ArraySegment<T> obj) =>
+            obj.Array is null ? 0 : HashCode.Combine(obj.Offset, obj.Count, obj.Array.GetHashCode());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(ArraySegmentEqualityComparer<T> other)
-        {
-            return true;
-        }
+        public bool Equals(ArraySegmentEqualityComparer<T> other) => true;
     }
 
     internal sealed class ArraySegmentComparerObject<T> : IEqualityComparer<ArraySegment<T>>
@@ -42,23 +26,11 @@ namespace Misnomer
         internal static ArraySegmentComparerObject<T> Default { get; } = new ArraySegmentComparerObject<T>();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(ArraySegment<T> x, ArraySegment<T> y)
-        {
-            return x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
-        }
+        public bool Equals(ArraySegment<T> x, ArraySegment<T> y) =>
+            x.Array == y.Array && x.Offset == y.Offset && x.Count == y.Count;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(ArraySegment<T> obj)
-        {
-            if (obj.Array == null)
-                return 0;
-
-            int hash = 5381;
-            hash = HashHelpers.Combine(hash, obj.Offset);
-            hash = HashHelpers.Combine(hash, obj.Count);
-
-            hash ^= obj.Array.GetHashCode();
-            return hash;
-        }
+        public int GetHashCode(ArraySegment<T> obj) =>
+            obj.Array is null ? 0 : HashCode.Combine(obj.Offset, obj.Count, obj.Array.GetHashCode());
     }
 }
