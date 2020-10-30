@@ -23,7 +23,7 @@ namespace Misnomer
             {
                 int value = 83 * i % count;
                 result[2 * i] = (Key)value;
-                result[2 * i + 1] = (Key)(~value);
+                result[2 * i + 1] = (Key)~value;
             }
 
             return result;
