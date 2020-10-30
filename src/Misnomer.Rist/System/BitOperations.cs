@@ -6,7 +6,7 @@ namespace System.Numerics
 {
     internal static class BitOperations
     {
-        private static ReadOnlySpan<byte> Log2DeBruijn => new byte[32]
+        private static ReadOnlySpan<byte> Log2DeBruijn => new byte[]
         {
             00, 09, 01, 10, 13, 21, 02, 29,
             11, 14, 16, 18, 22, 25, 03, 30,
