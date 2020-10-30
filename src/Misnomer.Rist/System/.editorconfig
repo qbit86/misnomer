@@ -1,0 +1,7 @@
+[*.cs]
+dotnet_analyzer_diagnostic.severity = silent
+dotnet_diagnostic.CS3021.severity = silent
+dotnet_diagnostic.CS8602.severity = silent
+dotnet_diagnostic.CS8604.severity = silent
+dotnet_diagnostic.CS8669.severity = silent
+generated_code = true
