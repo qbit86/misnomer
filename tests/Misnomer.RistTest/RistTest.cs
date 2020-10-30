@@ -216,10 +216,7 @@ namespace Misnomer
             var list = new List<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
             var rist = new Rist<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
 
-            bool Match(char c)
-            {
-                return Convert.ToInt32(c) % 2 == 0;
-            }
+            static bool Match(char c) => Convert.ToInt32(c) % 2 == 0;
 
             // Act
             list.RemoveAll(Match);
