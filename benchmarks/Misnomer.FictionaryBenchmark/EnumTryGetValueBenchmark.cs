@@ -39,7 +39,7 @@ namespace Misnomer
                 // 269th prime.
                 int value = 1723 * i % Count;
                 var key = (Key)value;
-                dictionary[key] = value;
+                dictionary![key] = value;
             }
 
             return dictionary;

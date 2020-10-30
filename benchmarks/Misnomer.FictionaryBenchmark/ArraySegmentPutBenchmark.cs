@@ -22,7 +22,7 @@ namespace Misnomer
             {
                 int firstValue = (7 + 1723 * i) % Count;
                 var firstKey = new Key(s_array, firstValue, Count - firstValue);
-                if (!dictionary.ContainsKey(firstKey))
+                if (!dictionary!.ContainsKey(firstKey))
                     dictionary.Add(firstKey, firstValue);
 
                 int secondValue = (13 + 853 * i) % Count;
@@ -30,7 +30,7 @@ namespace Misnomer
                 dictionary[secondKey] = secondValue;
             }
 
-            return dictionary.Count;
+            return dictionary!.Count;
         }
 
         #region Benchmarks

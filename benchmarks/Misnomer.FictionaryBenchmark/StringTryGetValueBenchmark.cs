@@ -29,7 +29,7 @@ namespace Misnomer
             for (int i = 0; i != Count; ++i)
             {
                 int value = unchecked(Seed + i);
-                dictionary[value.ToString("x8")] = value;
+                dictionary![value.ToString("x8")] = value;
             }
 
             return dictionary;

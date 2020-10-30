@@ -27,7 +27,7 @@ namespace Misnomer
             {
                 TDictionary d = dictionaries[i];
                 Debug.Assert(d != null, "d != null");
-                int newItemCount = Math.Max(1, d.Count);
+                int newItemCount = Math.Max(1, d!.Count);
                 for (int k = 0; k != newItemCount; ++k)
                 {
                     long value = (upper << 24) | (i << 16) | k;
