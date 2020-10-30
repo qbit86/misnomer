@@ -41,11 +41,13 @@ namespace Misnomer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetHashCode(string obj)
         {
+            // ReSharper disable ConstantConditionalAccessQualifier
 #if NETCOREAPP2_0 || NETCOREAPP3_0 || NETSTANDARD2_1
             return obj?.GetHashCode(StringComparison.Ordinal) ?? 0;
 #else
             return obj?.GetHashCode() ?? 0;
 #endif
+            // ReSharper restore ConstantConditionalAccessQualifier
         }
 
         /// <summary>

@@ -30,6 +30,7 @@ namespace Misnomer
             return y is null;
         }
 
+        // ReSharper disable ConstantConditionalAccessQualifier
         /// <summary>
         /// Serves as a hash function for the specified object for hashing algorithms and data structures, such as a hash table.
         /// </summary>
@@ -37,6 +38,7 @@ namespace Misnomer
         /// <returns>A hash code for the specified object.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetHashCode(T obj) => obj?.GetHashCode() ?? 0;
+        // ReSharper restore ConstantConditionalAccessQualifier
 
         /// <summary>
         /// Indicates whether the current <see cref="GenericEqualityComparer{T}"/> object is equal to another <see cref="GenericEqualityComparer{T}"/> object.
