@@ -1,4 +1,5 @@
 [Rist.cs]
+dotnet_diagnostic.CA1062.severity = silent
 dotnet_diagnostic.CS0436.severity = silent
 dotnet_diagnostic.CS8601.severity = silent
 dotnet_diagnostic.CS8603.severity = silent
