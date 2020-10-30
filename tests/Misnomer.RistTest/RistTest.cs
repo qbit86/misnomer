@@ -120,7 +120,7 @@ namespace Misnomer
             var rist = new Rist<int> { 1, 2, 3, 5, 8, 13, 21 };
 
             // Act
-            Exception exception = Record.Exception(() =>
+            Exception? exception = Record.Exception(() =>
             {
                 foreach (int _ in rist)
                     rist.Dispose();
