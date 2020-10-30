@@ -50,7 +50,7 @@ namespace Misnomer
             }
 
             Debug.Assert(list.Count > 0);
-            return ((long)list[^1] << 32) + max;
+            return ((long)list[list.Count - 1] << 32) + max;
         }
 
 #pragma warning disable CA1822
