@@ -9,7 +9,7 @@ namespace Misnomer
         // https://en.wikipedia.org/wiki/Collatz_conjecture
         private static int GetNext(int n)
         {
-            return n % 2 == 0 ? n / 2 : 3 * n + 1;
+            return (n & 1) == 0 ? n / 2 : 3 * n + 1;
         }
 
         private static long MaxTrajectoryPoint<TList, TListPolicy>(TList list, TListPolicy p)
@@ -50,7 +50,7 @@ namespace Misnomer
             }
 
             Debug.Assert(list.Count > 0);
-            return ((long)list[list.Count - 1] << 32) + max;
+            return ((long)list[^1] << 32) + max;
         }
 
 #pragma warning disable CA1822

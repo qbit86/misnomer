@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Configs;
+﻿using BenchmarkDotNet.Analysers;
+using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
@@ -10,35 +11,35 @@ namespace Misnomer
 {
     internal static class Program
     {
+        private static readonly RunMode s_runMode = RunMode.Short;
+
         private static void Main()
         {
             // https://benchmarkdotnet.org/articles/configs/configs.html
-            Job clrLegacyJitJob = new Job(Job.Default)
-                .WithRuntime(ClrRuntime.Net48)
-                .WithPlatform(Platform.X86)
-                .WithJit(Jit.LegacyJit)
-                .ApplyAndFreeze(RunMode.Short);
 
-            Job clrRyuJitJob = new Job(Job.Default)
-                .WithRuntime(ClrRuntime.Net48)
-                .WithPlatform(Platform.X64)
-                .WithJit(Jit.RyuJit)
-                .ApplyAndFreeze(RunMode.Short);
-
-            Job coreRyuJitJob = new Job(Job.Default)
-                .WithRuntime(CoreRuntime.Core31)
-                .WithPlatform(Platform.X64)
-                .WithJit(Jit.RyuJit)
-                .WithBaseline(true)
-                .ApplyAndFreeze(RunMode.Short);
-
+            Job[] jobs = GetJobs();
             IConfig config = ManualConfig.Create(DefaultConfig.Instance)
                 .AddDiagnoser(MemoryDiagnoser.Default)
-                .AddJob(clrLegacyJitJob)
-                .AddJob(clrRyuJitJob)
-                .AddJob(coreRyuJitJob);
+                .AddAnalyser(EnvironmentAnalyser.Default)
+                .AddJob(jobs);
 
-            Summary _ = BenchmarkRunner.Run<StringJoinBenchmark>(config);
+            Summary _ = BenchmarkRunner.Run<RistBenchmark>(config);
+        }
+
+        private static Job[] GetJobs()
+        {
+            Job[] jobs =
+            {
+                new Job(Job.Default).WithJit(Jit.LegacyJit).WithRuntime(ClrRuntime.Net461),
+                new Job(Job.Default).WithJit(Jit.LegacyJit).WithRuntime(ClrRuntime.Net48),
+                new Job(Job.Default).WithJit(Jit.RyuJit).WithRuntime(CoreRuntime.Core20),
+                new Job(Job.Default).WithJit(Jit.RyuJit).WithRuntime(CoreRuntime.Core31),
+            };
+
+            foreach (Job job in jobs)
+                job.ApplyAndFreeze(s_runMode);
+
+            return jobs;
         }
     }
 }
