@@ -1,5 +1,7 @@
 [Rist.cs]
 dotnet_diagnostic.CS0436.severity = silent
+dotnet_diagnostic.CS8601.severity = silent
+dotnet_diagnostic.CS8603.severity = silent
 dotnet_diagnostic.CS8669.severity = silent
 generated_code = true
 
