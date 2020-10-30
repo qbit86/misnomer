@@ -46,6 +46,7 @@ namespace Misnomer
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     public static class Fictionary<TKey, TValue>
+        where TKey : notnull
     {
 #pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
@@ -91,7 +92,8 @@ namespace Misnomer
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
     public sealed partial class Fictionary<TKey, TValue, TKeyComparer> : IDisposable
-        where TKeyComparer : IEqualityComparer<TKey> where TKey : notnull
+        where TKey : notnull
+        where TKeyComparer : IEqualityComparer<TKey>
     {
         private static ArrayPool<Entry> Pool => ArrayPool<Entry>.Shared;
 
