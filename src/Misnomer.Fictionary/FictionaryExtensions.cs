@@ -39,6 +39,7 @@ namespace Misnomer.Extensions
         /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified comparer.</returns>
         public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TKey, TValue, TKeyComparer>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source, TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
@@ -55,6 +56,7 @@ namespace Misnomer.Extensions
         /// <returns>A new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified comparer.</returns>
         public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TKey, TValue, TKeyComparer>(
             this IDictionary<TKey, TValue> source, TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
@@ -94,6 +96,7 @@ namespace Misnomer.Extensions
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             if (source == null)
@@ -163,6 +166,7 @@ namespace Misnomer.Extensions
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             if (source == null)
@@ -199,6 +203,7 @@ namespace Misnomer.Extensions
             TSource[] source,
             Func<TSource, TKey> keySelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             var d = new Fictionary<TKey, TSource, TKeyComparer>(source.Length, comparer);
@@ -212,6 +217,7 @@ namespace Misnomer.Extensions
             List<TSource> source,
             Func<TSource, TKey> keySelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             var d = new Fictionary<TKey, TSource, TKeyComparer>(source.Count, comparer);
@@ -226,6 +232,7 @@ namespace Misnomer.Extensions
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             var d = new Fictionary<TKey, TValue, TKeyComparer>(source.Length, comparer);
@@ -240,6 +247,7 @@ namespace Misnomer.Extensions
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector,
             TKeyComparer comparer)
+            where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
             var d = new Fictionary<TKey, TValue, TKeyComparer>(source.Count, comparer);
