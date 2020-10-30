@@ -13,8 +13,10 @@ namespace Misnomer
     {
         private static readonly RunMode s_runMode = RunMode.Short;
         private static readonly Jit[] s_jits = { Jit.LegacyJit, Jit.RyuJit };
-        private static readonly Platform[] s_platforms = { Platform.X86, Platform.X64 };
-        private static readonly Runtime[] s_runtimes = { ClrRuntime.Net48, CoreRuntime.Core31 };
+        private static readonly Platform[] s_platforms = { Platform.X64 };
+
+        private static readonly Runtime[] s_runtimes =
+            { ClrRuntime.Net461, ClrRuntime.Net48, CoreRuntime.Core20, CoreRuntime.Core31 };
 
         private static void Main()
         {
@@ -25,7 +27,7 @@ namespace Misnomer
                 .AddAnalyser(EnvironmentAnalyser.Default)
                 .AddJob(jobs.ToArray());
 
-            Summary _ = BenchmarkRunner.Run<StringPutBenchmark>(config);
+            Summary _ = BenchmarkRunner.Run<DateTimePutBenchmark>(config);
         }
 
         private static IEnumerable<Job> GetJobs()
@@ -38,7 +40,8 @@ namespace Misnomer
 
                 foreach (Runtime runtime in s_runtimes)
                 {
-                    if (jit == Jit.LegacyJit && runtime.Equals(CoreRuntime.Core31))
+                    if (jit == Jit.LegacyJit &&
+                        (runtime.Equals(CoreRuntime.Core20) || runtime.Equals(CoreRuntime.Core31)))
                         continue;
 
                     yield return new Job(Job.Default)
