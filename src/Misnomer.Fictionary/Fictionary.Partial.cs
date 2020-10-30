@@ -17,10 +17,8 @@ namespace Misnomer
         /// Creates an empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the <see cref="GenericEqualityComparer{TKey}"/>.
         /// </summary>
         /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the <see cref="GenericEqualityComparer{TKey}"/>.</returns>
-        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create()
-        {
-            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(0, new GenericEqualityComparer<TKey>());
-        }
+        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create() =>
+            new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(0, new GenericEqualityComparer<TKey>());
 
         /// <summary>
         /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class that is empty,
@@ -31,11 +29,8 @@ namespace Misnomer
         /// A new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that has the specified initial capacity,
         /// and uses the <see cref="GenericEqualityComparer{TKey}"/>.
         /// </returns>
-        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(int capacity)
-        {
-            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity,
-                new GenericEqualityComparer<TKey>());
-        }
+        public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> Create(int capacity) =>
+            new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(capacity, new GenericEqualityComparer<TKey>());
     }
 
     /// <summary>
@@ -53,10 +48,8 @@ namespace Misnomer
         /// <typeparam name="TKeyComparer">The type of the comparer that is used to determine equality of keys for the dictionary.</typeparam>
         /// <returns>An empty <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that uses the specified comparer" />.</returns>
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(0, comparer);
-        }
+            where TKeyComparer : IEqualityComparer<TKey> =>
+            new Fictionary<TKey, TValue, TKeyComparer>(0, comparer);
 
         /// <summary>
         /// Creates a new instance of the <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> class that is empty,
@@ -70,10 +63,8 @@ namespace Misnomer
         /// and uses the specified comparer.
         /// </returns>
         public static Fictionary<TKey, TValue, TKeyComparer> Create<TKeyComparer>(int capacity, TKeyComparer comparer)
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
-        }
+            where TKeyComparer : IEqualityComparer<TKey> =>
+            new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
     }
 
     // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs

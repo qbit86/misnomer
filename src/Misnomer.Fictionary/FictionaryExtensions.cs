@@ -21,11 +21,8 @@ namespace Misnomer.Extensions
         /// </returns>
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> ToFictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source)
-            where TKey : IEquatable<TKey>
-        {
-            return new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(source,
-                new GenericEqualityComparer<TKey>());
-        }
+            where TKey : IEquatable<TKey> =>
+            new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(source, new GenericEqualityComparer<TKey>());
 
         /// <summary>
         /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified key comparer.
@@ -39,10 +36,8 @@ namespace Misnomer.Extensions
         public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TKey, TValue, TKeyComparer>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source, TKeyComparer comparer)
             where TKey : notnull
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
-        }
+            where TKeyComparer : IEqualityComparer<TKey> =>
+            new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
 
         /// <summary>
         /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified key comparer.
@@ -56,10 +51,8 @@ namespace Misnomer.Extensions
         public static Fictionary<TKey, TValue, TKeyComparer> ToFictionary<TKey, TValue, TKeyComparer>(
             this IDictionary<TKey, TValue> source, TKeyComparer comparer)
             where TKey : notnull
-            where TKeyComparer : IEqualityComparer<TKey>
-        {
-            return new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
-        }
+            where TKeyComparer : IEqualityComparer<TKey> =>
+            new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
 
         /// <summary>
         /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> of its contents by using the <see cref="GenericEqualityComparer{TKey}"/>.
@@ -72,10 +65,8 @@ namespace Misnomer.Extensions
         public static Fictionary<TKey, TSource, GenericEqualityComparer<TKey>> ToFictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
-            where TKey : IEquatable<TKey>
-        {
-            return source.ToFictionary(keySelector, new GenericEqualityComparer<TKey>());
-        }
+            where TKey : IEquatable<TKey> =>
+            source.ToFictionary(keySelector, new GenericEqualityComparer<TKey>());
 
         /// <summary>
         /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> of its contents by using the specified key comparer.
@@ -139,10 +130,8 @@ namespace Misnomer.Extensions
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector)
-            where TKey : IEquatable<TKey>
-        {
-            return source.ToFictionary(keySelector, elementSelector, new GenericEqualityComparer<TKey>());
-        }
+            where TKey : IEquatable<TKey> =>
+            source.ToFictionary(keySelector, elementSelector, new GenericEqualityComparer<TKey>());
 
         /// <summary>
         /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> of its contents by using the specified key comparer.
