@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETCOREAPP2_0 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace System
@@ -134,12 +135,12 @@ namespace System
             if (IsFromEnd)
                 return ToStringFromEnd();
 
-            return ((uint)Value).ToString();
+            return ((uint)Value).ToString(CultureInfo.InvariantCulture);
         }
 
         private string ToStringFromEnd()
         {
-            return '^' + Value.ToString();
+            return '^' + Value.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
