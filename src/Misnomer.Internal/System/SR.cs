@@ -22,21 +22,6 @@ namespace System
             return false;
         }
 
-        internal static string Format(string resourceFormat, params object?[]? args)
-        {
-            if (args != null)
-            {
-                if (UsingResourceKeys())
-                {
-                    return resourceFormat + ", " + string.Join(", ", args);
-                }
-
-                return string.Format(CultureInfo.InvariantCulture, resourceFormat, args);
-            }
-
-            return resourceFormat;
-        }
-
         internal static string Format(string resourceFormat, object? p1)
         {
             if (UsingResourceKeys())
@@ -65,6 +50,21 @@ namespace System
             }
 
             return string.Format(CultureInfo.InvariantCulture, resourceFormat, p1, p2, p3);
+        }
+
+        internal static string Format(string resourceFormat, params object?[]? args)
+        {
+            if (args != null)
+            {
+                if (UsingResourceKeys())
+                {
+                    return resourceFormat + ", " + string.Join(", ", args);
+                }
+
+                return string.Format(CultureInfo.InvariantCulture, resourceFormat, args);
+            }
+
+            return resourceFormat;
         }
     }
 }
