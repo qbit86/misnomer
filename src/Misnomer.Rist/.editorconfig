@@ -7,4 +7,5 @@ dotnet_diagnostic.CS8669.severity = silent
 generated_code = true
 
 [Rist.Partial.cs]
+dotnet_diagnostic.CA1200.severity = silent # Avoid using cref tags with a prefix
 dotnet_diagnostic.CS0436.severity = silent

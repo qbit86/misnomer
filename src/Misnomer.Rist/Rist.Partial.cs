@@ -2,8 +2,6 @@
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
-#pragma warning disable CA1200 // Avoid using cref tags with a prefix
-
 namespace Misnomer
 {
     // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs
