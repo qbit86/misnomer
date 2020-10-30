@@ -5,7 +5,6 @@ Enables devirtualization of calls to the key comparer.
 Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
 Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
     <Title>Fast dictionary</Title>
     <VersionPrefix>0.4.0</VersionPrefix>
