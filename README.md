@@ -7,7 +7,7 @@ Standard collections with some optimizations.
 [![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg?label=Rist&logo=nuget)](https://www.nuget.org/packages/Misnomer.Rist/)
 
 `Rist<T>` — recyclable indexed collection.
-Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs), but uses pooling for the internal array.
+Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs), but uses pooling for the internal array.
 
 ### Examples
 
@@ -44,7 +44,7 @@ The risk is that untrusted caller can hold a reference to an array after returni
 [![Fictionary version](https://img.shields.io/nuget/v/Misnomer.Fictionary.svg?label=Fictionary&logo=nuget)](https://www.nuget.org/packages/Misnomer.Fictionary/)
 
 `Fictionary<TKey, TValue, TKeyComparer>` — fast associative collection.
-Implementation is based on [Dictionary&lt;TKey, TValue&gt;](https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/Dictionary.cs), but uses generic parameter constraint for polymorphic key comparer.
+Implementation is based on [Dictionary&lt;TKey, TValue&gt;](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs), but uses generic parameter constraint for polymorphic key comparer.
 Specializing with concrete type instead of indirect call to [IEqualityComparer&lt;TKey&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1) interface allows to avoid virtual call and prevents from boxing in case of [value types](https://adamsitnik.com/Value-Types-vs-Reference-Types/).
 
 ### Examples
