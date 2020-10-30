@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-// ReSharper disable PossibleMultipleEnumeration
 namespace Misnomer
 {
     // https://github.com/aspnet/Home/wiki/Engineering-guidelines#unit-tests-and-functional-tests
