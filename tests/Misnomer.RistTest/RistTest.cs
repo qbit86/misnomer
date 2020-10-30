@@ -4,11 +4,10 @@ using System.Linq;
 using Xunit;
 
 // ReSharper disable PossibleMultipleEnumeration
-// ReSharper disable once CheckNamespace
-
 namespace Misnomer
 {
     // https://github.com/aspnet/Home/wiki/Engineering-guidelines#unit-tests-and-functional-tests
+
     public sealed class RistTest
     {
         private static double Sqrt5 { get; } = Math.Sqrt(5);
