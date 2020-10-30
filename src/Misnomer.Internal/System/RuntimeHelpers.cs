@@ -3,7 +3,6 @@ namespace System.Runtime.CompilerServices
 {
     internal static class RuntimeHelpers
     {
-        // ReSharper disable once UnusedTypeParameter
         internal static bool IsReferenceOrContainsReferences<T>()
         {
             return true;
