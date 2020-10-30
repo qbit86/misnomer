@@ -39,7 +39,14 @@ namespace Misnomer
         /// <param name="obj">A string.</param>
         /// <returns>A 32-bit signed hash code calculated from the value of the <paramref name="obj"/> parameter.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetHashCode(string obj) => obj?.GetHashCode() ?? 0;
+        public int GetHashCode(string obj)
+        {
+#if NETCOREAPP2_0 || NETCOREAPP3_0 || NETSTANDARD2_1
+            return obj?.GetHashCode(StringComparison.Ordinal) ?? 0;
+#else
+            return obj?.GetHashCode() ?? 0;
+#endif
+        }
 
         /// <summary>
         /// Indicates whether the current <see cref="OrdinalStringComparer"/> object is equal to another <see cref="OrdinalStringComparer"/> object.
