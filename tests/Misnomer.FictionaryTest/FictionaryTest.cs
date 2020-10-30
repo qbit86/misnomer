@@ -26,10 +26,7 @@ namespace Misnomer
         private static ImmutableDictionary<int, string> SampleDictionary =>
             s_sampleDictionary ??= CreateSampleDictionary();
 
-        private static double Geometric(int i)
-        {
-            return Math.Pow(CommonRatio, i) * ScaleFactor;
-        }
+        private static double Geometric(int i) => Math.Pow(CommonRatio, i) * ScaleFactor;
 
         private static ImmutableArray<KeyValuePair<int, string>> CreateSampleItems()
         {
