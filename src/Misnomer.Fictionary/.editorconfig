@@ -1,4 +1,5 @@
 [Fictionary.cs]
+dotnet_diagnostic.CA1062.severity = silent
 dotnet_diagnostic.CS0436.severity = silent
 dotnet_diagnostic.CS8602.severity = silent
 dotnet_diagnostic.CS8618.severity = silent
