@@ -115,7 +115,7 @@ namespace Misnomer
             }
         }
 
-        protected Fictionary(SerializationInfo info, StreamingContext context)
+        private Fictionary(SerializationInfo info, StreamingContext context)
         {
             // We can't do anything with the keys and values until the entire graph has been deserialized
             // and we have a resonable estimate that GetHashCode is not going to fail.  For the time being,
