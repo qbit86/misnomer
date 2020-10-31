@@ -4,9 +4,9 @@
 // Used by Hashtable and Dictionary's SeralizationInfo .ctor's to store the SeralizationInfo
 // object until OnDeserialization is called.
 
-using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Threading;
 
 namespace System.Collections
 {
@@ -19,7 +19,10 @@ namespace System.Collections
             get
             {
                 if (s_serializationInfoTable == null)
-                    Interlocked.CompareExchange(ref s_serializationInfoTable, new ConditionalWeakTable<object, SerializationInfo>(), null);
+                {
+                    Interlocked.CompareExchange(
+                        ref s_serializationInfoTable, new ConditionalWeakTable<object, SerializationInfo>(), null);
+                }
 
                 return s_serializationInfoTable;
             }
