@@ -1,4 +1,6 @@
 [Fictionary.cs]
+dotnet_diagnostic.CS8602.severity = silent # Dereference of a possibly null reference
+dotnet_diagnostic.CS8618.severity = silent # Non-nullable member is uninitialized
 dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' context
 generated_code = true
 
