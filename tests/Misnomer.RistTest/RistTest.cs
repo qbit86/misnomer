@@ -119,8 +119,10 @@ namespace Misnomer
             // Act
             Exception? exception = Record.Exception(() =>
             {
+                // ReSharper disable AccessToDisposedClosure
                 foreach (int _ in rist)
                     rist.Dispose();
+                // ReSharper restore AccessToDisposedClosure
             });
 
             // Assert
