@@ -8,7 +8,7 @@ namespace Misnomer
     {
         private OrdinalStringComparerObject() { }
 
-        internal static OrdinalStringComparerObject Default { get; } = new OrdinalStringComparerObject();
+        internal static OrdinalStringComparerObject Default { get; } = new();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(string? x, string? y) => string.Equals(x, y, StringComparison.Ordinal);

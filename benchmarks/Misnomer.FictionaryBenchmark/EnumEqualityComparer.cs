@@ -22,7 +22,7 @@ namespace Misnomer
     {
         private EnumEqualityComparerObject() { }
 
-        internal static EnumEqualityComparerObject Default { get; } = new EnumEqualityComparerObject();
+        internal static EnumEqualityComparerObject Default { get; } = new();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Key x, Key y) => (int)y == (int)x;

@@ -10,7 +10,7 @@ namespace Misnomer
     {
         private GenericEqualityComparerObject() { }
 
-        internal static GenericEqualityComparerObject<T> Default { get; } = new GenericEqualityComparerObject<T>();
+        internal static GenericEqualityComparerObject<T> Default { get; } = new();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals([AllowNull] T x, [AllowNull] T y)
