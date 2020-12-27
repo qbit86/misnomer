@@ -2,7 +2,6 @@
 dotnet_diagnostic.CA1034.severity = silent # Nested types should not be visible
 dotnet_diagnostic.CA1062.severity = silent # Validate arguments of public methods
 dotnet_diagnostic.CA1710.severity = silent # Identifiers should have correct suffix
-dotnet_diagnostic.CS0436.severity = silent # The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'
 dotnet_diagnostic.CS8602.severity = silent # Dereference of a possibly null reference
 dotnet_diagnostic.CS8618.severity = silent # Non-nullable member is uninitialized
 dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' context
