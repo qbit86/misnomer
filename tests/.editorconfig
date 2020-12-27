@@ -1,5 +1,6 @@
 [*.cs]
 dotnet_diagnostic.CA1707.severity = silent # Identifiers should not contain underscores
+dotnet_diagnostic.CA5394.severity = suggestion # Do not use insecure randomness
 dotnet_diagnostic.IDE0007.severity = silent # Use 'var' instead of explicit type
 dotnet_diagnostic.IDE0008.severity = silent # Use explicit type instead of 'var'
 dotnet_diagnostic.IDE0017.severity = silent # Use object initializers

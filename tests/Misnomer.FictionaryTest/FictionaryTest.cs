@@ -139,7 +139,7 @@ namespace Misnomer
         {
             // Arrange
             var dictionary = new Dictionary<string, double>(StringComparer.Ordinal);
-            Fictionary<string, double, StringComparer> fictionary =
+            using Fictionary<string, double, StringComparer> fictionary =
                 Fictionary<string, double>.Create(StringComparer.Ordinal);
 
             int count = SampleItems.Length;
@@ -210,7 +210,7 @@ namespace Misnomer
             // Arrange
             int count = SampleItems.Length;
             var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
-            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(0, EqualityComparer<int>.Default);
+            using Fictionary<int, string, EqualityComparer<int>> fictionary = new(0, EqualityComparer<int>.Default);
 
             // Act
             foreach (KeyValuePair<int, string> kv in SampleItems.Mix())

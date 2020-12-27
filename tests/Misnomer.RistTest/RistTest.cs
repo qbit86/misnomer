@@ -16,8 +16,8 @@ namespace Misnomer
         public void Add_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var list = new List<int>();
-            var rist = new Rist<int>();
+            List<int> list = new();
+            using Rist<int> rist = new();
             const int count = 23;
 
             // Act
@@ -36,8 +36,8 @@ namespace Misnomer
         public void AddRange_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var list = new List<int>();
-            var rist = new Rist<int>();
+            List<int> list = new();
+            using Rist<int> rist = new();
             IEnumerable<int> collection = new[] { 8, 21, 2, 3, 13, 1, 5 }.AsNothingButIEnumerable();
 
             // Act
@@ -52,7 +52,7 @@ namespace Misnomer
         public void Capacity_ShouldBeEnough()
         {
             // Arrange
-            var rist = new Rist<int> { 21, 2, 8, 5, 3, 13, 1 };
+            using Rist<int> rist = new() { 21, 2, 8, 5, 3, 13, 1 };
 
             // Act
             rist.Capacity = 9;
@@ -66,10 +66,7 @@ namespace Misnomer
         {
             // Arrange
             int[] expected = { 8, 2, 21, 5, 3, 34, 13 };
-            var actual = new Rist<int>(expected);
-
-            // Act
-            actual.Capacity = 23;
+            using Rist<int> actual = new(expected) { Capacity = 23 };
 
             // Assert
             Assert.Equal(expected, actual);
@@ -79,7 +76,7 @@ namespace Misnomer
         public void Capacity_ShouldThrow_WhenLessThenSize()
         {
             // Arrange
-            var rist = new Rist<int> { 21, 2, 8, 5, 3, 13, 1 };
+            using Rist<int> rist = new() { 21, 2, 8, 5, 3, 13, 1 };
 
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => rist.Capacity = 3);
@@ -90,10 +87,10 @@ namespace Misnomer
         {
             // Arrange
             IEnumerable<int> collection = new[] { 21, 2, 8, 5, 3, 13, 1 };
-            var expected = new List<int>(collection);
+            List<int> expected = new(collection);
 
             // Act
-            var actual = new Rist<int>(collection);
+            using Rist<int> actual = new(collection);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -103,11 +100,11 @@ namespace Misnomer
         public void Create_WithEnumerable()
         {
             // Arrange
-            IEnumerable<int> collection = new[] { 21, 2, 8, 5, 3, 13, 1 }.AsNothingButIEnumerable();
-            var expected = new List<int>(collection);
+            int[] array = { 21, 2, 8, 5, 3, 13, 1 };
+            List<int> expected = new(array.AsNothingButIEnumerable());
 
             // Act
-            var actual = new Rist<int>(collection);
+            using Rist<int> actual = new(array.AsNothingButIEnumerable());
 
             // Assert
             Assert.Equal(expected, actual);
@@ -117,7 +114,7 @@ namespace Misnomer
         public void Enumeration_ShouldThrow_WhenDisposed()
         {
             // Arrange
-            var rist = new Rist<int> { 1, 2, 3, 5, 8, 13, 21 };
+            using Rist<int> rist = new() { 1, 2, 3, 5, 8, 13, 21 };
 
             // Act
             Exception? exception = Record.Exception(() =>
@@ -135,8 +132,8 @@ namespace Misnomer
         {
             // Arrange
             const int count = 23;
-            var list = new List<int>(Enumerable.Repeat(int.MinValue, count));
-            var rist = new Rist<int>(Enumerable.Repeat(-1, count));
+            List<int> list = new(Enumerable.Repeat(int.MinValue, count));
+            using Rist<int> rist = new(Enumerable.Repeat(-1, count));
 
             // Act
             for (int i = 0; i != count; ++i)
@@ -156,10 +153,10 @@ namespace Misnomer
         public void Insert_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var list = new List<int>();
-            var rist = new Rist<int>();
+            List<int> list = new();
+            using Rist<int> rist = new();
             const int count = 23;
-            var prng = new Random(nameof(Insert_ShouldBehaveTheSameWay).GetHashCode());
+            Random prng = new(nameof(Insert_ShouldBehaveTheSameWay).GetHashCode(StringComparison.Ordinal));
 
             // Act
             for (int i = 0; i != count; ++i)
@@ -178,11 +175,11 @@ namespace Misnomer
         public void InsertRange_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var list = new List<int>();
-            var rist = new Rist<int>();
+            List<int> list = new();
+            using Rist<int> rist = new();
             const int count = 8;
-            var prng = new Random(nameof(InsertRange_ShouldBehaveTheSameWay).GetHashCode());
-            var range = new List<int>(count);
+            Random prng = new(nameof(InsertRange_ShouldBehaveTheSameWay).GetHashCode(StringComparison.Ordinal));
+            List<int> range = new(count);
 
             // Act
             for (int i = 0; i != count; ++i)
@@ -209,13 +206,10 @@ namespace Misnomer
         public void RemoveAll_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var list = new List<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
-            var rist = new Rist<char>(nameof(RemoveAll_ShouldBehaveTheSameWay));
+            List<char> list = new(nameof(RemoveAll_ShouldBehaveTheSameWay));
+            using Rist<char> rist = new(nameof(RemoveAll_ShouldBehaveTheSameWay));
 
-            static bool Match(char c)
-            {
-                return (Convert.ToInt32(c) & 1) == 0;
-            }
+            static bool Match(char c) => (Convert.ToInt32(c) & 1) == 0;
 
             // Act
             list.RemoveAll(Match);
