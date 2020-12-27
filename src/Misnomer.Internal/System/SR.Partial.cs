@@ -1,6 +1,6 @@
 ﻿namespace System
 {
-    // https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/src/Resources/Strings.resx
+    // https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/Resources/Strings.resx
 
     internal static partial class SR
     {
