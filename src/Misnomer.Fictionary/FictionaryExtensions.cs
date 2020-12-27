@@ -109,7 +109,7 @@ namespace Misnomer.Extensions
                     return ToFictionary(list, keySelector, comparer);
             }
 
-            var d = new Fictionary<TKey, TSource, TKeyComparer>(capacity, comparer);
+            Fictionary<TKey, TSource, TKeyComparer> d = new(capacity, comparer);
             foreach (TSource element in source)
                 d.Add(keySelector(element), element);
 
@@ -180,7 +180,7 @@ namespace Misnomer.Extensions
                     return ToFictionary(list, keySelector, elementSelector, comparer);
             }
 
-            var d = new Fictionary<TKey, TValue, TKeyComparer>(capacity, comparer);
+            Fictionary<TKey, TValue, TKeyComparer> d = new(capacity, comparer);
             foreach (TSource element in source)
                 d.Add(keySelector(element), elementSelector(element));
 
@@ -194,7 +194,7 @@ namespace Misnomer.Extensions
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
-            var d = new Fictionary<TKey, TSource, TKeyComparer>(source.Length, comparer);
+            Fictionary<TKey, TSource, TKeyComparer> d = new(source.Length, comparer);
             for (int i = 0; i < source.Length; ++i)
                 d.Add(keySelector(source[i]), source[i]);
 
@@ -208,7 +208,7 @@ namespace Misnomer.Extensions
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
-            var d = new Fictionary<TKey, TSource, TKeyComparer>(source.Count, comparer);
+            Fictionary<TKey, TSource, TKeyComparer> d = new(source.Count, comparer);
             foreach (TSource element in source)
                 d.Add(keySelector(element), element);
 
@@ -223,7 +223,7 @@ namespace Misnomer.Extensions
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
-            var d = new Fictionary<TKey, TValue, TKeyComparer>(source.Length, comparer);
+            Fictionary<TKey, TValue, TKeyComparer> d = new(source.Length, comparer);
             for (int i = 0; i < source.Length; ++i)
                 d.Add(keySelector(source[i]), elementSelector(source[i]));
 
@@ -238,7 +238,7 @@ namespace Misnomer.Extensions
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey>
         {
-            var d = new Fictionary<TKey, TValue, TKeyComparer>(source.Count, comparer);
+            Fictionary<TKey, TValue, TKeyComparer> d = new(source.Count, comparer);
             foreach (TSource element in source)
                 d.Add(keySelector(element), elementSelector(element));
 
