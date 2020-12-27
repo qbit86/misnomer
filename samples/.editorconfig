@@ -1,3 +1,0 @@
-[*.cs]
-dotnet_diagnostic.IDE0007.severity = silent # Use 'var' instead of explicit type
-dotnet_diagnostic.IDE0058.severity = silent # Remove unnecessary expression value
