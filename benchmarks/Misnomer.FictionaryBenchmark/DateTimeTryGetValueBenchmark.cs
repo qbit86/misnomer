@@ -37,7 +37,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(new GenericEqualityComparer<Key>());
+            Dictionary<Key, int> dictionary = new(new GenericEqualityComparer<Key>());
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -52,7 +52,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
         public void GlobalSetupDictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(GenericEqualityComparerObject<Key>.Default);
+            Dictionary<Key, int> dictionary = new(GenericEqualityComparerObject<Key>.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -68,7 +68,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            var dictionary = new Dictionary<Key, int>(comparer);
+            Dictionary<Key, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -84,7 +84,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            var dictionary = new Dictionary<Key, int>(comparer);
+            Dictionary<Key, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -99,7 +99,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
         public void GlobalSetupDictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<Key, int>(EqualityComparer<Key>.Default);
+            Dictionary<Key, int> dictionary = new(EqualityComparer<Key>.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -113,7 +113,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryDefault))]
         public void GlobalSetupDictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>();
+            Dictionary<Key, int> dictionary = new();
             _dictionary = PopulateDictionary(dictionary);
         }
 

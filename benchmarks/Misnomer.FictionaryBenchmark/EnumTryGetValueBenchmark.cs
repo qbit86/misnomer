@@ -48,7 +48,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
         public void GlobalSetupDictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(EnumEqualityComparerObject.Default);
+            Dictionary<Key, int> dictionary = new(EnumEqualityComparerObject.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -62,7 +62,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryDefault))]
         public void GlobalSetupDictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>();
+            Dictionary<Key, int> dictionary = new();
             _dictionary = PopulateDictionary(dictionary);
         }
 
