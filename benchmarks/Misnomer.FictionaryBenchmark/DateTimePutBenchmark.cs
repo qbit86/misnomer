@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 using Key = System.DateTime;
 
@@ -14,8 +13,6 @@ namespace Misnomer
         private static int PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<Key, int>
         {
-            Debug.Assert(dictionary != null, "dictionary != null");
-
             for (int i = 0; i != Count; ++i)
             {
                 int firstValue = (7 + 1723 * i) % Count;
@@ -36,30 +33,30 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(Count, new GenericEqualityComparer<Key>());
+            Dictionary<Key, int> dictionary = new(Count, new GenericEqualityComparer<Key>());
             return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            var fictionaryConcreteValue =
-                new Fictionary<Key, int, GenericEqualityComparer<Key>>(Count, new GenericEqualityComparer<Key>());
+            Fictionary<Key, int, GenericEqualityComparer<Key>> fictionaryConcreteValue =
+                new(Count, new GenericEqualityComparer<Key>());
             return PopulateDictionary(fictionaryConcreteValue);
         }
 
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(Count, GenericEqualityComparerObject<Key>.Default);
+            Dictionary<Key, int> dictionary = new(Count, GenericEqualityComparerObject<Key>.Default);
             return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            var fictionaryConcreteReference = new Fictionary<Key, int, GenericEqualityComparerObject<Key>>(
-                Count, GenericEqualityComparerObject<Key>.Default);
+            Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionaryConcreteReference =
+                new(Count, GenericEqualityComparerObject<Key>.Default);
             return PopulateDictionary(fictionaryConcreteReference);
         }
 
@@ -67,7 +64,7 @@ namespace Misnomer
         public int DictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            Dictionary<Key, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -75,7 +72,7 @@ namespace Misnomer
         public int FictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -83,7 +80,7 @@ namespace Misnomer
         public int DictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            Dictionary<Key, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -91,29 +88,29 @@ namespace Misnomer
         public int FictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            var fictionaryVirtual = new Fictionary<Key, int, IEqualityComparer<Key>>(Count, comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
         [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<Key, int>(Count, EqualityComparer<Key>.Default);
+            Dictionary<Key, int> dictionary = new(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(dictionary);
         }
 
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            var fictionaryStandardPolymorphic =
-                new Fictionary<Key, int, EqualityComparer<Key>>(Count, EqualityComparer<Key>.Default);
+            Fictionary<Key, int, EqualityComparer<Key>> fictionaryStandardPolymorphic =
+                new(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(fictionaryStandardPolymorphic);
         }
 
         [Benchmark]
         public int DictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>(Count);
+            Dictionary<Key, int> dictionary = new(Count);
             return PopulateDictionary(dictionary);
         }
 
