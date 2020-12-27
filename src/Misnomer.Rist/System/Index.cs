@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#if NETCOREAPP2_0 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
+#if NETCOREAPP2_1 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
 using System.Globalization;
 using System.Runtime.CompilerServices;
 

@@ -1,4 +1,4 @@
-#if NETCOREAPP2_0 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
+#if NETCOREAPP2_1 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property)]
