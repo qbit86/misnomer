@@ -22,7 +22,7 @@ namespace Misnomer
         [Benchmark(Baseline = true)]
         public string Move()
         {
-            Rist<string> list = CreateAndPopulateList();
+            using Rist<string> list = CreateAndPopulateList();
 
             string[] array = list.MoveToArray();
             return string.Join(", ", array, 1, 3);
@@ -31,7 +31,7 @@ namespace Misnomer
         [Benchmark]
         public string Copy()
         {
-            Rist<string> list = CreateAndPopulateList();
+            using Rist<string> list = CreateAndPopulateList();
 
             string[] array = list.ToArray();
             return string.Join(", ", array, 1, 3);
@@ -40,7 +40,7 @@ namespace Misnomer
         [Benchmark]
         public string Linq()
         {
-            Rist<string> list = CreateAndPopulateList();
+            using Rist<string> list = CreateAndPopulateList();
 
             IEnumerable<string> enumerable = list.Skip(1).Take(3);
             return string.Join(", ", enumerable);

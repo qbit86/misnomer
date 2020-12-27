@@ -54,7 +54,11 @@ namespace Misnomer
         public long List() => MaxTrajectoryPoint(new List<int>(), new ListPolicy());
 
         [Benchmark]
-        public long Rist() => MaxTrajectoryPoint(new Rist<int>(), new RistPolicy());
+        public long Rist()
+        {
+            using Rist<int> rist = new();
+            return MaxTrajectoryPoint(rist, new RistPolicy());
+        }
     }
 
     internal interface IListPolicy<in TList>
