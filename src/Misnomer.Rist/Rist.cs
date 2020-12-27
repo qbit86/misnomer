@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Misnomer
@@ -80,7 +81,6 @@ namespace Misnomer
             }
             else
             {
-                _size = 0;
                 _items = s_emptyArray;
                 using (IEnumerator<T> en = collection!.GetEnumerator())
                 {
@@ -417,7 +417,7 @@ namespace Misnomer
         public bool Exists(Predicate<T> match)
             => FindIndex(match) != -1;
 
-        public T Find(Predicate<T> match)
+        public T? Find(Predicate<T> match)
         {
             if (match == null)
             {
@@ -483,7 +483,7 @@ namespace Misnomer
             return -1;
         }
 
-        public T FindLast(Predicate<T> match)
+        public T? FindLast(Predicate<T> match)
         {
             if (match == null)
             {
@@ -1080,7 +1080,7 @@ namespace Misnomer
             private readonly Rist<T> _list;
             private int _index;
             private readonly int _version;
-            private T _current;
+            private T? _current;
 
             internal Enumerator(Rist<T> list)
             {
