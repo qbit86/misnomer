@@ -23,7 +23,7 @@ namespace Misnomer
     {
         private ArraySegmentComparerObject() { }
 
-        internal static ArraySegmentComparerObject<T> Default { get; } = new ArraySegmentComparerObject<T>();
+        internal static ArraySegmentComparerObject<T> Default { get; } = new();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(ArraySegment<T> x, ArraySegment<T> y) =>

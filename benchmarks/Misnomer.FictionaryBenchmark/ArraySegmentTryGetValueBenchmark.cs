@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 using Key = System.ArraySegment<int>;
 
@@ -22,18 +21,16 @@ namespace Misnomer
 
         private int _trialSeed;
 
-        private Key Trial { get; set; } = new Key(Array.Empty<int>());
+        private Key Trial { get; set; } = new(Array.Empty<int>());
 
         private static TDictionary PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<Key, int>
         {
-            Debug.Assert(dictionary != null, "dictionary != null");
-
             for (int i = 0; i != Count; ++i)
             {
                 // 269th prime.
                 int value = (5 + 1723 * i) % Count;
-                var key = new Key(s_array, value, Count - value);
+                Key key = new(s_array, value, Count - value);
                 dictionary![key] = value;
             }
 
@@ -53,30 +50,30 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(new ArraySegmentEqualityComparer<int>());
+            Dictionary<Key, int> dictionary = new(new ArraySegmentEqualityComparer<int>());
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            var fictionary =
-                new Fictionary<Key, int, ArraySegmentEqualityComparer<int>>(new ArraySegmentEqualityComparer<int>());
+            Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionary =
+                new(new ArraySegmentEqualityComparer<int>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
         public void GlobalSetupDictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(ArraySegmentComparerObject<int>.Default);
+            Dictionary<Key, int> dictionary = new(ArraySegmentComparerObject<int>.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            var fictionary =
-                new Fictionary<Key, int, ArraySegmentComparerObject<int>>(ArraySegmentComparerObject<int>.Default);
+            Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionary =
+                new(ArraySegmentComparerObject<int>.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
 
@@ -84,7 +81,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            var dictionary = new Dictionary<Key, int>(comparer);
+            Dictionary<Key, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -92,7 +89,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -100,7 +97,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            var dictionary = new Dictionary<Key, int>(comparer);
+            Dictionary<Key, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -108,28 +105,28 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
         [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
         public void GlobalSetupDictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<Key, int>(EqualityComparer<Key>.Default);
+            Dictionary<Key, int> dictionary = new(EqualityComparer<Key>.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            var fictionary = new Fictionary<Key, int, EqualityComparer<Key>>(EqualityComparer<Key>.Default);
+            Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 
         [GlobalSetup(Target = nameof(DictionaryDefault))]
         public void GlobalSetupDictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>();
+            Dictionary<Key, int> dictionary = new();
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -147,37 +144,37 @@ namespace Misnomer
         #region Benchmarks
 
         [Benchmark]
-        public bool DictionaryConcreteValue() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryConcreteValue() => _dictionary!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool FictionaryConcreteValue() => _fictionaryConcreteValue!.TryGetValue(Trial, out int _);
+        public bool FictionaryConcreteValue() => _fictionaryConcreteValue!.TryGetValue(Trial, out _);
 
         [Benchmark(Baseline = true)]
-        public bool DictionaryConcreteReference() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryConcreteReference() => _dictionary!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool FictionaryConcreteReference() => _fictionaryConcreteReference!.TryGetValue(Trial, out int _);
+        public bool FictionaryConcreteReference() => _fictionaryConcreteReference!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool DictionaryVirtualValue() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryVirtualValue() => _dictionary!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool FictionaryVirtualValue() => _fictionaryVirtual!.TryGetValue(Trial, out int _);
+        public bool FictionaryVirtualValue() => _fictionaryVirtual!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool DictionaryVirtualReference() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryVirtualReference() => _dictionary!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool FictionaryVirtualReference() => _fictionaryVirtual!.TryGetValue(Trial, out int _);
+        public bool FictionaryVirtualReference() => _fictionaryVirtual!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool DictionaryStandardPolymorphic() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryStandardPolymorphic() => _dictionary!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool FictionaryStandardPolymorphic() => _fictionaryStandardPolymorphic!.TryGetValue(Trial, out int _);
+        public bool FictionaryStandardPolymorphic() => _fictionaryStandardPolymorphic!.TryGetValue(Trial, out _);
 
         [Benchmark]
-        public bool DictionaryDefault() => _dictionary!.TryGetValue(Trial, out int _);
+        public bool DictionaryDefault() => _dictionary!.TryGetValue(Trial, out _);
 
         #endregion
     }
