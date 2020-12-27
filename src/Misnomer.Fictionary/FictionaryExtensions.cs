@@ -22,7 +22,7 @@ namespace Misnomer.Extensions
         public static Fictionary<TKey, TValue, GenericEqualityComparer<TKey>> ToFictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source)
             where TKey : IEquatable<TKey> =>
-            new Fictionary<TKey, TValue, GenericEqualityComparer<TKey>>(source, new GenericEqualityComparer<TKey>());
+            new(source, new GenericEqualityComparer<TKey>());
 
         /// <summary>
         /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified key comparer.
@@ -37,7 +37,7 @@ namespace Misnomer.Extensions
             this IEnumerable<KeyValuePair<TKey, TValue>> source, TKeyComparer comparer)
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey> =>
-            new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
+            new(source, comparer);
 
         /// <summary>
         /// Creates a new <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> that contains the specified items and uses the specified key comparer.
@@ -52,7 +52,7 @@ namespace Misnomer.Extensions
             this IDictionary<TKey, TValue> source, TKeyComparer comparer)
             where TKey : notnull
             where TKeyComparer : IEqualityComparer<TKey> =>
-            new Fictionary<TKey, TValue, TKeyComparer>(source, comparer);
+            new(source, comparer);
 
         /// <summary>
         /// Enumerates and transforms a sequence, and produces a <see cref="Fictionary{TKey, TValue, TKeyComparer}"/> of its contents by using the <see cref="GenericEqualityComparer{TKey}"/>.
