@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
 
-namespace Misnomer
+#if NETCOREAPP2_1 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
+namespace System
 {
     /// <summary>
     /// Represents a method that converts an object from one type to another type.
@@ -12,3 +12,4 @@ namespace Misnomer
     /// <typeparam name="TOutput">The type the input object is to be converted to.</typeparam>
     public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
 }
+#endif
