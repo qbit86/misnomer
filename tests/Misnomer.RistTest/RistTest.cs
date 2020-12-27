@@ -36,13 +36,13 @@ namespace Misnomer
         public void AddRange_ShouldBehaveTheSameWay()
         {
             // Arrange
+            int[] array = { 8, 21, 2, 3, 13, 1, 5 };
             List<int> list = new();
             using Rist<int> rist = new();
-            IEnumerable<int> collection = new[] { 8, 21, 2, 3, 13, 1, 5 }.AsNothingButIEnumerable();
 
             // Act
-            list.AddRange(collection);
-            rist.AddRange(collection);
+            list.AddRange(array.AsNothingButIEnumerable());
+            rist.AddRange(array.AsNothingButIEnumerable());
 
             // Assert
             Assert.Equal(list, rist);
