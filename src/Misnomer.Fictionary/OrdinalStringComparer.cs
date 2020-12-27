@@ -42,7 +42,7 @@ namespace Misnomer
         public int GetHashCode(string obj)
         {
             // ReSharper disable ConstantConditionalAccessQualifier
-#if NETCOREAPP2_1 || NETCOREAPP3_0 || NETSTANDARD2_1
+#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
             return obj?.GetHashCode(StringComparison.Ordinal) ?? 0;
 #else
             return obj?.GetHashCode() ?? 0;
