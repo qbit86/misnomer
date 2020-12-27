@@ -14,7 +14,8 @@ namespace Misnomer
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    public partial class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>, ISerializable, IDeserializationCallback
+    public partial class Fictionary<TKey, TValue, TKeyComparer> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>, ISerializable, IDeserializationCallback where TKey : notnull
+        where TKeyComparer : IEqualityComparer<TKey>
     {
         // constants for serialization
         private const string VersionName = "Version"; // Do not rename (binary serialization)
@@ -1423,7 +1424,7 @@ namespace Misnomer
                 private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
                 private int _index;
                 private readonly int _version;
-                [AllowNull, MaybeNull] private TKey _currentKey;
+                private TKey? _currentKey;
 
                 internal Enumerator(Fictionary<TKey, TValue, TKeyComparer> dictionary)
                 {
@@ -1615,7 +1616,7 @@ namespace Misnomer
                 private readonly Fictionary<TKey, TValue, TKeyComparer> _dictionary;
                 private int _index;
                 private readonly int _version;
-                [AllowNull, MaybeNull] private TValue _currentValue;
+                private TValue? _currentValue;
 
                 internal Enumerator(Fictionary<TKey, TValue, TKeyComparer> dictionary)
                 {
