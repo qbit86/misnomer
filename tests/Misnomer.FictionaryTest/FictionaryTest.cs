@@ -122,7 +122,7 @@ namespace Misnomer
         public void Create_WithDictionary()
         {
             // Arrange
-            var keyComparer = new GenericEqualityComparer<int>();
+            GenericEqualityComparer<int> keyComparer = default;
 
             // Act
             Dictionary<int, string> dictionary = new(SampleDictionary, Int32EqualityComparer.Default);
