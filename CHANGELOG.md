@@ -2,7 +2,7 @@
 
 ## [Unreleased] - 2020-12-27
 ### Added
-- Support of `netcoreapp2.1` and `netcoreapp3.0` target platform.
+- Support of `netcoreapp2.1` and `netcoreapp3.1` target platform.
 - Nullable annotation and warning contexts.
 
 ### Changed
