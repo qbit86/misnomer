@@ -4,6 +4,7 @@ using Key = System.DateTime;
 
 namespace Misnomer
 {
+#pragma warning disable CA2000 // Dispose objects before losing scope
     public abstract class DateTimeTryGetValueBenchmark
     {
         // 270th prime.
@@ -43,7 +44,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            using Fictionary<Key, int, GenericEqualityComparer<Key>> fictionary =
+            Fictionary<Key, int, GenericEqualityComparer<Key>> fictionary =
                 new(new GenericEqualityComparer<Key>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
@@ -58,7 +59,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            using Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionary =
+            Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionary =
                 new(GenericEqualityComparerObject<Key>.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
@@ -75,7 +76,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -91,7 +92,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -105,7 +106,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            using Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
+            Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 
@@ -164,4 +165,5 @@ namespace Misnomer
 
         #endregion
     }
+#pragma warning restore CA2000 // Dispose objects before losing scope
 }

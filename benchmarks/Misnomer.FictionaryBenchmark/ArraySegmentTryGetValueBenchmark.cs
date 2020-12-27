@@ -5,6 +5,7 @@ using Key = System.ArraySegment<int>;
 
 namespace Misnomer
 {
+#pragma warning disable CA2000 // Dispose objects before losing scope
     [MemoryDiagnoser]
     public abstract class ArraySegmentTryGetValueBenchmark
     {
@@ -57,7 +58,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            using Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionary =
+            Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionary =
                 new(new ArraySegmentEqualityComparer<int>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
@@ -72,7 +73,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            using Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionary =
+            Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionary =
                 new(ArraySegmentComparerObject<int>.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
@@ -89,7 +90,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -105,7 +106,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -119,7 +120,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            using Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
+            Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 
@@ -178,4 +179,5 @@ namespace Misnomer
 
         #endregion
     }
+#pragma warning restore CA2000 // Dispose objects before losing scope
 }

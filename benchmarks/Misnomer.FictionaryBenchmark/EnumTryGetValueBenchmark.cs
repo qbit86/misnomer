@@ -4,6 +4,7 @@ using Key = System.ConsoleColor;
 
 namespace Misnomer
 {
+#pragma warning disable CA2000 // Dispose objects before losing scope
     public abstract class EnumTryGetValueBenchmark
     {
         // 270th prime.
@@ -54,7 +55,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            using Fictionary<Key, int, EnumEqualityComparer> fictionary = new(new EnumEqualityComparer());
+            Fictionary<Key, int, EnumEqualityComparer> fictionary = new(new EnumEqualityComparer());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
@@ -110,4 +111,5 @@ namespace Misnomer
 
         #endregion
     }
+#pragma warning restore CA2000 // Dispose objects before losing scope
 }

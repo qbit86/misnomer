@@ -33,7 +33,7 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<Key, int>(Count, new EnumEqualityComparer());
+            Dictionary<Key, int> dictionary = new(Count, new EnumEqualityComparer());
             return PopulateDictionary(dictionary);
         }
 
@@ -48,7 +48,7 @@ namespace Misnomer
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<Key, int>(Count, EnumEqualityComparerObject.Default);
+            Dictionary<Key, int> dictionary = new(Count, EnumEqualityComparerObject.Default);
             return PopulateDictionary(dictionary);
         }
 
@@ -64,7 +64,7 @@ namespace Misnomer
         public int DictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new EnumEqualityComparer();
-            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            Dictionary<Key, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -80,7 +80,7 @@ namespace Misnomer
         public int DictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = EnumEqualityComparerObject.Default;
-            var dictionary = new Dictionary<Key, int>(Count, comparer);
+            Dictionary<Key, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -95,7 +95,7 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<Key, int>(Count, EqualityComparer<Key>.Default);
+            Dictionary<Key, int> dictionary = new(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(dictionary);
         }
 
@@ -110,7 +110,7 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryDefault()
         {
-            var dictionary = new Dictionary<Key, int>(Count);
+            Dictionary<Key, int> dictionary = new(Count);
             return PopulateDictionary(dictionary);
         }
 

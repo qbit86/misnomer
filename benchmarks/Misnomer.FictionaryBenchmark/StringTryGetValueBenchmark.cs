@@ -6,6 +6,7 @@ using BenchmarkDotNet.Configs;
 
 namespace Misnomer
 {
+#pragma warning disable CA2000 // Dispose objects before losing scope
     [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     [CategoriesColumn]
     public abstract class StringTryGetValueBenchmark
@@ -38,34 +39,30 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryConcreteValue))]
         public void GlobalSetupDictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<string, int>(new OrdinalStringComparer());
+            Dictionary<string, int> dictionary = new(new OrdinalStringComparer());
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             Fictionary<string, int, OrdinalStringComparer> fictionary = new(new OrdinalStringComparer());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
 
         [GlobalSetup(Target = nameof(DictionaryConcreteReference))]
         public void GlobalSetupDictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<string, int>(OrdinalStringComparerObject.Default);
+            Dictionary<string, int> dictionary = new(OrdinalStringComparerObject.Default);
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             Fictionary<string, int, OrdinalStringComparerObject> fictionary = new(OrdinalStringComparerObject.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
 
@@ -73,7 +70,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualValue()
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            var dictionary = new Dictionary<string, int>(comparer);
+            Dictionary<string, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -81,7 +78,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            using Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
+            Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -90,7 +87,7 @@ namespace Misnomer
         public void GlobalSetupDictionaryVirtualReference()
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            var dictionary = new Dictionary<string, int>(comparer);
+            Dictionary<string, int> dictionary = new(comparer);
             _dictionary = PopulateDictionary(dictionary);
         }
 
@@ -98,7 +95,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            using Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
+            Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -106,14 +103,14 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(DictionaryStandardPolymorphic))]
         public void GlobalSetupDictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<string, int>(StringComparer.Ordinal);
+            Dictionary<string, int> dictionary = new(StringComparer.Ordinal);
             _dictionary = PopulateDictionary(dictionary);
         }
 
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            using Fictionary<string, int, StringComparer> fictionary = new(StringComparer.Ordinal);
+            Fictionary<string, int, StringComparer> fictionary = new(StringComparer.Ordinal);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 
@@ -177,4 +174,5 @@ namespace Misnomer
 
         #endregion
     }
+#pragma warning restore CA2000 // Dispose objects before losing scope
 }

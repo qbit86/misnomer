@@ -34,7 +34,7 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryConcreteValue()
         {
-            var dictionary = new Dictionary<string, int>(Count, new OrdinalStringComparer());
+            Dictionary<string, int> dictionary = new(Count, new OrdinalStringComparer());
             return PopulateDictionary(dictionary);
         }
 
@@ -50,7 +50,7 @@ namespace Misnomer
         [Benchmark(Baseline = true)]
         public int DictionaryConcreteReference()
         {
-            var dictionary = new Dictionary<string, int>(Count, OrdinalStringComparerObject.Default);
+            Dictionary<string, int> dictionary = new(Count, OrdinalStringComparerObject.Default);
             return PopulateDictionary(dictionary);
         }
 
@@ -67,7 +67,7 @@ namespace Misnomer
         public int DictionaryVirtualValue()
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            var dictionary = new Dictionary<string, int>(Count, comparer);
+            Dictionary<string, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -84,7 +84,7 @@ namespace Misnomer
         public int DictionaryVirtualReference()
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            var dictionary = new Dictionary<string, int>(Count, comparer);
+            Dictionary<string, int> dictionary = new(Count, comparer);
             return PopulateDictionary(dictionary);
         }
 
@@ -99,7 +99,7 @@ namespace Misnomer
         [Benchmark]
         public int DictionaryStandardPolymorphic()
         {
-            var dictionary = new Dictionary<string, int>(Count, StringComparer.Ordinal);
+            Dictionary<string, int> dictionary = new(Count, StringComparer.Ordinal);
             return PopulateDictionary(dictionary);
         }
 
