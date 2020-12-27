@@ -44,7 +44,11 @@ namespace System
         /// <summary>Returns the hash code for this instance.</summary>
         public override int GetHashCode()
         {
+#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
+            return HashCode.Combine(Start.GetHashCode(), End.GetHashCode());
+#else
             return unchecked(Start.GetHashCode() * 397) ^ End.GetHashCode();
+#endif
         }
 
         /// <summary>Converts the value of the current Range object to its equivalent string representation.</summary>
