@@ -324,7 +324,7 @@ namespace Misnomer
             if (_buckets != null)
             {
                 Debug.Assert(_entries != null, "expected entries to be != null");
-                IEqualityComparer<TKey>? comparer = _comparer;
+                TKeyComparer comparer = _comparer;
                 if (comparer == null)
                 {
                     uint hashCode = (uint)key.GetHashCode();
