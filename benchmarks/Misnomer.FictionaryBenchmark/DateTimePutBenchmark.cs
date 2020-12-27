@@ -55,7 +55,7 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionaryConcreteReference =
+            using Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionaryConcreteReference =
                 new(Count, GenericEqualityComparerObject<Key>.Default);
             return PopulateDictionary(fictionaryConcreteReference);
         }
@@ -72,7 +72,7 @@ namespace Misnomer
         public int FictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -88,7 +88,7 @@ namespace Misnomer
         public int FictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -102,7 +102,7 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            Fictionary<Key, int, EqualityComparer<Key>> fictionaryStandardPolymorphic =
+            using Fictionary<Key, int, EqualityComparer<Key>> fictionaryStandardPolymorphic =
                 new(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(fictionaryStandardPolymorphic);
         }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 using Key = System.DateTimeOffset;
 
@@ -19,14 +18,11 @@ namespace Misnomer
         private static int PopulateDictionaries<TDictionary>(TDictionary[] dictionaries)
             where TDictionary : IDictionary<Key, long>
         {
-            Debug.Assert(dictionaries != null, "dictionaries != null");
-
             int count = dictionaries!.Length;
             for (int upper = 1; upper <= count; ++upper)
             for (int i = 0; i < upper; ++i)
             {
                 TDictionary d = dictionaries[i];
-                Debug.Assert(d != null, "d != null");
                 int newItemCount = Math.Max(1, d!.Count);
                 for (int k = 0; k != newItemCount; ++k)
                 {

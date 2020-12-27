@@ -108,8 +108,8 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            var fictionaryStandardPolymorphic = new Fictionary<string, int, StringComparer>(
-                Count, StringComparer.Ordinal);
+            using Fictionary<string, int, StringComparer> fictionaryStandardPolymorphic =
+                new(Count, StringComparer.Ordinal);
             return PopulateDictionary(fictionaryStandardPolymorphic);
         }
 

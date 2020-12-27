@@ -46,7 +46,8 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            var fictionary = new Fictionary<Key, int, GenericEqualityComparer<Key>>(new GenericEqualityComparer<Key>());
+            using Fictionary<Key, int, GenericEqualityComparer<Key>> fictionary =
+                new(new GenericEqualityComparer<Key>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
@@ -60,8 +61,8 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            var fictionary = new Fictionary<Key, int, GenericEqualityComparerObject<Key>>(
-                GenericEqualityComparerObject<Key>.Default);
+            using Fictionary<Key, int, GenericEqualityComparerObject<Key>> fictionary =
+                new(GenericEqualityComparerObject<Key>.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
 
@@ -77,7 +78,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new GenericEqualityComparer<Key>();
-            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -93,7 +94,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = GenericEqualityComparerObject<Key>.Default;
-            var fictionary = new Fictionary<Key, int, IEqualityComparer<Key>>(comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -107,7 +108,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            var fictionary = new Fictionary<Key, int, EqualityComparer<Key>>(EqualityComparer<Key>.Default);
+            using Fictionary<Key, int, EqualityComparer<Key>> fictionary = new(EqualityComparer<Key>.Default);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 

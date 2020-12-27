@@ -57,7 +57,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            var fictionary = new Fictionary<Key, int, EnumEqualityComparer>(new EnumEqualityComparer());
+            using Fictionary<Key, int, EnumEqualityComparer> fictionary = new(new EnumEqualityComparer());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
