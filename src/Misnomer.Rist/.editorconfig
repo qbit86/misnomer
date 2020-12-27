@@ -1,11 +1,11 @@
 [Rist.cs]
-dotnet_diagnostic.CA1062.severity = silent
-dotnet_diagnostic.CS0436.severity = silent
-dotnet_diagnostic.CS8601.severity = silent
-dotnet_diagnostic.CS8603.severity = silent
-dotnet_diagnostic.CS8669.severity = silent
+dotnet_diagnostic.CA1062.severity = silent # Validate arguments of public methods
+dotnet_diagnostic.CS0436.severity = silent # The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'
+dotnet_diagnostic.CS8601.severity = silent # Possible null reference assignment
+dotnet_diagnostic.CS8603.severity = silent # Possible null reference return
+dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' context
 generated_code = true
 
 [Rist.Partial.cs]
 dotnet_diagnostic.CA1200.severity = silent # Avoid using cref tags with a prefix
-dotnet_diagnostic.CS0436.severity = silent
+dotnet_diagnostic.CS0436.severity = silent # The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'
