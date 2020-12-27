@@ -8,14 +8,8 @@ namespace Misnomer
     {
         private static Rist<string> CreateAndPopulateList()
         {
-            var list = new Rist<string>();
             // Populating, filtering, sorting, grouping...
-            list.Add("Camille");
-            list.Add("Annie");
-            list.Add("Sara");
-            list.Add("Katrin");
-            list.Add("Kari");
-
+            Rist<string> list = new() { "Camille", "Annie", "Sara", "Katrin", "Kari" };
             return list;
         }
 
