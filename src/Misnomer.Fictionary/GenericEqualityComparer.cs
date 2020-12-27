@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_1 || NETSTANDARD2_1
+using System.Diagnostics.CodeAnalysis;
+#endif
 
 namespace Misnomer
 {
@@ -22,12 +24,15 @@ namespace Misnomer
         /// <param name="y">The second object to compare.</param>
         /// <returns>`true` if the specified objects are equal; otherwise, `false`.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals([AllowNull] T x, [AllowNull] T y)
+        public bool Equals(T? x, T? y)
         {
             if (x != null)
-                return y != null && x.Equals(y);
-
-            return y is null;
+            {
+                if (y != null) return x.Equals(y);
+                return false;
+            }
+            if (y != null) return false;
+            return true;
         }
 
         // ReSharper disable ConstantConditionalAccessQualifier
@@ -37,7 +42,11 @@ namespace Misnomer
         /// <param name="obj">The object for which to get a hash code.</param>
         /// <returns>A hash code for the specified object.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if NETCOREAPP3_1 || NETSTANDARD2_1
+        public int GetHashCode([DisallowNull] T obj) => obj?.GetHashCode() ?? 0;
+#else
         public int GetHashCode(T obj) => obj?.GetHashCode() ?? 0;
+#endif
         // ReSharper restore ConstantConditionalAccessQualifier
 
         /// <summary>
@@ -52,13 +61,15 @@ namespace Misnomer
         /// </summary>
         /// <param name="obj">An object to compare with this object.</param>
         /// <returns>true` if <paramref name="obj"/> is of type <see cref="GenericEqualityComparer{T}"/>; otherwise, `false`.</returns>
-        public override bool Equals(object? obj) => obj is GenericEqualityComparer<T>;
+        public override bool Equals(object? obj) =>
+            obj is GenericEqualityComparer<T>;
 
         /// <summary>
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => typeof(GenericEqualityComparer<T>).GetHashCode();
+        public override int GetHashCode() =>
+            typeof(GenericEqualityComparer<T>).GetHashCode();
     }
 #pragma warning restore CA2231, CA1815
 }
