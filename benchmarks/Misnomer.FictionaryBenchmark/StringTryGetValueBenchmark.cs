@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 
@@ -19,17 +20,15 @@ namespace Misnomer
         private Fictionary<string, int, StringComparer>? _fictionaryStandardPolymorphic;
         private Fictionary<string, int, IEqualityComparer<string>>? _fictionaryVirtual;
 
-        private static string Trial { get; } = (~Seed).ToString();
+        private static string Trial { get; } = (~Seed).ToString(CultureInfo.InvariantCulture);
 
         private static TDictionary PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<string, int>
         {
-            Debug.Assert(dictionary != null, "dictionary != null");
-
             for (int i = 0; i != Count; ++i)
             {
                 int value = unchecked(Seed + i);
-                dictionary![value.ToString("x8")] = value;
+                dictionary![value.ToString("x8", CultureInfo.InvariantCulture)] = value;
             }
 
             return dictionary;
@@ -47,8 +46,10 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
+#pragma warning disable CA2000 // Dispose objects before losing scope
             Fictionary<string, int, OrdinalStringComparer> fictionary = new(new OrdinalStringComparer());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
+#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
 
@@ -62,8 +63,10 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
+#pragma warning disable CA2000 // Dispose objects before losing scope
             Fictionary<string, int, OrdinalStringComparerObject> fictionary = new(OrdinalStringComparerObject.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
+#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
 
