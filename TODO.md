@@ -9,7 +9,6 @@
     ```cs
     new Span<T>(_items, 0, _size).Sort(comparison);
     ```
-- [ ] Update sources when C# 9 will be available: replace generic `T` with `T?` in a couple of places, remove suppression rules in related `.editorconfig`s.
 
 [ArraySortHelper.cs]: src/Misnomer.Rist/System/ArraySortHelper.cs
 [MemoryExtensions.Sort()]: https://docs.microsoft.com/en-us/dotnet/api/system.memoryextensions.sort
