@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 using Key = System.DateTime;
 
@@ -21,8 +20,6 @@ namespace Misnomer
         private static TDictionary PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<Key, int>
         {
-            Debug.Assert(dictionary != null, "dictionary != null");
-
             for (int i = 0; i != Count; ++i)
             {
                 // 269th prime.

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 
 namespace Misnomer
@@ -14,8 +13,6 @@ namespace Misnomer
         private static int PopulateDictionary<TDictionary>(TDictionary dictionary)
             where TDictionary : IDictionary<string, int>
         {
-            Debug.Assert(dictionary != null, "dictionary != null");
-
             for (int i = 0; i != Count; ++i)
             {
                 int firstValue = (7 + 1723 * i) % Count;
