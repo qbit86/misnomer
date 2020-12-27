@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Buffers;
+#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
 using System.Runtime.CompilerServices;
+#endif
 
 namespace Misnomer
 {
