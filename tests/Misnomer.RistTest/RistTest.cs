@@ -211,7 +211,10 @@ namespace Misnomer
             List<char> list = new(nameof(RemoveAll_ShouldBehaveTheSameWay));
             using Rist<char> rist = new(nameof(RemoveAll_ShouldBehaveTheSameWay));
 
-            static bool Match(char c) => (Convert.ToInt32(c) & 1) == 0;
+            static bool Match(char c)
+            {
+                return (Convert.ToInt32(c) & 1) == 0;
+            }
 
             // Act
             list.RemoveAll(Match);
