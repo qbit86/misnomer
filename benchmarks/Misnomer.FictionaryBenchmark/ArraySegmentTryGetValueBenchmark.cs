@@ -57,7 +57,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionary =
+            using Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionary =
                 new(new ArraySegmentEqualityComparer<int>());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
@@ -72,7 +72,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionary =
+            using Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionary =
                 new(ArraySegmentComparerObject<int>.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
@@ -89,7 +89,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -105,7 +105,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 

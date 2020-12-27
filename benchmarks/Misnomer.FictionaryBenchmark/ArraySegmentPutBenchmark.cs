@@ -42,8 +42,8 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionaryConcreteValue = new(
-                Count, new ArraySegmentEqualityComparer<int>());
+            using Fictionary<Key, int, ArraySegmentEqualityComparer<int>> fictionaryConcreteValue =
+                new(Count, new ArraySegmentEqualityComparer<int>());
             return PopulateDictionary(fictionaryConcreteValue);
         }
 
@@ -57,8 +57,8 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionaryConcreteReference = new(
-                Count, ArraySegmentComparerObject<int>.Default);
+            using Fictionary<Key, int, ArraySegmentComparerObject<int>> fictionaryConcreteReference =
+                new(Count, ArraySegmentComparerObject<int>.Default);
             return PopulateDictionary(fictionaryConcreteReference);
         }
 
@@ -74,7 +74,7 @@ namespace Misnomer
         public int FictionaryVirtualValue()
         {
             IEqualityComparer<Key> comparer = new ArraySegmentEqualityComparer<int>();
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -90,7 +90,7 @@ namespace Misnomer
         public int FictionaryVirtualReference()
         {
             IEqualityComparer<Key> comparer = ArraySegmentComparerObject<int>.Default;
-            Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
+            using Fictionary<Key, int, IEqualityComparer<Key>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -104,7 +104,7 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryStandardPolymorphic()
         {
-            Fictionary<Key, int, EqualityComparer<Key>> fictionaryStandardPolymorphic =
+            using Fictionary<Key, int, EqualityComparer<Key>> fictionaryStandardPolymorphic =
                 new(Count, EqualityComparer<Key>.Default);
             return PopulateDictionary(fictionaryStandardPolymorphic);
         }

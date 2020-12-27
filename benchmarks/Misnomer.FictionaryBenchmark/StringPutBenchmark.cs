@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using BenchmarkDotNet.Attributes;
 
 namespace Misnomer
@@ -16,12 +17,12 @@ namespace Misnomer
             for (int i = 0; i != Count; ++i)
             {
                 int firstValue = (7 + 1723 * i) % Count;
-                string firstKey = firstValue.ToString("x8");
+                string firstKey = firstValue.ToString("x8", CultureInfo.InvariantCulture);
                 if (!dictionary!.ContainsKey(firstKey))
                     dictionary.Add(firstKey, firstValue);
 
                 int secondValue = (13 + 853 * i) % Count;
-                string secondKey = secondValue.ToString("x8");
+                string secondKey = secondValue.ToString("x8", CultureInfo.InvariantCulture);
                 dictionary[secondKey] = secondValue;
             }
 
@@ -40,8 +41,8 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            var fictionaryConcreteValue = new Fictionary<string, int, OrdinalStringComparer>(
-                Count, new OrdinalStringComparer());
+            using Fictionary<string, int, OrdinalStringComparer> fictionaryConcreteValue =
+                new(Count, new OrdinalStringComparer());
             return PopulateDictionary(fictionaryConcreteValue);
         }
 
@@ -56,8 +57,8 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteReference()
         {
-            var fictionaryConcreteReference = new Fictionary<string, int, OrdinalStringComparerObject>(
-                Count, OrdinalStringComparerObject.Default);
+            using Fictionary<string, int, OrdinalStringComparerObject> fictionaryConcreteReference =
+                new(Count, OrdinalStringComparerObject.Default);
             return PopulateDictionary(fictionaryConcreteReference);
         }
 
@@ -74,7 +75,7 @@ namespace Misnomer
         public int FictionaryVirtualValue()
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            var fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(Count, comparer);
+            using Fictionary<string, int, IEqualityComparer<string>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 
@@ -91,7 +92,7 @@ namespace Misnomer
         public int FictionaryVirtualReference()
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            var fictionaryVirtual = new Fictionary<string, int, IEqualityComparer<string>>(Count, comparer);
+            using Fictionary<string, int, IEqualityComparer<string>> fictionaryVirtual = new(Count, comparer);
             return PopulateDictionary(fictionaryVirtual);
         }
 

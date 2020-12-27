@@ -47,7 +47,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteValue))]
         public void GlobalSetupFictionaryConcreteValue()
         {
-            var fictionary = new Fictionary<string, int, OrdinalStringComparer>(new OrdinalStringComparer());
+            Fictionary<string, int, OrdinalStringComparer> fictionary = new(new OrdinalStringComparer());
             _fictionaryConcreteValue = PopulateDictionary(fictionary);
         }
 
@@ -62,8 +62,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryConcreteReference))]
         public void GlobalSetupFictionaryConcreteReference()
         {
-            var fictionary =
-                new Fictionary<string, int, OrdinalStringComparerObject>(OrdinalStringComparerObject.Default);
+            Fictionary<string, int, OrdinalStringComparerObject> fictionary = new(OrdinalStringComparerObject.Default);
             _fictionaryConcreteReference = PopulateDictionary(fictionary);
         }
 
@@ -80,7 +79,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualValue()
         {
             IEqualityComparer<string> comparer = new OrdinalStringComparer();
-            var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
+            using Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -97,7 +96,7 @@ namespace Misnomer
         public void GlobalSetupFictionaryVirtualReference()
         {
             IEqualityComparer<string> comparer = OrdinalStringComparerObject.Default;
-            var fictionary = new Fictionary<string, int, IEqualityComparer<string>>(comparer);
+            using Fictionary<string, int, IEqualityComparer<string>> fictionary = new(comparer);
             _fictionaryVirtual = PopulateDictionary(fictionary);
         }
 
@@ -112,7 +111,7 @@ namespace Misnomer
         [GlobalSetup(Target = nameof(FictionaryStandardPolymorphic))]
         public void GlobalSetupFictionaryStandardPolymorphic()
         {
-            var fictionary = new Fictionary<string, int, StringComparer>(StringComparer.Ordinal);
+            using Fictionary<string, int, StringComparer> fictionary = new(StringComparer.Ordinal);
             _fictionaryStandardPolymorphic = PopulateDictionary(fictionary);
         }
 

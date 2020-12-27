@@ -40,7 +40,7 @@ namespace Misnomer
         [Benchmark]
         public int FictionaryConcreteValue()
         {
-            Fictionary<Key, int, GenericEqualityComparer<Key>> fictionaryConcreteValue =
+            using Fictionary<Key, int, GenericEqualityComparer<Key>> fictionaryConcreteValue =
                 new(Count, new GenericEqualityComparer<Key>());
             return PopulateDictionary(fictionaryConcreteValue);
         }
