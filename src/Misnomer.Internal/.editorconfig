@@ -2,11 +2,8 @@
 resharper_unused_type_parameter_highlighting = hint
 
 [SR.cs]
-dotnet_diagnostic.CA1508.severity = silent # Avoid dead conditional code
+generated_code = true
 
 [ThrowHelper.cs]
-dotnet_diagnostic.CA1305.severity = silent # Specify IFormatProvider
-dotnet_diagnostic.CA2208.severity = silent # Instantiate argument exceptions correctly
-dotnet_diagnostic.CS8604.severity = silent # Possible null reference argument for a parameter
 dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 generated_code = true
