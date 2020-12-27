@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 #if NETCOREAPP3_1 || NETSTANDARD2_1
 using System.Diagnostics.CodeAnalysis;
+
 #endif
 
 namespace Misnomer
@@ -31,6 +33,7 @@ namespace Misnomer
                 if (y != null) return x.Equals(y);
                 return false;
             }
+
             if (y != null) return false;
             return true;
         }

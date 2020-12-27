@@ -3,10 +3,7 @@ namespace System.Runtime.CompilerServices
 {
     internal static class RuntimeHelpers
     {
-        internal static bool IsReferenceOrContainsReferences<T>()
-        {
-            return true;
-        }
+        internal static bool IsReferenceOrContainsReferences<T>() => true;
     }
 }
 #endif
