@@ -8,7 +8,6 @@
 ### Changed
 - Fictionary: Set `netstandard2.0` as minimum target platform.
 - Rist: Set `netstandard1.3` as minimum target platform.
-- Rist: Moved `Converter<>` delegate to `System` namespace on platforms where it does not exist already.
 
 ### Removed
 - Support of `netcoreapp2.0` target platform.
