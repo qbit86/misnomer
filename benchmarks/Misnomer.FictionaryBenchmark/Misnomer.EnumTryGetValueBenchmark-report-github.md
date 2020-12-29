@@ -1,31 +1,51 @@
 ``` ini
 
-BenchmarkDotNet=v0.11.4, OS=Windows 10.0.17763.316 (1809/October2018Update/Redstone5)
-Intel Core i5-4690K CPU 3.50GHz (Haswell), 1 CPU, 4 logical and 4 physical cores
-.NET Core SDK=2.1.504
-  [Host]     : .NET Core 2.1.8 (CoreCLR 4.6.27317.03, CoreFX 4.6.27317.03), 64bit RyuJIT
-  Job-JMOLKO : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
-  Job-COALGX : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 32bit LegacyJIT-v4.7.3324.0
-  Job-LEOISI : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3324.0
-  Job-EPOFQZ : .NET Core 2.1.8 (CoreCLR 4.6.27317.03, CoreFX 4.6.27317.03), 64bit RyuJIT
+BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19042
+AMD Ryzen 5 3500U with Radeon Vega Mobile Gfx, 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=5.0.100
+  [Host]     : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
+  Job-QSJMJA : .NET Framework 4.8 (4.8.4300.0), X64 RyuJIT
+  Job-NWVJDB : .NET Framework 4.8 (4.8.4300.0), X64 RyuJIT
+  Job-EJMCRD : .NET Framework 4.8 (4.8.4300.0), X64 RyuJIT
+  Job-XKZQNX : .NET Framework 4.8 (4.8.4300.0), X64 RyuJIT
+  Job-GLWODF : .NET Core 3.1.8 (CoreCLR 4.700.20.41105, CoreFX 4.700.20.41903), X64 RyuJIT
+  Job-JTUVIF : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
 
-IterationCount=3  LaunchCount=1  WarmupCount=3  
+Platform=X64  IterationCount=3  LaunchCount=1  
+WarmupCount=3  
 
 ```
-|                      Method |       Jit | Platform | Runtime |     Mean |     Error |    StdDev | Ratio | RatioSD |
-|---------------------------- |---------- |--------- |-------- |---------:|----------:|----------:|------:|--------:|
-| DictionaryConcreteReference | LegacyJit |      X64 |     Clr | 2.514 us | 0.5341 us | 0.0293 us |  1.00 |    0.00 |
-|     FictionaryConcreteValue | LegacyJit |      X64 |     Clr | 1.582 us | 0.0551 us | 0.0030 us |  0.63 |    0.01 |
-|           DictionaryDefault | LegacyJit |      X64 |     Clr | 2.332 us | 0.2017 us | 0.0111 us |  0.93 |    0.01 |
-|                             |           |          |         |          |           |           |       |         |
-| DictionaryConcreteReference | LegacyJit |      X86 |     Clr | 2.881 us | 0.8300 us | 0.0455 us |  1.00 |    0.00 |
-|     FictionaryConcreteValue | LegacyJit |      X86 |     Clr | 1.943 us | 0.4219 us | 0.0231 us |  0.67 |    0.02 |
-|           DictionaryDefault | LegacyJit |      X86 |     Clr | 2.123 us | 0.6998 us | 0.0384 us |  0.74 |    0.02 |
-|                             |           |          |         |          |           |           |       |         |
-| DictionaryConcreteReference |    RyuJit |      X64 |     Clr | 2.467 us | 0.0441 us | 0.0024 us |  1.00 |    0.00 |
-|     FictionaryConcreteValue |    RyuJit |      X64 |     Clr | 1.566 us | 0.1893 us | 0.0104 us |  0.63 |    0.00 |
-|           DictionaryDefault |    RyuJit |      X64 |     Clr | 2.302 us | 0.1028 us | 0.0056 us |  0.93 |    0.00 |
-|                             |           |          |         |          |           |           |       |         |
-| DictionaryConcreteReference |    RyuJit |      X64 |    Core | 2.551 us | 0.1125 us | 0.0062 us |  1.00 |    0.00 |
-|     FictionaryConcreteValue |    RyuJit |      X64 |    Core | 1.499 us | 0.0324 us | 0.0018 us |  0.59 |    0.00 |
-|           DictionaryDefault |    RyuJit |      X64 |    Core | 1.779 us | 0.0076 us | 0.0004 us |  0.70 |    0.00 |
+|                      Method |        Job |       Jit |       Runtime |     Mean |     Error |    StdDev | Ratio | RatioSD |
+|---------------------------- |----------- |---------- |-------------- |---------:|----------:|----------:|------:|--------:|
+| DictionaryConcreteReference | Job-QSJMJA | LegacyJit |    .NET 4.6.1 | 1.942 μs | 0.2122 μs | 0.0116 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-QSJMJA | LegacyJit |    .NET 4.6.1 | 1.077 μs | 0.0993 μs | 0.0054 μs |  0.55 |    0.00 |
+|           DictionaryDefault | Job-QSJMJA | LegacyJit |    .NET 4.6.1 | 1.675 μs | 0.0332 μs | 0.0018 μs |  0.86 |    0.00 |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-NWVJDB | LegacyJit |      .NET 4.8 | 1.918 μs | 0.0913 μs | 0.0050 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-NWVJDB | LegacyJit |      .NET 4.8 | 1.079 μs | 0.0857 μs | 0.0047 μs |  0.56 |    0.00 |
+|           DictionaryDefault | Job-NWVJDB | LegacyJit |      .NET 4.8 | 1.810 μs | 2.2996 μs | 0.1260 μs |  0.94 |    0.06 |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-EJMCRD |    RyuJit |    .NET 4.6.1 | 1.937 μs | 0.3307 μs | 0.0181 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-EJMCRD |    RyuJit |    .NET 4.6.1 | 1.084 μs | 0.0798 μs | 0.0044 μs |  0.56 |    0.00 |
+|           DictionaryDefault | Job-EJMCRD |    RyuJit |    .NET 4.6.1 | 1.675 μs | 0.0862 μs | 0.0047 μs |  0.87 |    0.01 |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-XKZQNX |    RyuJit |      .NET 4.8 | 1.922 μs | 0.1841 μs | 0.0101 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-XKZQNX |    RyuJit |      .NET 4.8 | 1.116 μs | 0.7855 μs | 0.0431 μs |  0.58 |    0.02 |
+|           DictionaryDefault | Job-XKZQNX |    RyuJit |      .NET 4.8 | 1.799 μs | 3.7551 μs | 0.2058 μs |  0.94 |    0.10 |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-OQLGSH |    RyuJit | .NET Core 2.1 |       NA |        NA |        NA |     ? |       ? |
+|     FictionaryConcreteValue | Job-OQLGSH |    RyuJit | .NET Core 2.1 |       NA |        NA |        NA |     ? |       ? |
+|           DictionaryDefault | Job-OQLGSH |    RyuJit | .NET Core 2.1 |       NA |        NA |        NA |     ? |       ? |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-GLWODF |    RyuJit | .NET Core 3.1 | 1.851 μs | 0.0401 μs | 0.0022 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-GLWODF |    RyuJit | .NET Core 3.1 | 1.062 μs | 0.0751 μs | 0.0041 μs |  0.57 |    0.00 |
+|           DictionaryDefault | Job-GLWODF |    RyuJit | .NET Core 3.1 | 1.415 μs | 0.0237 μs | 0.0013 μs |  0.76 |    0.00 |
+|                             |            |           |               |          |           |           |       |         |
+| DictionaryConcreteReference | Job-JTUVIF |    RyuJit | .NET Core 5.0 | 1.694 μs | 0.1947 μs | 0.0107 μs |  1.00 |    0.00 |
+|     FictionaryConcreteValue | Job-JTUVIF |    RyuJit | .NET Core 5.0 | 1.065 μs | 0.1048 μs | 0.0057 μs |  0.63 |    0.00 |
+|           DictionaryDefault | Job-JTUVIF |    RyuJit | .NET Core 5.0 | 1.180 μs | 0.3613 μs | 0.0198 μs |  0.70 |    0.01 |
+
+Benchmarks with issues:
+  EnumTryGetValueBenchmark.DictionaryConcreteReference: Job-OQLGSH(Jit=RyuJit, Platform=X64, Runtime=.NET Core 2.1, IterationCount=3, LaunchCount=1, WarmupCount=3)
+  EnumTryGetValueBenchmark.FictionaryConcreteValue: Job-OQLGSH(Jit=RyuJit, Platform=X64, Runtime=.NET Core 2.1, IterationCount=3, LaunchCount=1, WarmupCount=3)
+  EnumTryGetValueBenchmark.DictionaryDefault: Job-OQLGSH(Jit=RyuJit, Platform=X64, Runtime=.NET Core 2.1, IterationCount=3, LaunchCount=1, WarmupCount=3)
