@@ -31,6 +31,13 @@ namespace Misnomer
         }
 
         /// <summary>
+        /// Gets a span view over the data in a list.
+        /// Items should not be added or removed from the <see cref="Rist{T}"/> while the <see cref="Span{T}"/> is in use.
+        /// </summary>
+        /// <returns>A <see cref="Span{T}"/> instance over the <see cref="Rist{T}"/>.</returns>
+        public Span<T> AsSpan() => new(_items, 0, _size);
+
+        /// <summary>
         /// Extracts the internal array and replaces it with a zero length array.
         /// </summary>
         /// <returns>An <see cref="T:T[]"/> that is <see cref="Capacity"/> in length.</returns>
