@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 2020-12-30
+## [0.4.0] - 2020-12-30
 ### Added
 - Support of `netcoreapp2.1` and `netcoreapp3.1` target platform.
 - Nullable annotation and warning contexts.
@@ -17,4 +17,5 @@
 - [src/Misnomer.Fictionary/CHANGELOG.md](src/Misnomer.Fictionary/CHANGELOG.md)
 - [src/Misnomer.Rist/CHANGELOG.md](src/Misnomer.Rist/CHANGELOG.md)
 
-[Unreleased]: https://github.com/qbit86/misnomer/compare/fictionary-0.2.0...HEAD
+[Unreleased]: https://github.com/qbit86/misnomer/compare/misnomer-0.4.0...HEAD
+[0.4.0]: https://github.com/qbit86/misnomer/compare/fictionary-0.2.0...misnomer-0.4.0

@@ -8,7 +8,6 @@ Provides ToFictionary() extension methods which replace conventional ToDictionar
     <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
     <Title>Fast dictionary</Title>
     <VersionPrefix>0.4.0</VersionPrefix>
-    <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
