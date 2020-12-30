@@ -1,10 +1,11 @@
 # Misnomer
 
+[![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg?label=Rist&logo=nuget)](https://www.nuget.org/packages/Misnomer.Rist/)
+[![Fictionary version](https://img.shields.io/nuget/v/Misnomer.Fictionary.svg?label=Fictionary&logo=nuget)](https://www.nuget.org/packages/Misnomer.Fictionary/)
+
 Standard collections with some optimizations.
 
 ## Misnomer.Rist
-
-[![Rist version](https://img.shields.io/nuget/v/Misnomer.Rist.svg?label=Rist&logo=nuget)](https://www.nuget.org/packages/Misnomer.Rist/)
 
 `Rist<T>` — recyclable indexed collection.
 Implementation is based on [List&lt;T&gt;](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs), but uses pooling for the internal array.
@@ -38,8 +39,6 @@ Implementation deliberately prefers [shared](https://docs.microsoft.com/en-us/do
 The risk is that untrusted caller can hold a reference to an array after returning it to [ArrayPool&lt;T&gt;.Shared](https://docs.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1.shared), thus getting access to internal state of `Rist<T>` on subsequent use.
 
 ## Misnomer.Fictionary
-
-[![Fictionary version](https://img.shields.io/nuget/v/Misnomer.Fictionary.svg?label=Fictionary&logo=nuget)](https://www.nuget.org/packages/Misnomer.Fictionary/)
 
 `Fictionary<TKey, TValue, TKeyComparer>` — fast associative collection.
 Implementation is based on [Dictionary&lt;TKey, TValue&gt;](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs), but uses generic parameter constraint for polymorphic key comparer.
