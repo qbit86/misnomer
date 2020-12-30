@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased] - 2020-12-30
+### Added
+- Rist: `AsSpan()` method.
+
 ## [0.4.0] - 2020-12-30
 ### Added
 - Support of `netcoreapp2.1` and `netcoreapp3.1` target platform.
