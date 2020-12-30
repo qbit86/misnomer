@@ -1,0 +1,9 @@
+[RuntimeHelpers.cs]
+resharper_unused_type_parameter_highlighting = hint
+
+[SR.cs]
+generated_code = true
+
+[ThrowHelper.cs]
+dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+generated_code = true

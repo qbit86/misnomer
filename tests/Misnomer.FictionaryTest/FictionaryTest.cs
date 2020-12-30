@@ -14,7 +14,7 @@ namespace Misnomer
 
         private static ImmutableArray<KeyValuePair<int, string>> s_sampleItems;
 
-        private static ImmutableDictionary<int, string> s_sampleDictionary;
+        private static ImmutableDictionary<int, string>? s_sampleDictionary;
 
         private static double ScaleFactor { get; } = 1.0;
 
@@ -24,12 +24,9 @@ namespace Misnomer
             s_sampleItems.IsDefault ? s_sampleItems = CreateSampleItems() : s_sampleItems;
 
         private static ImmutableDictionary<int, string> SampleDictionary =>
-            s_sampleDictionary ?? (s_sampleDictionary = CreateSampleDictionary());
+            s_sampleDictionary ??= CreateSampleDictionary();
 
-        private static double Geometric(int i)
-        {
-            return Math.Pow(CommonRatio, i) * ScaleFactor;
-        }
+        private static double Geometric(int i) => Math.Pow(CommonRatio, i) * ScaleFactor;
 
         private static ImmutableArray<KeyValuePair<int, string>> CreateSampleItems()
         {
@@ -58,7 +55,6 @@ namespace Misnomer
             return builder.ToImmutable();
         }
 
-#pragma warning disable CA1707 // Identifiers should not contain underscores
         [Fact]
         public void Clear()
         {
@@ -107,7 +103,7 @@ namespace Misnomer
         public void CopyTo_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary);
+            Dictionary<int, string> dictionary = new(SampleDictionary);
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
 
             var dictionaryArray = new KeyValuePair<int, string>[dictionary.Count];
@@ -126,10 +122,10 @@ namespace Misnomer
         public void Create_WithDictionary()
         {
             // Arrange
-            var keyComparer = new GenericEqualityComparer<int>();
+            GenericEqualityComparer<int> keyComparer = default;
 
             // Act
-            var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
+            Dictionary<int, string> dictionary = new(SampleDictionary, Int32EqualityComparer.Default);
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 SampleDictionary.ToFictionary(keyComparer);
 
@@ -142,8 +138,8 @@ namespace Misnomer
         public void Indexer_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<string, double>(StringComparer.Ordinal);
-            Fictionary<string, double, StringComparer> fictionary =
+            Dictionary<string, double> dictionary = new(StringComparer.Ordinal);
+            using Fictionary<string, double, StringComparer> fictionary =
                 Fictionary<string, double>.Create(StringComparer.Ordinal);
 
             int count = SampleItems.Length;
@@ -169,7 +165,7 @@ namespace Misnomer
         public void Remove_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
+            Dictionary<int, string> dictionary = new(SampleDictionary, Int32EqualityComparer.Default);
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
             int count = SampleItems.Length;
 
@@ -190,7 +186,7 @@ namespace Misnomer
         public void RemoveOut_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary, Int32EqualityComparer.Default);
+            Dictionary<int, string> dictionary = new(SampleDictionary, Int32EqualityComparer.Default);
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary = SampleDictionary.ToFictionary();
             int count = SampleItems.Length;
 
@@ -198,8 +194,8 @@ namespace Misnomer
             for (int i = 0; i != count; ++i)
             {
                 int key = SampleItems[i].Key * (i % 2 == 0 ? 1 : -1);
-                bool removedFromDictionary = dictionary.Remove(key, out string dictionaryValue);
-                bool removedFromFictionary = fictionary.Remove(key, out string fictionaryValue);
+                bool removedFromDictionary = dictionary.Remove(key, out string? dictionaryValue);
+                bool removedFromFictionary = fictionary.Remove(key, out string? fictionaryValue);
 
                 Assert.Equal(removedFromDictionary, removedFromFictionary);
                 Assert.Equal(dictionaryValue, fictionaryValue);
@@ -213,8 +209,8 @@ namespace Misnomer
         {
             // Arrange
             int count = SampleItems.Length;
-            var dictionary = new Dictionary<int, string>(count, EqualityComparer<int>.Default);
-            var fictionary = new Fictionary<int, string, EqualityComparer<int>>(0, EqualityComparer<int>.Default);
+            Dictionary<int, string> dictionary = new(count, EqualityComparer<int>.Default);
+            using Fictionary<int, string, EqualityComparer<int>> fictionary = new(0, EqualityComparer<int>.Default);
 
             // Act
             foreach (KeyValuePair<int, string> kv in SampleItems.Mix())
@@ -244,7 +240,7 @@ namespace Misnomer
         public void TryGetValue_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Dictionary<int, string> dictionary = new(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 SampleDictionary.ToList().Mix().ToFictionary();
 
@@ -252,15 +248,15 @@ namespace Misnomer
             foreach (KeyValuePair<int, string> kv in SampleDictionary)
             {
                 {
-                    bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string dictionaryValue);
-                    bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string fictionaryValue);
+                    bool foundInDictionary = dictionary.TryGetValue(kv.Key, out string? dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(kv.Key, out string? fictionaryValue);
 
                     Assert.Equal(foundInDictionary, foundInFictionary);
                     Assert.Equal(dictionaryValue, fictionaryValue);
                 }
                 {
-                    bool foundInDictionary = dictionary.TryGetValue(-kv.Key, out string dictionaryValue);
-                    bool foundInFictionary = fictionary.TryGetValue(-kv.Key, out string fictionaryValue);
+                    bool foundInDictionary = dictionary.TryGetValue(-kv.Key, out string? dictionaryValue);
+                    bool foundInFictionary = fictionary.TryGetValue(-kv.Key, out string? fictionaryValue);
 
                     Assert.Equal(foundInDictionary, foundInFictionary);
                     Assert.Equal(dictionaryValue, fictionaryValue);
@@ -272,7 +268,7 @@ namespace Misnomer
         public void Keys_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Dictionary<int, string> dictionary = new(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 SampleDictionary.ToList().Mix().ToFictionary();
 
@@ -285,7 +281,7 @@ namespace Misnomer
         public void Values_ShouldBehaveTheSameWay()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Dictionary<int, string> dictionary = new(SampleDictionary.Reverse());
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary =
                 SampleDictionary.ToList().Mix().ToFictionary();
 
@@ -298,7 +294,7 @@ namespace Misnomer
         public void Dispose_ShouldClear()
         {
             // Arrange
-            var dictionary = new Dictionary<int, string>(SampleDictionary.Reverse());
+            Dictionary<int, string> dictionary = new(SampleDictionary.Reverse());
 
             Fictionary<int, string, GenericEqualityComparer<int>> fictionary = DefaultFictionary<int, string>.Create();
             foreach (KeyValuePair<int, string> item in SampleItems)
@@ -318,6 +314,5 @@ namespace Misnomer
             Assert.Empty(dictionary.Except(fictionary));
             Assert.Empty(fictionary.Except(dictionary));
         }
-#pragma warning restore CA1707 // Identifiers should not contain underscores
     }
 }

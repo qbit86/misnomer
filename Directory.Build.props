@@ -1,5 +1,11 @@
 <Project>
   <PropertyGroup>
-    <MisnomerRootDir>$(MSBuildThisFileDirectory)</MisnomerRootDir>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <RootNamespace>Misnomer</RootNamespace>
   </PropertyGroup>
 </Project>

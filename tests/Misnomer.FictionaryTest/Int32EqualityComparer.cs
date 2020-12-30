@@ -4,16 +4,10 @@ namespace Misnomer
 {
     internal sealed class Int32EqualityComparer : IEqualityComparer<int>
     {
-        internal static Int32EqualityComparer Default { get; } = new Int32EqualityComparer();
+        internal static Int32EqualityComparer Default { get; } = new();
 
-        public bool Equals(int x, int y)
-        {
-            return x == y;
-        }
+        public bool Equals(int x, int y) => x == y;
 
-        public int GetHashCode(int obj)
-        {
-            return unchecked(obj * 397) ^ obj.GetHashCode();
-        }
+        public int GetHashCode(int obj) => unchecked(obj * 397) ^ obj.GetHashCode();
     }
 }

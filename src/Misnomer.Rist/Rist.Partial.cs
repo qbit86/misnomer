@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Buffers;
+#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
+using RuntimeHelpers = System.Runtime.CompilerServices.RuntimeHelpers;
+
+#endif
 
 namespace Misnomer
 {
-    // https://github.com/dotnet/corefx/blob/master/src/Common/src/CoreLib/System/Collections/Generic/List.cs
+    // https://github.com/dotnet/runtime/blob/e7204f5d6fcaca5e097ec854b3be6055229fc442/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs
 
-#pragma warning disable CA1200 // Avoid using cref tags with a prefix
     /// <summary>
     /// Represents a recyclable list of objects that can be accessed by index.
     /// Enables pooling instances of inner array of type <see cref="T:T[]"/>.
@@ -13,8 +16,6 @@ namespace Misnomer
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     public sealed partial class Rist<T> : IDisposable
     {
-        private const int MaxArrayLength = 0X7FEFFFFF;
-
         private static ArrayPool<T> Pool => ArrayPool<T>.Shared;
 
         /// <summary>
@@ -46,5 +47,4 @@ namespace Misnomer
             return result;
         }
     }
-#pragma warning restore CA1200 // Avoid using cref tags with a prefix
 }

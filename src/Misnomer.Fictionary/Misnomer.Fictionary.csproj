@@ -1,43 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp1.0;netstandard1.2;netstandard2.0</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>0.2</AssemblyVersion>
-    <VersionPrefix>0.2.0</VersionPrefix>
-    <FileVersion>$(VersionPrefix)</FileVersion>
-    <Authors>Viktor T.</Authors>
-    <Title>Fast dictionary</Title>
-    <Description>Associative collection like usual Dictionary&lt;K, V&gt;, but with comparer type preserved instead of hiding behind the interface.
+    <Description>Associative collection like usual Dictionary&lt;TKey, TValue&gt;, but with comparer type preserved instead of hiding behind the interface.
 Enables devirtualization of calls to the key comparer.
 Enables reusing instances of inner array of entries via ArrayPool&lt;T&gt;.Shared.
-Provides ToFictionary() extension methods which perfectly replace conventional ToDictionary() for materializing LINQ queries.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/qbit86/misnomer</RepositoryUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+Provides ToFictionary() extension methods which replace conventional ToDictionary() for materializing LINQ queries.</Description>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PackageTags>fast;dictionary;generic;collection;pool;memory;allocation;jit</PackageTags>
-    <PackageIconUrl>https://github.com/qbit86/misnomer/raw/master/kopimi.png</PackageIconUrl>
-    <PackageReleaseNotes>https://github.com/qbit86/misnomer/blob/develop/src/Misnomer.Fictionary/CHANGELOG.md</PackageReleaseNotes>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(MisnomerRootDir)misnomer.snk</AssemblyOriginatorKeyFile>
-    <RootNamespace>Misnomer</RootNamespace>
+    <Title>Fast dictionary</Title>
+    <VersionPrefix>0.4.0</VersionPrefix>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyVersion>0.4</AssemblyVersion>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1' OR '$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+  </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.3">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>      
-    <PackageReference Condition="'$(TargetFramework)' != 'netcoreapp1.0'" Include="System.Buffers" Version="4.5.0" />
-    <PackageReference Include="Text.Analyzers" Version="2.6.3">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
   <Import Project="..\Misnomer.Internal\Misnomer.Internal.projitems" Label="Shared" />
 </Project>

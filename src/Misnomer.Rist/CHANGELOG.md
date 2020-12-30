@@ -1,5 +1,8 @@
 # Changelog
 
+## Newer versions
+- [../../CHANGELOG.md](../../CHANGELOG.md)
+
 ## [0.3.0] - 2019-01-22
 ### Changed
 - Made `Rist<T>` sealed. This is breaking change but can [improve performance](https://reubenbond.github.io/posts/dotnet-perf-tuning).

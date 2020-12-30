@@ -1,5 +1,8 @@
 # Changelog
 
+## Newer versions
+- [../../CHANGELOG.md](../../CHANGELOG.md)
+
 ## [0.2.0] - 2019-02-18
 ### Changed
 - Renamed `StringOrdinalComparer` struct to `OrdinalStringComparer`.

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2019
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}"
 EndProject
@@ -17,28 +17,34 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.Fictionary", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{BD248697-DD32-4223-B914-295F9001A68B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistDemo", "samples\Misnomer.RistDemo\Misnomer.RistDemo.csproj", "{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.RistDemo", "samples\Misnomer.RistDemo\Misnomer.RistDemo.csproj", "{9A6474E2-5E89-4B2D-B8A4-B432E0FE1E6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{B3C87831-0B68-460D-B97C-A6CB647ED0DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.RistBenchmark", "benchmarks\Misnomer.RistBenchmark\Misnomer.RistBenchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.RistBenchmark", "benchmarks\Misnomer.RistBenchmark\Misnomer.RistBenchmark.csproj", "{F04AAE16-2DF4-41C3-A125-CF250874CAF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FC45A3-5F94-48A4-8B36-EDE4A6852B17}"
-ProjectSection(SolutionItems) = preProject
-	.gitignore = .gitignore
-	.editorconfig = .editorconfig
-	LICENSE.txt = LICENSE.txt
-	README.md = README.md
-	Directory.Build.props = Directory.Build.props
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
+		LICENSE.txt = LICENSE.txt
+		Misnomer.sln.DotSettings = Misnomer.sln.DotSettings
+		README.md = README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryTest", "tests\Misnomer.FictionaryTest\Misnomer.FictionaryTest.csproj", "{DAA87D39-B0D2-4771-AD36-5D499357A06E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.FictionaryTest", "tests\Misnomer.FictionaryTest\Misnomer.FictionaryTest.csproj", "{DAA87D39-B0D2-4771-AD36-5D499357A06E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misnomer.FictionaryDemo", "samples\Misnomer.FictionaryDemo\Misnomer.FictionaryDemo.csproj", "{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.FictionaryDemo", "samples\Misnomer.FictionaryDemo\Misnomer.FictionaryDemo.csproj", "{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.FictionaryBenchmark", "benchmarks\Misnomer.FictionaryBenchmark\Misnomer.FictionaryBenchmark.csproj", "{A582E594-B920-432C-B483-CC04E4008E89}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
+		src\Misnomer.Internal\Misnomer.Internal.projitems*{830b7512-9999-450a-870c-02ff7308c410}*SharedItemsImports = 5
+		src\Misnomer.Internal\Misnomer.Internal.projitems*{8c6f8e5a-59cc-4389-a5e2-bed7043a140a}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +79,10 @@ Global
 		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A582E594-B920-432C-B483-CC04E4008E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A582E594-B920-432C-B483-CC04E4008E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A582E594-B920-432C-B483-CC04E4008E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A582E594-B920-432C-B483-CC04E4008E89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +96,7 @@ Global
 		{F04AAE16-2DF4-41C3-A125-CF250874CAF9} = {B3C87831-0B68-460D-B97C-A6CB647ED0DC}
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
 		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D} = {BD248697-DD32-4223-B914-295F9001A68B}
+		{A582E594-B920-432C-B483-CC04E4008E89} = {B3C87831-0B68-460D-B97C-A6CB647ED0DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}

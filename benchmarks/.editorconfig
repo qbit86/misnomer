@@ -1,0 +1,3 @@
+[*.cs]
+dotnet_diagnostic.CA1067.severity = silent # Override Equals when implementing IEquatable
+dotnet_diagnostic.CA1822.severity = silent # Mark members as static

@@ -1,0 +1,3 @@
+[*.cs]
+dotnet_diagnostic.CS8669.severity = silent # The annotation for nullable reference types should only be used in code within a '#nullable' context
+generated_code = true
