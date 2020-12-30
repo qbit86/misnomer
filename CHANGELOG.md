@@ -1,11 +1,12 @@
 # Changelog
 
-## [Unreleased] - 2020-12-27
+## [Unreleased] - 2020-12-30
 ### Added
 - Support of `netcoreapp2.1` and `netcoreapp3.1` target platform.
 - Nullable annotation and warning contexts.
 
 ### Changed
+- Updated sources from <https://github.com/dotnet/runtime/tree/v5.0.1>.
 - Fictionary: Set `netstandard2.0` as minimum target platform.
 - Rist: Set `netstandard1.3` as minimum target platform.
 
