@@ -1,8 +1,9 @@
 # Changelog
 
-## [Unreleased] - 2020-12-30
+## [Unreleased] - 2020-12-31
 ### Added
 - Rist: `AsSpan()` method.
+- Rist: `MoveToArray()` overload providing the actual number of elements.
 
 ## [0.4.0] - 2020-12-30
 ### Added
