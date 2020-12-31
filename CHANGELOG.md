@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 2020-12-31
+## [0.4.1] - 2020-12-31
 ### Added
 - Rist: `AsSpan()` method.
 - Rist: `MoveToArray()` overload providing the actual number of elements.
@@ -22,5 +22,6 @@
 - [src/Misnomer.Fictionary/CHANGELOG.md](src/Misnomer.Fictionary/CHANGELOG.md)
 - [src/Misnomer.Rist/CHANGELOG.md](src/Misnomer.Rist/CHANGELOG.md)
 
-[Unreleased]: https://github.com/qbit86/misnomer/compare/misnomer-0.4.0...HEAD
+[Unreleased]: https://github.com/qbit86/misnomer/compare/rist-0.4.1...HEAD
+[0.4.1]: https://github.com/qbit86/misnomer/compare/misnomer-0.4.0...rist-0.4.1
 [0.4.0]: https://github.com/qbit86/misnomer/compare/fictionary-0.2.0...misnomer-0.4.0
