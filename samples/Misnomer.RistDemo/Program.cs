@@ -16,8 +16,7 @@ namespace Misnomer
             foreach (string item in rist)
                 Console.WriteLine(item);
 
-            int count = rist.Count;
-            string[] array = rist.MoveToArray();
+            string[] array = rist.MoveToArray(out int count);
             int length = array.Length;
             Debug.Assert(count <= length);
             Console.WriteLine($"{nameof(count)}: {count}, {nameof(length)}: {length}");
