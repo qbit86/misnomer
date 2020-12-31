@@ -40,7 +40,7 @@ namespace Misnomer
         /// <summary>
         /// Extracts the internal array and replaces it with a zero length array.
         /// </summary>
-        /// <returns>An <see cref="T:T[]"/> that is <see cref="Capacity"/> in length.</returns>
+        /// <returns>An array that is <see cref="Capacity"/> in length.</returns>
         /// <remarks>
         /// This array is <see cref="Capacity"/> in length,
         /// so the caller should save actual <see cref="Count"/> before calling this method.
@@ -52,6 +52,18 @@ namespace Misnomer
             _items = s_emptyArray;
             _version++;
             return result;
+        }
+
+        /// <summary>
+        /// Extracts the internal array and replaces it with a zero length array.
+        /// </summary>
+        /// <param name="length">When this method returns,
+        /// contains the actual number of elements in the <see cref="Rist{T}"/>.</param>
+        /// <returns>An array that is <see cref="Capacity"/> in length.</returns>
+        public T[] MoveToArray(out int length)
+        {
+            length = _size;
+            return MoveToArray();
         }
     }
 }
