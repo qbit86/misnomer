@@ -8,7 +8,6 @@ MoveToArray() method releases ownership of internal buffer, so can be used as â€
     <PackageTags>recyclable;list;generic;collection;pool;memory;allocation;array;buffer</PackageTags>
     <Title>Recyclable list</Title>
     <VersionPrefix>0.4.1</VersionPrefix>
-    <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyVersion>0.4</AssemblyVersion>
