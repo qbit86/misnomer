@@ -23,8 +23,7 @@ rist.AddRange(Directory.EnumerateFiles("."));
 foreach (string item in rist)
     Console.WriteLine(item);
 
-int count = rist.Count;
-string[] array = rist.MoveToArray();
+string[] array = rist.MoveToArray(out int count);
 int length = array.Length;
 Debug.Assert(count <= length);
 Console.WriteLine($"{nameof(count)}: {count}, {nameof(length)}: {length}");
@@ -66,7 +65,7 @@ foreach (KeyValuePair<string, FileInfo> kv in fictionary)
     Console.WriteLine($"{kv.Key}\t{kv.Value.Directory.FullName}");
 
 Console.WriteLine();
-if (fictionary.TryGetValue(".gitconfig", out FileInfo value))
+if (fictionary.TryGetValue(".gitconfig", out FileInfo? value))
     Console.WriteLine($"{value.Name}: {value.Length} bytes");
 ```
 
