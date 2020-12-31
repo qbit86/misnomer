@@ -29,6 +29,9 @@ namespace Misnomer.Extensions
         /// </param>
         public static void MoveToArray<T>(this Rist<T> rist, out ArraySegment<T> segment)
         {
+            if (rist is null)
+                throw new ArgumentNullException(nameof(rist));
+
             int length = rist._size;
             T[] array = rist.MoveToArray();
             segment = new ArraySegment<T>(array, 0, length);
