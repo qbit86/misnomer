@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.FictionaryDemo", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misnomer.FictionaryBenchmark", "benchmarks\Misnomer.FictionaryBenchmark\Misnomer.FictionaryBenchmark.csproj", "{A582E594-B920-432C-B483-CC04E4008E89}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Misnomer.Nullable", "src\Misnomer.Nullable\Misnomer.Nullable.shproj", "{A4E8C64A-AF03-47DF-8A9F-FE7CEEBC8107}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Misnomer.Internal\Misnomer.Internal.projitems*{3892922d-d51a-4325-865c-ca9026641489}*SharedItemsImports = 13
@@ -97,6 +99,7 @@ Global
 		{DAA87D39-B0D2-4771-AD36-5D499357A06E} = {7A55A4A0-1654-4698-B5D7-52FF6EBE4462}
 		{48E1E6C7-C09D-4E53-87DF-7C892D086F6D} = {BD248697-DD32-4223-B914-295F9001A68B}
 		{A582E594-B920-432C-B483-CC04E4008E89} = {B3C87831-0B68-460D-B97C-A6CB647ED0DC}
+		{A4E8C64A-AF03-47DF-8A9F-FE7CEEBC8107} = {CDBE2BAB-E63A-4220-9CF0-CACF7ED4ACC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6A0204A-2814-451F-8587-CD296DD68ACD}

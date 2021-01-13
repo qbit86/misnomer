@@ -1,0 +1,3 @@
+[NullableAttributes.cs]
+dotnet_diagnostic.CA1019.severity = silent # Define accessors for attribute arguments
+generated_code = true
