@@ -4,12 +4,14 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net48'">
-    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.0"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.12.1"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Misnomer.Fictionary\Misnomer.Fictionary.csproj" />
+    <ProjectReference Include="..\..\src\Misnomer.Fictionary\Misnomer.Fictionary.csproj"/>
   </ItemGroup>
+  <Import Condition="'$(TargetFramework)' == 'netcoreapp2.1' OR '$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net48'"
+          Project="..\..\src\Misnomer.Nullable\Misnomer.Nullable.projitems" Label="Shared"/>
 </Project>

@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
-#if NETCOREAPP3_1 || NETSTANDARD2_1
 using System.Diagnostics.CodeAnalysis;
-
-#endif
+using System.Runtime.CompilerServices;
 
 namespace Misnomer
 {
@@ -45,11 +41,7 @@ namespace Misnomer
         /// <param name="obj">The object for which to get a hash code.</param>
         /// <returns>A hash code for the specified object.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP3_1 || NETSTANDARD2_1
         public int GetHashCode([DisallowNull] T obj) => obj?.GetHashCode() ?? 0;
-#else
-        public int GetHashCode(T obj) => obj?.GetHashCode() ?? 0;
-#endif
         // ReSharper restore ConstantConditionalAccessQualifier
 
         /// <summary>
