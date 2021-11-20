@@ -4,6 +4,7 @@
     <AssemblyOriginatorKeyFile>$(RepoRoot)assets/misnomer.snk</AssemblyOriginatorKeyFile>
     <ContinuousIntegrationBuild Condition="'$(Configuration)' == 'Release'">true</ContinuousIntegrationBuild>
     <Deterministic>true</Deterministic>
+    <EnablePackageValidation>true</EnablePackageValidation>
     <InformationalVersion>$(Version)</InformationalVersion>
     <LangVersion>9</LangVersion>
     <SignAssembly>true</SignAssembly>
