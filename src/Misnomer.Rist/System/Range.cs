@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#if NETCOREAPP2_1 || NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
+#if NET461 || NETSTANDARD1_3 || NETSTANDARD2_0
 namespace System
 {
     /// <summary>Represent a range has start and end indexes.</summary>
@@ -44,7 +44,7 @@ namespace System
         /// <summary>Returns the hash code for this instance.</summary>
         public override int GetHashCode()
         {
-#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
+#if NETCOREAPP3_1 || NETSTANDARD2_1
             return HashCode.Combine(Start.GetHashCode(), End.GetHashCode());
 #else
             return unchecked(Start.GetHashCode() * 397) ^ End.GetHashCode();

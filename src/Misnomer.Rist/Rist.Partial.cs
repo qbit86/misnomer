@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Buffers;
-#if NETCOREAPP2_1 || NETCOREAPP3_1 || NETSTANDARD2_1
+#if NETCOREAPP3_1 || NETSTANDARD2_1
 using RuntimeHelpers = System.Runtime.CompilerServices.RuntimeHelpers;
 
 #endif
