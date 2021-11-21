@@ -4,6 +4,9 @@
 ### Changed
 - Dropped support of `netcoreapp2.1` in favor of `netcoreapp3.1`.
 
+### Removed
+- Dropped support of `netstandard1.3` target platform.
+
 ## [0.4.1] - 2020-12-31
 ### Added
 - Rist: `AsSpan()` method.

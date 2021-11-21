@@ -1,4 +1,4 @@
-#if NET461 || NETSTANDARD1_3 || NETSTANDARD2_0 || NETSTANDARD2_1
+#if NET461 || NETSTANDARD2_0 || NETSTANDARD2_1
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
