@@ -14,7 +14,7 @@ namespace Misnomer
         public bool Equals(string? x, string? y) => string.Equals(x, y, StringComparison.Ordinal);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP3_1 || NET5_0
+#if NETCOREAPP3_1 || NET6_0_OR_GREATER
         public int GetHashCode(string obj) => obj.GetHashCode(StringComparison.Ordinal);
 #else
         public int GetHashCode(string obj) => obj.GetHashCode();
