@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Buffers;
-#if NETCOREAPP3_1 || NETSTANDARD2_1
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 using RuntimeHelpers = System.Runtime.CompilerServices.RuntimeHelpers;
-
 #endif
 
 namespace Misnomer

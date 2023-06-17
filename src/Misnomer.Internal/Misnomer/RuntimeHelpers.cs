@@ -1,4 +1,4 @@
-﻿#if NET461 || NETSTANDARD2_0
+﻿#if !NETCOREAPP2_0_OR_GREATER && !NETSTANDARD2_1_OR_GREATER
 namespace Misnomer
 {
     internal static class RuntimeHelpers
